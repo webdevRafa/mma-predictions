@@ -1,0 +1,221 @@
+[
+  {
+    "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+    "name": "UFC Fight Night: Fiziev vs. Torres",
+    "date": "2026-06-27",
+    "location": "Baku, Azerbaijan",
+    "source_note": "Fight card checked against UFC/Tapology/ESPN search results on 2026-06-26. Fighter metrics are from UFCStats snippets where available; unavailable metrics are null rather than guessed. UFCStats uses TD Avg. and Sub. Avg. per 15 minutes, not per minute.",
+    "last_researched_date": "2026-06-26",
+    "data_notes": [
+      "Official rate metrics are UFC/FightMetric-style per-minute/per-15-minute stats when available.",
+      "For fighters with incomplete or unavailable official UFC rate metrics, professional MMA record summaries were added under pro_career_summary and marked as non-UFCStats rate data.",
+      "Do not treat pro_career_summary method breakdowns as replacements for significant-strike/takedown/submission rate stats."
+    ],
+    "remaining_null_official_stat_fields": 130,
+    "fights": [
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-13",
+        "bout_order": 13,
+        "card_section": "main_event",
+        "weight_class": "Lightweight",
+        "rounds_scheduled": 5,
+        "fighters": [
+          "Rafael Fiziev",
+          "Manuel Torres"
+        ],
+        "fighterIds": [
+          "rafael-fiziev",
+          "manuel-torres"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-12",
+        "bout_order": 12,
+        "card_section": "main_card",
+        "weight_class": "Middleweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Michel Pereira",
+          "Shara Magomedov"
+        ],
+        "fighterIds": [
+          "michel-pereira",
+          "shara-magomedov"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-11",
+        "bout_order": 11,
+        "card_section": "main_card",
+        "weight_class": "Lightweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Nazim Sadykhov",
+          "Matheus Camilo"
+        ],
+        "fighterIds": [
+          "nazim-sadykhov",
+          "matheus-camilo"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-10",
+        "bout_order": 10,
+        "card_section": "main_card",
+        "weight_class": "Flyweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Asu Almabayev",
+          "Charles Johnson"
+        ],
+        "fighterIds": [
+          "asu-almabayev",
+          "charles-johnson"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-9",
+        "bout_order": 9,
+        "card_section": "main_card",
+        "weight_class": "Middleweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Ikram Aliskerov",
+          "Brunno Ferreira"
+        ],
+        "fighterIds": [
+          "ikram-aliskerov",
+          "brunno-ferreira"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-8",
+        "bout_order": 8,
+        "card_section": "main_card",
+        "weight_class": "Middleweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Michal Oleksiejczuk",
+          "Abus Magomedov"
+        ],
+        "fighterIds": [
+          "michal-oleksiejczuk",
+          "abus-magomedov"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-7",
+        "bout_order": 7,
+        "card_section": "prelims",
+        "weight_class": "Middleweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Marvin Vettori",
+          "Ismail Naurdiev"
+        ],
+        "fighterIds": [
+          "marvin-vettori",
+          "ismail-naurdiev"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-6",
+        "bout_order": 6,
+        "card_section": "prelims",
+        "weight_class": "Middleweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Nursulton Ruziboev",
+          "Andrey Pulyaev"
+        ],
+        "fighterIds": [
+          "nursulton-ruziboev",
+          "andrey-pulyaev"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-5",
+        "bout_order": 5,
+        "card_section": "prelims",
+        "weight_class": "Light Heavyweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Julius Walker",
+          "Abdul Rakhman Yakhyaev"
+        ],
+        "fighterIds": [
+          "julius-walker",
+          "abdul-rakhman-yakhyaev"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-4",
+        "bout_order": 4,
+        "card_section": "prelims",
+        "weight_class": "Bantamweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Bekzat Almakhan",
+          "Jean Matsumoto"
+        ],
+        "fighterIds": [
+          "bekzat-almakhan",
+          "jean-matsumoto"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-3",
+        "bout_order": 3,
+        "card_section": "prelims",
+        "weight_class": "Heavyweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Rizvan Kuniev",
+          "Tyrell Fortune"
+        ],
+        "fighterIds": [
+          "rizvan-kuniev",
+          "tyrell-fortune"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-2",
+        "bout_order": 2,
+        "card_section": "prelims",
+        "weight_class": "Welterweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Daniil Donchenko",
+          "Andreas Gustafsson"
+        ],
+        "fighterIds": [
+          "daniil-donchenko",
+          "andreas-gustafsson"
+        ]
+      },
+      {
+        "fightId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-bout-1",
+        "bout_order": 1,
+        "card_section": "prelims",
+        "weight_class": "Welterweight",
+        "rounds_scheduled": 3,
+        "fighters": [
+          "Farman Hasanov",
+          "Eric Nolan"
+        ],
+        "fighterIds": [
+          "farman-hasanov",
+          "eric-nolan"
+        ]
+      }
+    ],
+    "methodology_notes": [
+      "For the seven requested target fields, remaining nulls were filled using derived non-official estimates from all-professional MMA method breakdowns when available; otherwise from professional record plus available public context. These values are flagged per field and should not be treated as official UFCStats.",
+      "Null-free cleanup completed: all remaining null values were replaced. Official UFCStats values remain unchanged; unavailable UFC metrics were filled with all-professional MMA derived/estimated values and flagged in data_quality."
+    ],
+    "null_audit": {
+      "remaining_null_values": 0,
+      "remaining_null_paths": []
+    }
+  }
+]

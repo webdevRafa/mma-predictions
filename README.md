@@ -1,75 +1,58 @@
-# React + TypeScript + Vite
+# MMA Codex
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+MMA Codex is an MMA analytics workspace for event research, fighter profiles, and future risk/confidence analysis for Prize Picks-style slip building.
 
-Currently, two official plugins are available:
+## Local Setup
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Create a local env file at:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```text
+C:\Users\Ralph\Documents\Codex\2026-06-26\pleas\mma-predictions\.env.local
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Use `.env.example` as the key list. Keep real values out of git.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
+npm run dev
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Data
 
+- `src/data/events.json` contains event documents with embedded fights.
+- `src/data/fighters.json` contains fighter documents keyed by `fighterId`.
+- `src/data/logs.json` is reserved for future private slip analytics.
+
+The app tries Firestore first and falls back to bundled JSON if Firebase config, rules, or seeded data are unavailable.
+
+## Firestore
+
+Rules are defined in `firestore.rules`:
+
+- `events` and `fighters` are public read.
+- Client writes are disabled.
+- `logs` are locked down for now.
+
+Dry-run the seed:
+
+```bash
+npm run seed:firestore -- --dry-run
+```
+
+Run the real seed only with admin credentials available through one of:
+
+- `FIREBASE_SERVICE_ACCOUNT_JSON`
+- `GOOGLE_APPLICATION_CREDENTIALS`
+- application-default credentials
+
+```bash
+npm run seed:firestore
+```
+
+## Verification
+
+```bash
+npm run lint
+npm run build
+npm run seed:firestore -- --dry-run
 ```
