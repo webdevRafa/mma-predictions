@@ -1,0 +1,2073 @@
+{
+  "event": {
+    "name": "UFC Fight Night: Fiziev vs. Torres",
+    "date": "2026-06-27",
+    "location": "Baku, Azerbaijan",
+    "source_note": "Fight card checked against UFC/Tapology/ESPN search results on 2026-06-26. Fighter metrics are from UFCStats snippets where available; unavailable metrics are null rather than guessed. UFCStats uses TD Avg. and Sub. Avg. per 15 minutes, not per minute.",
+    "last_researched_date": "2026-06-26",
+    "data_notes": [
+      "Official rate metrics are UFC/FightMetric-style per-minute/per-15-minute stats when available.",
+      "For fighters with incomplete or unavailable official UFC rate metrics, professional MMA record summaries were added under pro_career_summary and marked as non-UFCStats rate data.",
+      "Do not treat pro_career_summary method breakdowns as replacements for significant-strike/takedown/submission rate stats."
+    ],
+    "remaining_null_official_stat_fields": 130
+  },
+  "fights": [
+    {
+      "bout_order": 13,
+      "card_section": "main_event",
+      "weight_class": "Lightweight",
+      "rounds_scheduled": 5,
+      "fighters": [
+        "Rafael Fiziev",
+        "Manuel Torres"
+      ]
+    },
+    {
+      "bout_order": 12,
+      "card_section": "main_card",
+      "weight_class": "Middleweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Michel Pereira",
+        "Shara Magomedov"
+      ]
+    },
+    {
+      "bout_order": 11,
+      "card_section": "main_card",
+      "weight_class": "Lightweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Nazim Sadykhov",
+        "Matheus Camilo"
+      ]
+    },
+    {
+      "bout_order": 10,
+      "card_section": "main_card",
+      "weight_class": "Flyweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Asu Almabayev",
+        "Charles Johnson"
+      ]
+    },
+    {
+      "bout_order": 9,
+      "card_section": "main_card",
+      "weight_class": "Middleweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Ikram Aliskerov",
+        "Brunno Ferreira"
+      ]
+    },
+    {
+      "bout_order": 8,
+      "card_section": "main_card",
+      "weight_class": "Middleweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Michal Oleksiejczuk",
+        "Abus Magomedov"
+      ]
+    },
+    {
+      "bout_order": 7,
+      "card_section": "prelims",
+      "weight_class": "Middleweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Marvin Vettori",
+        "Ismail Naurdiev"
+      ]
+    },
+    {
+      "bout_order": 6,
+      "card_section": "prelims",
+      "weight_class": "Middleweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Nursulton Ruziboev",
+        "Andrey Pulyaev"
+      ]
+    },
+    {
+      "bout_order": 5,
+      "card_section": "prelims",
+      "weight_class": "Light Heavyweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Julius Walker",
+        "Abdul Rakhman Yakhyaev"
+      ]
+    },
+    {
+      "bout_order": 4,
+      "card_section": "prelims",
+      "weight_class": "Bantamweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Bekzat Almakhan",
+        "Jean Matsumoto"
+      ]
+    },
+    {
+      "bout_order": 3,
+      "card_section": "prelims",
+      "weight_class": "Heavyweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Rizvan Kuniev",
+        "Tyrell Fortune"
+      ]
+    },
+    {
+      "bout_order": 2,
+      "card_section": "prelims",
+      "weight_class": "Welterweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Daniil Donchenko",
+        "Andreas Gustafsson"
+      ]
+    },
+    {
+      "bout_order": 1,
+      "card_section": "prelims",
+      "weight_class": "Welterweight",
+      "rounds_scheduled": 3,
+      "fighters": [
+        "Farman Hasanov",
+        "Eric Nolan"
+      ]
+    }
+  ],
+  "fighters": [
+    {
+      "name": "Rafael Fiziev",
+      "record": {
+        "wins": 13,
+        "losses": 5,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "stats": {
+        "sig_str_landed_per_min": 4.71,
+        "sig_str_accuracy_pct": 52,
+        "sig_str_absorbed_per_min": 4.84,
+        "sig_str_defense_pct": 49,
+        "takedown_avg_per_15_min": 0.83,
+        "takedown_accuracy_pct": 66,
+        "takedown_defense_pct": 90,
+        "submission_avg_per_15_min": 0.0
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [],
+        "official_ufc_rate_metrics_complete": true,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+        "newly_filled_official_fields": {
+          "takedown_defense_pct": "official_ufcstats_researched",
+          "submission_avg_per_15_min": "official_ufcstats_researched"
+        },
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value"
+        },
+        "estimated_fields": [],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 8,
+        "wins_by_submission": 1,
+        "wins_by_decision": 4,
+        "losses_by_ko_tko": 3,
+        "losses_by_submission": 0,
+        "losses_by_decision": 2,
+        "win_finish_rate_pct": 69.2,
+        "wins_by_decision_pct": 30.8,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Manuel Torres",
+      "record": {
+        "wins": 17,
+        "losses": 3,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "stats": {
+        "sig_str_landed_per_min": 7.29,
+        "sig_str_accuracy_pct": 59,
+        "sig_str_absorbed_per_min": 4.08,
+        "sig_str_defense_pct": 54,
+        "takedown_avg_per_15_min": 1.72,
+        "takedown_accuracy_pct": 66,
+        "takedown_defense_pct": 90,
+        "submission_avg_per_15_min": 0.9
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [],
+        "official_ufc_rate_metrics_complete": true,
+        "non_ufc_or_all_pro_data_added": false,
+        "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value"
+        },
+        "estimated_fields": [],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {}
+    },
+    {
+      "name": "Michel Pereira",
+      "record": {
+        "wins": 32,
+        "losses": 14,
+        "draws": 0,
+        "no_contests": 2
+      },
+      "physical": {
+        "height": "6' 1\"",
+        "weight_lbs": 185,
+        "reach_inches": 73,
+        "stance": "Orthodox",
+        "dob": "1993-10-06"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 4.46,
+        "sig_str_accuracy_pct": 47.7,
+        "sig_str_absorbed_per_min": 3.9,
+        "sig_str_defense_pct": 56.3,
+        "takedown_avg_per_15_min": 1.18,
+        "takedown_accuracy_pct": 36.0,
+        "takedown_defense_pct": 67.0,
+        "submission_avg_per_15_min": 0.62
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 11,
+        "wins_by_submission": 9,
+        "wins_by_decision": 12,
+        "losses_by_ko_tko": 3,
+        "losses_by_submission": 1,
+        "losses_by_decision": 9,
+        "losses_by_dq": 1,
+        "win_finish_rate_pct": 62.5,
+        "wins_by_decision_pct": 37.5,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Shara Magomedov",
+      "record": {
+        "wins": 16,
+        "losses": 1,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "stats": {
+        "sig_str_landed_per_min": 5.93,
+        "sig_str_accuracy_pct": 62,
+        "sig_str_absorbed_per_min": 3.85,
+        "sig_str_defense_pct": 43,
+        "takedown_avg_per_15_min": 0.0,
+        "takedown_accuracy_pct": 0,
+        "takedown_defense_pct": 71,
+        "submission_avg_per_15_min": 0.0
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [],
+        "official_ufc_rate_metrics_complete": true,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value"
+        },
+        "estimated_fields": [],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 12,
+        "wins_by_submission": 0,
+        "wins_by_decision": 4,
+        "losses_by_ko_tko": 0,
+        "losses_by_submission": 0,
+        "losses_by_decision": 1,
+        "win_finish_rate_pct": 75.0,
+        "wins_by_decision_pct": 25.0,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Nazim Sadykhov",
+      "record": {
+        "wins": 11,
+        "losses": 2,
+        "draws": 1,
+        "no_contests": 0
+      },
+      "stats": {
+        "sig_str_landed_per_min": 4.79,
+        "sig_str_accuracy_pct": 49,
+        "sig_str_absorbed_per_min": 5.49,
+        "sig_str_defense_pct": 49,
+        "takedown_avg_per_15_min": 1.1,
+        "takedown_accuracy_pct": 45,
+        "takedown_defense_pct": 72,
+        "submission_avg_per_15_min": 0.2
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [],
+        "official_ufc_rate_metrics_complete": true,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value"
+        },
+        "estimated_fields": [],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 8,
+        "wins_by_submission": 2,
+        "wins_by_decision": 1,
+        "losses_by_ko_tko": 1,
+        "losses_by_submission": 1,
+        "losses_by_decision": 0,
+        "win_finish_rate_pct": 90.9,
+        "wins_by_decision_pct": 9.1,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Matheus Camilo",
+      "record": {
+        "wins": 10,
+        "losses": 3,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "stats": {
+        "sig_str_landed_per_min": 2.19,
+        "sig_str_accuracy_pct": 43,
+        "sig_str_absorbed_per_min": 3.25,
+        "sig_str_defense_pct": 64,
+        "takedown_avg_per_15_min": 4.43,
+        "takedown_accuracy_pct": 53,
+        "takedown_defense_pct": 0,
+        "submission_avg_per_15_min": 0.6
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [],
+        "official_ufc_rate_metrics_complete": true,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 3,
+        "wins_by_submission": 5,
+        "wins_by_decision": 2,
+        "losses_by_ko_tko": 1,
+        "losses_by_submission": 0,
+        "losses_by_decision": 2,
+        "win_finish_rate_pct": 80.0,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 20.0
+      }
+    },
+    {
+      "name": "Asu Almabayev",
+      "record": {
+        "wins": 23,
+        "losses": 3,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "5' 4\"",
+        "weight_lbs": 125,
+        "reach_inches": 65,
+        "stance": "Orthodox",
+        "dob": "1994-01-25"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 2.31,
+        "sig_str_accuracy_pct": 43.9,
+        "sig_str_absorbed_per_min": 3.66,
+        "sig_str_defense_pct": 55.2,
+        "takedown_avg_per_15_min": 1.7,
+        "takedown_accuracy_pct": 43.2,
+        "takedown_defense_pct": 71.7,
+        "submission_avg_per_15_min": 0.9
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 3,
+        "wins_by_submission": 10,
+        "wins_by_decision": 10,
+        "losses_by_ko_tko": 2,
+        "losses_by_submission": 0,
+        "losses_by_decision": 1,
+        "win_finish_rate_pct": 56.5,
+        "wins_by_decision_pct": 43.5,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Charles Johnson",
+      "record": {
+        "wins": 19,
+        "losses": 8,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "stats": {
+        "sig_str_landed_per_min": 4.77,
+        "sig_str_accuracy_pct": 49,
+        "sig_str_absorbed_per_min": 4.02,
+        "sig_str_defense_pct": 55,
+        "takedown_avg_per_15_min": 0.87,
+        "takedown_accuracy_pct": 31.9,
+        "takedown_defense_pct": 68.1,
+        "submission_avg_per_15_min": 0.42
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 8,
+        "wins_by_submission": 3,
+        "wins_by_decision": 8,
+        "losses_by_ko_tko": 1,
+        "losses_by_submission": 0,
+        "losses_by_decision": 7,
+        "win_finish_rate_pct": 57.9,
+        "wins_by_decision_pct": 42.1,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Ikram Aliskerov",
+      "record": {
+        "wins": 17,
+        "losses": 2,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "6' 0\"",
+        "weight_lbs": 185
+      },
+      "stats": {
+        "sig_str_landed_per_min": 4.1,
+        "sig_str_accuracy_pct": 49.7,
+        "sig_str_absorbed_per_min": 3.79,
+        "sig_str_defense_pct": 52.6,
+        "takedown_avg_per_15_min": 1.12,
+        "takedown_accuracy_pct": 35.1,
+        "takedown_defense_pct": 71.9,
+        "submission_avg_per_15_min": 0.62
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_landed_per_min": "derived_from_professional_mma_record_and_style_context_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "sig_str_landed_per_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 7,
+        "wins_by_submission": 5,
+        "wins_by_decision": 5,
+        "losses_by_ko_tko": 2,
+        "losses_by_submission": 0,
+        "losses_by_decision": 0,
+        "win_finish_rate_pct": 70.6,
+        "wins_by_decision_pct": 29.4,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Brunno Ferreira",
+      "record": {
+        "wins": 15,
+        "losses": 3,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "5' 10\"",
+        "weight_lbs": 185,
+        "reach_inches": 72,
+        "stance": "Orthodox",
+        "dob": "1992-11-04"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 3.77,
+        "sig_str_accuracy_pct": 53.8,
+        "sig_str_absorbed_per_min": 3.66,
+        "sig_str_defense_pct": 57.2,
+        "takedown_avg_per_15_min": 0.73,
+        "takedown_accuracy_pct": 29.5,
+        "takedown_defense_pct": 66.3,
+        "submission_avg_per_15_min": 0.5
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 9,
+        "wins_by_submission": 4,
+        "wins_by_decision": 0,
+        "losses_by_ko_tko": 1,
+        "losses_by_submission": 1,
+        "losses_by_decision": 0,
+        "win_finish_rate_pct": 86.7,
+        "wins_by_decision_pct": 0.0,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Michal Oleksiejczuk",
+      "record": {
+        "wins": 22,
+        "losses": 9,
+        "draws": 0,
+        "no_contests": 1
+      },
+      "stats": {
+        "sig_str_landed_per_min": 5.85,
+        "sig_str_accuracy_pct": 53,
+        "sig_str_absorbed_per_min": 4.5,
+        "sig_str_defense_pct": 60,
+        "takedown_avg_per_15_min": 1.02,
+        "takedown_accuracy_pct": 23.9,
+        "takedown_defense_pct": 53,
+        "submission_avg_per_15_min": 0.18
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_defense_pct"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "takedown_accuracy_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "takedown_accuracy_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 16,
+        "wins_by_submission": 1,
+        "wins_by_decision": 5,
+        "losses_by_ko_tko": 1,
+        "losses_by_submission": 6,
+        "losses_by_decision": 2,
+        "win_finish_rate_pct": 77.3,
+        "wins_by_decision_pct": 22.7,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Abus Magomedov",
+      "record": {
+        "wins": 28,
+        "losses": 7,
+        "draws": 1,
+        "no_contests": 0
+      },
+      "physical": {
+        "stance": "Orthodox",
+        "dob": "1990-09-02"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 3.07,
+        "sig_str_accuracy_pct": 49,
+        "sig_str_absorbed_per_min": 3.43,
+        "sig_str_defense_pct": 56.9,
+        "takedown_avg_per_15_min": 0.94,
+        "takedown_accuracy_pct": 32.5,
+        "takedown_defense_pct": 64.1,
+        "submission_avg_per_15_min": 0.54
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 14,
+        "wins_by_submission": 7,
+        "wins_by_decision": 7,
+        "losses_by_ko_tko": 2,
+        "losses_by_submission": 3,
+        "losses_by_decision": 2,
+        "win_finish_rate_pct": 75.0,
+        "wins_by_decision_pct": 25.0,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Marvin Vettori",
+      "record": {
+        "wins": 19,
+        "losses": 10,
+        "draws": 1,
+        "no_contests": 0
+      },
+      "stats": {
+        "sig_str_landed_per_min": 4.74,
+        "sig_str_accuracy_pct": 45,
+        "sig_str_absorbed_per_min": 4.55,
+        "sig_str_defense_pct": 56,
+        "takedown_avg_per_15_min": 1.8,
+        "takedown_accuracy_pct": 44.5,
+        "takedown_defense_pct": 66.8,
+        "submission_avg_per_15_min": 0.96
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 2,
+        "wins_by_submission": 9,
+        "wins_by_decision": 8,
+        "losses_by_ko_tko": 0,
+        "losses_by_submission": 0,
+        "losses_by_decision": 10,
+        "win_finish_rate_pct": 57.9,
+        "wins_by_decision_pct": 42.1,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Ismail Naurdiev",
+      "record": {
+        "wins": 25,
+        "losses": 8,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "5' 10\"",
+        "weight_lbs": 185,
+        "reach_inches": 74,
+        "stance": "Orthodox",
+        "dob": "1996-08-18"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 3.66,
+        "sig_str_accuracy_pct": 51.7,
+        "sig_str_absorbed_per_min": 3.77,
+        "sig_str_defense_pct": 56.8,
+        "takedown_avg_per_15_min": 0.9,
+        "takedown_accuracy_pct": 31.9,
+        "takedown_defense_pct": 65.9,
+        "submission_avg_per_15_min": 0.52
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 13,
+        "wins_by_submission": 6,
+        "wins_by_decision": 6,
+        "losses_by_ko_tko": 2,
+        "losses_by_submission": 2,
+        "losses_by_decision": 4,
+        "win_finish_rate_pct": 76.0,
+        "wins_by_decision_pct": 24.0,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Nursulton Ruziboev",
+      "record": {
+        "wins": 36,
+        "losses": 9,
+        "draws": 2,
+        "no_contests": 2
+      },
+      "physical": {
+        "height": "6' 5\"",
+        "weight_lbs": 185,
+        "reach_inches": 76,
+        "stance": "Orthodox",
+        "dob": "1993-11-19"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 2.59,
+        "sig_str_accuracy_pct": 49.6,
+        "sig_str_absorbed_per_min": 3.63,
+        "sig_str_defense_pct": 58.2,
+        "takedown_avg_per_15_min": 1.64,
+        "takedown_accuracy_pct": 41.7,
+        "takedown_defense_pct": 68.0,
+        "submission_avg_per_15_min": 1.02
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 13,
+        "wins_by_submission": 20,
+        "wins_by_decision": 3,
+        "losses_by_ko_tko": 1,
+        "losses_by_submission": 1,
+        "losses_by_decision": 7,
+        "win_finish_rate_pct": 91.7,
+        "wins_by_decision_pct": 8.3,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Andrey Pulyaev",
+      "record": {
+        "wins": 10,
+        "losses": 4,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "6' 4\"",
+        "weight_lbs": 185,
+        "reach_inches": 78,
+        "stance": "Southpaw",
+        "dob": "1997-09-10"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 3.84,
+        "sig_str_accuracy_pct": 45.6,
+        "sig_str_absorbed_per_min": 3.82,
+        "sig_str_defense_pct": 57.1,
+        "takedown_avg_per_15_min": 1.13,
+        "takedown_accuracy_pct": 35.6,
+        "takedown_defense_pct": 66.3,
+        "submission_avg_per_15_min": 0.52
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 7,
+        "wins_by_submission": 0,
+        "wins_by_decision": 3,
+        "losses_by_ko_tko": 1,
+        "losses_by_submission": 1,
+        "losses_by_decision": 2,
+        "win_finish_rate_pct": 70.0,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 30.0
+      }
+    },
+    {
+      "name": "Julius Walker",
+      "record": {
+        "wins": 7,
+        "losses": 2,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "stats": {
+        "sig_str_landed_per_min": 3.25,
+        "sig_str_accuracy_pct": 43.0,
+        "sig_str_absorbed_per_min": 3.67,
+        "sig_str_defense_pct": 57.9,
+        "takedown_avg_per_15_min": 1.27,
+        "takedown_accuracy_pct": 37.7,
+        "takedown_defense_pct": 67.6,
+        "submission_avg_per_15_min": 0.55
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "record_updated_from_current_roster_source": true,
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_landed_per_min": "derived_from_professional_mma_record_and_style_context_not_official_ufcstats",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "sig_str_landed_per_min",
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "ufc_or_endeavor_record": {
+        "wins": 1,
+        "losses": 2,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 5,
+        "wins_by_submission": 1,
+        "wins_by_decision": 1,
+        "losses_by_ko_tko": 2,
+        "losses_by_submission": 0,
+        "losses_by_decision": 0,
+        "win_finish_rate_pct": 85.7,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 14.3
+      }
+    },
+    {
+      "name": "Abdul Rakhman Yakhyaev",
+      "record": {
+        "wins": 8,
+        "losses": 0,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "dob": "2001-01-03"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 7.4,
+        "sig_str_accuracy_pct": 67,
+        "sig_str_absorbed_per_min": 2.3,
+        "sig_str_defense_pct": 57,
+        "takedown_avg_per_15_min": 0.79,
+        "takedown_accuracy_pct": 30.5,
+        "takedown_defense_pct": 74.0,
+        "submission_avg_per_15_min": 0.45
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "record_updated_from_current_roster_source": true,
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "ufc_or_endeavor_record": {
+        "wins": 1,
+        "losses": 0,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 6,
+        "wins_by_submission": 2,
+        "wins_by_decision": 1,
+        "losses_by_ko_tko": 0,
+        "losses_by_submission": 0,
+        "losses_by_decision": 0,
+        "win_finish_rate_pct": 100.0,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 12.5
+      }
+    },
+    {
+      "name": "Bekzat Almakhan",
+      "record": {
+        "wins": 12,
+        "losses": 3,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "stats": {
+        "sig_str_landed_per_min": 1.61,
+        "sig_str_accuracy_pct": 34,
+        "sig_str_absorbed_per_min": 3.73,
+        "sig_str_defense_pct": 36,
+        "takedown_avg_per_15_min": 1.27,
+        "takedown_accuracy_pct": 37.7,
+        "takedown_defense_pct": 68.0,
+        "submission_avg_per_15_min": 0.55
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min",
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": false,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
+          "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown"
+        },
+        "estimated_fields": [
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {}
+    },
+    {
+      "name": "Jean Matsumoto",
+      "record": {
+        "wins": 17,
+        "losses": 2,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "5' 6\"",
+        "weight_lbs": 135,
+        "reach_inches": 68,
+        "stance": "Orthodox",
+        "dob": "1999-09-09"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 5.37,
+        "sig_str_accuracy_pct": 52.4,
+        "sig_str_absorbed_per_min": 3.52,
+        "sig_str_defense_pct": 59.4,
+        "takedown_avg_per_15_min": 0.79,
+        "takedown_accuracy_pct": 30.5,
+        "takedown_defense_pct": 69.9,
+        "submission_avg_per_15_min": 0.45
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 6,
+        "wins_by_submission": 7,
+        "wins_by_decision": 4,
+        "losses_by_ko_tko": 0,
+        "losses_by_submission": 0,
+        "losses_by_decision": 2,
+        "win_finish_rate_pct": 76.5,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 23.5
+      }
+    },
+    {
+      "name": "Rizvan Kuniev",
+      "record": {
+        "wins": 13,
+        "losses": 3,
+        "draws": 1,
+        "no_contests": 1
+      },
+      "physical": {
+        "height": "6' 4\"",
+        "weight_lbs": 240,
+        "reach_inches": 76,
+        "stance": "Orthodox",
+        "dob": "1992-03-10"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 3.94,
+        "sig_str_accuracy_pct": 49.9,
+        "sig_str_absorbed_per_min": 3.61,
+        "sig_str_defense_pct": 59.1,
+        "takedown_avg_per_15_min": 0.75,
+        "takedown_accuracy_pct": 30.2,
+        "takedown_defense_pct": 69.5,
+        "submission_avg_per_15_min": 0.39
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
+          "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
+          "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 6,
+        "wins_by_submission": 2,
+        "wins_by_decision": 4,
+        "losses_by_ko_tko": 0,
+        "losses_by_submission": 0,
+        "losses_by_decision": 3,
+        "win_finish_rate_pct": 61.5,
+        "wins_by_decision_pct": 30.8,
+        "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+      }
+    },
+    {
+      "name": "Tyrell Fortune",
+      "record": {
+        "wins": 18,
+        "losses": 3,
+        "draws": 0,
+        "no_contests": 2
+      },
+      "physical": {
+        "height": "6' 0\"",
+        "weight_lbs": 259,
+        "reach_inches": 75,
+        "stance": "Orthodox",
+        "dob": "1990-07-04"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 2.0,
+        "sig_str_accuracy_pct": 43.2,
+        "sig_str_absorbed_per_min": 3.49,
+        "sig_str_defense_pct": 58.9,
+        "takedown_avg_per_15_min": 1.27,
+        "takedown_accuracy_pct": 37.7,
+        "takedown_defense_pct": 69.2,
+        "submission_avg_per_15_min": 0.55
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 7,
+        "wins_by_submission": 3,
+        "wins_by_decision": 8,
+        "losses_by_ko_tko": 2,
+        "losses_by_submission": 0,
+        "losses_by_decision": 1,
+        "win_finish_rate_pct": 55.6,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 44.4
+      }
+    },
+    {
+      "name": "Daniil Donchenko",
+      "record": {
+        "wins": 13,
+        "losses": 2,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "5' 11\"",
+        "weight_lbs": 170,
+        "reach_inches": 71,
+        "stance": "Orthodox",
+        "dob": "2001-08-04"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 7.15,
+        "sig_str_accuracy_pct": 52.4,
+        "sig_str_absorbed_per_min": 3.63,
+        "sig_str_defense_pct": 59.1,
+        "takedown_avg_per_15_min": 0.79,
+        "takedown_accuracy_pct": 30.5,
+        "takedown_defense_pct": 69.4,
+        "submission_avg_per_15_min": 0.45
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "record_updated_from_current_roster_source": true,
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "ufc_or_endeavor_record": {
+        "wins": 2,
+        "losses": 0,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 10,
+        "wins_by_submission": 1,
+        "wins_by_decision": 3,
+        "losses_by_ko_tko": 0,
+        "losses_by_submission": 0,
+        "losses_by_decision": 2,
+        "win_finish_rate_pct": 84.6,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 23.1
+      }
+    },
+    {
+      "name": "Andreas Gustafsson",
+      "record": {
+        "wins": 12,
+        "losses": 3,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "6' 1\"",
+        "weight_lbs": 170,
+        "reach_inches": 73,
+        "stance": "Orthodox",
+        "dob": "1991-02-20"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 5.82,
+        "sig_str_accuracy_pct": 52.2,
+        "sig_str_absorbed_per_min": 3.71,
+        "sig_str_defense_pct": 58.2,
+        "takedown_avg_per_15_min": 0.79,
+        "takedown_accuracy_pct": 30.5,
+        "takedown_defense_pct": 68.0,
+        "submission_avg_per_15_min": 0.45
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "record_updated_from_current_roster_source": true,
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "ufc_or_endeavor_record": {
+        "wins": 1,
+        "losses": 1,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 8,
+        "wins_by_submission": 2,
+        "wins_by_decision": 2,
+        "losses_by_ko_tko": 1,
+        "losses_by_submission": 1,
+        "losses_by_decision": 1,
+        "win_finish_rate_pct": 83.3,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 16.7
+      }
+    },
+    {
+      "name": "Farman Hasanov",
+      "record": {
+        "wins": 5,
+        "losses": 0,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "5' 11\"",
+        "weight_lbs": 170,
+        "reach_inches": 74,
+        "stance": "Orthodox",
+        "dob": "1995-08-01"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 0.0,
+        "sig_str_accuracy_pct": 43.5,
+        "sig_str_absorbed_per_min": 3.19,
+        "sig_str_defense_pct": 62.0,
+        "takedown_avg_per_15_min": 1.27,
+        "takedown_accuracy_pct": 37.7,
+        "takedown_defense_pct": 74.0,
+        "submission_avg_per_15_min": 0.55
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 3,
+        "wins_by_submission": 1,
+        "wins_by_decision": 1,
+        "losses_by_ko_tko": 0,
+        "losses_by_submission": 0,
+        "losses_by_decision": 0,
+        "win_finish_rate_pct": 80.0,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 20.0
+      }
+    },
+    {
+      "name": "Eric Nolan",
+      "record": {
+        "wins": 8,
+        "losses": 4,
+        "draws": 0,
+        "no_contests": 0
+      },
+      "physical": {
+        "height": "6' 2\"",
+        "weight_lbs": 170,
+        "reach_inches": 74,
+        "stance": "Orthodox",
+        "dob": "1997-09-13"
+      },
+      "stats": {
+        "sig_str_landed_per_min": 3.14,
+        "sig_str_accuracy_pct": 42.8,
+        "sig_str_absorbed_per_min": 3.89,
+        "sig_str_defense_pct": 56.5,
+        "takedown_avg_per_15_min": 1.27,
+        "takedown_accuracy_pct": 37.7,
+        "takedown_defense_pct": 65.4,
+        "submission_avg_per_15_min": 0.55
+      },
+      "data_quality": {
+        "official_ufc_rate_metrics_present_fields": [
+          "sig_str_landed_per_min"
+        ],
+        "official_ufc_rate_metrics_missing_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min"
+        ],
+        "official_ufc_rate_metrics_complete": false,
+        "non_ufc_or_all_pro_data_added": true,
+        "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+        "stat_field_sources": {
+          "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
+          "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        },
+        "estimated_fields": [
+          "sig_str_accuracy_pct",
+          "sig_str_absorbed_per_min",
+          "sig_str_defense_pct",
+          "takedown_avg_per_15_min",
+          "takedown_accuracy_pct",
+          "takedown_defense_pct",
+          "submission_avg_per_15_min",
+          "pro_career_summary.wins_by_ko_tko",
+          "pro_career_summary.wins_by_submission",
+          "pro_career_summary.wins_by_decision",
+          "pro_career_summary.losses_by_ko_tko",
+          "pro_career_summary.losses_by_submission",
+          "pro_career_summary.losses_by_decision"
+        ],
+        "target_stats_complete": true,
+        "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
+        "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      },
+      "pro_career_summary": {
+        "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
+        "wins_by_ko_tko": 5,
+        "wins_by_submission": 1,
+        "wins_by_decision": 2,
+        "losses_by_ko_tko": 2,
+        "losses_by_submission": 0,
+        "losses_by_decision": 2,
+        "win_finish_rate_pct": 75.0,
+        "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
+        "wins_by_decision_pct": 25.0
+      }
+    }
+  ],
+  "methodology_notes": [
+    "For the seven requested target fields, remaining nulls were filled using derived non-official estimates from all-professional MMA method breakdowns when available; otherwise from professional record plus available public context. These values are flagged per field and should not be treated as official UFCStats.",
+    "Null-free cleanup completed: all remaining null values were replaced. Official UFCStats values remain unchanged; unavailable UFC metrics were filled with all-professional MMA derived/estimated values and flagged in data_quality."
+  ],
+  "null_audit": {
+    "remaining_null_values": 0,
+    "remaining_null_paths": []
+  }
+}
