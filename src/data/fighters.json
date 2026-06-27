@@ -58,7 +58,10 @@
       "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
       "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/c814b4c899793af6",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 12
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -82,6 +85,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/c814b4c899793af6",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 12.06,
+      "completed_fights_count": 12,
+      "total_fight_time_minutes": 144.7,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/c814b4c899793af6",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -143,7 +157,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/2e7878927067fdca",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 7
     },
     "pro_career_summary": {},
     "physical": {
@@ -156,6 +173,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/2e7878927067fdca",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 2.49,
+      "completed_fights_count": 7,
+      "total_fight_time_minutes": 17.42,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/2e7878927067fdca",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -224,7 +252,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/595db60957de51d3",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 15
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -242,6 +273,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/595db60957de51d3",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 10.71,
+      "completed_fights_count": 15,
+      "total_fight_time_minutes": 160.68,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/595db60957de51d3",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -303,7 +345,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/06734ca9d88dec3a",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 6
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -327,6 +372,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/06734ca9d88dec3a",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 13.72,
+      "completed_fights_count": 6,
+      "total_fight_time_minutes": 82.32,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/06734ca9d88dec3a",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -388,7 +444,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/ff62013d2fce6d13",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 7
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -412,6 +471,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/ff62013d2fce6d13",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 9.71,
+      "completed_fights_count": 7,
+      "total_fight_time_minutes": 68,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/ff62013d2fce6d13",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -480,7 +550,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/72f890c5d421e705",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 2
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -504,6 +577,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/72f890c5d421e705",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 11.86,
+      "completed_fights_count": 2,
+      "total_fight_time_minutes": 23.72,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/72f890c5d421e705",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -572,7 +656,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/8d3273573b85be09",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 7
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -589,6 +676,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/8d3273573b85be09",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 12.97,
+      "completed_fights_count": 7,
+      "total_fight_time_minutes": 90.82,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/8d3273573b85be09",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -650,7 +748,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/814e5233e2acf2ee",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 14
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -674,6 +775,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/814e5233e2acf2ee",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 12.7,
+      "completed_fights_count": 14,
+      "total_fight_time_minutes": 177.73,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/814e5233e2acf2ee",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -742,7 +854,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/b07aed698fba8624",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 6
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -759,6 +874,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/b07aed698fba8624",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 4.69,
+      "completed_fights_count": 6,
+      "total_fight_time_minutes": 28.15,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/b07aed698fba8624",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -827,7 +953,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/1e719d4b676dc19a",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 10
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -844,6 +973,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/1e719d4b676dc19a",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 5.99,
+      "completed_fights_count": 10,
+      "total_fight_time_minutes": 59.9,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/1e719d4b676dc19a",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -905,7 +1045,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/0d65c432720accb9",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 18
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -929,6 +1072,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/0d65c432720accb9",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 6.54,
+      "completed_fights_count": 18,
+      "total_fight_time_minutes": 117.8,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/0d65c432720accb9",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -997,7 +1151,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/36b8f265bcd1b7a4",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 7
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -1014,6 +1171,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/36b8f265bcd1b7a4",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 10.66,
+      "completed_fights_count": 7,
+      "total_fight_time_minutes": 74.65,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/36b8f265bcd1b7a4",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1075,7 +1243,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/7acbb0972e75281a",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 18
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -1099,6 +1270,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/7acbb0972e75281a",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 17.15,
+      "completed_fights_count": 18,
+      "total_fight_time_minutes": 308.78,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/7acbb0972e75281a",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1167,7 +1349,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/6a96ad1bc34fb113",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 7
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -1184,6 +1369,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/6a96ad1bc34fb113",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 13.06,
+      "completed_fights_count": 7,
+      "total_fight_time_minutes": 91.43,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/6a96ad1bc34fb113",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1252,7 +1448,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/49d2a08964c5eb11",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 5
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -1269,6 +1468,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/49d2a08964c5eb11",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 8.03,
+      "completed_fights_count": 5,
+      "total_fight_time_minutes": 40.13,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/49d2a08964c5eb11",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1344,7 +1554,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/22e07d3da1aa3475",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 4
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -1361,6 +1574,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/22e07d3da1aa3475",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 12.88,
+      "completed_fights_count": 4,
+      "total_fight_time_minutes": 51.52,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/22e07d3da1aa3475",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1430,7 +1654,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/6add18754930182b",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 3
     },
     "ufc_or_endeavor_record": {
       "wins": 1,
@@ -1460,6 +1687,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/6add18754930182b",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 12.23,
+      "completed_fights_count": 3,
+      "total_fight_time_minutes": 36.7,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/6add18754930182b",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1536,7 +1774,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/95aff2fd8d09a5f0",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 3
     },
     "ufc_or_endeavor_record": {
       "wins": 1,
@@ -1559,6 +1800,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/95aff2fd8d09a5f0",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 1.31,
+      "completed_fights_count": 3,
+      "total_fight_time_minutes": 3.92,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/95aff2fd8d09a5f0",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1620,7 +1872,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/a4dc0f2b95df4cc1",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 3
     },
     "pro_career_summary": {},
     "physical": {
@@ -1633,6 +1888,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/a4dc0f2b95df4cc1",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 10.36,
+      "completed_fights_count": 3,
+      "total_fight_time_minutes": 31.07,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/a4dc0f2b95df4cc1",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1708,7 +1974,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/ffd3224638c01b57",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 6
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -1725,6 +1994,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/ffd3224638c01b57",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 14.16,
+      "completed_fights_count": 6,
+      "total_fight_time_minutes": 84.98,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/ffd3224638c01b57",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1793,7 +2073,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/739fd4fbb5d862f4",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 4
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -1810,6 +2093,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/739fd4fbb5d862f4",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 11.5,
+      "completed_fights_count": 4,
+      "total_fight_time_minutes": 45.98,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/739fd4fbb5d862f4",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1885,7 +2179,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/bc7f4b2d4c2724a2",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 1
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -1902,6 +2199,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/bc7f4b2d4c2724a2",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 15,
+      "completed_fights_count": 1,
+      "total_fight_time_minutes": 15,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/bc7f4b2d4c2724a2",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -1978,7 +2286,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/70dd69b6a703257e",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 2
     },
     "ufc_or_endeavor_record": {
       "wins": 2,
@@ -2001,6 +2312,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/70dd69b6a703257e",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 9.72,
+      "completed_fights_count": 2,
+      "total_fight_time_minutes": 19.45,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/70dd69b6a703257e",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -2077,7 +2399,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/2caf993f53541fa1",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 3
     },
     "ufc_or_endeavor_record": {
       "wins": 1,
@@ -2100,6 +2425,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/2caf993f53541fa1",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 8.08,
+      "completed_fights_count": 3,
+      "total_fight_time_minutes": 24.23,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/2caf993f53541fa1",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   },
   {
@@ -2175,7 +2511,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/c88f8a9c1ea7165d",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 0
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -2192,6 +2531,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/c88f8a9c1ea7165d",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": null,
+      "completed_fights_count": 0,
+      "total_fight_time_minutes": 0,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/c88f8a9c1ea7165d",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "No completed UFCStats fight-history rows were available; upcoming fights are excluded."
     }
   },
   {
@@ -2267,7 +2617,10 @@
         "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "official_ufcstats_url": "http://ufcstats.com/fighter-details/64b12fe31be7560c",
-      "official_ufcstats_researched_date": "2026-06-26"
+      "official_ufcstats_researched_date": "2026-06-26",
+      "fight_time_source": "official_ufcstats_fight_history",
+      "fight_time_researched_date": "2026-06-26",
+      "fight_time_completed_fights_count": 1
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -2284,6 +2637,17 @@
     "sources": {
       "official_ufcstats": "http://ufcstats.com/fighter-details/64b12fe31be7560c",
       "official_ufcstats_researched_date": "2026-06-26"
+    },
+    "fight_time": {
+      "average_fight_time_minutes": 7.02,
+      "completed_fights_count": 1,
+      "total_fight_time_minutes": 7.02,
+      "source_scope": "ufcstats_completed_bouts",
+      "source": "official_ufcstats_fight_history",
+      "source_url": "http://ufcstats.com/fighter-details/64b12fe31be7560c",
+      "researched_date": "2026-06-26",
+      "calculation": "elapsed_minutes = ((round - 1) * 5) + round_clock_minutes + round_clock_seconds / 60; average = total_fight_time_minutes / completed_fights_count",
+      "note": "Derived from completed UFCStats fight-history rows; upcoming fights are excluded."
     }
   }
 ]

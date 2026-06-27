@@ -51,12 +51,25 @@ export interface ProCareerSummary {
   [key: string]: unknown
 }
 
+export interface FighterFightTime {
+  average_fight_time_minutes?: number | null
+  completed_fights_count: number
+  total_fight_time_minutes?: number
+  source_scope: string
+  source: string
+  source_url?: string
+  researched_date: string
+  calculation?: string
+  note?: string
+}
+
 export interface Fighter {
   fighterId: string
   name: string
   record: FighterRecord
   physical?: FighterPhysical
   stats?: FighterStats
+  fight_time?: FighterFightTime
   data_quality?: FighterDataQuality
   pro_career_summary?: ProCareerSummary
   ufc_or_endeavor_record?: FighterRecord

@@ -548,7 +548,9 @@ function FighterProfile({ fightersById }: { fightersById: Map<string, Fighter> }
             <DetailItem label="Height" value={fighter.physical?.height} />
             <DetailItem label="Reach" value={formatReach(fighter)} />
             <DetailItem label="DOB" value={fighter.physical?.dob} />
+            <DetailItem label="Avg fight time" value={formatMinutes(fighter.fight_time?.average_fight_time_minutes)} />
             <DetailItem label="UFC/Endeavor" value={formatOptionalRecord(fighter.ufc_or_endeavor_record)} />
+            <DetailItem label="Timed fights" value={fighter.fight_time?.completed_fights_count} />
           </dl>
         </section>
 
@@ -706,6 +708,10 @@ function formatReach(fighter: Fighter): string {
 
 function formatPercent(value?: number): string {
   return value === undefined ? 'TBD' : `${value}%`
+}
+
+function formatMinutes(value?: number | null): string {
+  return value === undefined || value === null ? 'TBD' : `${value} min`
 }
 
 export default App
