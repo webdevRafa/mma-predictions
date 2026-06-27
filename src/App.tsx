@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Link, NavLink, Route, Routes, useParams } from 'react-router-dom'
+import { Link, NavLink, Route, Routes, useNavigate, useParams } from 'react-router-dom'
 import logo from './assets/logo.png'
 import { useMmaData } from './hooks/useMmaData'
 import { getNextEvent, indexFightersById } from './services/mmaData'
@@ -15,6 +15,128 @@ const statRows: Array<[keyof FighterStats, string]> = [
   ['takedown_accuracy_pct', 'TD Acc'],
   ['takedown_defense_pct', 'TD Def'],
   ['submission_avg_per_15_min', 'Sub Avg'],
+]
+
+type SortDirection = 'asc' | 'desc'
+type SortValue = number | string | undefined
+
+interface FighterTableColumn {
+  key: string
+  label: string
+  tooltip: string
+  align?: 'left' | 'right'
+  render: (fighter: Fighter) => string
+  sortValue: (fighter: Fighter) => SortValue
+}
+
+const fighterTableColumns: FighterTableColumn[] = [
+  {
+    key: 'name',
+    label: 'Fighter',
+    tooltip: 'Fighter name. Click a row to open the full fighter profile.',
+    align: 'left',
+    render: (fighter) => fighter.name,
+    sortValue: (fighter) => fighter.name,
+  },
+  {
+    key: 'wins',
+    label: 'W',
+    tooltip: 'Professional MMA wins listed in the fighter record.',
+    render: (fighter) => String(fighter.record.wins),
+    sortValue: (fighter) => fighter.record.wins,
+  },
+  {
+    key: 'losses',
+    label: 'L',
+    tooltip: 'Professional MMA losses listed in the fighter record.',
+    render: (fighter) => String(fighter.record.losses),
+    sortValue: (fighter) => fighter.record.losses,
+  },
+  {
+    key: 'draws',
+    label: 'D',
+    tooltip: 'Professional MMA draws listed in the fighter record.',
+    render: (fighter) => String(fighter.record.draws),
+    sortValue: (fighter) => fighter.record.draws,
+  },
+  {
+    key: 'weight',
+    label: 'Weight',
+    tooltip: 'Listed UFCStats weight in pounds.',
+    render: (fighter) => formatWeight(fighter),
+    sortValue: (fighter) => fighter.physical?.weight_lbs,
+  },
+  {
+    key: 'reach',
+    label: 'Reach',
+    tooltip: 'Listed UFCStats reach in inches.',
+    render: (fighter) => formatReach(fighter),
+    sortValue: (fighter) => fighter.physical?.reach_inches,
+  },
+  {
+    key: 'stance',
+    label: 'Stance',
+    tooltip: 'Listed UFCStats stance or dominant stance profile.',
+    align: 'left',
+    render: (fighter) => fighter.physical?.stance ?? 'TBD',
+    sortValue: (fighter) => fighter.physical?.stance,
+  },
+  {
+    key: 'slpm',
+    label: 'SLpM',
+    tooltip: 'Significant strikes landed per minute.',
+    render: (fighter) => formatStatValue('sig_str_landed_per_min', fighter.stats?.sig_str_landed_per_min),
+    sortValue: (fighter) => fighter.stats?.sig_str_landed_per_min,
+  },
+  {
+    key: 'str_acc',
+    label: 'Str Acc',
+    tooltip: 'Significant striking accuracy percentage.',
+    render: (fighter) => formatStatValue('sig_str_accuracy_pct', fighter.stats?.sig_str_accuracy_pct),
+    sortValue: (fighter) => fighter.stats?.sig_str_accuracy_pct,
+  },
+  {
+    key: 'sapm',
+    label: 'SApM',
+    tooltip: 'Significant strikes absorbed per minute.',
+    render: (fighter) => formatStatValue('sig_str_absorbed_per_min', fighter.stats?.sig_str_absorbed_per_min),
+    sortValue: (fighter) => fighter.stats?.sig_str_absorbed_per_min,
+  },
+  {
+    key: 'str_def',
+    label: 'Str Def',
+    tooltip: 'Significant strike defense percentage.',
+    render: (fighter) => formatStatValue('sig_str_defense_pct', fighter.stats?.sig_str_defense_pct),
+    sortValue: (fighter) => fighter.stats?.sig_str_defense_pct,
+  },
+  {
+    key: 'td_avg',
+    label: 'TD Avg',
+    tooltip: 'Average takedowns landed per 15 minutes.',
+    render: (fighter) => formatStatValue('takedown_avg_per_15_min', fighter.stats?.takedown_avg_per_15_min),
+    sortValue: (fighter) => fighter.stats?.takedown_avg_per_15_min,
+  },
+  {
+    key: 'td_acc',
+    label: 'TD Acc',
+    tooltip: 'Takedown accuracy percentage.',
+    render: (fighter) => formatStatValue('takedown_accuracy_pct', fighter.stats?.takedown_accuracy_pct),
+    sortValue: (fighter) => fighter.stats?.takedown_accuracy_pct,
+  },
+  {
+    key: 'td_def',
+    label: 'TD Def',
+    tooltip: 'Takedown defense percentage.',
+    render: (fighter) => formatStatValue('takedown_defense_pct', fighter.stats?.takedown_defense_pct),
+    sortValue: (fighter) => fighter.stats?.takedown_defense_pct,
+  },
+  {
+    key: 'sub_avg',
+    label: 'Sub Avg',
+    tooltip: 'Average submission attempts per 15 minutes.',
+    render: (fighter) => formatStatValue('submission_avg_per_15_min', fighter.stats?.submission_avg_per_15_min),
+    sortValue: (fighter) => fighter.stats?.submission_avg_per_15_min,
+  },
 ]
 
 function App() {
@@ -180,6 +302,12 @@ function FighterSnapshot({ fighter }: { fighter: Fighter }) {
 
 function FightersPage({ fighters }: { fighters: Fighter[] }) {
   const [query, setQuery] = useState('')
+  const [sortState, setSortState] = useState<{ key: string; direction: SortDirection }>({
+    key: 'name',
+    direction: 'asc',
+  })
+  const navigate = useNavigate()
+
   const filteredFighters = useMemo(() => {
     const normalizedQuery = query.trim().toLowerCase()
 
@@ -188,12 +316,8 @@ function FightersPage({ fighters }: { fighters: Fighter[] }) {
     }
 
     return fighters.filter((fighter) => {
-      const searchable = [
-        fighter.name,
-        fighter.physical?.stance,
-        String(fighter.physical?.weight_lbs ?? ''),
-      ]
-        .filter(Boolean)
+      const searchable = fighterTableColumns
+        .map((column) => column.render(fighter))
         .join(' ')
         .toLowerCase()
 
@@ -201,8 +325,35 @@ function FightersPage({ fighters }: { fighters: Fighter[] }) {
     })
   }, [fighters, query])
 
+  const sortedFighters = useMemo(() => {
+    const sortColumn =
+      fighterTableColumns.find((column) => column.key === sortState.key) ?? fighterTableColumns[0]
+
+    return [...filteredFighters].sort((first, second) => {
+      return compareSortValues(
+        sortColumn.sortValue(first),
+        sortColumn.sortValue(second),
+        sortState.direction,
+      )
+    })
+  }, [filteredFighters, sortState])
+
+  const handleSort = (key: string) => {
+    setSortState((current) => {
+      if (current.key !== key) {
+        return { key, direction: 'asc' }
+      }
+
+      return { key, direction: current.direction === 'asc' ? 'desc' : 'asc' }
+    })
+  }
+
+  const openFighter = (fighterId: string) => {
+    navigate(`/fighters/${fighterId}`)
+  }
+
   return (
-    <section className="page-stack">
+    <section className="page-stack fighters-page">
       <div className="page-heading split-heading">
         <div>
           <p className="eyebrow">Roster</p>
@@ -220,11 +371,14 @@ function FightersPage({ fighters }: { fighters: Fighter[] }) {
       </div>
 
       {filteredFighters.length > 0 ? (
-        <div className="fighter-directory">
-          {filteredFighters.map((fighter) => (
-            <FighterDirectoryCard key={fighter.fighterId} fighter={fighter} />
-          ))}
-        </div>
+        <FighterDataTable
+          fighters={sortedFighters}
+          resultCount={filteredFighters.length}
+          totalCount={fighters.length}
+          sortState={sortState}
+          onSort={handleSort}
+          onOpenFighter={openFighter}
+        />
       ) : (
         <EmptyState title="No fighters found" body="Try a different search." />
       )}
@@ -232,19 +386,121 @@ function FightersPage({ fighters }: { fighters: Fighter[] }) {
   )
 }
 
-function FighterDirectoryCard({ fighter }: { fighter: Fighter }) {
+interface FighterDataTableProps {
+  fighters: Fighter[]
+  resultCount: number
+  totalCount: number
+  sortState: { key: string; direction: SortDirection }
+  onSort: (key: string) => void
+  onOpenFighter: (fighterId: string) => void
+}
+
+function FighterDataTable({
+  fighters,
+  resultCount,
+  totalCount,
+  sortState,
+  onSort,
+  onOpenFighter,
+}: FighterDataTableProps) {
   return (
-    <Link className="directory-card" to={`/fighters/${fighter.fighterId}`}>
-      <div>
-        <h2>{fighter.name}</h2>
-        <p>{formatRecord(fighter.record)}</p>
+    <div className="fighter-table-shell">
+      <div className="table-summary">
+        <span>
+          Showing {resultCount} of {totalCount} fighters
+        </span>
+        <span>Click a row to open the fighter profile</span>
       </div>
-      <div className="directory-meta">
-        <span>{fighter.physical?.stance ?? 'Stance TBD'}</span>
-        <span>{formatWeight(fighter)}</span>
+      <div className="fighter-table-scroll" role="region" aria-label="Fighter data table" tabIndex={0}>
+        <table className="fighter-table">
+          <thead>
+            <tr>
+              {fighterTableColumns.map((column) => {
+                const isSorted = sortState.key === column.key
+
+                return (
+                  <th
+                    key={column.key}
+                    className={column.align === 'left' ? 'text-column' : undefined}
+                    aria-sort={
+                      isSorted
+                        ? sortState.direction === 'asc'
+                          ? 'ascending'
+                          : 'descending'
+                        : 'none'
+                    }
+                  >
+                    <button
+                      type="button"
+                      className={isSorted ? 'sort-button active' : 'sort-button'}
+                      onClick={() => onSort(column.key)}
+                    >
+                      <span className="column-help" data-tooltip={column.tooltip} title={column.tooltip}>
+                        {column.label}
+                      </span>
+                      <span className="sort-indicator" aria-hidden="true">
+                        <span
+                          className={
+                            isSorted && sortState.direction === 'asc'
+                              ? 'sort-chevron up active'
+                              : 'sort-chevron up'
+                          }
+                        />
+                        <span
+                          className={
+                            isSorted && sortState.direction === 'desc'
+                              ? 'sort-chevron down active'
+                              : 'sort-chevron down'
+                          }
+                        />
+                      </span>
+                    </button>
+                  </th>
+                )
+              })}
+            </tr>
+          </thead>
+          <tbody>
+            {fighters.map((fighter) => (
+              <tr
+                key={fighter.fighterId}
+                className="fighter-table-row"
+                role="link"
+                tabIndex={0}
+                aria-label={`Open ${fighter.name} profile`}
+                onClick={() => onOpenFighter(fighter.fighterId)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault()
+                    onOpenFighter(fighter.fighterId)
+                  }
+                }}
+              >
+                {fighterTableColumns.map((column) => {
+                  const isNameColumn = column.key === 'name'
+
+                  return (
+                    <td
+                      key={column.key}
+                      className={column.align === 'left' ? 'text-column' : undefined}
+                    >
+                      {isNameColumn ? (
+                        <span className="fighter-cell">
+                          <span className="fighter-name">{fighter.name}</span>
+                          <span className="fighter-record">{formatRecord(fighter.record)}</span>
+                        </span>
+                      ) : (
+                        column.render(fighter)
+                      )}
+                    </td>
+                  )
+                })}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <MetricGrid fighter={fighter} compact />
-    </Link>
+    </div>
   )
 }
 
@@ -399,6 +655,34 @@ function formatStatValue(key: keyof FighterStats, value?: number): string {
   const isPercentage = key.endsWith('_pct')
   const formatted = Number.isInteger(value) ? String(value) : value.toFixed(2)
   return isPercentage ? `${formatted}%` : formatted
+}
+
+function compareSortValues(first: SortValue, second: SortValue, direction: SortDirection): number {
+  const firstMissing = first === undefined || first === ''
+  const secondMissing = second === undefined || second === ''
+
+  if (firstMissing && secondMissing) {
+    return 0
+  }
+
+  if (firstMissing) {
+    return 1
+  }
+
+  if (secondMissing) {
+    return -1
+  }
+
+  const directionMultiplier = direction === 'asc' ? 1 : -1
+
+  if (typeof first === 'number' && typeof second === 'number') {
+    return (first - second) * directionMultiplier
+  }
+
+  return String(first).localeCompare(String(second), undefined, {
+    numeric: true,
+    sensitivity: 'base',
+  }) * directionMultiplier
 }
 
 function formatDate(date: string): string {
