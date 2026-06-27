@@ -32,24 +32,33 @@
       "official_ufc_rate_metrics_missing_fields": [],
       "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "newly_filled_official_fields": {
-        "takedown_defense_pct": "official_ufcstats_researched",
-        "submission_avg_per_15_min": "official_ufcstats_researched"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/c814b4c899793af6",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -62,6 +71,17 @@
       "win_finish_rate_pct": 69.2,
       "wins_by_decision_pct": 30.8,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "physical": {
+      "height": "5' 8\"",
+      "weight_lbs": 155,
+      "reach_inches": 71,
+      "stance": "Switch",
+      "dob": "1993-03-05"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/c814b4c899793af6",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -97,22 +117,46 @@
       "official_ufc_rate_metrics_missing_fields": [],
       "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": false,
-      "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/2e7878927067fdca",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
-    "pro_career_summary": {}
+    "pro_career_summary": {},
+    "physical": {
+      "height": "5' 10\"",
+      "weight_lbs": 155,
+      "reach_inches": 73,
+      "stance": "Switch",
+      "dob": "1995-03-25"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/2e7878927067fdca",
+      "official_ufcstats_researched_date": "2026-06-26"
+    }
   },
   {
     "fighterId": "michel-pereira",
@@ -132,19 +176,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 4.46,
-      "sig_str_accuracy_pct": 47.7,
-      "sig_str_absorbed_per_min": 3.9,
-      "sig_str_defense_pct": 56.3,
-      "takedown_avg_per_15_min": 1.18,
-      "takedown_accuracy_pct": 36,
-      "takedown_defense_pct": 67,
-      "submission_avg_per_15_min": 0.62
+      "sig_str_accuracy_pct": 51,
+      "sig_str_absorbed_per_min": 4.4,
+      "sig_str_defense_pct": 51,
+      "takedown_avg_per_15_min": 1.21,
+      "takedown_accuracy_pct": 56,
+      "takedown_defense_pct": 75,
+      "submission_avg_per_15_min": 0.7
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -153,30 +195,36 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/595db60957de51d3",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -190,6 +238,10 @@
       "win_finish_rate_pct": 62.5,
       "wins_by_decision_pct": 37.5,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/595db60957de51d3",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -225,20 +277,33 @@
       "official_ufc_rate_metrics_missing_fields": [],
       "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/06734ca9d88dec3a",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -251,6 +316,17 @@
       "win_finish_rate_pct": 75,
       "wins_by_decision_pct": 25,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "physical": {
+      "height": "6' 2\"",
+      "weight_lbs": 185,
+      "reach_inches": 73,
+      "stance": "Orthodox",
+      "dob": "1994-05-16"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/06734ca9d88dec3a",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -286,20 +362,33 @@
       "official_ufc_rate_metrics_missing_fields": [],
       "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/ff62013d2fce6d13",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -312,6 +401,17 @@
       "win_finish_rate_pct": 90.9,
       "wins_by_decision_pct": 9.1,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "physical": {
+      "height": "5' 10\"",
+      "weight_lbs": 155,
+      "reach_inches": 69,
+      "stance": "Southpaw",
+      "dob": "1994-05-16"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/ff62013d2fce6d13",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -347,16 +447,16 @@
       "official_ufc_rate_metrics_missing_fields": [],
       "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "No null data remaining in this fighter object. Official UFC values were preserved; non-UFC/pro-derived estimates are flagged in sources.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "submission_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
         "pro_career_summary.wins_by_ko_tko",
@@ -367,8 +467,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/72f890c5d421e705",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -381,6 +493,17 @@
       "win_finish_rate_pct": 80,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 20
+    },
+    "physical": {
+      "height": "5' 10\"",
+      "weight_lbs": 155,
+      "reach_inches": 69,
+      "stance": "Orthodox",
+      "dob": "2001-01-02"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/72f890c5d421e705",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -401,19 +524,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 2.31,
-      "sig_str_accuracy_pct": 43.9,
-      "sig_str_absorbed_per_min": 3.66,
-      "sig_str_defense_pct": 55.2,
-      "takedown_avg_per_15_min": 1.7,
-      "takedown_accuracy_pct": 43.2,
-      "takedown_defense_pct": 71.7,
-      "submission_avg_per_15_min": 0.9
+      "sig_str_accuracy_pct": 50,
+      "sig_str_absorbed_per_min": 1.99,
+      "sig_str_defense_pct": 53,
+      "takedown_avg_per_15_min": 4.46,
+      "takedown_accuracy_pct": 42,
+      "takedown_defense_pct": 44,
+      "submission_avg_per_15_min": 1.5
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -422,30 +543,36 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/8d3273573b85be09",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -458,6 +585,10 @@
       "win_finish_rate_pct": 56.5,
       "wins_by_decision_pct": 43.5,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/8d3273573b85be09",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -474,45 +605,52 @@
       "sig_str_accuracy_pct": 49,
       "sig_str_absorbed_per_min": 4.02,
       "sig_str_defense_pct": 55,
-      "takedown_avg_per_15_min": 0.87,
-      "takedown_accuracy_pct": 31.9,
-      "takedown_defense_pct": 68.1,
-      "submission_avg_per_15_min": 0.42
+      "takedown_avg_per_15_min": 0.51,
+      "takedown_accuracy_pct": 16,
+      "takedown_defense_pct": 69,
+      "submission_avg_per_15_min": 0.3
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
         "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
-        "sig_str_defense_pct"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_defense_pct",
         "takedown_avg_per_15_min",
         "takedown_accuracy_pct",
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/814e5233e2acf2ee",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -525,6 +663,17 @@
       "win_finish_rate_pct": 57.9,
       "wins_by_decision_pct": 42.1,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "physical": {
+      "height": "5' 9\"",
+      "weight_lbs": 125,
+      "reach_inches": 70,
+      "stance": "Switch",
+      "dob": "1991-01-10"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/814e5233e2acf2ee",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -538,21 +687,23 @@
     },
     "physical": {
       "height": "6' 0\"",
-      "weight_lbs": 185
+      "weight_lbs": 185,
+      "reach_inches": 76,
+      "stance": "Southpaw",
+      "dob": "1992-12-07"
     },
     "stats": {
-      "sig_str_landed_per_min": 4.1,
-      "sig_str_accuracy_pct": 49.7,
-      "sig_str_absorbed_per_min": 3.79,
-      "sig_str_defense_pct": 52.6,
-      "takedown_avg_per_15_min": 1.12,
-      "takedown_accuracy_pct": 35.1,
-      "takedown_defense_pct": 71.9,
-      "submission_avg_per_15_min": 0.62
+      "sig_str_landed_per_min": 6.86,
+      "sig_str_accuracy_pct": 64,
+      "sig_str_absorbed_per_min": 5.47,
+      "sig_str_defense_pct": 41,
+      "takedown_avg_per_15_min": 3.2,
+      "takedown_accuracy_pct": 60,
+      "takedown_defense_pct": 100,
+      "submission_avg_per_15_min": 0.5
     },
     "data_quality": {
-      "official_ufc_rate_metrics_present_fields": [],
-      "official_ufc_rate_metrics_missing_fields": [
+      "official_ufc_rate_metrics_present_fields": [
         "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
@@ -562,32 +713,36 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_landed_per_min": "derived_from_professional_mma_record_and_style_context_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
-        "sig_str_landed_per_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/b07aed698fba8624",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -600,6 +755,10 @@
       "win_finish_rate_pct": 70.6,
       "wins_by_decision_pct": 29.4,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/b07aed698fba8624",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -620,19 +779,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 3.77,
-      "sig_str_accuracy_pct": 53.8,
-      "sig_str_absorbed_per_min": 3.66,
-      "sig_str_defense_pct": 57.2,
-      "takedown_avg_per_15_min": 0.73,
-      "takedown_accuracy_pct": 29.5,
-      "takedown_defense_pct": 66.3,
-      "submission_avg_per_15_min": 0.5
+      "sig_str_accuracy_pct": 50,
+      "sig_str_absorbed_per_min": 3.91,
+      "sig_str_defense_pct": 51,
+      "takedown_avg_per_15_min": 1.25,
+      "takedown_accuracy_pct": 23,
+      "takedown_defense_pct": 61,
+      "submission_avg_per_15_min": 0.8
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -641,42 +798,52 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/1e719d4b676dc19a",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
       "wins_by_ko_tko": 9,
-      "wins_by_submission": 4,
-      "wins_by_decision": 0,
-      "losses_by_ko_tko": 1,
+      "wins_by_submission": 5,
+      "wins_by_decision": 1,
+      "losses_by_ko_tko": 2,
       "losses_by_submission": 1,
       "losses_by_decision": 0,
-      "win_finish_rate_pct": 86.7,
-      "wins_by_decision_pct": 0,
+      "win_finish_rate_pct": 93.3,
+      "wins_by_decision_pct": 6.7,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/1e719d4b676dc19a",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -692,11 +859,11 @@
       "sig_str_landed_per_min": 5.85,
       "sig_str_accuracy_pct": 53,
       "sig_str_absorbed_per_min": 4.5,
-      "sig_str_defense_pct": 60,
+      "sig_str_defense_pct": 59,
       "takedown_avg_per_15_min": 1.02,
-      "takedown_accuracy_pct": 23.9,
-      "takedown_defense_pct": 53,
-      "submission_avg_per_15_min": 0.18
+      "takedown_accuracy_pct": 42,
+      "takedown_defense_pct": 52,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
@@ -705,31 +872,40 @@
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
         "takedown_avg_per_15_min",
-        "takedown_defense_pct"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
         "takedown_accuracy_pct",
+        "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "takedown_accuracy_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/0d65c432720accb9",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -742,6 +918,17 @@
       "win_finish_rate_pct": 77.3,
       "wins_by_decision_pct": 22.7,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "physical": {
+      "height": "6' 0\"",
+      "weight_lbs": 185,
+      "reach_inches": 74,
+      "stance": "Southpaw",
+      "dob": "1995-02-22"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/0d65c432720accb9",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -754,6 +941,9 @@
       "no_contests": 0
     },
     "physical": {
+      "height": "6' 2\"",
+      "weight_lbs": 185,
+      "reach_inches": 78,
       "stance": "Orthodox",
       "dob": "1990-09-02"
     },
@@ -761,47 +951,53 @@
       "sig_str_landed_per_min": 3.07,
       "sig_str_accuracy_pct": 49,
       "sig_str_absorbed_per_min": 3.43,
-      "sig_str_defense_pct": 56.9,
-      "takedown_avg_per_15_min": 0.94,
-      "takedown_accuracy_pct": 32.5,
-      "takedown_defense_pct": 64.1,
-      "submission_avg_per_15_min": 0.54
+      "sig_str_defense_pct": 55,
+      "takedown_avg_per_15_min": 2.61,
+      "takedown_accuracy_pct": 59,
+      "takedown_defense_pct": 100,
+      "submission_avg_per_15_min": 0.4
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
         "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
         "takedown_avg_per_15_min",
         "takedown_accuracy_pct",
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/36b8f265bcd1b7a4",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -814,6 +1010,10 @@
       "win_finish_rate_pct": 75,
       "wins_by_decision_pct": 25,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/36b8f265bcd1b7a4",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -830,45 +1030,52 @@
       "sig_str_accuracy_pct": 45,
       "sig_str_absorbed_per_min": 4.55,
       "sig_str_defense_pct": 56,
-      "takedown_avg_per_15_min": 1.8,
-      "takedown_accuracy_pct": 44.5,
-      "takedown_defense_pct": 66.8,
-      "submission_avg_per_15_min": 0.96
+      "takedown_avg_per_15_min": 1.41,
+      "takedown_accuracy_pct": 43,
+      "takedown_defense_pct": 68,
+      "submission_avg_per_15_min": 0.4
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
         "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
-        "sig_str_defense_pct"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_defense_pct",
         "takedown_avg_per_15_min",
         "takedown_accuracy_pct",
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/7acbb0972e75281a",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -881,6 +1088,17 @@
       "win_finish_rate_pct": 57.9,
       "wins_by_decision_pct": 42.1,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "physical": {
+      "height": "6' 0\"",
+      "weight_lbs": 185,
+      "reach_inches": 74,
+      "stance": "Southpaw",
+      "dob": "1993-09-20"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/7acbb0972e75281a",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -901,19 +1119,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 3.66,
-      "sig_str_accuracy_pct": 51.7,
-      "sig_str_absorbed_per_min": 3.77,
-      "sig_str_defense_pct": 56.8,
-      "takedown_avg_per_15_min": 0.9,
-      "takedown_accuracy_pct": 31.9,
-      "takedown_defense_pct": 65.9,
-      "submission_avg_per_15_min": 0.52
+      "sig_str_accuracy_pct": 52,
+      "sig_str_absorbed_per_min": 1.75,
+      "sig_str_defense_pct": 64,
+      "takedown_avg_per_15_min": 1.48,
+      "takedown_accuracy_pct": 40,
+      "takedown_defense_pct": 73,
+      "submission_avg_per_15_min": 0.2
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -922,30 +1138,36 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/6a96ad1bc34fb113",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -958,6 +1180,10 @@
       "win_finish_rate_pct": 76,
       "wins_by_decision_pct": 24,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/6a96ad1bc34fb113",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -978,19 +1204,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 2.59,
-      "sig_str_accuracy_pct": 49.6,
-      "sig_str_absorbed_per_min": 3.63,
-      "sig_str_defense_pct": 58.2,
-      "takedown_avg_per_15_min": 1.64,
-      "takedown_accuracy_pct": 41.7,
-      "takedown_defense_pct": 68,
-      "submission_avg_per_15_min": 1.02
+      "sig_str_accuracy_pct": 46,
+      "sig_str_absorbed_per_min": 2.89,
+      "sig_str_defense_pct": 48,
+      "takedown_avg_per_15_min": 0.75,
+      "takedown_accuracy_pct": 66,
+      "takedown_defense_pct": 33,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -999,30 +1223,36 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/49d2a08964c5eb11",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
@@ -1035,6 +1265,10 @@
       "win_finish_rate_pct": 91.7,
       "wins_by_decision_pct": 8.3,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/49d2a08964c5eb11",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -1055,19 +1289,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 3.84,
-      "sig_str_accuracy_pct": 45.6,
-      "sig_str_absorbed_per_min": 3.82,
-      "sig_str_defense_pct": 57.1,
-      "takedown_avg_per_15_min": 1.13,
-      "takedown_accuracy_pct": 35.6,
-      "takedown_defense_pct": 66.3,
-      "submission_avg_per_15_min": 0.52
+      "sig_str_accuracy_pct": 56,
+      "sig_str_absorbed_per_min": 3.14,
+      "sig_str_defense_pct": 55,
+      "takedown_avg_per_15_min": 0.29,
+      "takedown_accuracy_pct": 16,
+      "takedown_defense_pct": 64,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -1076,27 +1308,21 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
         "pro_career_summary.wins_by_ko_tko",
         "pro_career_summary.wins_by_submission",
         "pro_career_summary.wins_by_decision",
@@ -1105,8 +1331,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/22e07d3da1aa3475",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -1119,6 +1357,10 @@
       "win_finish_rate_pct": 70,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 30
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/22e07d3da1aa3475",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -1131,18 +1373,17 @@
       "no_contests": 0
     },
     "stats": {
-      "sig_str_landed_per_min": 3.25,
-      "sig_str_accuracy_pct": 43,
-      "sig_str_absorbed_per_min": 3.67,
-      "sig_str_defense_pct": 57.9,
-      "takedown_avg_per_15_min": 1.27,
-      "takedown_accuracy_pct": 37.7,
-      "takedown_defense_pct": 67.6,
-      "submission_avg_per_15_min": 0.55
+      "sig_str_landed_per_min": 3.73,
+      "sig_str_accuracy_pct": 53,
+      "sig_str_absorbed_per_min": 4.03,
+      "sig_str_defense_pct": 43,
+      "takedown_avg_per_15_min": 4.09,
+      "takedown_accuracy_pct": 38,
+      "takedown_defense_pct": 100,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
-      "official_ufc_rate_metrics_present_fields": [],
-      "official_ufc_rate_metrics_missing_fields": [
+      "official_ufc_rate_metrics_present_fields": [
         "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
@@ -1152,30 +1393,22 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "record_updated_from_current_roster_source": true,
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_landed_per_min": "derived_from_professional_mma_record_and_style_context_not_official_ufcstats",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
-        "sig_str_landed_per_min",
         "pro_career_summary.wins_by_ko_tko",
         "pro_career_summary.wins_by_submission",
         "pro_career_summary.wins_by_decision",
@@ -1184,8 +1417,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/6add18754930182b",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "ufc_or_endeavor_record": {
       "wins": 1,
@@ -1204,18 +1449,33 @@
       "win_finish_rate_pct": 85.7,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 14.3
+    },
+    "physical": {
+      "height": "6' 4\"",
+      "weight_lbs": 205,
+      "reach_inches": 78,
+      "stance": "Orthodox",
+      "dob": "1999-07-16"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/6add18754930182b",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
     "fighterId": "abdul-rakhman-yakhyaev",
     "name": "Abdul Rakhman Yakhyaev",
     "record": {
-      "wins": 8,
+      "wins": 9,
       "losses": 0,
       "draws": 0,
       "no_contests": 0
     },
     "physical": {
+      "height": "6' 2\"",
+      "weight_lbs": 205,
+      "reach_inches": 78,
+      "stance": "Orthodox",
       "dob": "2001-01-03"
     },
     "stats": {
@@ -1223,43 +1483,38 @@
       "sig_str_accuracy_pct": 67,
       "sig_str_absorbed_per_min": 2.3,
       "sig_str_defense_pct": 57,
-      "takedown_avg_per_15_min": 0.79,
-      "takedown_accuracy_pct": 30.5,
-      "takedown_defense_pct": 74,
-      "submission_avg_per_15_min": 0.45
+      "takedown_avg_per_15_min": 11.49,
+      "takedown_accuracy_pct": 75,
+      "takedown_defense_pct": 100,
+      "submission_avg_per_15_min": 7.7
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
         "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
-        "sig_str_defense_pct"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_defense_pct",
         "takedown_avg_per_15_min",
         "takedown_accuracy_pct",
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "record_updated_from_current_roster_source": true,
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
         "pro_career_summary.wins_by_ko_tko",
         "pro_career_summary.wins_by_submission",
         "pro_career_summary.wins_by_decision",
@@ -1268,8 +1523,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/95aff2fd8d09a5f0",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "ufc_or_endeavor_record": {
       "wins": 1,
@@ -1288,6 +1555,10 @@
       "win_finish_rate_pct": 100,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 12.5
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/95aff2fd8d09a5f0",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -1304,47 +1575,65 @@
       "sig_str_accuracy_pct": 34,
       "sig_str_absorbed_per_min": 3.73,
       "sig_str_defense_pct": 36,
-      "takedown_avg_per_15_min": 1.27,
-      "takedown_accuracy_pct": 37.7,
-      "takedown_defense_pct": 68,
-      "submission_avg_per_15_min": 0.55
+      "takedown_avg_per_15_min": 0,
+      "takedown_accuracy_pct": 0,
+      "takedown_defense_pct": 41,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
         "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
-        "sig_str_defense_pct"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_defense_pct",
         "takedown_avg_per_15_min",
         "takedown_accuracy_pct",
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": false,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_absorbed_per_min": "official_ufcstats_or_preexisting_verified_value",
-        "sig_str_defense_pct": "official_ufcstats_or_preexisting_verified_value",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/a4dc0f2b95df4cc1",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
-    "pro_career_summary": {}
+    "pro_career_summary": {},
+    "physical": {
+      "height": "5' 7\"",
+      "weight_lbs": 135,
+      "reach_inches": 68,
+      "stance": "Orthodox",
+      "dob": "1997-10-08"
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/a4dc0f2b95df4cc1",
+      "official_ufcstats_researched_date": "2026-06-26"
+    }
   },
   {
     "fighterId": "jean-matsumoto",
@@ -1364,19 +1653,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 5.37,
-      "sig_str_accuracy_pct": 52.4,
-      "sig_str_absorbed_per_min": 3.52,
-      "sig_str_defense_pct": 59.4,
-      "takedown_avg_per_15_min": 0.79,
-      "takedown_accuracy_pct": 30.5,
-      "takedown_defense_pct": 69.9,
-      "submission_avg_per_15_min": 0.45
+      "sig_str_accuracy_pct": 39,
+      "sig_str_absorbed_per_min": 5.41,
+      "sig_str_defense_pct": 47,
+      "takedown_avg_per_15_min": 3,
+      "takedown_accuracy_pct": 48,
+      "takedown_defense_pct": 56,
+      "submission_avg_per_15_min": 0.5
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -1385,27 +1672,21 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
         "pro_career_summary.wins_by_ko_tko",
         "pro_career_summary.wins_by_submission",
         "pro_career_summary.wins_by_decision",
@@ -1414,8 +1695,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/ffd3224638c01b57",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -1428,6 +1721,10 @@
       "win_finish_rate_pct": 76.5,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 23.5
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/ffd3224638c01b57",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -1448,19 +1745,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 3.94,
-      "sig_str_accuracy_pct": 49.9,
-      "sig_str_absorbed_per_min": 3.61,
-      "sig_str_defense_pct": 59.1,
-      "takedown_avg_per_15_min": 0.75,
-      "takedown_accuracy_pct": 30.2,
-      "takedown_defense_pct": 69.5,
-      "submission_avg_per_15_min": 0.39
+      "sig_str_accuracy_pct": 54,
+      "sig_str_absorbed_per_min": 2.33,
+      "sig_str_defense_pct": 48,
+      "takedown_avg_per_15_min": 0.98,
+      "takedown_accuracy_pct": 75,
+      "takedown_defense_pct": 93,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -1469,42 +1764,52 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics and physical profile values were refreshed on 2026-06-26.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_all_professional_record_method_breakdown",
-        "sig_str_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_all_professional_record_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_all_professional_record_method_breakdown",
-        "takedown_defense_pct": "derived_from_all_professional_record_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_all_professional_record_method_breakdown"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
-      "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min"
-      ],
+      "estimated_fields": [],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/739fd4fbb5d862f4",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_not_ufc_rate_metrics",
       "wins_by_ko_tko": 6,
       "wins_by_submission": 2,
-      "wins_by_decision": 4,
+      "wins_by_decision": 5,
       "losses_by_ko_tko": 0,
       "losses_by_submission": 0,
       "losses_by_decision": 3,
       "win_finish_rate_pct": 61.5,
-      "wins_by_decision_pct": 30.8,
+      "wins_by_decision_pct": 38.5,
       "note": "Method breakdown is all-professional MMA where available, not UFC-only per-minute stats."
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/739fd4fbb5d862f4",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -1525,19 +1830,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 2,
-      "sig_str_accuracy_pct": 43.2,
-      "sig_str_absorbed_per_min": 3.49,
-      "sig_str_defense_pct": 58.9,
-      "takedown_avg_per_15_min": 1.27,
-      "takedown_accuracy_pct": 37.7,
-      "takedown_defense_pct": 69.2,
-      "submission_avg_per_15_min": 0.55
+      "sig_str_accuracy_pct": 50,
+      "sig_str_absorbed_per_min": 3.13,
+      "sig_str_defense_pct": 57,
+      "takedown_avg_per_15_min": 3,
+      "takedown_accuracy_pct": 60,
+      "takedown_defense_pct": 100,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -1546,27 +1849,21 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
         "pro_career_summary.wins_by_ko_tko",
         "pro_career_summary.wins_by_submission",
         "pro_career_summary.wins_by_decision",
@@ -1575,8 +1872,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/bc7f4b2d4c2724a2",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -1589,13 +1898,17 @@
       "win_finish_rate_pct": 55.6,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 44.4
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/bc7f4b2d4c2724a2",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
     "fighterId": "daniil-donchenko",
     "name": "Daniil Donchenko",
     "record": {
-      "wins": 13,
+      "wins": 14,
       "losses": 2,
       "draws": 0,
       "no_contests": 0
@@ -1609,19 +1922,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 7.15,
-      "sig_str_accuracy_pct": 52.4,
-      "sig_str_absorbed_per_min": 3.63,
-      "sig_str_defense_pct": 59.1,
-      "takedown_avg_per_15_min": 0.79,
-      "takedown_accuracy_pct": 30.5,
-      "takedown_defense_pct": 69.4,
-      "submission_avg_per_15_min": 0.45
+      "sig_str_accuracy_pct": 60,
+      "sig_str_absorbed_per_min": 2.57,
+      "sig_str_defense_pct": 72,
+      "takedown_avg_per_15_min": 0.77,
+      "takedown_accuracy_pct": 33,
+      "takedown_defense_pct": 75,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -1630,28 +1941,22 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "record_updated_from_current_roster_source": true,
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
         "pro_career_summary.wins_by_ko_tko",
         "pro_career_summary.wins_by_submission",
         "pro_career_summary.wins_by_decision",
@@ -1660,8 +1965,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/70dd69b6a703257e",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "ufc_or_endeavor_record": {
       "wins": 2,
@@ -1680,6 +1997,10 @@
       "win_finish_rate_pct": 84.6,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 23.1
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/70dd69b6a703257e",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -1700,19 +2021,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 5.82,
-      "sig_str_accuracy_pct": 52.2,
-      "sig_str_absorbed_per_min": 3.71,
-      "sig_str_defense_pct": 58.2,
-      "takedown_avg_per_15_min": 0.79,
-      "takedown_accuracy_pct": 30.5,
-      "takedown_defense_pct": 68,
-      "submission_avg_per_15_min": 0.45
+      "sig_str_accuracy_pct": 71,
+      "sig_str_absorbed_per_min": 3.63,
+      "sig_str_defense_pct": 45,
+      "takedown_avg_per_15_min": 6.19,
+      "takedown_accuracy_pct": 58,
+      "takedown_defense_pct": 100,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -1721,28 +2040,22 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "record_updated_from_current_roster_source": true,
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
         "pro_career_summary.wins_by_ko_tko",
         "pro_career_summary.wins_by_submission",
         "pro_career_summary.wins_by_decision",
@@ -1751,8 +2064,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/2caf993f53541fa1",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "ufc_or_endeavor_record": {
       "wins": 1,
@@ -1771,6 +2096,10 @@
       "win_finish_rate_pct": 83.3,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 16.7
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/2caf993f53541fa1",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -1791,19 +2120,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 0,
-      "sig_str_accuracy_pct": 43.5,
-      "sig_str_absorbed_per_min": 3.19,
-      "sig_str_defense_pct": 62,
-      "takedown_avg_per_15_min": 1.27,
-      "takedown_accuracy_pct": 37.7,
-      "takedown_defense_pct": 74,
-      "submission_avg_per_15_min": 0.55
+      "sig_str_accuracy_pct": 0,
+      "sig_str_absorbed_per_min": 0,
+      "sig_str_defense_pct": 0,
+      "takedown_avg_per_15_min": 0,
+      "takedown_accuracy_pct": 0,
+      "takedown_defense_pct": 0,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -1812,27 +2139,21 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
         "pro_career_summary.wins_by_ko_tko",
         "pro_career_summary.wins_by_submission",
         "pro_career_summary.wins_by_decision",
@@ -1841,8 +2162,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/c88f8a9c1ea7165d",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -1855,6 +2188,10 @@
       "win_finish_rate_pct": 80,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 20
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/c88f8a9c1ea7165d",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   },
   {
@@ -1875,19 +2212,17 @@
     },
     "stats": {
       "sig_str_landed_per_min": 3.14,
-      "sig_str_accuracy_pct": 42.8,
-      "sig_str_absorbed_per_min": 3.89,
-      "sig_str_defense_pct": 56.5,
-      "takedown_avg_per_15_min": 1.27,
-      "takedown_accuracy_pct": 37.7,
-      "takedown_defense_pct": 65.4,
-      "submission_avg_per_15_min": 0.55
+      "sig_str_accuracy_pct": 39,
+      "sig_str_absorbed_per_min": 5.13,
+      "sig_str_defense_pct": 41,
+      "takedown_avg_per_15_min": 0,
+      "takedown_accuracy_pct": 0,
+      "takedown_defense_pct": 71,
+      "submission_avg_per_15_min": 0
     },
     "data_quality": {
       "official_ufc_rate_metrics_present_fields": [
-        "sig_str_landed_per_min"
-      ],
-      "official_ufc_rate_metrics_missing_fields": [
+        "sig_str_landed_per_min",
         "sig_str_accuracy_pct",
         "sig_str_absorbed_per_min",
         "sig_str_defense_pct",
@@ -1896,27 +2231,21 @@
         "takedown_defense_pct",
         "submission_avg_per_15_min"
       ],
-      "official_ufc_rate_metrics_complete": false,
+      "official_ufc_rate_metrics_missing_fields": [],
+      "official_ufc_rate_metrics_complete": true,
       "non_ufc_or_all_pro_data_added": true,
-      "warning": "Some fields remain null because I did not find a reliable published UFC/FightMetric-style rate metric. Nulls were preserved rather than estimated.",
+      "warning": "Official UFCStats rate metrics were refreshed on 2026-06-26. Remaining estimated fields are non-UFC/pro-career method breakdowns, not UFCStats rate metrics.",
       "stat_field_sources": {
-        "sig_str_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_absorbed_per_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "sig_str_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_accuracy_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "takedown_defense_pct": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "submission_avg_per_15_min": "derived_from_professional_record_and_available_public_context_no_reliable_method_breakdown",
-        "pro_career_summary": "all_professional_mma_estimated_method_breakdown_not_official_ufcstats"
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
       },
       "estimated_fields": [
-        "sig_str_accuracy_pct",
-        "sig_str_absorbed_per_min",
-        "sig_str_defense_pct",
-        "takedown_avg_per_15_min",
-        "takedown_accuracy_pct",
-        "takedown_defense_pct",
-        "submission_avg_per_15_min",
         "pro_career_summary.wins_by_ko_tko",
         "pro_career_summary.wins_by_submission",
         "pro_career_summary.wins_by_decision",
@@ -1925,8 +2254,20 @@
         "pro_career_summary.losses_by_decision"
       ],
       "target_stats_complete": true,
-      "target_stats_note": "Official UFCStats values were preserved. Missing target fields were filled with non-official all-professional-derived estimates, not UFCStats rate metrics.",
-      "official_ufc_rate_metrics_missing_fields_after_target_fill": []
+      "target_stats_note": "All tracked UFC rate metric fields are populated from UFCStats as of 2026-06-26.",
+      "official_ufc_rate_metrics_missing_fields_after_target_fill": [],
+      "newly_filled_official_fields": {
+        "sig_str_landed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_absorbed_per_min": "official_ufcstats_refreshed_2026-06-26",
+        "sig_str_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_accuracy_pct": "official_ufcstats_refreshed_2026-06-26",
+        "takedown_defense_pct": "official_ufcstats_refreshed_2026-06-26",
+        "submission_avg_per_15_min": "official_ufcstats_refreshed_2026-06-26"
+      },
+      "official_ufcstats_url": "http://ufcstats.com/fighter-details/64b12fe31be7560c",
+      "official_ufcstats_researched_date": "2026-06-26"
     },
     "pro_career_summary": {
       "source_scope": "all_professional_mma_record_estimated_method_breakdown_not_ufc_rate_metrics",
@@ -1939,6 +2280,10 @@
       "win_finish_rate_pct": 75,
       "note": "Filled to remove nulls using all-professional MMA record context and style/finish estimates; not an official UFCStats rate metric.",
       "wins_by_decision_pct": 25
+    },
+    "sources": {
+      "official_ufcstats": "http://ufcstats.com/fighter-details/64b12fe31be7560c",
+      "official_ufcstats_researched_date": "2026-06-26"
     }
   }
 ]
