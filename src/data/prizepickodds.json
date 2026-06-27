@@ -1,0 +1,1055 @@
+[
+  {
+    "oddsSnapshotId": "2026-06-27-ufc-fight-night-fiziev-vs-torres-prizepicks-2026-06-26",
+    "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+    "provider": "PrizePicks",
+    "capturedAt": "2026-06-26",
+    "status": "active",
+    "source": "manual_user_entry",
+    "lineType": "over_under_projection",
+    "allowedSelections": [
+      "over",
+      "under"
+    ],
+    "notes": [
+      "Each projection can be played as over or under on PrizePicks.",
+      "fighterName preserves the PrizePicks display name. fighterId is populated only when the line can be matched to fighters.json.",
+      "Unmatched fighter names are still linked to eventId so they can be reconciled later if the event/fighter data expands."
+    ],
+    "lines": [
+      {
+        "lineId": "significant-strikes-jefferson-nascimento",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Jefferson Nascimento",
+        "fighterId": null,
+        "fighterMatchStatus": "unmatched",
+        "projection": 36.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-tahir-abdullayev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Tahir Abdullayev",
+        "fighterId": null,
+        "fighterMatchStatus": "unmatched",
+        "projection": 21.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-jean-matsumoto",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Jean Matsumoto",
+        "matchedFighterName": "Jean Matsumoto",
+        "fighterId": "jean-matsumoto",
+        "fighterMatchStatus": "matched",
+        "projection": 56.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-bekzat-almakhan",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Bekzat Almakhan",
+        "matchedFighterName": "Bekzat Almakhan",
+        "fighterId": "bekzat-almakhan",
+        "fighterMatchStatus": "matched",
+        "projection": 37.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-daniil-donchenko",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Daniil Donchenko",
+        "matchedFighterName": "Daniil Donchenko",
+        "fighterId": "daniil-donchenko",
+        "fighterMatchStatus": "matched",
+        "projection": 34.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-theodor-berggren",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Theodor Berggren",
+        "fighterId": null,
+        "fighterMatchStatus": "unmatched",
+        "projection": 16.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-javier-reyes",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Javier Reyes",
+        "fighterId": null,
+        "fighterMatchStatus": "unmatched",
+        "projection": 40.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-kaan-ofli",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Kaan Ofli",
+        "fighterId": null,
+        "fighterMatchStatus": "unmatched",
+        "projection": 23.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-andrey-pulyaev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Andrey Pulyaev",
+        "matchedFighterName": "Andrey Pulyaev",
+        "fighterId": "andrey-pulyaev",
+        "fighterMatchStatus": "matched",
+        "projection": 32.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-nursulton-ruziboev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Nursulton Ruziboev",
+        "matchedFighterName": "Nursulton Ruziboev",
+        "fighterId": "nursulton-ruziboev",
+        "fighterMatchStatus": "matched",
+        "projection": 25.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-abdul-rakhman-yakhyaev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Abdul-Rakhman Yakhyaev",
+        "matchedFighterName": "Abdul Rakhman Yakhyaev",
+        "fighterId": "abdul-rakhman-yakhyaev",
+        "fighterMatchStatus": "alias_matched",
+        "projection": 16.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-julius-walker",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Julius Walker",
+        "matchedFighterName": "Julius Walker",
+        "fighterId": "julius-walker",
+        "fighterMatchStatus": "matched",
+        "projection": 11.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-eric-nolan",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Eric Nolan",
+        "matchedFighterName": "Eric Nolan",
+        "fighterId": "eric-nolan",
+        "fighterMatchStatus": "matched",
+        "projection": 28.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-farman-hasanov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Farman Hasanov",
+        "matchedFighterName": "Farman Hasanov",
+        "fighterId": "farman-hasanov",
+        "fighterMatchStatus": "matched",
+        "projection": 35.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-michal-oleksiejczuk",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Michal Oleksiejczuk",
+        "matchedFighterName": "Michal Oleksiejczuk",
+        "fighterId": "michal-oleksiejczuk",
+        "fighterMatchStatus": "matched",
+        "projection": 31.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-abusupiyan-magomedov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Abusupiyan Magomedov",
+        "matchedFighterName": "Abus Magomedov",
+        "fighterId": "abus-magomedov",
+        "fighterMatchStatus": "alias_matched",
+        "projection": 27.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-ikram-aliskerov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Ikram Aliskerov",
+        "matchedFighterName": "Ikram Aliskerov",
+        "fighterId": "ikram-aliskerov",
+        "fighterMatchStatus": "matched",
+        "projection": 38.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-brunno-ferreira",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Brunno Ferreira",
+        "matchedFighterName": "Brunno Ferreira",
+        "fighterId": "brunno-ferreira",
+        "fighterMatchStatus": "matched",
+        "projection": 28.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-charles-johnson",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Charles Johnson",
+        "matchedFighterName": "Charles Johnson",
+        "fighterId": "charles-johnson",
+        "fighterMatchStatus": "matched",
+        "projection": 35.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-asu-almabayev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Asu Almabayev",
+        "matchedFighterName": "Asu Almabayev",
+        "fighterId": "asu-almabayev",
+        "fighterMatchStatus": "matched",
+        "projection": 29.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-nazim-sadykhov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Nazim Sadykhov",
+        "matchedFighterName": "Nazim Sadykhov",
+        "fighterId": "nazim-sadykhov",
+        "fighterMatchStatus": "matched",
+        "projection": 41.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-matheus-camilo",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Matheus Camilo",
+        "matchedFighterName": "Matheus Camilo",
+        "fighterId": "matheus-camilo",
+        "fighterMatchStatus": "matched",
+        "projection": 30.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-sharabutdin-magomedov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Sharabutdin Magomedov",
+        "matchedFighterName": "Shara Magomedov",
+        "fighterId": "shara-magomedov",
+        "fighterMatchStatus": "alias_matched",
+        "projection": 60.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-michel-pereira",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Michel Pereira",
+        "matchedFighterName": "Michel Pereira",
+        "fighterId": "michel-pereira",
+        "fighterMatchStatus": "matched",
+        "projection": 41.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-manuel-torres",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Manuel Torres",
+        "matchedFighterName": "Manuel Torres",
+        "fighterId": "manuel-torres",
+        "fighterMatchStatus": "matched",
+        "projection": 39.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "significant-strikes-rafael-fiziev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "significant_strikes",
+        "marketLabel": "Significant Strikes",
+        "fighterName": "Rafael Fiziev",
+        "matchedFighterName": "Rafael Fiziev",
+        "fighterId": "rafael-fiziev",
+        "fighterMatchStatus": "matched",
+        "projection": 39.5,
+        "unit": "significant_strikes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-tahir-abdullayev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Tahir Abdullayev",
+        "fighterId": null,
+        "fighterMatchStatus": "unmatched",
+        "projection": 2.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-jean-matsumoto",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Jean Matsumoto",
+        "matchedFighterName": "Jean Matsumoto",
+        "fighterId": "jean-matsumoto",
+        "fighterMatchStatus": "matched",
+        "projection": 2.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-daniil-donchenko",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Daniil Donchenko",
+        "matchedFighterName": "Daniil Donchenko",
+        "fighterId": "daniil-donchenko",
+        "fighterMatchStatus": "matched",
+        "projection": 2.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-javier-reyes",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Javier Reyes",
+        "fighterId": null,
+        "fighterMatchStatus": "unmatched",
+        "projection": 1.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-nursulton-ruziboev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Nursulton Ruziboev",
+        "matchedFighterName": "Nursulton Ruziboev",
+        "fighterId": "nursulton-ruziboev",
+        "fighterMatchStatus": "matched",
+        "projection": 1.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-abdul-rakhman-yakhyaev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Abdul-Rakhman Yakhyaev",
+        "matchedFighterName": "Abdul Rakhman Yakhyaev",
+        "fighterId": "abdul-rakhman-yakhyaev",
+        "fighterMatchStatus": "alias_matched",
+        "projection": 1.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-farman-hasanov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Farman Hasanov",
+        "matchedFighterName": "Farman Hasanov",
+        "fighterId": "farman-hasanov",
+        "fighterMatchStatus": "matched",
+        "projection": 1.54,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ],
+        "notes": [
+          "Projection preserved exactly from user-provided PrizePicks list."
+        ]
+      },
+      {
+        "lineId": "total-rounds-michal-oleksiejczuk",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Michal Oleksiejczuk",
+        "matchedFighterName": "Michal Oleksiejczuk",
+        "fighterId": "michal-oleksiejczuk",
+        "fighterMatchStatus": "matched",
+        "projection": 1.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-ikram-aliskerov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Ikram Aliskerov",
+        "matchedFighterName": "Ikram Aliskerov",
+        "fighterId": "ikram-aliskerov",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-asu-almabayev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Asu Almabayev",
+        "matchedFighterName": "Asu Almabayev",
+        "fighterId": "asu-almabayev",
+        "fighterMatchStatus": "matched",
+        "projection": 2.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-nazim-sadykhov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Nazim Sadykhov",
+        "matchedFighterName": "Nazim Sadykhov",
+        "fighterId": "nazim-sadykhov",
+        "fighterMatchStatus": "matched",
+        "projection": 1.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "total-rounds-rafael-fiziev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "total_rounds",
+        "marketLabel": "Total Rounds",
+        "fighterName": "Rafael Fiziev",
+        "matchedFighterName": "Rafael Fiziev",
+        "fighterId": "rafael-fiziev",
+        "fighterMatchStatus": "matched",
+        "projection": 1.5,
+        "unit": "rounds",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "fight-time-daniil-donchenko",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "fight_time_minutes",
+        "marketLabel": "Fight Time",
+        "fighterName": "Daniil Donchenko",
+        "matchedFighterName": "Daniil Donchenko",
+        "fighterId": "daniil-donchenko",
+        "fighterMatchStatus": "matched",
+        "projection": 8.75,
+        "unit": "minutes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "fight-time-nursulton-ruziboev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "fight_time_minutes",
+        "marketLabel": "Fight Time",
+        "fighterName": "Nursulton Ruziboev",
+        "matchedFighterName": "Nursulton Ruziboev",
+        "fighterId": "nursulton-ruziboev",
+        "fighterMatchStatus": "matched",
+        "projection": 11.75,
+        "unit": "minutes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "fight-time-abdul-rakhman-yakhyaev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "fight_time_minutes",
+        "marketLabel": "Fight Time",
+        "fighterName": "Abdul-Rakhman Yakhyaev",
+        "matchedFighterName": "Abdul Rakhman Yakhyaev",
+        "fighterId": "abdul-rakhman-yakhyaev",
+        "fighterMatchStatus": "alias_matched",
+        "projection": 4.25,
+        "unit": "minutes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "fight-time-farman-hasanov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "fight_time_minutes",
+        "marketLabel": "Fight Time",
+        "fighterName": "Farman Hasanov",
+        "matchedFighterName": "Farman Hasanov",
+        "fighterId": "farman-hasanov",
+        "fighterMatchStatus": "matched",
+        "projection": 9.25,
+        "unit": "minutes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "fight-time-ikram-aliskerov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "fight_time_minutes",
+        "marketLabel": "Fight Time",
+        "fighterName": "Ikram Aliskerov",
+        "matchedFighterName": "Ikram Aliskerov",
+        "fighterId": "ikram-aliskerov",
+        "fighterMatchStatus": "matched",
+        "projection": 7.5,
+        "unit": "minutes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "fight-time-nazim-sadykhov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "fight_time_minutes",
+        "marketLabel": "Fight Time",
+        "fighterName": "Nazim Sadykhov",
+        "matchedFighterName": "Nazim Sadykhov",
+        "fighterId": "nazim-sadykhov",
+        "fighterMatchStatus": "matched",
+        "projection": 9.5,
+        "unit": "minutes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "fight-time-rafael-fiziev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "fight_time_minutes",
+        "marketLabel": "Fight Time",
+        "fighterName": "Rafael Fiziev",
+        "matchedFighterName": "Rafael Fiziev",
+        "fighterId": "rafael-fiziev",
+        "fighterMatchStatus": "matched",
+        "projection": 9.25,
+        "unit": "minutes",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "knockdowns-michal-oleksiejczuk",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "knockdowns",
+        "marketLabel": "Knockdowns",
+        "fighterName": "Michal Oleksiejczuk",
+        "matchedFighterName": "Michal Oleksiejczuk",
+        "fighterId": "michal-oleksiejczuk",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "knockdowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "knockdowns-ikram-aliskerov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "knockdowns",
+        "marketLabel": "Knockdowns",
+        "fighterName": "Ikram Aliskerov",
+        "matchedFighterName": "Ikram Aliskerov",
+        "fighterId": "ikram-aliskerov",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "knockdowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "knockdowns-nazim-sadykhov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "knockdowns",
+        "marketLabel": "Knockdowns",
+        "fighterName": "Nazim Sadykhov",
+        "matchedFighterName": "Nazim Sadykhov",
+        "fighterId": "nazim-sadykhov",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "knockdowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "knockdowns-sharabutdin-magomedov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "knockdowns",
+        "marketLabel": "Knockdowns",
+        "fighterName": "Sharabutdin Magomedov",
+        "matchedFighterName": "Shara Magomedov",
+        "fighterId": "shara-magomedov",
+        "fighterMatchStatus": "alias_matched",
+        "projection": 0.5,
+        "unit": "knockdowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "knockdowns-manuel-torres",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "knockdowns",
+        "marketLabel": "Knockdowns",
+        "fighterName": "Manuel Torres",
+        "matchedFighterName": "Manuel Torres",
+        "fighterId": "manuel-torres",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "knockdowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "knockdowns-rafael-fiziev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "knockdowns",
+        "marketLabel": "Knockdowns",
+        "fighterName": "Rafael Fiziev",
+        "matchedFighterName": "Rafael Fiziev",
+        "fighterId": "rafael-fiziev",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "knockdowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "takedowns-michal-oleksiejczuk",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "takedowns",
+        "marketLabel": "Takedowns",
+        "fighterName": "Michal Oleksiejczuk",
+        "matchedFighterName": "Michal Oleksiejczuk",
+        "fighterId": "michal-oleksiejczuk",
+        "fighterMatchStatus": "matched",
+        "projection": 1.5,
+        "unit": "takedowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "takedowns-ikram-aliskerov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "takedowns",
+        "marketLabel": "Takedowns",
+        "fighterName": "Ikram Aliskerov",
+        "matchedFighterName": "Ikram Aliskerov",
+        "fighterId": "ikram-aliskerov",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "takedowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "takedowns-brunno-ferreira",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "takedowns",
+        "marketLabel": "Takedowns",
+        "fighterName": "Brunno Ferreira",
+        "matchedFighterName": "Brunno Ferreira",
+        "fighterId": "brunno-ferreira",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "takedowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "takedowns-asu-almabayev",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "takedowns",
+        "marketLabel": "Takedowns",
+        "fighterName": "Asu Almabayev",
+        "matchedFighterName": "Asu Almabayev",
+        "fighterId": "asu-almabayev",
+        "fighterMatchStatus": "matched",
+        "projection": 3.5,
+        "unit": "takedowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "takedowns-charles-johnson",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "takedowns",
+        "marketLabel": "Takedowns",
+        "fighterName": "Charles Johnson",
+        "matchedFighterName": "Charles Johnson",
+        "fighterId": "charles-johnson",
+        "fighterMatchStatus": "matched",
+        "projection": 2.5,
+        "unit": "takedowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "takedowns-matheus-camilo",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "takedowns",
+        "marketLabel": "Takedowns",
+        "fighterName": "Matheus Camilo",
+        "matchedFighterName": "Matheus Camilo",
+        "fighterId": "matheus-camilo",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "takedowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "takedowns-nazim-sadykhov",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "takedowns",
+        "marketLabel": "Takedowns",
+        "fighterName": "Nazim Sadykhov",
+        "matchedFighterName": "Nazim Sadykhov",
+        "fighterId": "nazim-sadykhov",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "takedowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      },
+      {
+        "lineId": "takedowns-michel-pereira",
+        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
+        "provider": "PrizePicks",
+        "marketType": "takedowns",
+        "marketLabel": "Takedowns",
+        "fighterName": "Michel Pereira",
+        "matchedFighterName": "Michel Pereira",
+        "fighterId": "michel-pereira",
+        "fighterMatchStatus": "matched",
+        "projection": 0.5,
+        "unit": "takedowns",
+        "allowedSelections": [
+          "over",
+          "under"
+        ]
+      }
+    ],
+    "audit": {
+      "lineCount": 59,
+      "marketCounts": {
+        "significant_strikes": 26,
+        "total_rounds": 12,
+        "fight_time_minutes": 7,
+        "knockdowns": 6,
+        "takedowns": 8
+      },
+      "unmatchedFighterNames": [
+        "Jefferson Nascimento",
+        "Tahir Abdullayev",
+        "Theodor Berggren",
+        "Javier Reyes",
+        "Kaan Ofli"
+      ],
+      "aliasMappings": [
+        {
+          "fighterName": "Abdul-Rakhman Yakhyaev",
+          "fighterId": "abdul-rakhman-yakhyaev",
+          "matchedFighterName": "Abdul Rakhman Yakhyaev"
+        },
+        {
+          "fighterName": "Abusupiyan Magomedov",
+          "fighterId": "abus-magomedov",
+          "matchedFighterName": "Abus Magomedov"
+        },
+        {
+          "fighterName": "Sharabutdin Magomedov",
+          "fighterId": "shara-magomedov",
+          "matchedFighterName": "Shara Magomedov"
+        }
+      ]
+    }
+  }
+]

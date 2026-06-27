@@ -12,6 +12,16 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    match /prizepickOdds/{snapshotId} {
+      allow read: if true;
+      allow write: if false;
+
+      match /lines/{lineId} {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+
     match /logs/{logId} {
       allow read, write: if false;
     }

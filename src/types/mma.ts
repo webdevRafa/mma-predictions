@@ -90,6 +90,54 @@ export interface MmaEvent {
   }
 }
 
+export type PrizePickMarketType =
+  | 'significant_strikes'
+  | 'total_rounds'
+  | 'fight_time_minutes'
+  | 'knockdowns'
+  | 'takedowns'
+
+export type PrizePickSelection = 'over' | 'under'
+
+export interface PrizePickLine {
+  lineId: string
+  eventId: string
+  provider: 'PrizePicks' | string
+  marketType: PrizePickMarketType
+  marketLabel: string
+  fighterName: string
+  matchedFighterName?: string
+  fighterId?: string | null
+  fighterMatchStatus: 'matched' | 'alias_matched' | 'unmatched' | string
+  projection: number
+  unit: string
+  allowedSelections: PrizePickSelection[]
+  notes?: string[]
+}
+
+export interface PrizePickOddsSnapshot {
+  oddsSnapshotId: string
+  eventId: string
+  provider: 'PrizePicks' | string
+  capturedAt: string
+  status: 'active' | 'archived' | string
+  source: string
+  lineType: 'over_under_projection' | string
+  allowedSelections: PrizePickSelection[]
+  notes?: string[]
+  lines: PrizePickLine[]
+  audit?: {
+    lineCount?: number
+    marketCounts?: Record<string, number>
+    unmatchedFighterNames?: string[]
+    aliasMappings?: Array<{
+      fighterName: string
+      fighterId: string
+      matchedFighterName: string
+    }>
+  }
+}
+
 export interface PrizePickLog {
   logId: string
   eventId?: string

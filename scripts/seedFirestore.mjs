@@ -15,12 +15,18 @@ loadLocalEnvFile('.env')
 
 const fighters = readJson('fighters.json')
 const events = readJson('events.json')
+const prizePickOdds = readJson('prizepickodds.json')
 
 validateSeedData()
 
 if (dryRun) {
+  const prizePickLineCount = prizePickOdds.reduce(
+    (total, oddsSnapshot) => total + oddsSnapshot.lines.length,
+    0,
+  )
+
   console.log(
-    `Dry run OK: ${events.length} event document(s), ${fighters.length} fighter document(s).`,
+    `Dry run OK: ${events.length} event document(s), ${fighters.length} fighter document(s), ${prizePickOdds.length} PrizePicks snapshot document(s), ${prizePickLineCount} PrizePicks line document(s).`,
   )
   for (const event of events) {
     console.log(`events/${event.eventId} -> ${event.name}`)
@@ -30,6 +36,11 @@ if (dryRun) {
   }
   if (fighters.length > 5) {
     console.log(`...and ${fighters.length - 5} more fighter document(s).`)
+  }
+  for (const oddsSnapshot of prizePickOdds) {
+    console.log(
+      `prizepickOdds/${oddsSnapshot.oddsSnapshotId} -> ${oddsSnapshot.lines.length} line document(s) for ${oddsSnapshot.eventId}`,
+    )
   }
   process.exit(0)
 }
@@ -62,6 +73,43 @@ for (const fighter of fighters) {
   )
 }
 
+for (const oddsSnapshot of prizePickOdds) {
+  const { lines, ...snapshotMetadata } = oddsSnapshot
+  const snapshotRef = firestore.collection('prizepickOdds').doc(oddsSnapshot.oddsSnapshotId)
+
+  batch.set(
+    snapshotRef,
+    {
+      ...snapshotMetadata,
+      lineCount: lines.length,
+      seededAt,
+    },
+    { merge: true },
+  )
+
+  for (const line of lines) {
+    batch.set(
+      snapshotRef.collection('lines').doc(line.lineId),
+      {
+        ...line,
+        oddsSnapshotId: oddsSnapshot.oddsSnapshotId,
+        seededAt,
+      },
+      { merge: true },
+    )
+  }
+
+  batch.set(
+    firestore.collection('events').doc(oddsSnapshot.eventId),
+    {
+      latestPrizePickOddsSnapshotId: oddsSnapshot.oddsSnapshotId,
+      latestPrizePickOddsLineCount: lines.length,
+      latestPrizePickOddsSeededAt: seededAt,
+    },
+    { merge: true },
+  )
+}
+
 try {
   await batch.commit()
 } catch (error) {
@@ -73,7 +121,10 @@ try {
 }
 
 console.log(
-  `Seeded Firestore: ${events.length} event document(s), ${fighters.length} fighter document(s).`,
+  `Seeded Firestore: ${events.length} event document(s), ${fighters.length} fighter document(s), ${prizePickOdds.length} PrizePicks snapshot document(s), ${prizePickOdds.reduce(
+    (total, oddsSnapshot) => total + oddsSnapshot.lines.length,
+    0,
+  )} PrizePicks line document(s).`,
 )
 
 function readJson(fileName) {
@@ -113,6 +164,8 @@ function loadLocalEnvFile(fileName) {
 }
 
 function validateSeedData() {
+  const eventIds = new Set(events.map((event) => event.eventId))
+
   for (const event of events) {
     if (!event.eventId || !Array.isArray(event.fights)) {
       throw new Error(`Invalid event seed document: ${event.name ?? 'unknown event'}`)
@@ -122,6 +175,44 @@ function validateSeedData() {
   for (const fighter of fighters) {
     if (!fighter.fighterId || !fighter.name) {
       throw new Error(`Invalid fighter seed document: ${fighter.name ?? 'unknown fighter'}`)
+    }
+  }
+
+  for (const oddsSnapshot of prizePickOdds) {
+    if (!oddsSnapshot.oddsSnapshotId || !oddsSnapshot.eventId || !Array.isArray(oddsSnapshot.lines)) {
+      throw new Error(
+        `Invalid PrizePicks odds snapshot: ${oddsSnapshot.oddsSnapshotId ?? 'unknown snapshot'}`,
+      )
+    }
+
+    if (!eventIds.has(oddsSnapshot.eventId)) {
+      throw new Error(
+        `PrizePicks odds snapshot ${oddsSnapshot.oddsSnapshotId} references unknown event ${oddsSnapshot.eventId}`,
+      )
+    }
+
+    if (oddsSnapshot.audit?.lineCount !== undefined && oddsSnapshot.audit.lineCount !== oddsSnapshot.lines.length) {
+      throw new Error(
+        `PrizePicks odds snapshot ${oddsSnapshot.oddsSnapshotId} audit lineCount does not match lines length`,
+      )
+    }
+
+    const lineIds = new Set()
+
+    for (const line of oddsSnapshot.lines) {
+      if (!line.lineId || !line.marketType || !line.fighterName || typeof line.projection !== 'number') {
+        throw new Error(
+          `Invalid PrizePicks line in ${oddsSnapshot.oddsSnapshotId}: ${line.lineId ?? line.fighterName ?? 'unknown line'}`,
+        )
+      }
+
+      if (lineIds.has(line.lineId)) {
+        throw new Error(
+          `Duplicate PrizePicks lineId ${line.lineId} in ${oddsSnapshot.oddsSnapshotId}`,
+        )
+      }
+
+      lineIds.add(line.lineId)
     }
   }
 }
