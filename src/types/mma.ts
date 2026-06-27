@@ -105,10 +105,13 @@ export interface MmaEvent {
 
 export type PrizePickMarketType =
   | 'significant_strikes'
+  | 'rd1_significant_strikes'
   | 'total_rounds'
   | 'fight_time_minutes'
+  | 'fantasy_score'
   | 'knockdowns'
   | 'takedowns'
+  | string
 
 export type PrizePickSelection = 'over' | 'under'
 
@@ -116,15 +119,29 @@ export interface PrizePickLine {
   lineId: string
   eventId: string
   provider: 'PrizePicks' | string
+  prizePicksProjectionId?: string
   marketType: PrizePickMarketType
   marketLabel: string
   fighterName: string
-  matchedFighterName?: string
+  matchedFighterName?: string | null
   fighterId?: string | null
   fighterMatchStatus: 'matched' | 'alias_matched' | 'unmatched' | string
+  opponentName?: string | null
+  gameName?: string | null
   projection: number
   unit: string
   allowedSelections: PrizePickSelection[]
+  allowedSelectionsSource?: string
+  allowedSelectionsConfidence?: 'low' | 'medium' | 'high' | string
+  allowedSelectionsNote?: string
+  prizePicksOddsType?: 'standard' | 'goblin' | 'demon' | string
+  adjustedOdds?: boolean
+  projectionType?: string
+  status?: string
+  startTime?: string
+  updatedAt?: string
+  boardTime?: string
+  rawPrizePicks?: Record<string, unknown>
   notes?: string[]
 }
 
@@ -135,14 +152,20 @@ export interface PrizePickOddsSnapshot {
   capturedAt: string
   status: 'active' | 'archived' | string
   source: string
+  sourceUrl?: string
+  leagueId?: string
+  leagueName?: string
   lineType: 'over_under_projection' | string
-  allowedSelections: PrizePickSelection[]
+  allowedSelections?: PrizePickSelection[]
+  normalizedSelectionLabels?: Partial<Record<PrizePickSelection, string>>
+  selectionAvailabilityNotes?: string[]
   notes?: string[]
   lines: PrizePickLine[]
   audit?: {
     lineCount?: number
     marketCounts?: Record<string, number>
     unmatchedFighterNames?: string[]
+    [key: string]: unknown
     aliasMappings?: Array<{
       fighterName: string
       fighterId: string
