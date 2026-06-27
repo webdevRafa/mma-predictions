@@ -76,6 +76,7 @@ for (const fighter of fighters) {
 for (const oddsSnapshot of prizePickOdds) {
   const { lines, ...snapshotMetadata } = oddsSnapshot
   const snapshotRef = firestore.collection('prizepickOdds').doc(oddsSnapshot.oddsSnapshotId)
+  const currentLineIds = new Set(lines.map((line) => line.lineId))
 
   batch.set(
     snapshotRef,
@@ -97,6 +98,14 @@ for (const oddsSnapshot of prizePickOdds) {
       },
       { merge: true },
     )
+  }
+
+  const existingLines = await snapshotRef.collection('lines').get()
+
+  for (const existingLine of existingLines.docs) {
+    if (!currentLineIds.has(existingLine.id)) {
+      batch.delete(existingLine.ref)
+    }
   }
 
   batch.set(

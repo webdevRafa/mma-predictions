@@ -18,38 +18,6 @@
     ],
     "lines": [
       {
-        "lineId": "significant-strikes-jefferson-nascimento",
-        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
-        "provider": "PrizePicks",
-        "marketType": "significant_strikes",
-        "marketLabel": "Significant Strikes",
-        "fighterName": "Jefferson Nascimento",
-        "fighterId": null,
-        "fighterMatchStatus": "unmatched",
-        "projection": 36.5,
-        "unit": "significant_strikes",
-        "allowedSelections": [
-          "over",
-          "under"
-        ]
-      },
-      {
-        "lineId": "significant-strikes-tahir-abdullayev",
-        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
-        "provider": "PrizePicks",
-        "marketType": "significant_strikes",
-        "marketLabel": "Significant Strikes",
-        "fighterName": "Tahir Abdullayev",
-        "fighterId": null,
-        "fighterMatchStatus": "unmatched",
-        "projection": 21.5,
-        "unit": "significant_strikes",
-        "allowedSelections": [
-          "over",
-          "under"
-        ]
-      },
-      {
         "lineId": "significant-strikes-jean-matsumoto",
         "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
         "provider": "PrizePicks",
@@ -94,54 +62,6 @@
         "fighterId": "daniil-donchenko",
         "fighterMatchStatus": "matched",
         "projection": 34.5,
-        "unit": "significant_strikes",
-        "allowedSelections": [
-          "over",
-          "under"
-        ]
-      },
-      {
-        "lineId": "significant-strikes-theodor-berggren",
-        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
-        "provider": "PrizePicks",
-        "marketType": "significant_strikes",
-        "marketLabel": "Significant Strikes",
-        "fighterName": "Theodor Berggren",
-        "fighterId": null,
-        "fighterMatchStatus": "unmatched",
-        "projection": 16.5,
-        "unit": "significant_strikes",
-        "allowedSelections": [
-          "over",
-          "under"
-        ]
-      },
-      {
-        "lineId": "significant-strikes-javier-reyes",
-        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
-        "provider": "PrizePicks",
-        "marketType": "significant_strikes",
-        "marketLabel": "Significant Strikes",
-        "fighterName": "Javier Reyes",
-        "fighterId": null,
-        "fighterMatchStatus": "unmatched",
-        "projection": 40.5,
-        "unit": "significant_strikes",
-        "allowedSelections": [
-          "over",
-          "under"
-        ]
-      },
-      {
-        "lineId": "significant-strikes-kaan-ofli",
-        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
-        "provider": "PrizePicks",
-        "marketType": "significant_strikes",
-        "marketLabel": "Significant Strikes",
-        "fighterName": "Kaan Ofli",
-        "fighterId": null,
-        "fighterMatchStatus": "unmatched",
-        "projection": 23.5,
         "unit": "significant_strikes",
         "allowedSelections": [
           "over",
@@ -455,22 +375,6 @@
         ]
       },
       {
-        "lineId": "total-rounds-tahir-abdullayev",
-        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
-        "provider": "PrizePicks",
-        "marketType": "total_rounds",
-        "marketLabel": "Total Rounds",
-        "fighterName": "Tahir Abdullayev",
-        "fighterId": null,
-        "fighterMatchStatus": "unmatched",
-        "projection": 2.5,
-        "unit": "rounds",
-        "allowedSelections": [
-          "over",
-          "under"
-        ]
-      },
-      {
         "lineId": "total-rounds-jean-matsumoto",
         "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
         "provider": "PrizePicks",
@@ -498,22 +402,6 @@
         "fighterId": "daniil-donchenko",
         "fighterMatchStatus": "matched",
         "projection": 2.5,
-        "unit": "rounds",
-        "allowedSelections": [
-          "over",
-          "under"
-        ]
-      },
-      {
-        "lineId": "total-rounds-javier-reyes",
-        "eventId": "2026-06-27-ufc-fight-night-fiziev-vs-torres",
-        "provider": "PrizePicks",
-        "marketType": "total_rounds",
-        "marketLabel": "Total Rounds",
-        "fighterName": "Javier Reyes",
-        "fighterId": null,
-        "fighterMatchStatus": "unmatched",
-        "projection": 1.5,
         "unit": "rounds",
         "allowedSelections": [
           "over",
@@ -1018,21 +906,15 @@
       }
     ],
     "audit": {
-      "lineCount": 59,
+      "lineCount": 52,
       "marketCounts": {
-        "significant_strikes": 26,
-        "total_rounds": 12,
+        "significant_strikes": 21,
+        "total_rounds": 10,
         "fight_time_minutes": 7,
         "knockdowns": 6,
         "takedowns": 8
       },
-      "unmatchedFighterNames": [
-        "Jefferson Nascimento",
-        "Tahir Abdullayev",
-        "Theodor Berggren",
-        "Javier Reyes",
-        "Kaan Ofli"
-      ],
+      "unmatchedFighterNames": [],
       "aliasMappings": [
         {
           "fighterName": "Abdul-Rakhman Yakhyaev",
