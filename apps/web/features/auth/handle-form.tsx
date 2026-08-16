@@ -6,6 +6,8 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
+import { trackAnalyticsEvent } from "@/lib/analytics/events";
+
 export function HandleForm({ returnTo }: { returnTo: string }) {
   const router = useRouter();
   const [handle, setHandle] = useState("");
@@ -40,6 +42,7 @@ export function HandleForm({ returnTo }: { returnTo: string }) {
             : "Handle could not be reserved";
         throw new Error(message);
       }
+      trackAnalyticsEvent("handle_created");
       router.push(returnTo);
       router.refresh();
     } catch (caught) {

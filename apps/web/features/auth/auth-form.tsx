@@ -19,6 +19,7 @@ import {
   isFirebaseClientConfigured,
 } from "@/lib/firebase/client";
 import { getFormString } from "@/lib/forms/form-data";
+import { trackAnalyticsEvent } from "@/lib/analytics/events";
 
 import {
   readAuthReturnContext,
@@ -52,7 +53,7 @@ export function AuthForm({ mode, returnTo }: { mode: Mode; returnTo: string }) {
   const [notice, setNotice] = useState<string | null>(null);
   const [email, setEmail] = useState("");
 
-  async function establishSession(user: User) {
+  async function establishSession(user: User, authMethod: "email" | "google") {
     const stored = readAuthReturnContext();
     const destination = stored?.returnTo ?? returnTo;
     const response = await fetch("/api/auth/session", {
@@ -81,6 +82,8 @@ export function AuthForm({ mode, returnTo }: { mode: Mode; returnTo: string }) {
       accountStatus?: string;
       returnTo?: string;
     };
+    if (mode === "signup")
+      trackAnalyticsEvent("signup_completed", { auth_method: authMethod });
     if (["banned", "deleted"].includes(result.accountStatus ?? "")) {
       router.push("/account/restricted");
     } else if (result.onboardingRequired) {
@@ -112,7 +115,7 @@ export function AuthForm({ mode, returnTo }: { mode: Mode; returnTo: string }) {
           : await signInWithEmailAndPassword(auth, email, password);
       if (mode === "signup" && !credential.user.emailVerified)
         await sendEmailVerification(credential.user);
-      await establishSession(credential.user);
+      await establishSession(credential.user, "email");
     } catch (caught) {
       setError(friendlyAuthError(caught));
     } finally {
@@ -132,6 +135,7 @@ export function AuthForm({ mode, returnTo }: { mode: Mode; returnTo: string }) {
       const { auth } = getFirebaseClient();
       await establishSession(
         (await signInWithPopup(auth, new GoogleAuthProvider())).user,
+        "google",
       );
     } catch (caught) {
       setError(friendlyAuthError(caught));

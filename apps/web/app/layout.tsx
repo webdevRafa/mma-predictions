@@ -2,11 +2,13 @@ import type { Metadata, Viewport } from "next";
 import { Barlow_Condensed, IBM_Plex_Mono, Inter } from "next/font/google";
 import type { ReactNode } from "react";
 
+import { AnalyticsRuntime } from "@/features/analytics/analytics-runtime";
+import { ConsentProvider } from "@/features/privacy/consent-provider";
 import { MobileNavigation } from "@/components/shell/mobile-navigation";
 import { SiteFooter } from "@/components/shell/site-footer";
 import { SiteHeader } from "@/components/shell/site-header";
 import { JsonLd } from "@/components/seo/json-ld";
-import { absoluteUrl } from "@/lib/seo/site";
+import { absoluteUrl, SITE_URL } from "@/lib/seo/site";
 
 import "./globals.css";
 
@@ -29,7 +31,7 @@ const monoFont = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://fightlobby.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "FightLobby — Every fight has a lobby",
     template: "%s | FightLobby",
@@ -44,6 +46,9 @@ export const metadata: Metadata = {
     locale: "en_US",
   },
   twitter: { card: "summary_large_image" },
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export const viewport: Viewport = {
@@ -80,10 +85,13 @@ export default function RootLayout({
             },
           ]}
         />
-        <SiteHeader />
-        {children}
-        <SiteFooter />
-        <MobileNavigation />
+        <ConsentProvider>
+          <AnalyticsRuntime />
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+          <MobileNavigation />
+        </ConsentProvider>
       </body>
     </html>
   );

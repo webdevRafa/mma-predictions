@@ -50,7 +50,7 @@ async function featureEnabled(name: "providerSyncEnabled" | "liveSyncEnabled") {
     .firestore.collection("featureFlags")
     .doc("current")
     .get();
-  return flags.get(name) === true;
+  return flags.get(name) !== false;
 }
 
 function taskId(

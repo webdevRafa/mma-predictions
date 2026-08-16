@@ -15,8 +15,10 @@ import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
+import { ShareProfileButton } from "@/features/profiles/share-profile-button";
 import { getPublicProfile, listPublicProfiles } from "@/lib/data/profiles";
 import { absoluteUrl } from "@/lib/seo/site";
+import { isProfileIndexable } from "@/lib/seo/indexability";
 
 type Props = { params: Promise<{ handle: string }> };
 
@@ -34,8 +36,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title: "Member not found",
       robots: { index: false, follow: false },
     };
-  const indexable =
-    profile.profileVisibility === "public" && profile.stats.gradedPicks >= 5;
+  const indexable = isProfileIndexable(profile);
   const description = `@${profile.handle} on FightLobby: ${profile.stats.totalPoints} points, ${Math.round(profile.stats.winnerAccuracy * 100)}% winner accuracy, and ${profile.stats.exactPicks} exact picks.`;
   return {
     title: `@${profile.handle} — UFC Prediction Record`,
@@ -130,6 +131,7 @@ export default async function PublicProfilePage({ params }: Props) {
                     Points rank #{profile.rankSummary.pointsRank}
                   </Badge>
                 ) : null}
+                <ShareProfileButton label={`@${profile.handle}`} />
               </div>
               <h1 className="mt-4 font-display text-5xl font-extrabold sm:text-7xl">
                 @{profile.handle}

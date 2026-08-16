@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 
+import { AdSlot } from "@/components/ads/ad-slot";
 import { EventCountdown } from "@/components/events/event-countdown";
 import { LocalEventTime } from "@/components/events/local-event-time";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
@@ -157,6 +158,15 @@ export default async function HomePage() {
           )}
         </div>
       </section>
+
+      {event ? (
+        <div className="shell py-8">
+          <AdSlot
+            eligible={event.monetizationEligible}
+            placement="home_after_hero"
+          />
+        </div>
+      ) : null}
 
       {card ? (
         <section className="shell py-16 sm:py-20">

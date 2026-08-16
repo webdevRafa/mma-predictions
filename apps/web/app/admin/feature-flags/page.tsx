@@ -7,6 +7,7 @@ import {
   adminLabelClass,
 } from "@/components/admin/admin-form";
 import { Card, CardHeader } from "@/components/ui/card";
+import { defaultRuntimeFeatureFlags } from "@/lib/features/runtime-flags";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export const dynamic = "force-dynamic";
@@ -63,7 +64,11 @@ export default async function FeatureFlagsPage({
                 {label}
                 <select
                   className={adminInputClass}
-                  defaultValue={String(snapshot.get(key) === true)}
+                  defaultValue={String(
+                    typeof snapshot.get(key) === "boolean"
+                      ? snapshot.get(key)
+                      : defaultRuntimeFeatureFlags[key],
+                  )}
                   name={key}
                 >
                   <option value="false">Disabled</option>

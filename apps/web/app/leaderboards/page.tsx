@@ -5,6 +5,7 @@ import Link from "next/link";
 import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
 import { listLeaderboards } from "@/lib/data/leaderboards";
 import { percentage } from "@/lib/format";
 
@@ -38,6 +39,10 @@ export default async function LeaderboardsPage({
 
   return (
     <main id="main-content">
+      <TrackAnalyticsEvent
+        name="leaderboard_viewed"
+        parameters={{ board_type: active?.type ?? "empty" }}
+      />
       <section className="relative overflow-hidden border-b border-fl-border">
         <div
           aria-hidden="true"

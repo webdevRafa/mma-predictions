@@ -17,7 +17,7 @@ import {
   ShieldCheck,
   Sparkles,
 } from "lucide-react";
-import { useEffect, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import { ConsensusCard } from "@/components/fights/consensus-card";
 import { Card, CardHeader } from "@/components/ui/card";
@@ -27,6 +27,7 @@ import {
   saveAuthReturnContext,
 } from "@/features/auth/auth-return-context";
 import { cn } from "@/lib/cn";
+import { trackAnalyticsEvent } from "@/lib/analytics/events";
 import { getFirebaseAppCheckToken } from "@/lib/firebase/client";
 
 interface DraftEnvelope {
@@ -151,6 +152,9 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [restored, setRestored] = useState(false);
+  const startedTracked = useRef(false);
+  const revealTracked = useRef(false);
+  const gradedTracked = useRef(false);
 
   useEffect(() => {
     const context = readAuthReturnContext();
@@ -184,6 +188,17 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
         if (prediction) {
           setSaved(prediction);
           setReveal(true);
+          if (prediction.grade && !gradedTracked.current) {
+            gradedTracked.current = true;
+            trackAnalyticsEvent("prediction_graded", {
+              fight_id: fight.id,
+              points: prediction.grade.points,
+            });
+          }
+          if (!revealTracked.current) {
+            revealTracked.current = true;
+            trackAnalyticsEvent("prediction_revealed", { fight_id: fight.id });
+          }
           if (!draft) setPick(prediction.pick);
         }
       })
@@ -199,11 +214,18 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   }, [fight]);
 
   function selectMethod(method: PredictionMethod) {
+    markStarted();
     setPick((current) => ({
       ...current,
       method,
       detail: defaultDetail(method),
     }));
+  }
+
+  function markStarted() {
+    if (startedTracked.current) return;
+    startedTracked.current = true;
+    trackAnalyticsEvent("prediction_started", { fight_id: fight.id });
   }
 
   function preserveAndAuthenticate(validPick: PredictionPick) {
@@ -212,6 +234,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
       returnTo,
       predictionDraft: { fightId: fight.id, pick: validPick },
     });
+    trackAnalyticsEvent("signup_prompted", { source: "prediction" });
     window.location.assign(`/login?returnTo=${encodeURIComponent(returnTo)}`);
   }
 
@@ -252,6 +275,14 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
       setCanSubmit(data.canEdit === true);
       setRestored(false);
       setStatus(data.created === true ? "Prediction saved." : "Changes saved.");
+      trackAnalyticsEvent(
+        data.created === true ? "prediction_submitted" : "prediction_updated",
+        { fight_id: fight.id },
+      );
+      if (!revealTracked.current) {
+        revealTracked.current = true;
+        trackAnalyticsEvent("prediction_revealed", { fight_id: fight.id });
+      }
       clearAuthReturnContext();
     } catch (caught) {
       setError(
@@ -340,12 +371,13 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
                       checked={selected}
                       className="sr-only"
                       name="winner"
-                      onChange={() =>
+                      onChange={() => {
+                        markStarted();
                         setPick((current) => ({
                           ...current,
                           winnerFighterId: fighter.id,
-                        }))
-                      }
+                        }));
+                      }}
                       type="radio"
                       value={fighter.id}
                     />

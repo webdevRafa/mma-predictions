@@ -2,10 +2,25 @@ import { parseFixture } from "@fightlobby/domain";
 import { describe, expect, it } from "vitest";
 
 import fixture from "../../../fixtures/events/ufc-fightlobby-demo.json";
-import { isFightIndexable, isFighterIndexable } from "../lib/seo/indexability";
+import {
+  isEventIndexable,
+  isFightIndexable,
+  isFighterIndexable,
+} from "../lib/seo/indexability";
 
 describe("public page indexability", () => {
   const card = parseFixture(fixture);
+
+  it("indexes only complete canonical event pages", () => {
+    expect(isEventIndexable(card.event, card.fights)).toBe(true);
+    expect(
+      isEventIndexable(
+        { ...card.event, editorial: { status: "draft" } },
+        card.fights,
+      ),
+    ).toBe(false);
+    expect(isEventIndexable(card.event, [])).toBe(false);
+  });
 
   it("indexes complete reviewed matchups and excludes thin drafts", () => {
     const mainEvent = card.fights.find(

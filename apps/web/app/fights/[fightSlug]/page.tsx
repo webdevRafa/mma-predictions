@@ -3,6 +3,7 @@ import { ArrowLeft, CheckCircle2, Clock3, Target } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
+import { AdSlot } from "@/components/ads/ad-slot";
 import { StatsComparison } from "@/components/fights/stats-comparison";
 import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
@@ -11,6 +12,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
+import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
 import { PredictionExperience } from "@/features/predictions/prediction-experience";
 import { getPublicFight, listPublicCards } from "@/lib/data/public";
 import { formatCardSegment, formatRecord } from "@/lib/format";
@@ -103,6 +105,10 @@ export default async function FightPage({ params }: Props) {
 
   return (
     <main id="main-content">
+      <TrackAnalyticsEvent
+        name="view_fight"
+        parameters={{ fight_id: fight.id, fight_status: fight.status }}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -238,6 +244,13 @@ export default async function FightPage({ params }: Props) {
         </div>
       </section>
 
+      <div className="shell py-8">
+        <AdSlot
+          eligible={fight.monetizationEligible}
+          placement="fight_after_matchup"
+        />
+      </div>
+
       <nav
         aria-label="Fight page sections"
         className="sticky top-16 z-30 border-b border-fl-border bg-fl-bg/95 backdrop-blur md:hidden"
@@ -341,6 +354,11 @@ export default async function FightPage({ params }: Props) {
               )}
             </div>
           </Card>
+
+          <AdSlot
+            eligible={fight.monetizationEligible}
+            placement="fight_after_editorial"
+          />
 
           <Card>
             <CardHeader

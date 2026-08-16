@@ -6,6 +6,7 @@ import { useRef, useState } from "react";
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { trackAnalyticsEvent } from "@/lib/analytics/events";
 
 const FightChatPanel = dynamic(
   () => import("./fight-chat-panel").then((module) => module.FightChatPanel),
@@ -74,7 +75,13 @@ export function FightChatLauncher({
           reply, report, and join the conversation.
         </p>
         <div ref={triggerRef}>
-          <Button className="mt-5 w-full" onClick={() => setOpen(true)}>
+          <Button
+            className="mt-5 w-full"
+            onClick={() => {
+              trackAnalyticsEvent("chat_opened", { room_type: roomType });
+              setOpen(true);
+            }}
+          >
             <MessageCircle aria-hidden="true" size={17} /> Open {roomType} lobby
           </Button>
         </div>

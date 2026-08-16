@@ -44,6 +44,7 @@ import { doc, onSnapshot } from "firebase/firestore";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { trackAnalyticsEvent } from "@/lib/analytics/events";
 import { cn } from "@/lib/cn";
 import {
   getFirebaseAppCheckToken,
@@ -296,6 +297,7 @@ export function FightChatPanel({
       setBody("");
       setReplyTo(null);
       setNotice("Message sent");
+      trackAnalyticsEvent("chat_message_sent", { room_type: roomType });
       nearBottomRef.current = true;
       requestAnimationFrame(scrollToBottom);
     } catch (sendError) {
@@ -377,6 +379,7 @@ export function FightChatPanel({
       if (!response.ok)
         throw new Error(apiMessage(payload, "Report could not be submitted"));
       setNotice("Report sent to the moderation queue.");
+      trackAnalyticsEvent("chat_message_reported", { room_type: roomType });
     } catch (reportError) {
       setError(
         reportError instanceof Error

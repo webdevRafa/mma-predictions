@@ -3,6 +3,7 @@ import { CalendarClock, MapPin, Radio, Trophy, UsersRound } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
+import { AdSlot } from "@/components/ads/ad-slot";
 import { EventCountdown } from "@/components/events/event-countdown";
 import { LocalEventTime } from "@/components/events/local-event-time";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
@@ -12,9 +13,11 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
+import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
 import { FollowButton } from "@/features/profiles/follow-button";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { absoluteUrl } from "@/lib/seo/site";
+import { isEventIndexable } from "@/lib/seo/indexability";
 
 type Props = { params: Promise<{ eventSlug: string }> };
 
@@ -32,8 +35,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   const description = `${card.event.name} fight card, community predictions, matchup analysis, and event lobby on FightLobby.`;
   const canonical = `/events/${card.event.slug}`;
-  const indexable =
-    card.event.monetizationEligible && card.event.dataQuality !== "blocked";
+  const indexable = isEventIndexable(card.event, card.fights);
   return {
     title: `${card.event.shortName} Fight Card, Predictions & Event Lobby`,
     description,
@@ -90,6 +92,14 @@ export default async function EventPage({ params }: Props) {
 
   return (
     <main id="main-content">
+      <TrackAnalyticsEvent
+        name="view_event"
+        parameters={{
+          event_id: event.id,
+          event_status: event.status,
+          promotion: event.promotion,
+        }}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",
@@ -209,6 +219,13 @@ export default async function EventPage({ params }: Props) {
           </div>
         </div>
       </section>
+
+      <div className="shell py-8">
+        <AdSlot
+          eligible={event.monetizationEligible}
+          placement="event_after_context"
+        />
+      </div>
 
       <div className="shell grid gap-8 py-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:py-16">
         <section aria-labelledby="fight-card-title">

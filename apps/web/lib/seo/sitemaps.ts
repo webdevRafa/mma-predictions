@@ -1,8 +1,13 @@
 import "server-only";
 
-import { listPublicCards, listPublicEvents } from "@/lib/data/public";
+import { listPublicCards } from "@/lib/data/public";
 import { listPublicProfiles } from "@/lib/data/profiles";
-import { isFightIndexable, isFighterIndexable } from "@/lib/seo/indexability";
+import {
+  isEventIndexable,
+  isFightIndexable,
+  isFighterIndexable,
+  isProfileIndexable,
+} from "@/lib/seo/indexability";
 import { absoluteUrl } from "@/lib/seo/site";
 
 function escapeXml(value: string) {
@@ -29,14 +34,10 @@ export function sitemapDocument(entries: { url: string; updatedAt: string }[]) {
 }
 
 export async function eventSitemapEntries() {
-  return (await listPublicEvents())
-    .filter(
-      (event) =>
-        event.status !== "draft" &&
-        event.monetizationEligible &&
-        event.dataQuality !== "blocked",
-    )
-    .map((event) => ({
+  const cards = await listPublicCards();
+  return cards
+    .filter((card) => isEventIndexable(card.event, card.fights))
+    .map(({ event }) => ({
       url: absoluteUrl(`/events/${event.slug}`),
       updatedAt: event.updatedAt,
     }));
@@ -76,11 +77,7 @@ export async function fighterSitemapEntries() {
 
 export async function profileSitemapEntries() {
   return (await listPublicProfiles())
-    .filter(
-      (profile) =>
-        profile.profileVisibility === "public" &&
-        profile.stats.gradedPicks >= 5,
-    )
+    .filter(isProfileIndexable)
     .map((profile) => ({
       url: absoluteUrl(`/u/${profile.handleNormalized}`),
       updatedAt: profile.updatedAt,

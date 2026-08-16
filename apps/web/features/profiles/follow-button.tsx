@@ -4,6 +4,8 @@ import { BellPlus, Check } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
+import { trackAnalyticsEvent } from "@/lib/analytics/events";
+
 export function FollowButton({
   targetType,
   targetId,
@@ -49,7 +51,14 @@ export function FollowButton({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ targetType, targetId }),
       });
-      if (response.ok) setFollowing(!following);
+      if (response.ok) {
+        if (!following)
+          trackAnalyticsEvent(
+            targetType === "event" ? "event_followed" : "fighter_followed",
+            { target_id: targetId },
+          );
+        setFollowing(!following);
+      }
     } finally {
       setBusy(false);
     }

@@ -1,11 +1,15 @@
 import Link from "next/link";
 
+import { PrivacyChoicesButton } from "@/features/privacy/privacy-choices-button";
+
 const links = [
   ["About", "/about"],
   ["Community guidelines", "/community-guidelines"],
   ["Privacy", "/privacy"],
+  ["Cookies", "/cookie-policy"],
   ["Terms", "/terms"],
   ["Data corrections", "/data-corrections"],
+  ["Copyright", "/dmca"],
 ] as const;
 
 export function SiteFooter() {
@@ -38,6 +42,7 @@ export function SiteFooter() {
               {label}
             </Link>
           ))}
+          <PrivacyChoicesButton />
         </nav>
       </div>
     </footer>
