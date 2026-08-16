@@ -1,0 +1,7 @@
+{
+  "projects": {
+    "default": "fightlobby-local",
+    "staging": "fightlobby-staging",
+    "production": "fightlobby-production"
+  }
+}

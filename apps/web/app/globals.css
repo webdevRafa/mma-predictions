@@ -1,0 +1,10 @@
+:root {
+  color-scheme: dark;
+  font-family: system-ui, sans-serif;
+  background: #080a0d;
+  color: #f5f7fa;
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; }
+main { display: grid; min-height: 100vh; place-content: center; padding: 2rem; }

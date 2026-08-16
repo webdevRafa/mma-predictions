@@ -1,0 +1,24 @@
+{
+  "name": "@fightlobby/functions",
+  "version": "0.1.0",
+  "private": true,
+  "main": "dist/index.js",
+  "type": "module",
+  "engines": { "node": "22" },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@fightlobby/domain": "workspace:*",
+    "firebase-admin": "latest",
+    "firebase-functions": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "typescript": "^6.0.2",
+    "vitest": "latest"
+  }
+}
