@@ -315,3 +315,50 @@ export interface Leaderboard {
   lastBuiltAt?: string | undefined;
   entries: LeaderboardEntry[];
 }
+
+export type ChatRoomStatus =
+  "scheduled" | "open" | "slow_mode" | "read_only" | "closed";
+
+export type ChatRoleBadge = "trusted" | "moderator" | "admin";
+
+export interface ChatRoom {
+  id: string;
+  type: "event_lobby" | "fight_lobby";
+  eventId: string;
+  fightId?: string | undefined;
+  status: ChatRoomStatus;
+  opensAt: string;
+  writableUntil?: string | undefined;
+  slowModeSeconds: number;
+  messageCount: number;
+  lastMessageAt?: string | undefined;
+  moderationHealth: "normal" | "degraded" | "locked";
+  monetizationEligible: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ChatReply {
+  messageId: string;
+  uid: string;
+  handle: string;
+  excerpt: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  roomId: string;
+  uid: string;
+  author: {
+    handle: string;
+    avatarVersion: number;
+    roleBadge?: ChatRoleBadge | undefined;
+  };
+  body: string;
+  bodyNormalizedHash: string;
+  replyTo?: ChatReply | undefined;
+  createdAt: number;
+  clientNonce: string;
+  status: "published" | "removed";
+  moderationVersion: number;
+}

@@ -1,24 +1,27 @@
-import { UserRoundX } from "lucide-react";
-
 import { Card, CardHeader } from "@/components/ui/card";
+import { BlockedMemberList } from "@/features/chat/blocked-member-list";
 import { requireOnboardedSession } from "@/lib/auth/session";
+import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export default async function BlockedUsersPage() {
-  await requireOnboardedSession("/settings/blocked-users");
+  const session = await requireOnboardedSession("/settings/blocked-users");
+  const snapshot = await getFirebaseAdmin()
+    .firestore.collection("users")
+    .doc(session.uid)
+    .collection("blocks")
+    .limit(500)
+    .get();
+  const members = snapshot.docs.map((document) => {
+    const handle: unknown = document.get("handle");
+    return {
+      uid: document.id,
+      ...(typeof handle === "string" ? { handle } : {}),
+    };
+  });
   return (
     <Card>
       <CardHeader eyebrow="Community controls" title="Blocked users" />
-      <div className="p-6 text-center">
-        <UserRoundX
-          aria-hidden="true"
-          className="mx-auto text-fl-text-dim"
-          size={28}
-        />
-        <p className="mt-4 font-semibold">No blocked users</p>
-        <p className="mt-2 text-sm text-fl-text-muted">
-          People you block from a lobby will appear here when chat launches.
-        </p>
-      </div>
+      <BlockedMemberList initialMembers={members} />
     </Card>
   );
 }

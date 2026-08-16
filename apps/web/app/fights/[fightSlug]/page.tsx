@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import {
-  ArrowLeft,
-  CheckCircle2,
-  Clock3,
-  MessageCircle,
-  Radio,
-  Target,
-} from "lucide-react";
+import { ArrowLeft, CheckCircle2, Clock3, Target } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
@@ -17,6 +10,7 @@ import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
+import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { PredictionExperience } from "@/features/predictions/prediction-experience";
 import { getPublicFight, listPublicCards } from "@/lib/data/public";
 import { formatCardSegment, formatRecord } from "@/lib/format";
@@ -450,39 +444,10 @@ export default async function FightPage({ params }: Props) {
           className="space-y-5 lg:sticky lg:top-24 lg:self-start"
           id="lobby"
         >
-          <Card>
-            <CardHeader eyebrow="Fight lobby" title="Matchup room" />
-            <div className="p-5 sm:p-6">
-              <div className="flex items-center justify-between gap-3">
-                <span className="inline-flex items-center gap-2 text-sm font-semibold">
-                  <Radio
-                    aria-hidden="true"
-                    className="text-fl-live"
-                    size={16}
-                  />{" "}
-                  Room preview
-                </span>
-                <Badge tone="neutral">Read only</Badge>
-              </div>
-              <div className="mt-5 space-y-3">
-                {[
-                  "Community chat connects in Phase 8.",
-                  "Predictions stay separate from lobby noise.",
-                ].map((message) => (
-                  <div
-                    className="rounded-xl bg-fl-surface-2 p-3 text-xs leading-5 text-fl-text-muted"
-                    key={message}
-                  >
-                    {message}
-                  </div>
-                ))}
-              </div>
-              <p className="mt-5 flex items-center gap-2 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
-                <MessageCircle aria-hidden="true" size={13} />{" "}
-                {fight.chatRoomId}
-              </p>
-            </div>
-          </Card>
+          <FightChatLauncher
+            fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
+            roomId={fight.chatRoomId}
+          />
           <Card className="p-5 sm:p-6">
             <Target aria-hidden="true" className="text-fl-accent" size={22} />
             <h2 className="mt-4 font-display text-2xl font-bold">

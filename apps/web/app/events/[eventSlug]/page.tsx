@@ -1,12 +1,5 @@
 import type { Metadata } from "next";
-import {
-  CalendarClock,
-  MapPin,
-  MessageCircle,
-  Radio,
-  Trophy,
-  UsersRound,
-} from "lucide-react";
+import { CalendarClock, MapPin, Radio, Trophy, UsersRound } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
@@ -18,6 +11,7 @@ import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
+import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { FollowButton } from "@/features/profiles/follow-button";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { absoluteUrl } from "@/lib/seo/site";
@@ -238,23 +232,11 @@ export default async function EventPage({ params }: Props) {
           className="space-y-5 lg:sticky lg:top-24 lg:self-start"
           aria-label="Event community summary"
         >
-          <Card>
-            <CardHeader eyebrow="Event lobby" title="The room opens here" />
-            <div className="p-5 sm:p-6">
-              <MessageCircle
-                aria-hidden="true"
-                className="text-fl-accent"
-                size={24}
-              />
-              <p className="mt-4 text-sm leading-6 text-fl-text-muted">
-                Read along now. Verified member posting and live presence arrive
-                with the community phase.
-              </p>
-              <div className="mt-5 rounded-xl border border-dashed border-fl-border bg-fl-surface-2 p-4 font-mono text-[10px] tracking-[.08em] text-fl-text-muted uppercase">
-                Room {event.chatRoomId}
-              </div>
-            </div>
-          </Card>
+          <FightChatLauncher
+            fightLabel={event.shortName}
+            roomId={event.chatRoomId}
+            roomType="event"
+          />
           <Card>
             <CardHeader
               eyebrow="Event leaderboard"

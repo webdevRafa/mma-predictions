@@ -4,7 +4,7 @@ import path from "node:path";
 import { parseFixture } from "@fightlobby/domain";
 import { initializeApp } from "firebase-admin/app";
 import { getDatabase } from "firebase-admin/database";
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore, Timestamp } from "firebase-admin/firestore";
 
 async function main(): Promise<void> {
   const projectId = process.env.GCLOUD_PROJECT ?? "fightlobby-local";
@@ -25,6 +25,13 @@ async function main(): Promise<void> {
   });
   const firestore = getFirestore(app);
   const batch = firestore.batch();
+  const eventStartsAt = Timestamp.fromDate(new Date(card.event.startsAt));
+  const fightLobbyOpensAt = Timestamp.fromMillis(
+    eventStartsAt.toMillis() - 7 * 24 * 60 * 60 * 1_000,
+  );
+  const writableUntil = Timestamp.fromMillis(
+    eventStartsAt.toMillis() + 24 * 60 * 60 * 1_000,
+  );
   batch.set(firestore.collection("events").doc(card.event.id), card.event);
   card.fighters.forEach((fighter) =>
     batch.set(firestore.collection("fighters").doc(fighter.id), {
@@ -45,7 +52,9 @@ async function main(): Promise<void> {
       type: "fight_lobby",
       eventId: fight.eventId,
       fightId: fight.id,
-      status: "scheduled",
+      status: Date.now() >= fightLobbyOpensAt.toMillis() ? "open" : "scheduled",
+      opensAt: fightLobbyOpensAt,
+      writableUntil,
       slowModeSeconds: 7,
       messageCount: 0,
       moderationHealth: "normal",
@@ -58,7 +67,9 @@ async function main(): Promise<void> {
     id: card.event.chatRoomId,
     type: "event_lobby",
     eventId: card.event.id,
-    status: "scheduled",
+    status: "open",
+    opensAt: Timestamp.fromDate(new Date(card.event.updatedAt)),
+    writableUntil,
     slowModeSeconds: 7,
     messageCount: 0,
     moderationHealth: "normal",

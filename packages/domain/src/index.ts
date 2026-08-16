@@ -5,6 +5,7 @@ export const BRAND = {
 } as const;
 
 export * from "./normalization/slug.ts";
+export * from "./chat/moderation.ts";
 export * from "./identity/handle.ts";
 export * from "./leaderboards/badges.ts";
 export * from "./leaderboards/ranking.ts";
@@ -12,6 +13,7 @@ export * from "./leaderboards/streak.ts";
 export * from "./predictions/validation.ts";
 export * from "./scoring/prediction.ts";
 export * from "./schemas/domain.ts";
+export * from "./schemas/chat.ts";
 export * from "./schemas/fixture.ts";
 export * from "./schemas/identity.ts";
 export * from "./schemas/leaderboard.ts";

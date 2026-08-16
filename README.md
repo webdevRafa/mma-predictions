@@ -47,3 +47,4 @@ Development uses normalized, versioned fixtures through a mock provider. Product
 - [Authentication](docs/authentication.md)
 - [Predictions](docs/predictions.md)
 - [Grading and leaderboards](docs/grading-and-leaderboards.md)
+- [Live chat and moderation](docs/live-chat.md)

@@ -131,6 +131,12 @@ rulesDescribe("Firebase security boundaries", () => {
       }),
     );
     await assertFails(
+      set(ref(memberDatabase, "chat/v1/rooms/room_a/presence/member_b"), {
+        connected: true,
+        lastSeen: Date.now(),
+      }),
+    );
+    await assertFails(
       set(ref(memberDatabase, "chat/v1/rooms/room_a/messages/msg_b"), {
         body: "blocked",
       }),

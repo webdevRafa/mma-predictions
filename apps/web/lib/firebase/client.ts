@@ -27,6 +27,8 @@ export const isFirebaseClientConfigured = Boolean(
   firebaseEnvironment.projectId &&
   firebaseEnvironment.appId,
 );
+export const isFirebaseRealtimeConfigured =
+  isFirebaseClientConfigured && Boolean(firebaseEnvironment.databaseURL);
 let emulatorsConnected = false;
 let appCheck: AppCheck | undefined;
 
