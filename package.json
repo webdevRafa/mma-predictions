@@ -11,11 +11,13 @@
     "lint": "eslint .",
     "typecheck": "pnpm -r typecheck",
     "test": "vitest run --passWithNoTests",
+    "validate:fixtures": "tsx scripts/validate-fixture.ts fixtures",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "emulators": "firebase emulators:start --config firebase.json"
   },
   "devDependencies": {
+    "@fightlobby/domain": "workspace:*",
     "@eslint/js": "latest",
     "@types/node": "latest",
     "@types/react": "latest",

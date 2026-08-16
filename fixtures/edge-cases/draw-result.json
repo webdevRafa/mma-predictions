@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-16T18:00:00.000Z",
+  "source": { "provider": "mock", "externalEventId": "edge-draw" },
+  "event": { "id": "evt_edge_draw", "promotion": "ufc", "name": "UFC Fixture: Draw Result", "shortName": "Draw Fixture", "slug": "ufc-fixture-draw-result-edraw", "status": "completed", "startsAt": "2026-07-01T23:00:00.000Z", "venueTimezone": "UTC" },
+  "fighters": [
+    { "id": "ftr_edge_draw_a", "slug": "rene-diaz-drawaa", "name": { "full": "René Diaz", "normalized": "rene diaz" }, "record": { "wins": 12, "losses": 4, "draws": 1, "noContests": 0 } },
+    { "id": "ftr_edge_draw_b", "slug": "samir-khan-drawbb", "name": { "full": "Samir Khan", "normalized": "samir khan" }, "record": { "wins": 11, "losses": 3, "draws": 1, "noContests": 0 } }
+  ],
+  "fights": [
+    { "id": "fgt_edge_draw", "slug": "rene-diaz-vs-samir-khan-edraw", "eventId": "evt_edge_draw", "fighterAId": "ftr_edge_draw_a", "fighterBId": "ftr_edge_draw_b", "cardSegment": "main_card", "boutOrder": 1, "status": "completed", "predictionStatus": "void", "weightClass": "Welterweight", "isTitleFight": false, "scheduledRounds": 3, "result": { "method": "draw", "methodDetail": "Majority draw", "resultVersion": 1, "official": true }, "predictionSummary": { "total": 80, "fighterA": 44, "fighterB": 36, "methods": {}, "rounds": {} }, "editorial": { "status": "missing" } }
+  ]
+}

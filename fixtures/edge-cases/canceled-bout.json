@@ -1,0 +1,13 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-16T18:00:00.000Z",
+  "source": { "provider": "mock", "externalEventId": "edge-canceled" },
+  "event": { "id": "evt_edge_cancel", "promotion": "ufc", "name": "UFC Fixture: Canceled Bout", "shortName": "Canceled Fixture", "slug": "ufc-fixture-canceled-bout-cancel", "status": "scheduled", "startsAt": "2026-10-01T23:00:00.000Z", "venueTimezone": "UTC" },
+  "fighters": [
+    { "id": "ftr_edge_cancel_a", "slug": "cass-allen-cancela", "name": { "full": "Cass Allen", "normalized": "cass allen" }, "record": { "wins": 8, "losses": 2, "draws": 0, "noContests": 0 } },
+    { "id": "ftr_edge_cancel_b", "slug": "mira-bell-cancelb", "name": { "full": "Mira Bell", "normalized": "mira bell" }, "record": { "wins": 9, "losses": 3, "draws": 0, "noContests": 0 } }
+  ],
+  "fights": [
+    { "id": "fgt_edge_cancel", "slug": "cass-allen-vs-mira-bell-cancel", "eventId": "evt_edge_cancel", "fighterAId": "ftr_edge_cancel_a", "fighterBId": "ftr_edge_cancel_b", "cardSegment": "prelims", "boutOrder": 1, "status": "canceled", "predictionStatus": "void", "weightClass": "Bantamweight", "isTitleFight": false, "scheduledRounds": 3, "predictionSummary": { "total": 42, "fighterA": 20, "fighterB": 22, "methods": {}, "rounds": {} }, "editorial": { "status": "missing" } }
+  ]
+}
