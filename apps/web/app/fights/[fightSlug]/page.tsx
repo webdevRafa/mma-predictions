@@ -3,16 +3,13 @@ import {
   ArrowLeft,
   CheckCircle2,
   Clock3,
-  LockKeyhole,
   MessageCircle,
   Radio,
-  ShieldCheck,
   Target,
 } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
-import { ConsensusCard } from "@/components/fights/consensus-card";
 import { StatsComparison } from "@/components/fights/stats-comparison";
 import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
@@ -20,6 +17,7 @@ import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
+import { PredictionExperience } from "@/features/predictions/prediction-experience";
 import { getPublicFight, listPublicCards } from "@/lib/data/public";
 import { formatCardSegment, formatRecord } from "@/lib/format";
 import { isFightIndexable } from "@/lib/seo/indexability";
@@ -247,39 +245,7 @@ export default async function FightPage({ params }: Props) {
         id="matchup"
       >
         <div className="space-y-6">
-          <Card id="predict">
-            <CardHeader
-              eyebrow="Your call"
-              title="Make your prediction"
-              description="Winner · method · finish detail · confidence"
-            />
-            <div className="p-5 sm:p-6">
-              <div className="flex items-start gap-4 rounded-xl border border-fl-border bg-fl-surface-2 p-4">
-                <span className="grid size-10 shrink-0 place-items-center rounded-full bg-fl-accent-soft text-fl-accent">
-                  <LockKeyhole aria-hidden="true" size={18} />
-                </span>
-                <div>
-                  <p className="font-semibold">Sign in to make this pick</p>
-                  <p className="mt-1 text-sm leading-6 text-fl-text-muted">
-                    Your selection remains editable until the server locks
-                    predictions at walkouts.
-                  </p>
-                </div>
-              </div>
-              <Link
-                className="focus-ring mt-5 inline-flex min-h-11 items-center justify-center rounded-lg bg-fl-accent px-5 text-sm font-bold text-fl-bg transition hover:bg-fl-accent-strong"
-                href={`/login?returnTo=/fights/${fight.slug}`}
-              >
-                Sign in to predict
-              </Link>
-              <p className="mt-4 flex items-center gap-2 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
-                <ShieldCheck aria-hidden="true" size={14} /> Eligibility is
-                verified by the server, never the browser clock.
-              </p>
-            </div>
-          </Card>
-
-          <ConsensusCard fight={fight} />
+          <PredictionExperience fight={fight} />
           <div id="stats">
             <StatsComparison fighterA={fighterA} fighterB={fighterB} />
           </div>
@@ -416,7 +382,7 @@ export default async function FightPage({ params }: Props) {
               </div>
               <div className="mt-5 space-y-3">
                 {[
-                  "Community chat connects in Phase 7.",
+                  "Community chat connects in Phase 8.",
                   "Predictions stay separate from lobby noise.",
                 ].map((message) => (
                   <div

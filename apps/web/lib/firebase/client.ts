@@ -1,6 +1,12 @@
 "use client";
 
 import { getApps, initializeApp, type FirebaseOptions } from "firebase/app";
+import {
+  ReCaptchaEnterpriseProvider,
+  getToken,
+  initializeAppCheck,
+  type AppCheck,
+} from "firebase/app-check";
 import { connectAuthEmulator, getAuth } from "firebase/auth";
 import { connectDatabaseEmulator, getDatabase } from "firebase/database";
 import { connectFirestoreEmulator, getFirestore } from "firebase/firestore";
@@ -22,6 +28,7 @@ export const isFirebaseClientConfigured = Boolean(
   firebaseEnvironment.appId,
 );
 let emulatorsConnected = false;
+let appCheck: AppCheck | undefined;
 
 function getFirebaseOptions(): FirebaseOptions {
   const { apiKey, projectId, appId } = firebaseEnvironment;
@@ -69,4 +76,15 @@ export function getFirebaseClient() {
   }
 
   return { app, auth, firestore, database, storage };
+}
+
+export async function getFirebaseAppCheckToken() {
+  const siteKey = process.env.NEXT_PUBLIC_FIREBASE_APP_CHECK_SITE_KEY;
+  if (!siteKey) return null;
+  const { app } = getFirebaseClient();
+  appCheck ??= initializeAppCheck(app, {
+    provider: new ReCaptchaEnterpriseProvider(siteKey),
+    isTokenAutoRefreshEnabled: true,
+  });
+  return (await getToken(appCheck)).token;
 }

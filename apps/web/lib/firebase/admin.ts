@@ -6,6 +6,7 @@ import {
   getApps,
   initializeApp,
 } from "firebase-admin/app";
+import { getAppCheck } from "firebase-admin/app-check";
 import { getAuth } from "firebase-admin/auth";
 import { getDatabase } from "firebase-admin/database";
 import { getFirestore } from "firebase-admin/firestore";
@@ -39,6 +40,7 @@ export function getFirebaseAdmin() {
     });
   return {
     app,
+    appCheck: getAppCheck(app),
     auth: getAuth(app),
     firestore: getFirestore(app),
     database: getDatabase(app),

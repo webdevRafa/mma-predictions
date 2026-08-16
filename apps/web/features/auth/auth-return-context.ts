@@ -12,10 +12,19 @@ function safeClientPath(value: string) {
 }
 
 export function saveAuthReturnContext(context: AuthReturnContext) {
+  const existing = readAuthReturnContext();
   sessionStorage.setItem(
     AUTH_CONTEXT_KEY,
-    JSON.stringify({ ...context, returnTo: safeClientPath(context.returnTo) }),
+    JSON.stringify({
+      ...existing,
+      ...context,
+      returnTo: safeClientPath(context.returnTo),
+    }),
   );
+}
+
+export function clearAuthReturnContext() {
+  sessionStorage.removeItem(AUTH_CONTEXT_KEY);
 }
 
 export function readAuthReturnContext(): AuthReturnContext | null {

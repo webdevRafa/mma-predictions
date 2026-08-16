@@ -183,6 +183,34 @@ export interface PredictionPick {
   confidence: number;
 }
 
+export type PredictionRecordStatus = "active" | "locked" | "graded" | "void";
+
+export interface PredictionGrade {
+  resultVersion: number;
+  winnerCorrect: boolean;
+  methodCorrect: boolean;
+  detailCorrect: boolean;
+  points: number;
+  gradedAt: string;
+  gradeVersion: number;
+}
+
+export interface Prediction {
+  id: string;
+  fightId: string;
+  eventId: string;
+  uid: string;
+  pick: PredictionPick;
+  status: PredictionRecordStatus;
+  submittedAt: string;
+  updatedAt: string;
+  lockedAt?: string | undefined;
+  providerStatusAtSubmission?: FightStatus | undefined;
+  lateReviewFlag: boolean;
+  predictionVersion: number;
+  grade?: PredictionGrade | undefined;
+}
+
 export interface EventCard {
   event: Event;
   fights: Fight[];

@@ -72,6 +72,17 @@ rulesDescribe("Firebase security boundaries", () => {
     await assertFails(
       setDoc(doc(firestore, "events/evt_public"), { status: "live" }),
     );
+    await assertFails(
+      setDoc(doc(firestore, "predictions/fgt_public_member_a"), {
+        fightId: "fgt_public",
+        uid: "member_a",
+      }),
+    );
+    await assertFails(
+      setDoc(doc(firestore, "fights/fgt_public/predictionShards/shard_01"), {
+        total: 1,
+      }),
+    );
   });
 
   it("keeps private user documents owner-only", async () => {

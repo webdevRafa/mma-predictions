@@ -1,18 +1,34 @@
-import type { Fight } from "@fightlobby/domain";
+import type { Fight, PredictionSummary } from "@fightlobby/domain";
 import { EyeOff, UsersRound } from "lucide-react";
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { percentage } from "@/lib/format";
 
-export function ConsensusCard({ fight }: { fight: Fight }) {
-  const reveal = fight.predictionStatus !== "open";
-  const fighterAPercentage = percentage(
-    fight.predictionSummary.fighterA,
-    fight.predictionSummary.total,
+const methodLabels: Record<string, string> = {
+  ko_tko: "KO/TKO",
+  submission: "Submission",
+  decision: "Decision",
+  other: "Other",
+};
+
+export function ConsensusCard({
+  fight,
+  reveal: revealOverride,
+  summary: summaryOverride,
+}: {
+  fight: Fight;
+  reveal?: boolean;
+  summary?: PredictionSummary;
+}) {
+  const summary = summaryOverride ?? fight.predictionSummary;
+  const reveal = revealOverride ?? fight.predictionStatus !== "open";
+  const fighterAPercentage = percentage(summary.fighterA, summary.total);
+  const fighterBPercentage = percentage(summary.fighterB, summary.total);
+  const methodEntries = Object.entries(summary.methods).filter(
+    ([, count]) => count > 0,
   );
-  const fighterBPercentage = percentage(
-    fight.predictionSummary.fighterB,
-    fight.predictionSummary.total,
+  const roundEntries = Object.entries(summary.rounds).filter(
+    ([key, count]) => /^\d$/.test(key) && count > 0,
   );
 
   return (
@@ -25,7 +41,7 @@ export function ConsensusCard({ fight }: { fight: Fight }) {
           </span>
           <div>
             <p className="font-display text-2xl font-bold">
-              {fight.predictionSummary.total.toLocaleString()}
+              {summary.total.toLocaleString()}
             </p>
             <p className="text-xs text-fl-text-muted">community predictions</p>
           </div>
@@ -54,6 +70,45 @@ export function ConsensusCard({ fight }: { fight: Fight }) {
                 className="bg-fl-info"
                 style={{ width: `${fighterBPercentage}%` }}
               />
+            </div>
+            <div className="mt-6 grid gap-5 sm:grid-cols-2">
+              <div>
+                <p className="eyebrow">Method calls</p>
+                <div className="mt-3 space-y-2">
+                  {methodEntries.map(([method, count]) => (
+                    <div
+                      className="flex items-center justify-between gap-3 text-xs"
+                      key={method}
+                    >
+                      <span className="text-fl-text-muted">
+                        {methodLabels[method] ?? method}
+                      </span>
+                      <span className="font-mono font-semibold">
+                        {percentage(count, summary.total)}%
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <p className="eyebrow">Finish rounds</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {roundEntries.length > 0 ? (
+                    roundEntries.map(([round, count]) => (
+                      <span
+                        className="rounded-md border border-fl-border bg-fl-surface-2 px-2.5 py-1.5 font-mono text-[10px]"
+                        key={round}
+                      >
+                        R{round} · {percentage(count, summary.total)}%
+                      </span>
+                    ))
+                  ) : (
+                    <span className="text-xs text-fl-text-dim">
+                      No round calls yet
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         ) : (

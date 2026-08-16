@@ -11,7 +11,7 @@ export default async function NotificationSettingsPage() {
       <CardHeader
         eyebrow="Private preferences"
         title="Notifications"
-        description="Delivery work arrives in Phase 9; these choices establish your consent now."
+        description="Delivery arrives in a later engagement pass; these choices establish your consent now."
       />
       <div className="p-5 sm:p-6">
         <PreferenceForm

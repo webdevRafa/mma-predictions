@@ -33,7 +33,13 @@ async function main(): Promise<void> {
     }),
   );
   card.fights.forEach((fight) => {
-    batch.set(firestore.collection("fights").doc(fight.id), fight);
+    const fightRef = firestore.collection("fights").doc(fight.id);
+    batch.set(fightRef, fight);
+    batch.set(fightRef.collection("predictionShards").doc("baseline"), {
+      shardId: "baseline",
+      ...fight.predictionSummary,
+      updatedAt: fight.updatedAt,
+    });
     batch.set(firestore.collection("chatRooms").doc(fight.chatRoomId), {
       id: fight.chatRoomId,
       type: "fight_lobby",

@@ -6,6 +6,8 @@ export const BRAND = {
 
 export * from "./normalization/slug.ts";
 export * from "./identity/handle.ts";
+export * from "./predictions/validation.ts";
+export * from "./scoring/prediction.ts";
 export * from "./schemas/domain.ts";
 export * from "./schemas/fixture.ts";
 export * from "./schemas/identity.ts";
