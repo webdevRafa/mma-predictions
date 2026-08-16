@@ -1,0 +1,10 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["../apps/web/*"]
+    },
+    "types": ["node"]
+  },
+  "include": ["./run-staging-simulation.ts", "./staging-simulation.ts"]
+}
