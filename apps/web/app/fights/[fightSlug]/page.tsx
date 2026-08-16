@@ -25,6 +25,24 @@ import { absoluteUrl } from "@/lib/seo/site";
 
 type Props = { params: Promise<{ fightSlug: string }> };
 
+const resultLabels = {
+  ko_tko: "KO / TKO",
+  submission: "Submission",
+  decision_unanimous: "Unanimous decision",
+  decision_split: "Split decision",
+  decision_majority: "Majority decision",
+  dq: "Disqualification",
+  draw: "Draw",
+  no_contest: "No contest",
+  overturned: "Overturned",
+  other: "Other",
+} as const;
+
+function clockTime(seconds?: number) {
+  if (seconds === undefined) return null;
+  return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+}
+
 export async function generateStaticParams() {
   return (await listPublicCards()).flatMap((card) =>
     card.fights.map((fight) => ({ fightSlug: fight.slug })),
@@ -82,6 +100,12 @@ export default async function FightPage({ params }: Props) {
   const fighterA = fighters.find((fighter) => fighter.id === fight.fighterAId);
   const fighterB = fighters.find((fighter) => fighter.id === fight.fighterBId);
   if (!fighterA || !fighterB) notFound();
+  const winner =
+    fight.result?.winnerFighterId === fighterA.id
+      ? fighterA
+      : fight.result?.winnerFighterId === fighterB.id
+        ? fighterB
+        : null;
 
   return (
     <main id="main-content">
@@ -328,16 +352,76 @@ export default async function FightPage({ params }: Props) {
             <CardHeader
               eyebrow="Fight state"
               title={
-                fight.result ? "Official result" : "Awaiting the opening horn"
+                fight.result?.official
+                  ? "Official result"
+                  : fight.result
+                    ? "Result under review"
+                    : "Awaiting the opening horn"
               }
             />
             <div className="p-5 sm:p-6">
               {fight.result ? (
-                <p className="text-sm text-fl-text-muted">
-                  Result data is recorded at version{" "}
-                  {fight.result.resultVersion} and will display here after
-                  official verification.
-                </p>
+                <div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle2
+                      aria-hidden="true"
+                      className="mt-0.5 shrink-0 text-fl-success"
+                      size={20}
+                    />
+                    <div>
+                      <p className="font-display text-2xl font-bold">
+                        {winner
+                          ? `${winner.name.full} wins`
+                          : resultLabels[fight.result.method]}
+                      </p>
+                      <p className="mt-1 text-sm text-fl-text-muted">
+                        {winner
+                          ? resultLabels[fight.result.method]
+                          : "Official bout result"}
+                        {fight.result.round
+                          ? ` · Round ${fight.result.round}`
+                          : ""}
+                        {clockTime(fight.result.timeInRoundSeconds)
+                          ? ` · ${clockTime(fight.result.timeInRoundSeconds)}`
+                          : ""}
+                      </p>
+                    </div>
+                  </div>
+                  {fight.gradingSummary ? (
+                    <div className="mt-5 grid grid-cols-2 gap-3 border-t border-fl-border pt-5 sm:grid-cols-3">
+                      <div>
+                        <p className="eyebrow">Community</p>
+                        <p className="mt-1 font-display text-2xl font-bold">
+                          {fight.gradingSummary.gradedPredictions}
+                        </p>
+                        <p className="text-xs text-fl-text-muted">
+                          graded picks
+                        </p>
+                      </div>
+                      <div>
+                        <p className="eyebrow">Winner reads</p>
+                        <p className="mt-1 font-display text-2xl font-bold">
+                          {fight.gradingSummary.correctWinners}
+                        </p>
+                        <p className="text-xs text-fl-text-muted">correct</p>
+                      </div>
+                      <div>
+                        <p className="eyebrow">Exact calls</p>
+                        <p className="mt-1 font-display text-2xl font-bold">
+                          {fight.gradingSummary.exactPicks}
+                        </p>
+                        <p className="text-xs text-fl-text-muted">
+                          winner + method + detail
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="mt-4 text-xs text-fl-text-dim">
+                      Prediction grading is queued for result version{" "}
+                      {fight.result.resultVersion}.
+                    </p>
+                  )}
+                </div>
               ) : (
                 <div className="flex items-start gap-3">
                   <Clock3

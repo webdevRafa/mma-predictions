@@ -2,6 +2,7 @@ import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
 import {
+  leaderboardFixtureSchema,
   publicProfileSchema,
   validateAndNormalizeFixture,
 } from "@fightlobby/domain";
@@ -26,6 +27,13 @@ async function main(): Promise<void> {
     for (const filename of await collectJsonFiles(input)) {
       try {
         const json: unknown = JSON.parse(await readFile(filename, "utf8"));
+        if (filename.includes(`${path.sep}leaderboards${path.sep}`)) {
+          const fixture = leaderboardFixtureSchema.parse(json);
+          console.log(
+            `✓ ${path.relative(process.cwd(), filename)} — ${fixture.members.length} leaderboard members`,
+          );
+          continue;
+        }
         if (filename.includes(`${path.sep}profiles${path.sep}`)) {
           const profile = publicProfileSchema.parse(json);
           console.log(

@@ -138,6 +138,14 @@ export interface FightResult {
   updatedAt: string;
 }
 
+export interface FightGradingSummary {
+  gradedPredictions: number;
+  voidPredictions: number;
+  correctWinners: number;
+  exactPicks: number;
+  awardedPoints: number;
+}
+
 export interface PredictionSummary {
   total: number;
   fighterA: number;
@@ -167,6 +175,7 @@ export interface Fight {
   estimatedStartsAt?: string | undefined;
   predictionsLockedAt?: string | undefined;
   result?: FightResult | undefined;
+  gradingSummary?: FightGradingSummary | undefined;
   replacedByFightId?: string | undefined;
   predictionSummary: PredictionSummary;
   chatRoomId: string;
@@ -271,4 +280,38 @@ export interface PrivateUser {
   };
   createdAt: string;
   updatedAt: string;
+}
+
+export type LeaderboardType =
+  "event" | "season_points" | "season_accuracy" | "streak";
+
+export interface LeaderboardEntry {
+  uid: string;
+  handle: string;
+  avatarVersion: number;
+  rank: number;
+  gradedPicks: number;
+  correctWinners: number;
+  rawAccuracy: number;
+  wilsonScore?: number | undefined;
+  totalPoints: number;
+  exactPicks: number;
+  currentStreak: number;
+  badges: string[];
+  updatedAt: string;
+}
+
+export interface Leaderboard {
+  id: string;
+  type: LeaderboardType;
+  label: string;
+  eventId?: string | undefined;
+  seasonId?: string | undefined;
+  championUid?: string | null | undefined;
+  startsAt?: string | undefined;
+  endsAt?: string | undefined;
+  minimumPicks: number;
+  calculationVersion: number;
+  lastBuiltAt?: string | undefined;
+  entries: LeaderboardEntry[];
 }

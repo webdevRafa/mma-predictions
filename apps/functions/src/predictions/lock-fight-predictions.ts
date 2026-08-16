@@ -81,7 +81,7 @@ export async function lockFightPredictionsCore(
       .collection("predictions")
       .where("fightId", "==", fightId)
       .orderBy(FieldPath.documentId())
-      .limit(300);
+      .limit(200);
     if (cursor) query = query.startAfter(cursor);
     const snapshot = await query.get();
     if (snapshot.empty) break;
@@ -130,7 +130,7 @@ export async function lockFightPredictionsCore(
     }
     await batch.commit();
     cursor = snapshot.docs.at(-1)?.id;
-    if (snapshot.size < 300) break;
+    if (snapshot.size < 200) break;
   } while (cursor);
 
   return {

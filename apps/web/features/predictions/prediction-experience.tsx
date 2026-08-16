@@ -4,6 +4,7 @@ import {
   validatePredictionForFight,
   type Fight,
   type PredictionMethod,
+  type PredictionGrade,
   type PredictionPick,
   type PredictionSummary,
 } from "@fightlobby/domain";
@@ -37,6 +38,7 @@ interface SavedPrediction {
   pick: PredictionPick;
   status: "active" | "locked" | "graded" | "void";
   predictionVersion: number;
+  grade?: PredictionGrade;
 }
 
 const methodOptions: { value: PredictionMethod; label: string }[] = [
@@ -92,6 +94,17 @@ function parseSavedPrediction(
   const result = validatePredictionForFight(source.pick, fight);
   const status = source.status;
   const version = source.predictionVersion;
+  const gradeSource = objectRecord(source.grade);
+  const grade =
+    typeof gradeSource.resultVersion === "number" &&
+    typeof gradeSource.winnerCorrect === "boolean" &&
+    typeof gradeSource.methodCorrect === "boolean" &&
+    typeof gradeSource.detailCorrect === "boolean" &&
+    typeof gradeSource.points === "number" &&
+    typeof gradeSource.gradedAt === "string" &&
+    typeof gradeSource.gradeVersion === "number"
+      ? (gradeSource as unknown as PredictionGrade)
+      : undefined;
   if (
     !result.success ||
     !["active", "locked", "graded", "void"].includes(String(status)) ||
@@ -102,6 +115,7 @@ function parseSavedPrediction(
     pick: result.data,
     status: status as SavedPrediction["status"],
     predictionVersion: version,
+    ...(grade ? { grade } : {}),
   };
 }
 
@@ -279,8 +293,9 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
                   {saved.status === "active" ? "saved" : saved.status}
                 </p>
                 <p className="mt-1 text-xs text-fl-text-muted">
-                  Version {saved.predictionVersion}. Active picks stay editable
-                  until the server locks this fight.
+                  {saved.grade
+                    ? `Official score: +${saved.grade.points} point${saved.grade.points === 1 ? "" : "s"}.`
+                    : `Version ${saved.predictionVersion}. Active picks stay editable until the server locks this fight.`}
                 </p>
               </div>
             </div>

@@ -4,6 +4,7 @@ import {
   predictionStatusSchema,
   validatePredictionForFight,
   type FightStatus,
+  type PredictionGrade,
   type PredictionPick,
   type PredictionSummary,
 } from "@fightlobby/domain";
@@ -26,6 +27,7 @@ export interface SafePredictionView {
   submittedAt: string;
   updatedAt: string;
   lockedAt?: string;
+  grade?: PredictionGrade;
 }
 
 export interface SubmissionResult {
@@ -136,6 +138,26 @@ function safePrediction(snapshot: DocumentSnapshot): SafePredictionView {
     );
   }
   const lockedAt = timestampIso(data.lockedAt);
+  const rawGrade = record(data.grade);
+  const gradedAt = timestampIso(rawGrade.gradedAt);
+  const grade =
+    typeof rawGrade.resultVersion === "number" &&
+    typeof rawGrade.winnerCorrect === "boolean" &&
+    typeof rawGrade.methodCorrect === "boolean" &&
+    typeof rawGrade.detailCorrect === "boolean" &&
+    typeof rawGrade.points === "number" &&
+    typeof rawGrade.gradeVersion === "number" &&
+    gradedAt
+      ? {
+          resultVersion: rawGrade.resultVersion,
+          winnerCorrect: rawGrade.winnerCorrect,
+          methodCorrect: rawGrade.methodCorrect,
+          detailCorrect: rawGrade.detailCorrect,
+          points: rawGrade.points,
+          gradedAt,
+          gradeVersion: rawGrade.gradeVersion,
+        }
+      : undefined;
   return {
     pick: pick.data,
     status,
@@ -143,6 +165,7 @@ function safePrediction(snapshot: DocumentSnapshot): SafePredictionView {
     submittedAt,
     updatedAt,
     ...(lockedAt ? { lockedAt } : {}),
+    ...(grade ? { grade } : {}),
   };
 }
 

@@ -40,3 +40,10 @@ Install Java 11+ and run `pnpm emulators`. The suite uses the demo project ID `f
 ## Data policy
 
 Development uses normalized, versioned fixtures through a mock provider. Production sports data must come through a licensed provider adapter. Provider payloads and secrets never belong in browser bundles or Git.
+
+## Documentation
+
+- [Architecture](docs/architecture.md)
+- [Authentication](docs/authentication.md)
+- [Predictions](docs/predictions.md)
+- [Grading and leaderboards](docs/grading-and-leaderboards.md)
