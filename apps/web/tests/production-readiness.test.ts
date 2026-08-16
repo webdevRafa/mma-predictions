@@ -10,17 +10,17 @@ function productionEnvironment(
 ): Record<string, string | undefined> {
   return {
     NEXT_PUBLIC_FIREBASE_API_KEY: "public-firebase-key",
-    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: "fightlobby-production.firebaseapp.com",
-    NEXT_PUBLIC_FIREBASE_PROJECT_ID: "fightlobby-production",
+    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: "mma-cortex.firebaseapp.com",
+    NEXT_PUBLIC_FIREBASE_PROJECT_ID: "mma-cortex",
     NEXT_PUBLIC_FIREBASE_DATABASE_URL:
-      "https://fightlobby-production-default-rtdb.firebaseio.com",
+      "https://mma-cortex-default-rtdb.firebaseio.com",
     NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET:
-      "fightlobby-production.firebasestorage.app",
+      "mma-cortex.firebasestorage.app",
     NEXT_PUBLIC_FIREBASE_APP_ID: "1:123:web:abc",
-    NEXT_PUBLIC_FIREBASE_APP_CHECK_SITE_KEY: "app-check-site-key",
-    FIREBASE_ADMIN_PROJECT_ID: "fightlobby-production",
+    VITE_FIREBASE_APP_CHECK_SITE_KEY: "app-check-site-key",
+    FIREBASE_ADMIN_PROJECT_ID: "mma-cortex",
     FIREBASE_ADMIN_CLIENT_EMAIL:
-      "firebase-admin@fightlobby-production.iam.gserviceaccount.com",
+      "firebase-admin@mma-cortex.iam.gserviceaccount.com",
     FIREBASE_ADMIN_PRIVATE_KEY: "private-key-material",
     FIGHTLOBBY_DATA_SOURCE: "firestore",
     MMA_PROVIDER: "sportsdataio",

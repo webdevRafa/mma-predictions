@@ -81,7 +81,7 @@ export function getFirebaseClient() {
 }
 
 export async function getFirebaseAppCheckToken() {
-  const siteKey = process.env.NEXT_PUBLIC_FIREBASE_APP_CHECK_SITE_KEY;
+  const siteKey = process.env.VITE_FIREBASE_APP_CHECK_SITE_KEY;
   if (!siteKey) return null;
   const { app } = getFirebaseClient();
   appCheck ??= initializeAppCheck(app, {

@@ -6,10 +6,10 @@ FightLobby uses Firebase Authentication for Google and email/password sign-in. T
 
 1. Enable **Google** and **Email/Password** in Authentication → Sign-in method.
 2. Add `fightlobby.com`, the active Vercel preview domains, and local development hosts to Authentication → Settings → Authorized domains.
-3. Configure the public `NEXT_PUBLIC_FIREBASE_*` values and server-only `FIREBASE_ADMIN_*` values listed in `.env.example`.
-4. Never prefix Admin credentials with `NEXT_PUBLIC_`; those values must remain server-only.
+3. Configure the public `VITE_FIREBASE_*` values and server-only `FIREBASE_ADMIN_*` values listed in `.env.example`.
+4. Never prefix Admin credentials with `VITE_` or `NEXT_PUBLIC_`; those values must remain server-only.
 
-The legacy `VITE_FIREBASE_*` web values are mapped during migration, but new environments should use `NEXT_PUBLIC_FIREBASE_*`.
+Firebase web values use the existing `VITE_FIREBASE_*` names. Next.js maps the public Firebase configuration into the client bundle explicitly; server-only Admin credentials must remain unprefixed.
 
 ## Account boundaries
 

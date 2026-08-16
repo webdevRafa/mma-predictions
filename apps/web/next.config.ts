@@ -55,7 +55,8 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_USE_FIREBASE_EMULATORS: publicEnvironment(
       "NEXT_PUBLIC_USE_FIREBASE_EMULATORS",
     ),
-    NEXT_PUBLIC_FIREBASE_APP_CHECK_SITE_KEY: publicEnvironment(
+    VITE_FIREBASE_APP_CHECK_SITE_KEY: publicEnvironment(
+      "VITE_FIREBASE_APP_CHECK_SITE_KEY",
       "NEXT_PUBLIC_FIREBASE_APP_CHECK_SITE_KEY",
     ),
     NEXT_PUBLIC_GA_MEASUREMENT_ID: publicEnvironment(
