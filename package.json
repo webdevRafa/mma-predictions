@@ -4,7 +4,7 @@
   "private": true,
   "description": "FightLobby — every fight has a lobby.",
   "packageManager": "pnpm@10.17.0",
-  "engines": { "node": ">=22" },
+  "engines": { "node": "22.x" },
   "scripts": {
     "dev": "pnpm --filter @fightlobby/web dev",
     "build": "pnpm -r build",
@@ -24,6 +24,7 @@
     "eslint-plugin-react-hooks": "latest",
     "firebase-tools": "latest",
     "globals": "latest",
+    "next": "latest",
     "prettier": "latest",
     "tsx": "latest",
     "typescript": "^6.0.2",

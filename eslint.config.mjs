@@ -3,10 +3,11 @@ import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import tseslint from "typescript-eslint";
 
+const typeScriptFiles = ["**/*.{ts,tsx}"];
+
 export default tseslint.config(
   {
     ignores: [
-      "eslint.config.mjs",
       "**/.next/**",
       "**/coverage/**",
       "**/dist/**",
@@ -14,9 +15,16 @@ export default tseslint.config(
     ],
   },
   eslint.configs.recommended,
-  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked.map((config) => ({
+    ...config,
+    files: typeScriptFiles,
+  })),
   {
-    files: ["**/*.{ts,tsx}"],
+    files: ["**/*.{js,mjs,cjs}"],
+    languageOptions: { globals: globals.node },
+  },
+  {
+    files: typeScriptFiles,
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
       parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname },
