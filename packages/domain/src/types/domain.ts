@@ -28,6 +28,9 @@ export type ResultMethod =
 export type PredictionMethod = "ko_tko" | "submission" | "decision" | "other";
 export type DataQuality = "verified" | "complete" | "partial" | "blocked";
 export type UserRole = "member" | "trusted" | "moderator" | "admin";
+export type AccountStatus =
+  "active" | "muted" | "suspended" | "banned" | "deleted";
+export type ProfileVisibility = "public" | "limited";
 
 export interface FighterName {
   full: string;
@@ -184,4 +187,60 @@ export interface EventCard {
   event: Event;
   fights: Fight[];
   fighters: Fighter[];
+}
+
+export interface PublicProfileStats {
+  gradedPicks: number;
+  correctWinners: number;
+  winnerAccuracy: number;
+  totalPoints: number;
+  exactPicks: number;
+  currentStreak: number;
+  longestStreak: number;
+  eventChampionships: number;
+}
+
+export interface PublicProfile {
+  uid: string;
+  handle: string;
+  handleNormalized: string;
+  handleHistory: string[];
+  displayName?: string | undefined;
+  avatar?: { storagePath?: string | undefined; version: number } | undefined;
+  joinedAt: string;
+  stats: PublicProfileStats;
+  rankSummary?:
+    | {
+        seasonId: string;
+        pointsRank?: number | undefined;
+        accuracyRank?: number | undefined;
+      }
+    | undefined;
+  badges: string[];
+  profileVisibility: ProfileVisibility;
+  updatedAt: string;
+}
+
+export interface PrivateUserPreferences {
+  timezone?: string | undefined;
+  hideUpcomingPicks: boolean;
+  emailEventReminders: boolean;
+  emailResults: boolean;
+}
+
+export interface PrivateUser {
+  uid: string;
+  accountStatus: AccountStatus;
+  roles: UserRole[];
+  termsVersion: string;
+  termsAcceptedAt?: string | undefined;
+  onboardingComplete: boolean;
+  preferences: PrivateUserPreferences;
+  moderation: {
+    trustLevel: number;
+    muteUntil?: string | undefined;
+    suspensionUntil?: string | undefined;
+  };
+  createdAt: string;
+  updatedAt: string;
 }

@@ -5,7 +5,7 @@ const items = [
   { href: "/", label: "Home", icon: Home },
   { href: "/events", label: "Events", icon: CalendarDays },
   { href: "/leaderboards", label: "Ranks", icon: Trophy },
-  { href: "/login", label: "Profile", icon: UserRound },
+  { href: "/settings", label: "Profile", icon: UserRound },
 ];
 
 export function MobileNavigation() {

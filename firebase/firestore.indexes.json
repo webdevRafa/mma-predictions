@@ -15,6 +15,14 @@
         { "fieldPath": "eventId", "order": "ASCENDING" },
         { "fieldPath": "boutOrder", "order": "ASCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "profiles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "profileVisibility", "order": "ASCENDING" },
+        { "fieldPath": "stats.gradedPicks", "order": "DESCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

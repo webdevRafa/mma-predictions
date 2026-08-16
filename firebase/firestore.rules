@@ -5,6 +5,16 @@ service cloud.firestore {
     function signedIn() { return request.auth != null; }
     function owns(uid) { return signedIn() && request.auth.uid == uid; }
     function publicEvent() { return resource.data.status != 'draft'; }
+    function safePublicProfile() {
+      return resource.data.profileVisibility in ['public', 'limited']
+        && resource.data.handleNormalized is string
+        && !resource.data.keys().hasAny([
+          'email',
+          'providerIds',
+          'preferences',
+          'moderation'
+        ]);
+    }
 
     match /events/{eventId} { allow read: if publicEvent(); allow write: if false; }
     match /fights/{fightId} {
@@ -21,7 +31,7 @@ service cloud.firestore {
       match /entries/{uid} { allow read: if true; allow write: if false; }
     }
     match /profiles/{uid} {
-      allow read: if resource.data.profileVisibility in ['public', 'limited'];
+      allow read: if safePublicProfile();
       allow write: if false;
       match /publicPicks/{fightId} { allow read: if true; allow write: if false; }
     }

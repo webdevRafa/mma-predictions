@@ -1,7 +1,10 @@
 import { readdir, readFile, stat } from "node:fs/promises";
 import path from "node:path";
 
-import { validateAndNormalizeFixture } from "@fightlobby/domain";
+import {
+  publicProfileSchema,
+  validateAndNormalizeFixture,
+} from "@fightlobby/domain";
 
 async function collectJsonFiles(inputPath: string): Promise<string[]> {
   const resolved = path.resolve(inputPath);
@@ -23,6 +26,13 @@ async function main(): Promise<void> {
     for (const filename of await collectJsonFiles(input)) {
       try {
         const json: unknown = JSON.parse(await readFile(filename, "utf8"));
+        if (filename.includes(`${path.sep}profiles${path.sep}`)) {
+          const profile = publicProfileSchema.parse(json);
+          console.log(
+            `✓ ${path.relative(process.cwd(), filename)} — @${profile.handle} public profile`,
+          );
+          continue;
+        }
         const result = validateAndNormalizeFixture(json);
         if (result.success) {
           console.log(

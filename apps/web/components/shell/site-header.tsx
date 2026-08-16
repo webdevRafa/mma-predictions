@@ -1,7 +1,8 @@
-import { CircleUserRound, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import Link from "next/link";
 
 import { listPublicEvents } from "@/lib/data/public";
+import { AuthMenu } from "@/features/auth/auth-menu";
 
 import { OfflineBanner } from "./offline-banner";
 
@@ -68,13 +69,7 @@ export async function SiteHeader() {
           >
             <Search aria-hidden="true" size={18} />
           </button>
-          <Link
-            aria-label="Sign in"
-            className="focus-ring grid size-10 place-items-center rounded-lg border border-fl-border bg-fl-surface-1 text-fl-text-muted hover:border-fl-text-muted hover:text-fl-text"
-            href="/login"
-          >
-            <CircleUserRound aria-hidden="true" size={19} />
-          </Link>
+          <AuthMenu />
         </div>
       </header>
     </>

@@ -1,6 +1,7 @@
 import "server-only";
 
 import { listPublicCards, listPublicEvents } from "@/lib/data/public";
+import { listPublicProfiles } from "@/lib/data/profiles";
 import { isFightIndexable, isFighterIndexable } from "@/lib/seo/indexability";
 import { absoluteUrl } from "@/lib/seo/site";
 
@@ -71,4 +72,17 @@ export async function fighterSitemapEntries() {
     url: absoluteUrl(`/fighters/${fighter.slug}`),
     updatedAt: fighter.updatedAt,
   }));
+}
+
+export async function profileSitemapEntries() {
+  return (await listPublicProfiles())
+    .filter(
+      (profile) =>
+        profile.profileVisibility === "public" &&
+        profile.stats.gradedPicks >= 5,
+    )
+    .map((profile) => ({
+      url: absoluteUrl(`/u/${profile.handleNormalized}`),
+      updatedAt: profile.updatedAt,
+    }));
 }

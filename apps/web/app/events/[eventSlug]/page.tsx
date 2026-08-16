@@ -18,6 +18,7 @@ import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
+import { FollowButton } from "@/features/profiles/follow-button";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { absoluteUrl } from "@/lib/seo/site";
 
@@ -148,6 +149,7 @@ export default async function EventPage({ params }: Props) {
                   id={event.id}
                   initialStatus={event.status}
                 />
+                <FollowButton targetId={event.id} targetType="event" />
               </div>
               <h1 className="mt-5 font-display text-5xl leading-[.88] font-extrabold text-balance sm:text-7xl lg:text-8xl">
                 {event.name}

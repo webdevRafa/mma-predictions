@@ -38,6 +38,21 @@ rulesDescribe("Firebase security boundaries", () => {
         uid: "member_a",
         email: "private@example.test",
       });
+      await setDoc(doc(context.firestore(), "profiles/member_a"), {
+        uid: "member_a",
+        handleNormalized: "member_a",
+        profileVisibility: "public",
+      });
+      await setDoc(doc(context.firestore(), "profiles/incomplete"), {
+        uid: "incomplete",
+        profileVisibility: "limited",
+      });
+      await setDoc(doc(context.firestore(), "profiles/leaked"), {
+        uid: "leaked",
+        handleNormalized: "leaked_member",
+        profileVisibility: "public",
+        email: "must-not-leak@example.test",
+      });
       await set(
         ref(context.database(), "chat/v1/rooms/room_a/messages/msg_a"),
         { body: "hello" },
@@ -81,6 +96,13 @@ rulesDescribe("Firebase security boundaries", () => {
         ),
       ),
     );
+  });
+
+  it("only exposes complete profiles with no private identity fields", async () => {
+    const firestore = environment.unauthenticatedContext().firestore();
+    await assertSucceeds(getDoc(doc(firestore, "profiles/member_a")));
+    await assertFails(getDoc(doc(firestore, "profiles/incomplete")));
+    await assertFails(getDoc(doc(firestore, "profiles/leaked")));
   });
 
   it("allows public chat reads and own presence but no direct messages", async () => {
