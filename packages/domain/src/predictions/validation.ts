@@ -16,9 +16,17 @@ export function validatePredictionForFight(
 ): PredictionValidationResult {
   const parsed = predictionPickSchema.safeParse(value);
   if (!parsed.success) {
+    const firstIssue = parsed.error.issues[0];
+    const field = firstIssue?.path[0];
+    if (field === "winnerFighterId") {
+      return {
+        success: false,
+        message: "Pick a winner before locking in your prediction",
+      };
+    }
     return {
       success: false,
-      message: parsed.error.issues[0]?.message ?? "Prediction is invalid",
+      message: firstIssue?.message ?? "Prediction is invalid",
     };
   }
   if (

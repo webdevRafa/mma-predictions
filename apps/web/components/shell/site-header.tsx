@@ -62,13 +62,13 @@ export async function SiteHeader() {
               {activeEvent.status === "live" ? "Live now" : "Next UFC event"}
             </Link>
           ) : null}
-          <button
+          <Link
             aria-label="Search FightLobby"
             className="focus-ring ml-auto grid size-10 cursor-pointer place-items-center rounded-lg text-fl-text-muted hover:bg-fl-surface-2 hover:text-fl-text lg:ml-0"
-            type="button"
+            href="/search"
           >
             <Search aria-hidden="true" size={18} />
-          </button>
+          </Link>
           <AuthMenu />
         </div>
       </header>

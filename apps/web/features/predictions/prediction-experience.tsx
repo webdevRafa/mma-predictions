@@ -235,7 +235,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
       predictionDraft: { fightId: fight.id, pick: validPick },
     });
     trackAnalyticsEvent("signup_prompted", { source: "prediction" });
-    window.location.assign(`/login?returnTo=${encodeURIComponent(returnTo)}`);
+    window.location.assign(`/signup?returnTo=${encodeURIComponent(returnTo)}`);
   }
 
   async function submit(event: FormEvent<HTMLFormElement>) {
@@ -373,6 +373,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
                       name="winner"
                       onChange={() => {
                         markStarted();
+                        setError(null);
                         setPick((current) => ({
                           ...current,
                           winnerFighterId: fighter.id,

@@ -91,6 +91,15 @@ describe("fight-aware prediction validation", () => {
     expect(validatePredictionForFight(basePick, fight).success).toBe(true);
   });
 
+  it("explains that a winner must be selected", () => {
+    expect(
+      validatePredictionForFight({ ...basePick, winnerFighterId: "" }, fight),
+    ).toEqual({
+      success: false,
+      message: "Pick a winner before locking in your prediction",
+    });
+  });
+
   it("rejects a winner outside the matchup", () => {
     expect(
       validatePredictionForFight(

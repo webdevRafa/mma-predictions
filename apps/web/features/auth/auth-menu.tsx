@@ -20,13 +20,23 @@ export function AuthMenu() {
 
   if (!user) {
     return (
-      <Link
-        aria-label="Sign in"
-        className="focus-ring grid size-10 place-items-center rounded-lg border border-fl-border bg-fl-surface-1 text-fl-text-muted hover:border-fl-text-muted hover:text-fl-text"
-        href="/login"
-      >
-        <CircleUserRound aria-hidden="true" size={19} />
-      </Link>
+      <div className="flex items-center gap-2">
+        <Link
+          className="focus-ring inline-flex min-h-10 items-center justify-center rounded-lg bg-fl-accent px-3 text-xs font-bold text-fl-bg transition hover:bg-fl-accent-strong"
+          href="/signup"
+        >
+          <span className="sm:hidden">Join</span>
+          <span className="hidden sm:inline">Sign up</span>
+        </Link>
+        <Link
+          aria-label="Sign in"
+          className="focus-ring grid size-10 place-items-center rounded-lg border border-fl-border bg-fl-surface-1 text-fl-text-muted hover:border-fl-text-muted hover:text-fl-text"
+          href="/login"
+          title="Sign in"
+        >
+          <CircleUserRound aria-hidden="true" size={19} />
+        </Link>
+      </div>
     );
   }
 
