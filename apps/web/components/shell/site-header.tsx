@@ -1,6 +1,8 @@
 import { CircleUserRound, Search } from "lucide-react";
 import Link from "next/link";
 
+import { listPublicEvents } from "@/lib/data/public";
+
 import { OfflineBanner } from "./offline-banner";
 
 const navigation = [
@@ -8,7 +10,11 @@ const navigation = [
   { href: "/leaderboards", label: "Leaderboards" },
 ];
 
-export function SiteHeader() {
+export async function SiteHeader() {
+  const events = await listPublicEvents();
+  const activeEvent =
+    events.find((event) => event.status === "live") ??
+    events.find((event) => event.status === "scheduled");
   return (
     <>
       <a className="skip-link" href="#main-content">
@@ -44,12 +50,17 @@ export function SiteHeader() {
               </Link>
             ))}
           </nav>
-          <Link
-            className="ml-auto hidden items-center gap-2 rounded-full border border-fl-live/30 bg-fl-live/10 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-[0.08em] text-[#ff8398] uppercase lg:flex"
-            href="/events"
-          >
-            <span aria-hidden="true" className="live-dot" /> Next UFC event
-          </Link>
+          {activeEvent ? (
+            <Link
+              className="ml-auto hidden items-center gap-2 rounded-full border border-fl-live/30 bg-fl-live/10 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-[0.08em] text-[#ff8398] uppercase lg:flex"
+              href={`/events/${activeEvent.slug}`}
+            >
+              {activeEvent.status === "live" ? (
+                <span aria-hidden="true" className="live-dot" />
+              ) : null}
+              {activeEvent.status === "live" ? "Live now" : "Next UFC event"}
+            </Link>
+          ) : null}
           <button
             aria-label="Search FightLobby"
             className="focus-ring ml-auto grid size-10 cursor-pointer place-items-center rounded-lg text-fl-text-muted hover:bg-fl-surface-2 hover:text-fl-text lg:ml-0"

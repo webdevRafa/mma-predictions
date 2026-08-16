@@ -12,7 +12,7 @@ import {
   isoDateTimeSchema,
   predictionStatusSchema,
   resultMethodSchema,
-} from "./domain.js";
+} from "./domain.ts";
 
 const idSchema = z
   .string()

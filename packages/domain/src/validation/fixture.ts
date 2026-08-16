@@ -1,7 +1,7 @@
 import type { ZodIssue } from "zod";
 
-import { normalizedFixtureSchema } from "../schemas/fixture.js";
-import type { Event, EventCard, Fight, Fighter } from "../types/domain.js";
+import { normalizedFixtureSchema } from "../schemas/fixture.ts";
+import type { Event, EventCard, Fight, Fighter } from "../types/domain.ts";
 
 export interface FixtureValidationIssue {
   path: string;

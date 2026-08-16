@@ -12,9 +12,18 @@ describe("FixturePublicRepository", () => {
     if (!event) return;
     const card = await repository.getEventBySlug(event.slug);
     expect(card?.fights).toHaveLength(5);
+    expect(
+      (await repository.getEventBySlug("ufc-fightlobby-demo"))?.event.slug,
+    ).toBe(event.slug);
     const firstFight = card?.fights[0];
     expect(
       firstFight ? await repository.getFightBySlug(firstFight.slug) : null,
     ).not.toBeNull();
+    expect(
+      (await repository.getFightBySlug("navarro-vs-okafor"))?.fight.slug,
+    ).toBe(firstFight?.slug);
+    expect(
+      (await repository.getFighterBySlug("asha-navarro"))?.fighter.slug,
+    ).toBe("asha-navarro-navarr");
   });
 });

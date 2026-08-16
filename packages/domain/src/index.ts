@@ -4,8 +4,8 @@ export const BRAND = {
   actionLine: "Make your pick. Join the lobby.",
 } as const;
 
-export * from "./normalization/slug.js";
-export * from "./schemas/domain.js";
-export * from "./schemas/fixture.js";
-export * from "./types/domain.js";
-export * from "./validation/fixture.js";
+export * from "./normalization/slug.ts";
+export * from "./schemas/domain.ts";
+export * from "./schemas/fixture.ts";
+export * from "./types/domain.ts";
+export * from "./validation/fixture.ts";

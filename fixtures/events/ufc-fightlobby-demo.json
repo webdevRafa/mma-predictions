@@ -8,7 +8,7 @@
     "name": "UFC FightLobby Demo: Navarro vs Okafor",
     "shortName": "UFC FightLobby Demo",
     "slug": "ufc-fightlobby-demo-navarro-vs-okafor-fl001",
-    "slugHistory": [],
+    "slugHistory": ["ufc-fightlobby-demo"],
     "status": "scheduled",
     "startsAt": "2026-09-06T00:00:00.000Z",
     "venueTimezone": "America/Chicago",
@@ -27,7 +27,7 @@
     {
       "id": "ftr_asha_navarro",
       "slug": "asha-navarro-navarr",
-      "slugHistory": [],
+      "slugHistory": ["asha-navarro"],
       "name": {
         "full": "Asha Navarro",
         "first": "Asha",
@@ -239,7 +239,7 @@
     {
       "id": "fgt_fl_demo_001",
       "slug": "asha-navarro-vs-naomi-okafor-fl001",
-      "slugHistory": [],
+      "slugHistory": ["navarro-vs-okafor"],
       "eventId": "evt_fl_demo_001",
       "fighterAId": "ftr_asha_navarro",
       "fighterBId": "ftr_naomi_okafor",

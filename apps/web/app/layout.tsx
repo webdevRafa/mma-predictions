@@ -5,6 +5,8 @@ import type { ReactNode } from "react";
 import { MobileNavigation } from "@/components/shell/mobile-navigation";
 import { SiteFooter } from "@/components/shell/site-footer";
 import { SiteHeader } from "@/components/shell/site-header";
+import { JsonLd } from "@/components/seo/json-ld";
+import { absoluteUrl } from "@/lib/seo/site";
 
 import "./globals.css";
 
@@ -35,6 +37,13 @@ export const metadata: Metadata = {
   description:
     "Make UFC predictions, compare the community consensus, and join a lobby built for every matchup.",
   applicationName: "FightLobby",
+  alternates: { canonical: "/" },
+  openGraph: {
+    siteName: "FightLobby",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {
@@ -52,6 +61,25 @@ export default function RootLayout({
       lang="en"
     >
       <body>
+        <JsonLd
+          data={[
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "@id": `${absoluteUrl("/")}#organization`,
+              name: "FightLobby",
+              url: absoluteUrl("/"),
+            },
+            {
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": `${absoluteUrl("/")}#website`,
+              name: "FightLobby",
+              url: absoluteUrl("/"),
+              publisher: { "@id": `${absoluteUrl("/")}#organization` },
+            },
+          ]}
+        />
         <SiteHeader />
         {children}
         <SiteFooter />

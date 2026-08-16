@@ -30,6 +30,24 @@ const nextConfig: NextConfig = {
   },
   poweredByHeader: false,
   reactStrictMode: true,
+  redirects: () =>
+    Promise.resolve([
+      {
+        source: "/events/ufc-fightlobby-demo",
+        destination: "/events/ufc-fightlobby-demo-navarro-vs-okafor-fl001",
+        permanent: true,
+      },
+      {
+        source: "/fights/navarro-vs-okafor",
+        destination: "/fights/asha-navarro-vs-naomi-okafor-fl001",
+        permanent: true,
+      },
+      {
+        source: "/fighters/asha-navarro",
+        destination: "/fighters/asha-navarro-navarr",
+        permanent: true,
+      },
+    ]),
   transpilePackages: ["@fightlobby/domain"],
 };
 
