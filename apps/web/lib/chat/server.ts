@@ -270,6 +270,12 @@ export async function postChatMessageCore(
     firestore.collection("featureFlags").doc("current").get(),
   ]);
   assertMemberCanPost(member, user, nowMilliseconds);
+  if (flags.exists && flags.get("siteReadOnly") === true)
+    throw new ApiError(
+      "FightLobby is temporarily read-only",
+      503,
+      "site_read_only",
+    );
   if (flags.exists && flags.get("chatEnabled") === false)
     throw new ApiError("Chat is temporarily disabled", 503, "chat_disabled");
   if (flags.exists && flags.get("chatPostingEnabled") === false)

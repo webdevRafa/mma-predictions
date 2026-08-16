@@ -68,6 +68,16 @@ export async function PUT(
       );
     }
     const fightId = validFightId((await params).fightId);
+    const flags = await getFirebaseAdmin()
+      .firestore.collection("featureFlags")
+      .doc("current")
+      .get();
+    if (flags.get("predictionsEnabled") === false)
+      throw new ApiError(
+        "Predictions are temporarily disabled",
+        503,
+        "predictions_disabled",
+      );
     const input = await parseJson(request, inputSchema);
     const result = await submitPredictionTransaction(
       getFirebaseAdmin().firestore,

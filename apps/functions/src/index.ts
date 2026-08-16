@@ -1,6 +1,7 @@
 import { onRequest } from "firebase-functions/v2/https";
 
 export { onAuthUserCreated } from "./identity/on-auth-user-created.js";
+export { processAdminJob } from "./admin/process-admin-job.js";
 export {
   applyUserSanction,
   closeExpiredChatRooms,

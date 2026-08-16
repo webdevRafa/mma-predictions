@@ -45,6 +45,14 @@ function archiveEnabled() {
   return process.env.RAW_PROVIDER_ARCHIVE_ENABLED !== "false";
 }
 
+async function featureEnabled(name: "providerSyncEnabled" | "liveSyncEnabled") {
+  const flags = await getAdminServices()
+    .firestore.collection("featureFlags")
+    .doc("current")
+    .get();
+  return flags.get(name) === true;
+}
+
 function taskId(
   providerKey: string,
   externalEventId: string,
@@ -145,6 +153,12 @@ export const syncEventCardTask = onTaskDispatched(
   },
   async (request) => {
     const input = eventTaskSchema.parse(request.data);
+    if (!input.dryRun && !(await featureEnabled("providerSyncEnabled"))) {
+      logger.warn("Event sync task skipped because provider sync is disabled", {
+        externalEventId: input.externalEventId,
+      });
+      return;
+    }
     const services = getAdminServices();
     const result = await syncEventCardCore({
       provider: getConfiguredProvider(),
@@ -172,7 +186,10 @@ export const discoverUpcomingEvents = onSchedule(
     minBackoffSeconds: 60,
   },
   async () => {
-    if (!providerSyncEnabled()) {
+    if (
+      !providerSyncEnabled() ||
+      !(await featureEnabled("providerSyncEnabled"))
+    ) {
       logger.info(
         "Provider discovery skipped because licensed ingestion is disabled",
       );
@@ -183,7 +200,12 @@ export const discoverUpcomingEvents = onSchedule(
 );
 
 async function enqueueCurrentEvents() {
-  if (!providerSyncEnabled()) return { enqueued: 0 };
+  if (
+    !providerSyncEnabled() ||
+    !(await featureEnabled("providerSyncEnabled")) ||
+    !(await featureEnabled("liveSyncEnabled"))
+  )
+    return { enqueued: 0 };
   const services = getAdminServices();
   const horizon = new Date(Date.now() + 18 * 60 * 60 * 1_000).toISOString();
   const floor = new Date(Date.now() - 8 * 60 * 60 * 1_000).toISOString();
@@ -237,7 +259,11 @@ export const reconcileProviderChanges = onSchedule(
     minBackoffSeconds: 60,
   },
   async () => {
-    if (!providerSyncEnabled()) return;
+    if (
+      !providerSyncEnabled() ||
+      !(await featureEnabled("providerSyncEnabled"))
+    )
+      return;
     await discoverUpcomingEventsCore(getConfiguredProvider());
   },
 );

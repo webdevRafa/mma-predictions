@@ -15,6 +15,7 @@
     "test": "vitest run --passWithNoTests",
     "test:rules": "firebase emulators:exec --only firestore,database,storage --project fightlobby-local \"cross-env RULES_TEST=1 vitest run tests/rules tests/integration\"",
     "seed:emulator": "tsx scripts/seed-emulator.ts",
+    "admin:grant": "tsx scripts/grant-admin.ts",
     "validate:fixtures": "tsx scripts/validate-fixture.ts fixtures",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

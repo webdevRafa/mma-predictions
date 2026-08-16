@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Timestamp } from "firebase-admin/firestore";
 import { Activity, Archive, DatabaseZap, ShieldAlert } from "lucide-react";
-import { redirect } from "next/navigation";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
-import { requireOnboardedSession } from "@/lib/auth/session";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export const dynamic = "force-dynamic";
@@ -62,16 +60,13 @@ async function loadConsoleData() {
 }
 
 export default async function SyncConsolePage() {
-  const session = await requireOnboardedSession("/admin/sync");
-  if (!session.roles.includes("admin")) redirect("/account/restricted");
   const data = await loadConsoleData();
-  const configured =
-    process.env.MMA_PROVIDER === "sportsdataio" &&
-    process.env.SPORTSDATAIO_COMMERCIAL_RIGHTS_CONFIRMED === "true" &&
-    Boolean(process.env.SPORTSDATAIO_MMA_KEY);
+  const configured = data.runs.some(
+    (run) => run.providerKey === "sportsdataio" && run.status === "complete",
+  );
 
   return (
-    <main className="shell py-10 sm:py-14" id="main-content">
+    <main id="main-content">
       <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
         <div>
           <p className="eyebrow">Admin · data operations</p>
@@ -84,7 +79,7 @@ export default async function SyncConsolePage() {
           </p>
         </div>
         <Badge tone={configured ? "success" : "warning"}>
-          {configured ? "Licensed sync enabled" : "Provider disabled"}
+          {configured ? "Licensed sync observed" : "No production sync yet"}
         </Badge>
       </div>
 

@@ -59,10 +59,24 @@ export async function requireOnboardedSession(returnTo: string) {
   return session;
 }
 
-export async function requireMutationSession() {
+export async function requireMutationSession(
+  options: { bypassSiteReadOnly?: boolean } = {},
+) {
   const session = await getOptionalSession();
   if (!session)
     throw new ApiError("Authentication is required", 401, "unauthenticated");
   assertMutationAllowed(session.accountStatus);
+  if (!options.bypassSiteReadOnly) {
+    const flags = await getFirebaseAdmin()
+      .firestore.collection("featureFlags")
+      .doc("current")
+      .get();
+    if (flags.get("siteReadOnly") === true)
+      throw new ApiError(
+        "FightLobby is temporarily read-only",
+        503,
+        "site_read_only",
+      );
+  }
   return session;
 }

@@ -1,6 +1,11 @@
 import { z } from "zod";
 
-import { apiErrorResponse, assertSameOrigin, parseJson } from "@/lib/auth/http";
+import {
+  ApiError,
+  apiErrorResponse,
+  assertSameOrigin,
+  parseJson,
+} from "@/lib/auth/http";
 import { safeReturnPath } from "@/lib/auth/return-path";
 import {
   SESSION_COOKIE_NAME,
@@ -24,7 +29,17 @@ export async function POST(request: Request) {
   try {
     assertSameOrigin(request);
     const input = await parseJson(request, sessionSchema);
-    const { auth } = getFirebaseAdmin();
+    const { auth, firestore } = getFirebaseAdmin();
+    const flags = await firestore
+      .collection("featureFlags")
+      .doc("current")
+      .get();
+    if (flags.get("authEnabled") === false)
+      throw new ApiError(
+        "Sign-in is temporarily disabled",
+        503,
+        "auth_disabled",
+      );
     const decoded = await auth.verifyIdToken(input.idToken, true);
     const account = await ensureUserRecords(decoded.uid);
     const sessionCookie = await auth.createSessionCookie(input.idToken, {
