@@ -33,6 +33,10 @@ pnpm test
 pnpm build
 ```
 
+Before a production release, run `pnpm launch:preflight` against the production
+environment export and `pnpm launch:verify -- https://your-canonical-domain` after
+deployment. See [Production launch](docs/production-launch.md).
+
 ## Firebase emulators
 
 Install Java 11+ and run `pnpm emulators`. The suite uses the demo project ID `fightlobby-local` and never connects to production by default.
@@ -48,3 +52,6 @@ Development uses normalized, versioned fixtures through a mock provider. Product
 - [Predictions](docs/predictions.md)
 - [Grading and leaderboards](docs/grading-and-leaderboards.md)
 - [Live chat and moderation](docs/live-chat.md)
+- [Production launch](docs/production-launch.md)
+- [Backup, restore, and regrade](docs/backup-restore-and-regrade.md)
+- [UFC event-day runbook](docs/event-day-runbook.md)

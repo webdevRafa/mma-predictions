@@ -6,5 +6,10 @@
     },
     "types": ["node"]
   },
-  "include": ["./run-staging-simulation.ts", "./staging-simulation.ts"]
+  "include": [
+    "./production-preflight.ts",
+    "./run-staging-simulation.ts",
+    "./staging-simulation.ts",
+    "./verify-production.ts"
+  ]
 }
