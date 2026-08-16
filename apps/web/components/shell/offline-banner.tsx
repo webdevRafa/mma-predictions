@@ -20,7 +20,10 @@ export function OfflineBanner() {
   if (!offline) return null;
 
   return (
-    <div className="border-b border-fl-warning/30 bg-fl-warning/10 px-4 py-2 text-center text-xs font-semibold text-fl-warning" role="status">
+    <div
+      className="border-b border-fl-warning/30 bg-fl-warning/10 px-4 py-2 text-center text-xs font-semibold text-fl-warning"
+      role="status"
+    >
       <WifiOff aria-hidden="true" className="mr-2 inline" size={14} />
       You’re offline. Showing the latest information saved on this device.
     </div>

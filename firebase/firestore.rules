@@ -2,8 +2,31 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if false;
+    function signedIn() { return request.auth != null; }
+    function owns(uid) { return signedIn() && request.auth.uid == uid; }
+    function publicEvent() { return resource.data.status != 'draft'; }
+
+    match /events/{eventId} { allow read: if publicEvent(); allow write: if false; }
+    match /fights/{fightId} {
+      allow read: if true;
+      allow write: if false;
+      match /predictionShards/{shardId} { allow read, write: if false; }
     }
+    match /fighters/{fighterId} { allow read: if true; allow write: if false; }
+    match /fightStats/{fightId} { allow read: if true; allow write: if false; }
+    match /chatRooms/{roomId} { allow read: if true; allow write: if false; }
+    match /leaderboards/{boardId} {
+      allow read: if true;
+      allow write: if false;
+      match /entries/{uid} { allow read: if true; allow write: if false; }
+    }
+    match /profiles/{uid} {
+      allow read: if resource.data.profileVisibility in ['public', 'limited'];
+      allow write: if false;
+      match /publicPicks/{fightId} { allow read: if true; allow write: if false; }
+    }
+    match /users/{uid} { allow read: if owns(uid); allow write: if false; }
+    match /reports/{reportId} { allow read: if signedIn() && resource.data.reporterUid == request.auth.uid; allow write: if false; }
+    match /{privateCollection}/{document=**} { allow read, write: if false; }
   }
 }

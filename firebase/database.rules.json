@@ -1,6 +1,24 @@
 {
   "rules": {
     ".read": false,
-    ".write": false
+    ".write": false,
+    "chat": {
+      "v1": {
+        "rooms": {
+          "$roomId": {
+            "messages": { ".read": true, ".write": false },
+            "presence": {
+              ".read": true,
+              "$uid": {
+                ".write": "$uid === auth.uid",
+                ".validate": "newData.val() === null || (newData.hasChildren(['connected', 'lastSeen']) && newData.child('connected').isBoolean() && newData.child('lastSeen').isNumber())"
+              }
+            },
+            "typing": { ".read": false, ".write": false }
+          }
+        },
+        "rateLimits": { ".read": false, ".write": false }
+      }
+    }
   }
 }

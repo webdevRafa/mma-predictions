@@ -13,9 +13,11 @@
     "@fightlobby/domain": "workspace:*",
     "@next/env": "latest",
     "firebase": "latest",
+    "firebase-admin": "latest",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "server-only": "latest",
     "lucide-react": "latest",
     "zod": "latest"
   },

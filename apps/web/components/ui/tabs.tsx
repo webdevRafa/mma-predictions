@@ -20,7 +20,11 @@ export function Tabs({ items, label }: { items: TabItem[]; label: string }) {
 
   return (
     <div>
-      <div className="flex gap-1 overflow-x-auto rounded-xl border border-fl-border bg-fl-surface-2 p-1" role="tablist" aria-label={label}>
+      <div
+        className="flex gap-1 overflow-x-auto rounded-xl border border-fl-border bg-fl-surface-2 p-1"
+        role="tablist"
+        aria-label={label}
+      >
         {items.map((item) => {
           const selected = item.id === active.id;
           return (

@@ -4,7 +4,9 @@
   "private": true,
   "main": "dist/index.js",
   "type": "module",
-  "engines": { "node": "22" },
+  "engines": {
+    "node": "22"
+  },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",

@@ -29,7 +29,9 @@ export function CardHeader({
       <h2 className="font-display text-2xl leading-none font-bold tracking-[0.01em] text-fl-text">
         {title}
       </h2>
-      {description ? <div className="mt-2 text-sm text-fl-text-muted">{description}</div> : null}
+      {description ? (
+        <div className="mt-2 text-sm text-fl-text-muted">{description}</div>
+      ) : null}
     </header>
   );
 }

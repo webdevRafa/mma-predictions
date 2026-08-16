@@ -1,4 +1,9 @@
-import type { Event, EventCard, Fighter, FightStatus } from "@fightlobby/domain";
+import type {
+  Event,
+  EventCard,
+  Fighter,
+  FightStatus,
+} from "@fightlobby/domain";
 
 export interface ProviderEventSummary {
   id: string;

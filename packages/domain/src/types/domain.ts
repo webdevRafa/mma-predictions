@@ -1,11 +1,33 @@
 export type Promotion = "ufc";
-export type EventStatus = "draft" | "scheduled" | "live" | "completed" | "canceled" | "postponed";
-export type FightStatus = "scheduled" | "prefight" | "walkouts" | "intros" | "in_progress" | "end_of_round" | "completed" | "canceled" | "postponed";
-export type PredictionStatus = "open" | "locked" | "grading" | "graded" | "void";
+export type EventStatus =
+  "draft" | "scheduled" | "live" | "completed" | "canceled" | "postponed";
+export type FightStatus =
+  | "scheduled"
+  | "prefight"
+  | "walkouts"
+  | "intros"
+  | "in_progress"
+  | "end_of_round"
+  | "completed"
+  | "canceled"
+  | "postponed";
+export type PredictionStatus =
+  "open" | "locked" | "grading" | "graded" | "void";
 export type CardSegment = "early_prelims" | "prelims" | "main_card";
-export type ResultMethod = "ko_tko" | "submission" | "decision_unanimous" | "decision_split" | "decision_majority" | "dq" | "draw" | "no_contest" | "overturned" | "other";
+export type ResultMethod =
+  | "ko_tko"
+  | "submission"
+  | "decision_unanimous"
+  | "decision_split"
+  | "decision_majority"
+  | "dq"
+  | "draw"
+  | "no_contest"
+  | "overturned"
+  | "other";
 export type PredictionMethod = "ko_tko" | "submission" | "decision" | "other";
 export type DataQuality = "verified" | "complete" | "partial" | "blocked";
+export type UserRole = "member" | "trusted" | "moderator" | "admin";
 
 export interface FighterName {
   full: string;
@@ -82,7 +104,12 @@ export interface Event {
   cardSegments: { earlyPrelims: number; prelims: number; mainCard: number };
   predictionSummary: { totalPredictions: number; uniquePredictors: number };
   chatRoomId: string;
-  editorial?: { summary?: string | undefined; status: "missing" | "draft" | "reviewed" | "published" } | undefined;
+  editorial?:
+    | {
+        summary?: string | undefined;
+        status: "missing" | "draft" | "reviewed" | "published";
+      }
+    | undefined;
   monetizationEligible: boolean;
   dataQuality: DataQuality;
   updatedAt: string;

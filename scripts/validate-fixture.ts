@@ -8,7 +8,9 @@ async function collectJsonFiles(inputPath: string): Promise<string[]> {
   const info = await stat(resolved);
   if (info.isFile()) return resolved.endsWith(".json") ? [resolved] : [];
   const entries = await readdir(resolved, { withFileTypes: true });
-  const nested = await Promise.all(entries.map((entry) => collectJsonFiles(path.join(resolved, entry.name))));
+  const nested = await Promise.all(
+    entries.map((entry) => collectJsonFiles(path.join(resolved, entry.name))),
+  );
   return nested.flat().sort();
 }
 
@@ -23,15 +25,21 @@ async function main(): Promise<void> {
         const json: unknown = JSON.parse(await readFile(filename, "utf8"));
         const result = validateAndNormalizeFixture(json);
         if (result.success) {
-          console.log(`✓ ${path.relative(process.cwd(), filename)} — ${result.data.event.name} (${result.data.fights.length} fights)`);
+          console.log(
+            `✓ ${path.relative(process.cwd(), filename)} — ${result.data.event.name} (${result.data.fights.length} fights)`,
+          );
         } else {
           failures += 1;
           console.error(`✗ ${path.relative(process.cwd(), filename)}`);
-          result.issues.forEach((issue) => console.error(`  ${issue.path}: ${issue.message}`));
+          result.issues.forEach((issue) =>
+            console.error(`  ${issue.path}: ${issue.message}`),
+          );
         }
       } catch (error) {
         failures += 1;
-        console.error(`✗ ${path.relative(process.cwd(), filename)}: ${error instanceof Error ? error.message : String(error)}`);
+        console.error(
+          `✗ ${path.relative(process.cwd(), filename)}: ${error instanceof Error ? error.message : String(error)}`,
+        );
       }
     }
   }

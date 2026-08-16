@@ -10,7 +10,10 @@ export function DialogPreview() {
 
   return (
     <>
-      <Button variant="secondary" onClick={() => dialogRef.current?.showModal()}>
+      <Button
+        variant="secondary"
+        onClick={() => dialogRef.current?.showModal()}
+      >
         Open matchup dialog
       </Button>
       <dialog
@@ -21,7 +24,10 @@ export function DialogPreview() {
         <div className="flex items-start justify-between border-b border-fl-border px-5 py-4">
           <div>
             <p className="eyebrow">Prediction saved</p>
-            <h2 className="font-display text-2xl font-bold" id="matchup-dialog-title">
+            <h2
+              className="font-display text-2xl font-bold"
+              id="matchup-dialog-title"
+            >
               Your pick is still editable
             </h2>
           </div>
@@ -35,9 +41,13 @@ export function DialogPreview() {
           </button>
         </div>
         <div className="px-5 py-5 text-sm leading-6 text-fl-text-muted">
-          Predictions lock at walkouts. FightLobby checks the official fight state on the server before saving every change.
+          Predictions lock at walkouts. FightLobby checks the official fight
+          state on the server before saving every change.
         </div>
-        <form className="flex justify-end border-t border-fl-border px-5 py-4" method="dialog">
+        <form
+          className="flex justify-end border-t border-fl-border px-5 py-4"
+          method="dialog"
+        >
           <Button>Got it</Button>
         </form>
       </dialog>

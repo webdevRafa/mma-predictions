@@ -26,7 +26,9 @@ export function StatusPill({ status }: { status: FightStatus }) {
         classes[status],
       )}
     >
-      {status === "live" ? <span className="live-dot" aria-hidden="true" /> : null}
+      {status === "live" ? (
+        <span className="live-dot" aria-hidden="true" />
+      ) : null}
       {labels[status]}
     </span>
   );

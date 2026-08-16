@@ -27,13 +27,19 @@ export default tseslint.config(
     files: typeScriptFiles,
     languageOptions: {
       globals: { ...globals.browser, ...globals.node },
-      parserOptions: { projectService: true, tsconfigRootDir: import.meta.dirname },
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
     },
     plugins: { "react-hooks": reactHooks },
     rules: {
       ...reactHooks.configs.recommended.rules,
       "@typescript-eslint/consistent-type-imports": "error",
-      "@typescript-eslint/no-misused-promises": ["error", { "checksVoidReturn": false }],
+      "@typescript-eslint/no-misused-promises": [
+        "error",
+        { checksVoidReturn: false },
+      ],
     },
   },
 );
