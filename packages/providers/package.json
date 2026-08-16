@@ -12,7 +12,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@fightlobby/domain": "workspace:*"
+    "@fightlobby/domain": "workspace:*",
+    "zod": "latest"
   },
   "devDependencies": {
     "typescript": "^6.0.2",

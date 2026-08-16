@@ -71,6 +71,9 @@ importers:
       '@fightlobby/domain':
         specifier: workspace:*
         version: link:../../packages/domain
+      '@fightlobby/providers':
+        specifier: workspace:*
+        version: link:../../packages/providers
       firebase-admin:
         specifier: latest
         version: 14.2.0(@firebase/app-compat@0.5.16)(@firebase/app@0.16.0)
@@ -164,6 +167,9 @@ importers:
       '@fightlobby/domain':
         specifier: workspace:*
         version: link:../domain
+      zod:
+        specifier: latest
+        version: 4.4.3
     devDependencies:
       typescript:
         specifier: ^6.0.2

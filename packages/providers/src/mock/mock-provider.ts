@@ -4,8 +4,10 @@ import type { EventCard, Fighter } from "@fightlobby/domain";
 import type {
   MmaDataProvider,
   ProviderEventSummary,
+  ProviderEventCard,
+  ProviderFighter,
   ProviderLiveEvent,
-} from "../core/provider";
+} from "../core/provider.js";
 
 export class MockMmaProvider implements MmaDataProvider {
   readonly providerKey = "mock";
@@ -50,17 +52,31 @@ export class MockMmaProvider implements MmaDataProvider {
     );
   }
 
-  getEventCard(externalEventId: string): Promise<EventCard> {
+  getEventCard(externalEventId: string): Promise<ProviderEventCard> {
     const card = this.#cards.get(externalEventId);
     if (!card) throw new Error(`Mock event not found: ${externalEventId}`);
-    return Promise.resolve(structuredClone(card));
+    return Promise.resolve({
+      ...structuredClone(card),
+      providerRefs: {
+        event: card.event.id,
+        fights: Object.fromEntries(
+          card.fights.map((fight) => [fight.id, fight.id]),
+        ),
+        fighters: Object.fromEntries(
+          card.fighters.map((fighter) => [fighter.id, fighter.id]),
+        ),
+      },
+    });
   }
 
-  getFighter(externalFighterId: string): Promise<Fighter> {
+  getFighter(externalFighterId: string): Promise<ProviderFighter> {
     const fighter = this.#fighters.get(externalFighterId);
     if (!fighter)
       throw new Error(`Mock fighter not found: ${externalFighterId}`);
-    return Promise.resolve(structuredClone(fighter));
+    return Promise.resolve({
+      ...structuredClone(fighter),
+      providerExternalId: externalFighterId,
+    });
   }
 
   async getLiveEvent(externalEventId: string): Promise<ProviderLiveEvent> {

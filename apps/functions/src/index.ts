@@ -12,6 +12,15 @@ export {
   regradeFightPredictions,
 } from "./grading/grade-fight-predictions.js";
 export { lockFightPredictions } from "./predictions/lock-fight-predictions.js";
+export {
+  discoverUpcomingEvents,
+  nightlyIntegrityCheck,
+  reconcileProviderChanges,
+  refreshFighterTask,
+  runEventSync,
+  syncEventCardTask,
+  syncLiveEvents,
+} from "./ingestion/jobs.js";
 
 export const health = onRequest({ cors: false }, (_request, response) => {
   response.status(200).json({ service: "fightlobby-functions", status: "ok" });

@@ -38,6 +38,14 @@ rulesDescribe("Firebase security boundaries", () => {
         uid: "member_a",
         email: "private@example.test",
       });
+      await setDoc(
+        doc(context.firestore(), "providerEntityState/event_evt_public"),
+        {
+          providerKey: "licensed-provider",
+          externalId: "private-provider-id",
+          manualOverrides: {},
+        },
+      );
       await setDoc(doc(context.firestore(), "profiles/member_a"), {
         uid: "member_a",
         handleNormalized: "member_a",
@@ -105,6 +113,18 @@ rulesDescribe("Firebase security boundaries", () => {
           environment.authenticatedContext("member_a").firestore(),
           "users/member_a",
         ),
+      ),
+    );
+  });
+
+  it("never exposes provider state or external identifiers to clients", async () => {
+    const path = "providerEntityState/event_evt_public";
+    await assertFails(
+      getDoc(doc(environment.unauthenticatedContext().firestore(), path)),
+    );
+    await assertFails(
+      getDoc(
+        doc(environment.authenticatedContext("member_a").firestore(), path),
       ),
     );
   });
