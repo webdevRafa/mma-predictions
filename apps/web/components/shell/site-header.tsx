@@ -27,7 +27,7 @@ export async function SiteHeader() {
         <div className="shell flex h-16 items-center gap-4 sm:h-[72px]">
           <Link
             aria-label="FightLobby home"
-            className="group flex shrink-0 items-center rounded-xl"
+            className="group flex shrink-0 items-center gap-2 rounded-xl"
             href="/"
           >
             <Image
@@ -40,6 +40,9 @@ export async function SiteHeader() {
               src="/brand/fightlobby-mark.png"
               width={2859}
             />
+            <span className="hidden font-display text-xl leading-none font-extrabold tracking-[-0.03em] text-fl-text min-[375px]:inline sm:text-2xl">
+              FIGHT<span className="text-fl-accent">LOBBY</span>
+            </span>
           </Link>
           <nav
             aria-label="Primary navigation"
