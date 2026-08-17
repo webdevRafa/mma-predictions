@@ -6,7 +6,6 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { FightPageWorkspace } from "@/components/fights/fight-page-workspace";
 import { StatsComparison } from "@/components/fights/stats-comparison";
-import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -183,21 +182,17 @@ export default async function FightPage({ params }: Props) {
           </h1>
           <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-8">
             <div className="min-w-0 text-center">
+              {fighterA.name.nickname ? (
+                <p className="eyebrow">“{fighterA.name.nickname}”</p>
+              ) : null}
               <Link
-                className="focus-ring inline-block rounded-full"
+                className="focus-ring mt-2 inline-block rounded-md"
                 href={`/fighters/${fighterA.slug}`}
               >
-                <FighterAvatar
-                  className="size-20 text-2xl sm:size-32 sm:text-4xl"
-                  name={fighterA.name.full}
-                />
+                <h2 className="font-display text-3xl leading-none font-extrabold tracking-[-.02em] sm:text-4xl lg:whitespace-nowrap lg:text-5xl">
+                  {fighterA.name.full}
+                </h2>
               </Link>
-              {fighterA.name.nickname ? (
-                <p className="eyebrow mt-5">“{fighterA.name.nickname}”</p>
-              ) : null}
-              <h2 className="mt-2 font-display text-[clamp(2.25rem,7vw,6.5rem)] leading-[.82] font-extrabold tracking-[-.02em] [overflow-wrap:anywhere]">
-                {fighterA.name.full}
-              </h2>
               <p className="mt-3 font-mono text-[11px] text-fl-text-muted">
                 {formatRecord(fighterA.record)} · {fighterA.countryCode ?? "—"}
               </p>
@@ -208,22 +203,18 @@ export default async function FightPage({ params }: Props) {
               </span>
               <span className="mx-auto mt-3 block h-16 w-px bg-gradient-to-b from-fl-accent to-transparent" />
             </div>
-            <div className="text-center">
+            <div className="min-w-0 text-center">
+              {fighterB.name.nickname ? (
+                <p className="eyebrow">“{fighterB.name.nickname}”</p>
+              ) : null}
               <Link
-                className="focus-ring inline-block rounded-full"
+                className="focus-ring mt-2 inline-block rounded-md"
                 href={`/fighters/${fighterB.slug}`}
               >
-                <FighterAvatar
-                  className="size-20 text-2xl sm:size-32 sm:text-4xl"
-                  name={fighterB.name.full}
-                />
+                <h2 className="font-display text-3xl leading-none font-extrabold tracking-[-.02em] sm:text-4xl lg:whitespace-nowrap lg:text-5xl">
+                  {fighterB.name.full}
+                </h2>
               </Link>
-              {fighterB.name.nickname ? (
-                <p className="eyebrow mt-5">“{fighterB.name.nickname}”</p>
-              ) : null}
-              <h2 className="mt-2 font-display text-[clamp(2.25rem,7vw,6.5rem)] leading-[.82] font-extrabold tracking-[-.02em] [overflow-wrap:anywhere]">
-                {fighterB.name.full}
-              </h2>
               <p className="mt-3 font-mono text-[11px] text-fl-text-muted">
                 {formatRecord(fighterB.record)} · {fighterB.countryCode ?? "—"}
               </p>

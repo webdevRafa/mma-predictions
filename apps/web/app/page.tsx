@@ -7,7 +7,6 @@ import { EventCountdown } from "@/components/events/event-countdown";
 import { EventPhaseLabel } from "@/components/events/event-phase-label";
 import { EventSchedule } from "@/components/events/event-schedule";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
-import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Card, CardHeader } from "@/components/ui/card";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
@@ -123,14 +122,10 @@ export default async function HomePage() {
                 </div>
                 <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6">
                   <Link
-                    className="focus-ring rounded-xl text-center"
+                    className="focus-ring min-w-0 rounded-xl text-center"
                     href={`/fighters/${mainFight.fighterA.slug}`}
                   >
-                    <FighterAvatar
-                      className="mx-auto size-20 text-2xl sm:size-24 sm:text-3xl"
-                      name={mainFight.fighterA.name.full}
-                    />
-                    <h3 className="mt-4 font-display text-2xl leading-none font-extrabold sm:text-4xl">
+                    <h3 className="font-display text-2xl leading-none font-extrabold sm:text-4xl">
                       {mainFight.fighterA.name.full}
                     </h3>
                     <p className="mt-2 font-mono text-[10px] text-fl-text-muted">
@@ -141,14 +136,10 @@ export default async function HomePage() {
                     VS
                   </span>
                   <Link
-                    className="focus-ring rounded-xl text-center"
+                    className="focus-ring min-w-0 rounded-xl text-center"
                     href={`/fighters/${mainFight.fighterB.slug}`}
                   >
-                    <FighterAvatar
-                      className="mx-auto size-20 text-2xl sm:size-24 sm:text-3xl"
-                      name={mainFight.fighterB.name.full}
-                    />
-                    <h3 className="mt-4 font-display text-2xl leading-none font-extrabold sm:text-4xl">
+                    <h3 className="font-display text-2xl leading-none font-extrabold sm:text-4xl">
                       {mainFight.fighterB.name.full}
                     </h3>
                     <p className="mt-2 font-mono text-[10px] text-fl-text-muted">

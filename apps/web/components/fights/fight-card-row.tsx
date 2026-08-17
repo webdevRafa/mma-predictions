@@ -2,19 +2,26 @@ import type { Fight } from "@fightlobby/domain";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
-import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Badge } from "@/components/ui/badge";
 import { formatRecord } from "@/lib/format";
 
-export function FightCardRow({ fight }: { fight: Fight }) {
+export function FightCardRow({
+  fight,
+  featuredLabel,
+}: {
+  fight: Fight;
+  featuredLabel?: "Main event" | "Co-main event";
+}) {
   return (
     <article className="group border-b border-fl-border/80 p-4 last:border-b-0 sm:p-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <span className="font-mono text-[10px] tracking-[0.1em] text-fl-text-dim uppercase">
-            Bout {fight.boutOrder}
-          </span>
+          {featuredLabel ? (
+            <span className="font-mono text-[10px] font-semibold tracking-[0.1em] text-fl-accent uppercase">
+              {featuredLabel}
+            </span>
+          ) : null}
           {fight.isTitleFight ? <Badge tone="accent">Title fight</Badge> : null}
         </div>
         <LiveStatusFragment
@@ -28,32 +35,26 @@ export function FightCardRow({ fight }: { fight: Fight }) {
         className="focus-ring mt-4 grid rounded-xl md:grid-cols-[1fr_auto_1fr_auto] md:items-center md:gap-5"
         href={`/fights/${fight.slug}`}
       >
-        <div className="flex items-center gap-3">
-          <FighterAvatar name={fight.fighterA.name.full} />
-          <div>
-            <h3 className="font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent">
-              {fight.fighterA.name.full}
-            </h3>
-            <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
-              {formatRecord(fight.fighterA.record)}
-            </p>
-          </div>
+        <div className="min-w-0">
+          <h3 className="font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent">
+            {fight.fighterA.name.full}
+          </h3>
+          <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
+            {formatRecord(fight.fighterA.record)}
+          </p>
         </div>
         <div className="my-3 flex items-center gap-3 text-fl-text-dim md:my-0">
           <span className="h-px flex-1 bg-fl-border md:hidden" />
           <span className="font-display text-sm font-bold">VS</span>
           <span className="h-px flex-1 bg-fl-border md:hidden" />
         </div>
-        <div className="flex items-center gap-3 md:flex-row-reverse md:text-right">
-          <FighterAvatar name={fight.fighterB.name.full} />
-          <div>
-            <h3 className="font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent">
-              {fight.fighterB.name.full}
-            </h3>
-            <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
-              {formatRecord(fight.fighterB.record)}
-            </p>
-          </div>
+        <div className="min-w-0 md:text-right">
+          <h3 className="font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent">
+            {fight.fighterB.name.full}
+          </h3>
+          <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
+            {formatRecord(fight.fighterB.record)}
+          </p>
         </div>
         <ArrowUpRight
           aria-hidden="true"

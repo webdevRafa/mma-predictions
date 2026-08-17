@@ -89,12 +89,3 @@ export function isFightLive(status: FightStatus) {
 export function percentage(value: number, total: number) {
   return total > 0 ? Math.round((value / total) * 100) : 0;
 }
-
-export function initials(name: string) {
-  return name
-    .split(/\s+/)
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-}

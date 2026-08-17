@@ -7,6 +7,12 @@ import { formatCardSegment } from "@/lib/format";
 const segments = ["main_card", "prelims", "early_prelims"] as const;
 
 export function FightCardGroups({ fights }: { fights: Fight[] }) {
+  const orderedFights = [...fights].sort(
+    (fightA, fightB) => fightA.boutOrder - fightB.boutOrder,
+  );
+  const mainEventId = orderedFights[0]?.id;
+  const coMainEventId = orderedFights[1]?.id;
+
   return (
     <div className="space-y-6">
       {segments.map((segment) => {
@@ -29,9 +35,22 @@ export function FightCardGroups({ fights }: { fights: Fight[] }) {
               </span>
             </div>
             <Card className="overflow-hidden">
-              {segmentFights.map((fight) => (
-                <FightCardRow fight={fight} key={fight.id} />
-              ))}
+              {segmentFights.map((fight) => {
+                const featuredLabel =
+                  fight.id === mainEventId
+                    ? "Main event"
+                    : fight.id === coMainEventId
+                      ? "Co-main event"
+                      : undefined;
+
+                return (
+                  <FightCardRow
+                    fight={fight}
+                    key={fight.id}
+                    {...(featuredLabel ? { featuredLabel } : {})}
+                  />
+                );
+              })}
             </Card>
           </section>
         );

@@ -13,7 +13,6 @@ import {
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
-import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
@@ -129,32 +128,26 @@ export default async function FighterPage({ params }: Props) {
               { label: fighter.name.full },
             ]}
           />
-          <div className="mt-10 grid gap-8 md:grid-cols-[auto_1fr] md:items-center">
-            <FighterAvatar
-              className="size-32 text-4xl sm:size-44 sm:text-6xl"
-              name={fighter.name.full}
-            />
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge tone="accent">
-                  {fighter.currentWeightClass ?? "UFC fighter"}
-                </Badge>
-                <Badge tone="neutral">{fighter.status}</Badge>
-                <FollowButton targetId={fighter.id} targetType="fighter" />
-              </div>
-              {fighter.name.nickname ? (
-                <p className="eyebrow mt-5">“{fighter.name.nickname}”</p>
-              ) : null}
-              <h1 className="mt-2 font-display text-6xl leading-[.84] font-extrabold tracking-[-.02em] sm:text-8xl">
-                {fighter.name.full}
-              </h1>
-              <p className="mt-5 font-mono text-lg font-semibold">
-                {formatRecord(fighter.record)}{" "}
-                <span className="text-sm font-medium text-fl-text-muted">
-                  professional record
-                </span>
-              </p>
+          <div className="mt-10 max-w-4xl">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge tone="accent">
+                {fighter.currentWeightClass ?? "UFC fighter"}
+              </Badge>
+              <Badge tone="neutral">{fighter.status}</Badge>
+              <FollowButton targetId={fighter.id} targetType="fighter" />
             </div>
+            {fighter.name.nickname ? (
+              <p className="eyebrow mt-5">“{fighter.name.nickname}”</p>
+            ) : null}
+            <h1 className="mt-2 font-display text-6xl leading-[.84] font-extrabold tracking-[-.02em] sm:text-8xl">
+              {fighter.name.full}
+            </h1>
+            <p className="mt-5 font-mono text-lg font-semibold">
+              {formatRecord(fighter.record)}{" "}
+              <span className="text-sm font-medium text-fl-text-muted">
+                professional record
+              </span>
+            </p>
           </div>
         </div>
       </section>

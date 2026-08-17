@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Award, Flame, Medal, ShieldCheck, Target, Trophy } from "lucide-react";
 import Link from "next/link";
 
-import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
@@ -156,23 +155,17 @@ export default async function LeaderboardsPage({
                           </span>
                         </td>
                         <td className="px-5 py-4">
-                          <div className="flex items-center gap-3">
-                            <FighterAvatar
-                              className="size-10 text-xs"
-                              name={entry.handle}
-                            />
-                            <div>
-                              <Link
-                                className="focus-ring rounded text-sm font-bold hover:text-fl-accent"
-                                href={`/u/${entry.handle}`}
-                              >
-                                @{entry.handle}
-                              </Link>
-                              <p className="mt-1 flex items-center gap-1 text-[10px] text-fl-text-dim">
-                                <Award aria-hidden="true" size={11} />{" "}
-                                {entry.gradedPicks} graded
-                              </p>
-                            </div>
+                          <div>
+                            <Link
+                              className="focus-ring rounded text-sm font-bold hover:text-fl-accent"
+                              href={`/u/${entry.handle}`}
+                            >
+                              @{entry.handle}
+                            </Link>
+                            <p className="mt-1 flex items-center gap-1 text-[10px] text-fl-text-dim">
+                              <Award aria-hidden="true" size={11} />{" "}
+                              {entry.gradedPicks} graded
+                            </p>
                           </div>
                         </td>
                         <td className="px-5 py-4 text-right font-display text-2xl font-bold">
