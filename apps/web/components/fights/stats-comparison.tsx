@@ -58,9 +58,9 @@ export function StatsComparison({
   ] as const;
 
   return (
-    <Card>
+    <Card className="min-w-0 overflow-hidden">
       <CardHeader eyebrow="Tale of the tape" title="Stats comparison" />
-      <div className="overflow-x-auto p-5 sm:p-6">
+      <div className="max-w-full overflow-x-auto overscroll-x-contain p-5 sm:p-6">
         <table className="w-full min-w-[32rem] border-collapse text-sm">
           <thead>
             <tr className="text-left font-display text-xl">

@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { ArrowLeft, CheckCircle2, Clock3, Target } from "lucide-react";
+import { CheckCircle2, Clock3, Target } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
 import { AdSlot } from "@/components/ads/ad-slot";
+import { FightPageWorkspace } from "@/components/fights/fight-page-workspace";
 import { StatsComparison } from "@/components/fights/stats-comparison";
 import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
@@ -104,7 +105,7 @@ export default async function FightPage({ params }: Props) {
         : null;
 
   return (
-    <main id="main-content">
+    <main className="overflow-x-clip" id="main-content">
       <TrackAnalyticsEvent
         name="view_fight"
         parameters={{ fight_id: fight.id, fight_status: fight.status }}
@@ -181,7 +182,7 @@ export default async function FightPage({ params }: Props) {
             live chat
           </h1>
           <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-8">
-            <div className="text-center">
+            <div className="min-w-0 text-center">
               <Link
                 className="focus-ring inline-block rounded-full"
                 href={`/fighters/${fighterA.slug}`}
@@ -194,14 +195,14 @@ export default async function FightPage({ params }: Props) {
               {fighterA.name.nickname ? (
                 <p className="eyebrow mt-5">“{fighterA.name.nickname}”</p>
               ) : null}
-              <h2 className="mt-2 font-display text-[clamp(2.25rem,7vw,6.5rem)] leading-[.82] font-extrabold tracking-[-.02em]">
+              <h2 className="mt-2 font-display text-[clamp(2.25rem,7vw,6.5rem)] leading-[.82] font-extrabold tracking-[-.02em] [overflow-wrap:anywhere]">
                 {fighterA.name.full}
               </h2>
               <p className="mt-3 font-mono text-[11px] text-fl-text-muted">
                 {formatRecord(fighterA.record)} · {fighterA.countryCode ?? "—"}
               </p>
             </div>
-            <div className="text-center">
+            <div className="min-w-0 text-center">
               <span className="font-display text-xl font-extrabold text-fl-text-dim sm:text-3xl">
                 VS
               </span>
@@ -220,7 +221,7 @@ export default async function FightPage({ params }: Props) {
               {fighterB.name.nickname ? (
                 <p className="eyebrow mt-5">“{fighterB.name.nickname}”</p>
               ) : null}
-              <h2 className="mt-2 font-display text-[clamp(2.25rem,7vw,6.5rem)] leading-[.82] font-extrabold tracking-[-.02em]">
+              <h2 className="mt-2 font-display text-[clamp(2.25rem,7vw,6.5rem)] leading-[.82] font-extrabold tracking-[-.02em] [overflow-wrap:anywhere]">
                 {fighterB.name.full}
               </h2>
               <p className="mt-3 font-mono text-[11px] text-fl-text-muted">
@@ -251,233 +252,207 @@ export default async function FightPage({ params }: Props) {
         />
       </div>
 
-      <nav
-        aria-label="Fight page sections"
-        className="sticky top-16 z-30 border-b border-fl-border bg-fl-bg/95 backdrop-blur md:hidden"
-      >
-        <div className="shell grid grid-cols-4 text-center text-xs font-semibold">
-          <a className="focus-ring py-4" href="#matchup">
-            Matchup
-          </a>
-          <a className="focus-ring py-4" href="#predict">
-            Predict
-          </a>
-          <a className="focus-ring py-4" href="#stats">
-            Stats
-          </a>
-          <a className="focus-ring py-4" href="#lobby">
-            Lobby
-          </a>
-        </div>
-      </nav>
-
-      <div
-        className="shell grid gap-8 py-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:py-14"
-        id="matchup"
-      >
-        <div className="space-y-6">
-          <PredictionExperience fight={fight} />
-          <div id="stats">
+      <FightPageWorkspace
+        backHref={`/events/${event.slug}`}
+        backLabel={`Back to ${event.shortName}`}
+        fighterAName={fighterA.name.full}
+        fighterBName={fighterB.name.full}
+        lobby={
+          <>
+            <FightChatLauncher
+              fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
+              roomId={fight.chatRoomId}
+            />
+            <Card className="p-5 sm:p-6">
+              <Target aria-hidden="true" className="text-fl-accent" size={22} />
+              <h2 className="mt-4 font-display text-2xl font-bold">
+                10 points available
+              </h2>
+              <p className="mt-2 text-sm leading-6 text-fl-text-muted">
+                5 winner · 3 method · 2 exact detail. A wrong winner scores zero
+                for the fight.
+              </p>
+            </Card>
+          </>
+        }
+        prediction={<PredictionExperience fight={fight} />}
+        stats={
+          <>
             <StatsComparison fighterA={fighterA} fighterB={fighterB} />
-          </div>
-
-          <Card>
-            <CardHeader
-              eyebrow="FightLobby desk"
-              title={fight.editorial.biggestQuestion ?? "The matchup question"}
-            />
-            <div className="space-y-6 p-5 sm:p-6">
-              {fight.editorial.status === "published" ? (
-                <>
-                  {fight.editorial.styleContrast ? (
-                    <div>
-                      <p className="eyebrow">Style contrast</p>
-                      <p className="mt-2 leading-7 text-fl-text-muted">
-                        {fight.editorial.styleContrast}
-                      </p>
+            <Card>
+              <CardHeader
+                eyebrow="FightLobby desk"
+                title={
+                  fight.editorial.biggestQuestion ?? "The matchup question"
+                }
+              />
+              <div className="space-y-6 p-5 sm:p-6">
+                {fight.editorial.status === "published" ? (
+                  <>
+                    {fight.editorial.styleContrast ? (
+                      <div>
+                        <p className="eyebrow">Style contrast</p>
+                        <p className="mt-2 leading-7 text-fl-text-muted">
+                          {fight.editorial.styleContrast}
+                        </p>
+                      </div>
+                    ) : null}
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      {fight.editorial.keysForFighterA?.length ? (
+                        <div>
+                          <h3 className="font-display text-2xl font-bold">
+                            Keys for {fighterA.name.last ?? fighterA.name.full}
+                          </h3>
+                          <ul className="mt-3 space-y-2 text-sm text-fl-text-muted">
+                            {fight.editorial.keysForFighterA.map((key) => (
+                              <li className="flex gap-2" key={key}>
+                                <CheckCircle2
+                                  aria-hidden="true"
+                                  className="mt-0.5 shrink-0 text-fl-accent"
+                                  size={15}
+                                />
+                                {key}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
+                      {fight.editorial.keysForFighterB?.length ? (
+                        <div>
+                          <h3 className="font-display text-2xl font-bold">
+                            Keys for {fighterB.name.last ?? fighterB.name.full}
+                          </h3>
+                          <ul className="mt-3 space-y-2 text-sm text-fl-text-muted">
+                            {fight.editorial.keysForFighterB.map((key) => (
+                              <li className="flex gap-2" key={key}>
+                                <CheckCircle2
+                                  aria-hidden="true"
+                                  className="mt-0.5 shrink-0 text-fl-accent"
+                                  size={15}
+                                />
+                                {key}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      ) : null}
                     </div>
-                  ) : null}
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    {fight.editorial.keysForFighterA?.length ? (
-                      <div>
-                        <h3 className="font-display text-2xl font-bold">
-                          Keys for {fighterA.name.last ?? fighterA.name.full}
-                        </h3>
-                        <ul className="mt-3 space-y-2 text-sm text-fl-text-muted">
-                          {fight.editorial.keysForFighterA.map((key) => (
-                            <li className="flex gap-2" key={key}>
-                              <CheckCircle2
-                                aria-hidden="true"
-                                className="mt-0.5 shrink-0 text-fl-accent"
-                                size={15}
-                              />
-                              {key}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
+                    {fight.editorial.fightLobbyTake ? (
+                      <blockquote className="border-l-2 border-fl-accent pl-4 text-lg leading-7">
+                        “{fight.editorial.fightLobbyTake}”
+                      </blockquote>
                     ) : null}
-                    {fight.editorial.keysForFighterB?.length ? (
-                      <div>
-                        <h3 className="font-display text-2xl font-bold">
-                          Keys for {fighterB.name.last ?? fighterB.name.full}
-                        </h3>
-                        <ul className="mt-3 space-y-2 text-sm text-fl-text-muted">
-                          {fight.editorial.keysForFighterB.map((key) => (
-                            <li className="flex gap-2" key={key}>
-                              <CheckCircle2
-                                aria-hidden="true"
-                                className="mt-0.5 shrink-0 text-fl-accent"
-                                size={15}
-                              />
-                              {key}
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ) : null}
+                  </>
+                ) : (
+                  <div className="rounded-xl border border-dashed border-fl-border bg-fl-surface-2 p-5">
+                    <p className="font-semibold">Analysis under review</p>
+                    <p className="mt-2 text-sm leading-6 text-fl-text-muted">
+                      This page stays out of search indexing until verified
+                      stats and original matchup context clear the content
+                      review.
+                    </p>
                   </div>
-                  {fight.editorial.fightLobbyTake ? (
-                    <blockquote className="border-l-2 border-fl-accent pl-4 text-lg leading-7">
-                      “{fight.editorial.fightLobbyTake}”
-                    </blockquote>
-                  ) : null}
-                </>
-              ) : (
-                <div className="rounded-xl border border-dashed border-fl-border bg-fl-surface-2 p-5">
-                  <p className="font-semibold">Analysis under review</p>
-                  <p className="mt-2 text-sm leading-6 text-fl-text-muted">
-                    This page stays out of search indexing until verified stats
-                    and original matchup context clear the content review.
-                  </p>
-                </div>
-              )}
-            </div>
-          </Card>
+                )}
+              </div>
+            </Card>
 
-          <AdSlot
-            eligible={fight.monetizationEligible}
-            placement="fight_after_editorial"
-          />
-
-          <Card>
-            <CardHeader
-              eyebrow="Fight state"
-              title={
-                fight.result?.official
-                  ? "Official result"
-                  : fight.result
-                    ? "Result under review"
-                    : "Awaiting the opening horn"
-              }
+            <AdSlot
+              eligible={fight.monetizationEligible}
+              placement="fight_after_editorial"
             />
-            <div className="p-5 sm:p-6">
-              {fight.result ? (
-                <div>
+
+            <Card>
+              <CardHeader
+                eyebrow="Fight state"
+                title={
+                  fight.result?.official
+                    ? "Official result"
+                    : fight.result
+                      ? "Result under review"
+                      : "Awaiting the opening horn"
+                }
+              />
+              <div className="p-5 sm:p-6">
+                {fight.result ? (
+                  <div>
+                    <div className="flex items-start gap-3">
+                      <CheckCircle2
+                        aria-hidden="true"
+                        className="mt-0.5 shrink-0 text-fl-success"
+                        size={20}
+                      />
+                      <div>
+                        <p className="font-display text-2xl font-bold">
+                          {winner
+                            ? `${winner.name.full} wins`
+                            : resultLabels[fight.result.method]}
+                        </p>
+                        <p className="mt-1 text-sm text-fl-text-muted">
+                          {winner
+                            ? resultLabels[fight.result.method]
+                            : "Official bout result"}
+                          {fight.result.round
+                            ? ` · Round ${fight.result.round}`
+                            : ""}
+                          {clockTime(fight.result.timeInRoundSeconds)
+                            ? ` · ${clockTime(fight.result.timeInRoundSeconds)}`
+                            : ""}
+                        </p>
+                      </div>
+                    </div>
+                    {fight.gradingSummary ? (
+                      <div className="mt-5 grid grid-cols-2 gap-3 border-t border-fl-border pt-5 sm:grid-cols-3">
+                        <div>
+                          <p className="eyebrow">Community</p>
+                          <p className="mt-1 font-display text-2xl font-bold">
+                            {fight.gradingSummary.gradedPredictions}
+                          </p>
+                          <p className="text-xs text-fl-text-muted">
+                            graded picks
+                          </p>
+                        </div>
+                        <div>
+                          <p className="eyebrow">Winner reads</p>
+                          <p className="mt-1 font-display text-2xl font-bold">
+                            {fight.gradingSummary.correctWinners}
+                          </p>
+                          <p className="text-xs text-fl-text-muted">correct</p>
+                        </div>
+                        <div>
+                          <p className="eyebrow">Exact calls</p>
+                          <p className="mt-1 font-display text-2xl font-bold">
+                            {fight.gradingSummary.exactPicks}
+                          </p>
+                          <p className="text-xs text-fl-text-muted">
+                            winner + method + detail
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="mt-4 text-xs text-fl-text-dim">
+                        Prediction grading is queued for result version{" "}
+                        {fight.result.resultVersion}.
+                      </p>
+                    )}
+                  </div>
+                ) : (
                   <div className="flex items-start gap-3">
-                    <CheckCircle2
+                    <Clock3
                       aria-hidden="true"
-                      className="mt-0.5 shrink-0 text-fl-success"
+                      className="mt-0.5 text-fl-info"
                       size={20}
                     />
-                    <div>
-                      <p className="font-display text-2xl font-bold">
-                        {winner
-                          ? `${winner.name.full} wins`
-                          : resultLabels[fight.result.method]}
-                      </p>
-                      <p className="mt-1 text-sm text-fl-text-muted">
-                        {winner
-                          ? resultLabels[fight.result.method]
-                          : "Official bout result"}
-                        {fight.result.round
-                          ? ` · Round ${fight.result.round}`
-                          : ""}
-                        {clockTime(fight.result.timeInRoundSeconds)
-                          ? ` · ${clockTime(fight.result.timeInRoundSeconds)}`
-                          : ""}
-                      </p>
-                    </div>
-                  </div>
-                  {fight.gradingSummary ? (
-                    <div className="mt-5 grid grid-cols-2 gap-3 border-t border-fl-border pt-5 sm:grid-cols-3">
-                      <div>
-                        <p className="eyebrow">Community</p>
-                        <p className="mt-1 font-display text-2xl font-bold">
-                          {fight.gradingSummary.gradedPredictions}
-                        </p>
-                        <p className="text-xs text-fl-text-muted">
-                          graded picks
-                        </p>
-                      </div>
-                      <div>
-                        <p className="eyebrow">Winner reads</p>
-                        <p className="mt-1 font-display text-2xl font-bold">
-                          {fight.gradingSummary.correctWinners}
-                        </p>
-                        <p className="text-xs text-fl-text-muted">correct</p>
-                      </div>
-                      <div>
-                        <p className="eyebrow">Exact calls</p>
-                        <p className="mt-1 font-display text-2xl font-bold">
-                          {fight.gradingSummary.exactPicks}
-                        </p>
-                        <p className="text-xs text-fl-text-muted">
-                          winner + method + detail
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <p className="mt-4 text-xs text-fl-text-dim">
-                      Prediction grading is queued for result version{" "}
-                      {fight.result.resultVersion}.
+                    <p className="text-sm leading-6 text-fl-text-muted">
+                      This matchup is scheduled. Live status updates can replace
+                      this fragment without rebuilding the full page.
                     </p>
-                  )}
-                </div>
-              ) : (
-                <div className="flex items-start gap-3">
-                  <Clock3
-                    aria-hidden="true"
-                    className="mt-0.5 text-fl-info"
-                    size={20}
-                  />
-                  <p className="text-sm leading-6 text-fl-text-muted">
-                    This matchup is scheduled. Live status updates can replace
-                    this fragment without rebuilding the full page.
-                  </p>
-                </div>
-              )}
-            </div>
-          </Card>
-
-          <Link
-            className="focus-ring inline-flex items-center gap-2 rounded-lg text-sm font-bold text-fl-accent"
-            href={`/events/${event.slug}`}
-          >
-            <ArrowLeft aria-hidden="true" size={16} /> Back to {event.shortName}
-          </Link>
-        </div>
-
-        <aside
-          className="space-y-5 lg:sticky lg:top-24 lg:self-start"
-          id="lobby"
-        >
-          <FightChatLauncher
-            fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
-            roomId={fight.chatRoomId}
-          />
-          <Card className="p-5 sm:p-6">
-            <Target aria-hidden="true" className="text-fl-accent" size={22} />
-            <h2 className="mt-4 font-display text-2xl font-bold">
-              10 points available
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-fl-text-muted">
-              5 winner · 3 method · 2 exact detail. A wrong winner scores zero
-              for the fight.
-            </p>
-          </Card>
-        </aside>
-      </div>
+                  </div>
+                )}
+              </div>
+            </Card>
+          </>
+        }
+      />
     </main>
   );
 }
