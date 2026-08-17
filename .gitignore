@@ -28,3 +28,5 @@ test-results/
 Thumbs.db
 *.suo
 *.sw?
+
+.vercel/

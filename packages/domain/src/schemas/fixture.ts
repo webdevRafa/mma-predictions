@@ -163,12 +163,22 @@ export const normalizedFixtureSchema = z
   .object({
     schemaVersion: z.literal(1),
     generatedAt: isoDateTimeSchema,
-    source: z
-      .object({
-        provider: z.literal("mock"),
-        externalEventId: z.string().trim().min(1),
-      })
-      .strict(),
+    source: z.discriminatedUnion("provider", [
+      z
+        .object({
+          provider: z.literal("mock"),
+          externalEventId: z.string().trim().min(1),
+        })
+        .strict(),
+      z
+        .object({
+          provider: z.literal("manual"),
+          externalEventId: z.string().trim().min(1),
+          sourceUrl: z.string().url(),
+          retrievedAt: isoDateTimeSchema,
+        })
+        .strict(),
+    ]),
     event: fixtureEventSchema,
     fighters: z.array(fixtureFighterSchema).min(2),
     fights: z.array(fixtureFightSchema).min(1),
