@@ -20,7 +20,11 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { FollowButton } from "@/features/profiles/follow-button";
 import { getPublicFighter, listPublicCards } from "@/lib/data/public";
-import { formatRecord } from "@/lib/format";
+import {
+  formatHeightMeasurement,
+  formatReachMeasurement,
+  formatRecord,
+} from "@/lib/format";
 import { isFighterIndexable } from "@/lib/seo/indexability";
 import { absoluteUrl } from "@/lib/seo/site";
 
@@ -87,12 +91,12 @@ export default async function FighterPage({ params }: Props) {
     {
       icon: Ruler,
       label: "Height",
-      value: fighter.heightCm ? `${fighter.heightCm} cm` : "—",
+      value: formatHeightMeasurement(fighter.heightCm),
     },
     {
       icon: MoveHorizontal,
       label: "Reach",
-      value: fighter.reachCm ? `${fighter.reachCm} cm` : "—",
+      value: formatReachMeasurement(fighter.reachCm),
     },
     { icon: Flag, label: "Country", value: fighter.countryCode ?? "—" },
     { icon: Activity, label: "Data quality", value: fighter.dataQuality },

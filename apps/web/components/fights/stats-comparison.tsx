@@ -1,6 +1,7 @@
 import type { Fighter } from "@fightlobby/domain";
 
 import { Card, CardHeader } from "@/components/ui/card";
+import { formatHeightMeasurement, formatReachMeasurement } from "@/lib/format";
 
 function metric(
   value: number | undefined,
@@ -12,12 +13,6 @@ function metric(
     : value.toFixed(1);
 }
 
-function measurement(value: number | undefined) {
-  if (value === undefined) return "—";
-  const inches = Math.round(value / 2.54);
-  return `${Math.floor(inches / 12)}′${inches % 12}″ · ${Math.round(value)} cm`;
-}
-
 export function StatsComparison({
   fighterA,
   fighterB,
@@ -26,8 +21,16 @@ export function StatsComparison({
   fighterB: Fighter;
 }) {
   const rows = [
-    ["Height", measurement(fighterA.heightCm), measurement(fighterB.heightCm)],
-    ["Reach", measurement(fighterA.reachCm), measurement(fighterB.reachCm)],
+    [
+      "Height",
+      formatHeightMeasurement(fighterA.heightCm),
+      formatHeightMeasurement(fighterB.heightCm),
+    ],
+    [
+      "Reach",
+      formatReachMeasurement(fighterA.reachCm),
+      formatReachMeasurement(fighterB.reachCm),
+    ],
     [
       "Sig. strikes / min",
       metric(fighterA.careerStats?.significantStrikesLandedPerMinute),

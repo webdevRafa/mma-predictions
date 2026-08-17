@@ -9,6 +9,24 @@ export function formatRecord(record: FighterRecord) {
   return record.noContests > 0 ? `${base} (${record.noContests} NC)` : base;
 }
 
+function formatInches(value: number) {
+  const rounded = Math.round(value * 2) / 2;
+  return Number.isInteger(rounded) ? String(rounded) : rounded.toFixed(1);
+}
+
+export function formatHeightMeasurement(valueCm: number | undefined) {
+  if (valueCm === undefined) return "—";
+  const totalInches = Math.round((valueCm / 2.54) * 2) / 2;
+  const feet = Math.floor(totalInches / 12);
+  const remainingInches = totalInches - feet * 12;
+  return `${feet}′${formatInches(remainingInches)}″ · ${Math.round(valueCm)} cm`;
+}
+
+export function formatReachMeasurement(valueCm: number | undefined) {
+  if (valueCm === undefined) return "—";
+  return `${formatInches(valueCm / 2.54)} in · ${Math.round(valueCm)} cm`;
+}
+
 export function formatEventDate(isoDate: string, timeZone?: string) {
   return new Intl.DateTimeFormat("en-US", {
     dateStyle: "full",
