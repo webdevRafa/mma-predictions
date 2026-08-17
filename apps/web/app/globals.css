@@ -9,9 +9,9 @@
   --color-fl-text: #f5f7fa;
   --color-fl-text-muted: #a7b0bb;
   --color-fl-text-dim: #697582;
-  --color-fl-accent: #ff5a36;
-  --color-fl-accent-strong: #ff3d1f;
-  --color-fl-accent-soft: rgba(255, 90, 54, 0.14);
+  --color-fl-accent: #f1401d;
+  --color-fl-accent-strong: #ff2d0a;
+  --color-fl-accent-soft: rgba(241, 64, 29, 0.15);
   --color-fl-live: #ff3656;
   --color-fl-success: #34d58c;
   --color-fl-warning: #ffb547;
@@ -53,7 +53,7 @@ a {
   text-decoration: none;
 }
 ::selection {
-  background: rgba(255, 90, 54, 0.28);
+  background: rgba(241, 64, 29, 0.28);
   color: #fff;
 }
 .shell {
@@ -78,7 +78,7 @@ a {
 }
 .focus-ring:focus-visible,
 :where(button, a, input, textarea, select):focus-visible {
-  outline: 2px solid #ff5a36;
+  outline: 2px solid #f1401d;
   outline-offset: 3px;
 }
 .skip-link {
@@ -102,7 +102,7 @@ a {
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
-    radial-gradient(circle at 18% 22%, rgba(255, 90, 54, 0.14), transparent 30%);
+    radial-gradient(circle at 18% 22%, rgba(241, 64, 29, 0.15), transparent 30%);
   background-size:
     48px 48px,
     48px 48px,

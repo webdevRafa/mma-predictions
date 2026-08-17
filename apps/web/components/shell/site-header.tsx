@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { listPublicEvents } from "@/lib/data/public";
@@ -26,14 +27,20 @@ export async function SiteHeader() {
         <div className="shell flex h-16 items-center gap-4 sm:h-[72px]">
           <Link
             aria-label="FightLobby home"
-            className="group flex shrink-0 items-center gap-2"
+            className="group flex shrink-0 items-center gap-2 rounded-xl"
             href="/"
           >
-            <span
+            <Image
+              alt=""
               aria-hidden="true"
-              className="h-5 w-1 rounded-full bg-fl-accent transition group-hover:h-7"
+              className="h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(224,12,15,0.18)] transition duration-200 group-hover:scale-[1.04] group-hover:drop-shadow-[0_0_14px_rgba(224,12,15,0.3)] sm:h-12"
+              height={2802}
+              preload
+              sizes="(max-width: 639px) 41px, 49px"
+              src="/brand/fightlobby-mark.png"
+              width={2859}
             />
-            <span className="font-display text-xl leading-none font-extrabold tracking-[0.035em] text-fl-text sm:text-2xl">
+            <span className="hidden font-display text-xl leading-none font-extrabold tracking-[-0.03em] text-fl-text min-[375px]:inline sm:text-2xl">
               FIGHT<span className="text-fl-accent">LOBBY</span>
             </span>
           </Link>
@@ -53,13 +60,15 @@ export async function SiteHeader() {
           </nav>
           {activeEvent ? (
             <Link
-              className="ml-auto hidden items-center gap-2 rounded-full border border-fl-live/30 bg-fl-live/10 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-[0.08em] text-[#ff8398] uppercase lg:flex"
+              aria-label={`${activeEvent.status === "live" ? "Open live event" : "Open upcoming event"}: ${activeEvent.name}`}
+              className="ml-auto hidden max-w-64 items-center gap-2 rounded-full border border-fl-live/30 bg-fl-live/10 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-[0.06em] text-[#ff8398] uppercase lg:flex"
               href={`/events/${activeEvent.slug}`}
+              title={activeEvent.name}
             >
               {activeEvent.status === "live" ? (
                 <span aria-hidden="true" className="live-dot" />
               ) : null}
-              {activeEvent.status === "live" ? "Live now" : "Next UFC event"}
+              <span className="truncate">{activeEvent.shortName}</span>
             </Link>
           ) : null}
           <Link

@@ -1,6 +1,6 @@
 export const BRAND = {
   name: "FightLobby",
-  tagline: "Every fight has a lobby.",
+  tagline: "Join the fight night conversation.",
   actionLine: "Make your pick. Join the lobby.",
 } as const;
 

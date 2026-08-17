@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "FightLobby — Every fight has a lobby";
+export const alt = "FightLobby — UFC predictions and live fight chat";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -27,7 +27,7 @@ export default function OpenGraphImage() {
           width: 560,
           height: 560,
           borderRadius: 560,
-          background: "rgba(255,90,54,.15)",
+          background: "rgba(241,64,29,.15)",
           top: -280,
           right: -80,
           display: "flex",
@@ -48,11 +48,11 @@ export default function OpenGraphImage() {
             width: 7,
             height: 34,
             borderRadius: 8,
-            background: "#FF5A36",
+            background: "#F1401D",
             display: "flex",
           }}
         />
-        FIGHT<span style={{ color: "#FF5A36", marginLeft: -14 }}>LOBBY</span>
+        FIGHT<span style={{ color: "#F1401D", marginLeft: -14 }}>LOBBY</span>
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div
@@ -63,21 +63,21 @@ export default function OpenGraphImage() {
             textTransform: "uppercase",
           }}
         >
-          Predictions · Reactions · Receipts
+          UFC predictions · Live fight chat · Community
         </div>
         <div
           style={{
             display: "flex",
             flexDirection: "column",
-            fontSize: 100,
+            fontSize: 88,
             lineHeight: 0.9,
             fontWeight: 900,
             letterSpacing: -4,
             marginTop: 24,
           }}
         >
-          <span>EVERY FIGHT</span>
-          <span style={{ color: "#FF5A36" }}>HAS A LOBBY.</span>
+          <span>JOIN THE FIGHT NIGHT</span>
+          <span style={{ color: "#F1401D" }}>CONVERSATION.</span>
         </div>
       </div>
     </div>,

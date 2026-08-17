@@ -1,6 +1,6 @@
 # FightLobby
 
-FightLobby is a UFC prediction and discussion community built around one idea: **every fight has a lobby**.
+FightLobby is an independent community for UFC predictions, live matchup chat, and fight-night discussion.
 
 ## Workspace
 
