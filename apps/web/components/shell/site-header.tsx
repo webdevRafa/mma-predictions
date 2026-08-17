@@ -1,4 +1,5 @@
 import { Search } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 import { listPublicEvents } from "@/lib/data/public";
@@ -26,16 +27,19 @@ export async function SiteHeader() {
         <div className="shell flex h-16 items-center gap-4 sm:h-[72px]">
           <Link
             aria-label="FightLobby home"
-            className="group flex shrink-0 items-center gap-2"
+            className="group flex shrink-0 items-center rounded-xl"
             href="/"
           >
-            <span
+            <Image
+              alt=""
               aria-hidden="true"
-              className="h-5 w-1 rounded-full bg-fl-accent transition group-hover:h-7"
+              className="size-14 object-contain drop-shadow-[0_0_12px_rgba(241,64,29,0.16)] transition duration-200 group-hover:scale-[1.04] group-hover:drop-shadow-[0_0_16px_rgba(241,64,29,0.28)] sm:size-16"
+              height={64}
+              priority
+              sizes="(max-width: 639px) 56px, 64px"
+              src="/brand/fightlobby-mark.png"
+              width={64}
             />
-            <span className="font-display text-xl leading-none font-extrabold tracking-[0.035em] text-fl-text sm:text-2xl">
-              FIGHT<span className="text-fl-accent">LOBBY</span>
-            </span>
           </Link>
           <nav
             aria-label="Primary navigation"

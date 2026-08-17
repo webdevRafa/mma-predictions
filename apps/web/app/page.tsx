@@ -64,7 +64,7 @@ export default async function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                className="focus-ring inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-fl-accent px-5 text-sm font-bold text-fl-bg shadow-[0_10px_28px_rgba(255,90,54,0.18)] transition hover:bg-fl-accent-strong"
+                className="focus-ring inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-fl-accent px-5 text-sm font-bold text-fl-bg shadow-[0_10px_28px_rgba(241,64,29,0.2)] transition hover:bg-fl-accent-strong"
                 href={event ? `/events/${event.slug}` : "/events"}
               >
                 Enter the next card <ArrowRight aria-hidden="true" size={17} />

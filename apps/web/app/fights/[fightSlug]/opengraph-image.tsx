@@ -38,7 +38,7 @@ export default async function FightOpenGraphImage({
         }}
       >
         <div style={{ display: "flex", fontSize: 30, fontWeight: 800 }}>
-          FIGHT<span style={{ color: "#FF5A36" }}>LOBBY</span>
+          FIGHT<span style={{ color: "#F1401D" }}>LOBBY</span>
         </div>
         <div
           style={{
@@ -78,7 +78,7 @@ export default async function FightOpenGraphImage({
             width: 82,
             height: 82,
             borderRadius: 82,
-            background: "#FF5A36",
+            background: "#F1401D",
             color: "#080A0D",
             fontSize: 26,
             fontWeight: 900,
@@ -103,7 +103,7 @@ export default async function FightOpenGraphImage({
       <div
         style={{
           display: "flex",
-          color: "#FF8B73",
+          color: "#FF826D",
           fontSize: 20,
           letterSpacing: 4,
         }}
