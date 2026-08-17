@@ -17,6 +17,18 @@ export function formatEventDate(isoDate: string, timeZone?: string) {
   }).format(new Date(isoDate));
 }
 
+export function formatEventDateWithZone(isoDate: string, timeZone: string) {
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    hour: "numeric",
+    minute: "2-digit",
+    timeZone,
+    timeZoneName: "short",
+  }).format(new Date(isoDate));
+}
+
 export function formatCompactDate(isoDate: string) {
   return new Intl.DateTimeFormat("en-US", {
     month: "short",

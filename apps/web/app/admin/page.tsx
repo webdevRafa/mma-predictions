@@ -13,6 +13,7 @@ import Link from "next/link";
 import { Card, CardHeader } from "@/components/ui/card";
 import { requireAdminPage } from "@/lib/admin/auth";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
+import { formatEventDateWithZone } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
@@ -69,6 +70,7 @@ async function dashboard() {
         name: String(event.get("name") ?? event.id),
         status: String(event.get("status") ?? "unknown"),
         startsAt: String(event.get("startsAt") ?? ""),
+        venueTimezone: String(event.get("venueTimezone") ?? "UTC"),
         total: eventFights.size,
         open: eventFights.docs.filter(
           (fight) => fight.get("predictionStatus") === "open",
@@ -180,7 +182,10 @@ export default async function AdminDashboardPage() {
                       <p className="font-bold">{event.name}</p>
                       <p className="mt-2 text-xs text-fl-text-muted">
                         {event.startsAt
-                          ? new Date(event.startsAt).toLocaleString()
+                          ? `Main card · ${formatEventDateWithZone(
+                              event.startsAt,
+                              event.venueTimezone,
+                            )}`
                           : "Start time unavailable"}
                       </p>
                     </div>
