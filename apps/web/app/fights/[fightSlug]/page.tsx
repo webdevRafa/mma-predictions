@@ -6,7 +6,6 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { FightPageWorkspace } from "@/components/fights/fight-page-workspace";
 import { StatsComparison } from "@/components/fights/stats-comparison";
-import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
@@ -156,7 +155,7 @@ export default async function FightPage({ params }: Props) {
               },
             ]}
           />
-          <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <div className="flex flex-wrap items-center gap-2">
               <Badge tone="neutral">
                 {formatCardSegment(fight.cardSegment)}
@@ -169,11 +168,6 @@ export default async function FightPage({ params }: Props) {
                 </Badge>
               ) : null}
             </div>
-            <LiveStatusFragment
-              collection="fights"
-              id={fight.id}
-              initialStatus={fight.status}
-            />
           </div>
 
           <h1 className="sr-only">
@@ -224,14 +218,6 @@ export default async function FightPage({ params }: Props) {
           <div className="mt-9 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 border-t border-fl-border pt-5 font-mono text-[10px] tracking-[.08em] text-fl-text-muted uppercase">
             <span>{fight.weightClass}</span>
             <span>{fight.scheduledRounds} rounds</span>
-            <span>
-              Event start{" "}
-              {new Date(event.startsAt).toLocaleDateString("en-US", {
-                month: "short",
-                day: "numeric",
-              })}
-            </span>
-            <span>Individual bout time is approximate</span>
           </div>
         </div>
       </section>
