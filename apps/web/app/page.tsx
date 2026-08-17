@@ -1,22 +1,19 @@
 import type { Metadata } from "next";
-import {
-  ArrowRight,
-  CalendarDays,
-  MessageCircle,
-  Target,
-  Trophy,
-} from "lucide-react";
+import { ArrowRight, MessageCircle, Target, Trophy } from "lucide-react";
 import Link from "next/link";
 
 import { AdSlot } from "@/components/ads/ad-slot";
 import { EventCountdown } from "@/components/events/event-countdown";
-import { LocalEventTime } from "@/components/events/local-event-time";
+import { EventPhaseLabel } from "@/components/events/event-phase-label";
+import { EventSchedule } from "@/components/events/event-schedule";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
 import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Card, CardHeader } from "@/components/ui/card";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { formatRecord } from "@/lib/format";
+import { resolveEventSchedule } from "@/lib/events/timing";
+import { getServerRenderTime } from "@/lib/time/server";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
@@ -42,6 +39,20 @@ export default async function HomePage() {
     card?.fights.find(
       (fight) => fight.cardSegment === "main_card" && fight.boutOrder === 1,
     );
+  const renderedAt = getServerRenderTime();
+  const eventTiming = event
+    ? {
+        status: event.status,
+        startsAt: event.startsAt,
+        ...(event.prelimsStartsAt
+          ? { prelimsStartsAt: event.prelimsStartsAt }
+          : {}),
+        ...(event.mainCardStartsAt
+          ? { mainCardStartsAt: event.mainCardStartsAt }
+          : {}),
+      }
+    : null;
+  const schedule = eventTiming ? resolveEventSchedule(eventTiming) : null;
 
   return (
     <main id="main-content">
@@ -81,7 +92,12 @@ export default async function HomePage() {
             <Card className="relative overflow-hidden lg:ml-auto lg:w-full lg:max-w-2xl">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-fl-border px-5 py-4 sm:px-6">
                 <div>
-                  <p className="eyebrow">Current / next UFC event</p>
+                  <p className="eyebrow">
+                    <EventPhaseLabel
+                      {...eventTiming!}
+                      renderedAt={renderedAt}
+                    />
+                  </p>
                   <h2 className="font-display text-2xl leading-none font-bold">
                     {event.shortName}
                   </h2>
@@ -90,18 +106,20 @@ export default async function HomePage() {
                   collection="events"
                   id={event.id}
                   initialStatus={event.status}
+                  eventTiming={eventTiming!}
+                  renderedAt={renderedAt}
                 />
               </div>
               <div className="p-5 sm:p-6">
-                <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[10px] tracking-[0.08em] text-fl-text-muted uppercase">
-                  <span className="inline-flex items-center gap-2">
-                    <CalendarDays aria-hidden="true" size={14} />
-                    <LocalEventTime
-                      startsAt={event.startsAt}
-                      venueTimezone={event.venueTimezone}
-                    />
+                <div className="grid gap-3 font-mono text-[10px] tracking-[0.08em] text-fl-text-muted uppercase">
+                  <EventSchedule
+                    mainCardStartsAt={schedule!.mainCardStartsAt}
+                    prelimsStartsAt={schedule!.prelimsStartsAt}
+                    venueTimezone={event.venueTimezone}
+                  />
+                  <span className="font-semibold text-fl-text sm:justify-self-end">
+                    <EventCountdown {...eventTiming!} renderedAt={renderedAt} />
                   </span>
-                  <EventCountdown startsAt={event.startsAt} />
                 </div>
                 <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6">
                   <Link

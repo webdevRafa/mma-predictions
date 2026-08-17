@@ -69,6 +69,7 @@ export interface Fighter {
   heightCm?: number | undefined;
   reachCm?: number | undefined;
   currentWeightClass?: string | undefined;
+  sourceUrl?: string | undefined;
   record: FighterRecord;
   careerStats?: CareerStats | undefined;
   dataQuality: DataQuality;
@@ -99,7 +100,12 @@ export interface Event {
   shortName: string;
   eventNumber?: number | undefined;
   status: EventStatus;
+  /** Legacy main-card start retained for backwards-compatible readers. */
   startsAt: string;
+  /** Absolute UTC instant when the first preliminary bout broadcast begins. */
+  prelimsStartsAt?: string | undefined;
+  /** Absolute UTC instant when the main-card broadcast begins. */
+  mainCardStartsAt?: string | undefined;
   venueTimezone: string;
   venue?: Venue | undefined;
   mainEventFightId?: string | undefined;

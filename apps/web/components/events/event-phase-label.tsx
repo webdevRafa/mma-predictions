@@ -3,11 +3,12 @@
 import { useEffect, useState } from "react";
 
 import {
-  eventCountdownLabel,
+  eventPhaseLabel,
+  getEventTimingPhase,
   type EventScheduleInput,
 } from "@/lib/events/timing";
 
-export function EventCountdown({
+export function EventPhaseLabel({
   renderedAt,
   ...event
 }: EventScheduleInput & { renderedAt: number }) {
@@ -21,8 +22,8 @@ export function EventCountdown({
   }, []);
 
   return (
-    <time dateTime={event.prelimsStartsAt ?? event.startsAt}>
-      {eventCountdownLabel(event, now)}
-    </time>
+    <span data-event-phase={getEventTimingPhase(event, now)}>
+      {eventPhaseLabel(getEventTimingPhase(event, now))}
+    </span>
   );
 }

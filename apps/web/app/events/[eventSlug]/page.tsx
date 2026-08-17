@@ -5,7 +5,7 @@ import { notFound, permanentRedirect } from "next/navigation";
 
 import { AdSlot } from "@/components/ads/ad-slot";
 import { EventCountdown } from "@/components/events/event-countdown";
-import { LocalEventTime } from "@/components/events/local-event-time";
+import { EventSchedule } from "@/components/events/event-schedule";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
@@ -18,6 +18,8 @@ import { FollowButton } from "@/features/profiles/follow-button";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { absoluteUrl } from "@/lib/seo/site";
 import { isEventIndexable } from "@/lib/seo/indexability";
+import { resolveEventSchedule } from "@/lib/events/timing";
+import { getServerRenderTime } from "@/lib/time/server";
 
 type Props = { params: Promise<{ eventSlug: string }> };
 
@@ -89,6 +91,18 @@ export default async function EventPage({ params }: Props) {
   ]
     .filter(Boolean)
     .join(" · ");
+  const renderedAt = getServerRenderTime();
+  const eventTiming = {
+    status: event.status,
+    startsAt: event.startsAt,
+    ...(event.prelimsStartsAt
+      ? { prelimsStartsAt: event.prelimsStartsAt }
+      : {}),
+    ...(event.mainCardStartsAt
+      ? { mainCardStartsAt: event.mainCardStartsAt }
+      : {}),
+  };
+  const schedule = resolveEventSchedule(eventTiming);
 
   return (
     <main id="main-content">
@@ -105,7 +119,7 @@ export default async function EventPage({ params }: Props) {
           "@context": "https://schema.org",
           "@type": "SportsEvent",
           name: event.name,
-          startDate: event.startsAt,
+          startDate: schedule.prelimsStartsAt,
           eventStatus: schemaEventStatus(event.status),
           eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
           url: absoluteUrl(`/events/${event.slug}`),
@@ -152,6 +166,8 @@ export default async function EventPage({ params }: Props) {
                   collection="events"
                   id={event.id}
                   initialStatus={event.status}
+                  eventTiming={eventTiming}
+                  renderedAt={renderedAt}
                 />
                 <FollowButton targetId={event.id} targetType="event" />
               </div>
@@ -167,7 +183,7 @@ export default async function EventPage({ params }: Props) {
             <div className="rounded-xl border border-fl-border bg-fl-surface-1/90 p-5 lg:min-w-72">
               <p className="eyebrow">Event clock</p>
               <p className="mt-2 font-display text-2xl font-bold">
-                <EventCountdown startsAt={event.startsAt} />
+                <EventCountdown {...eventTiming} renderedAt={renderedAt} />
               </p>
             </div>
           </div>
@@ -175,17 +191,18 @@ export default async function EventPage({ params }: Props) {
       </section>
 
       <section className="border-b border-fl-border bg-fl-surface-1/45">
-        <div className="shell grid gap-px bg-fl-border sm:grid-cols-2 lg:grid-cols-4">
-          <div className="bg-fl-bg p-5">
+        <div className="shell grid gap-px bg-fl-border sm:grid-cols-2 lg:grid-cols-5">
+          <div className="bg-fl-bg p-5 sm:col-span-2">
             <p className="eyebrow inline-flex items-center gap-2">
-              <CalendarClock aria-hidden="true" size={13} /> Start
+              <CalendarClock aria-hidden="true" size={13} /> Event schedule
             </p>
-            <p className="mt-2 text-sm font-semibold">
-              <LocalEventTime
-                startsAt={event.startsAt}
+            <div className="mt-2 text-sm font-semibold">
+              <EventSchedule
+                mainCardStartsAt={schedule.mainCardStartsAt}
+                prelimsStartsAt={schedule.prelimsStartsAt}
                 venueTimezone={event.venueTimezone}
               />
-            </p>
+            </div>
           </div>
           <div className="bg-fl-bg p-5">
             <p className="eyebrow inline-flex items-center gap-2">

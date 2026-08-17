@@ -12,6 +12,12 @@ function metric(
     : value.toFixed(1);
 }
 
+function measurement(value: number | undefined) {
+  if (value === undefined) return "—";
+  const inches = Math.round(value / 2.54);
+  return `${Math.floor(inches / 12)}′${inches % 12}″ · ${Math.round(value)} cm`;
+}
+
 export function StatsComparison({
   fighterA,
   fighterB,
@@ -20,16 +26,8 @@ export function StatsComparison({
   fighterB: Fighter;
 }) {
   const rows = [
-    [
-      "Height",
-      fighterA.heightCm ? `${fighterA.heightCm} cm` : "—",
-      fighterB.heightCm ? `${fighterB.heightCm} cm` : "—",
-    ],
-    [
-      "Reach",
-      fighterA.reachCm ? `${fighterA.reachCm} cm` : "—",
-      fighterB.reachCm ? `${fighterB.reachCm} cm` : "—",
-    ],
+    ["Height", measurement(fighterA.heightCm), measurement(fighterB.heightCm)],
+    ["Reach", measurement(fighterA.reachCm), measurement(fighterB.reachCm)],
     [
       "Sig. strikes / min",
       metric(fighterA.careerStats?.significantStrikesLandedPerMinute),
@@ -54,6 +52,11 @@ export function StatsComparison({
       "Takedown defense",
       metric(fighterA.careerStats?.takedownDefense, "percentage"),
       metric(fighterB.careerStats?.takedownDefense, "percentage"),
+    ],
+    [
+      "Submission attempts / 15",
+      metric(fighterA.careerStats?.submissionsPer15),
+      metric(fighterB.careerStats?.submissionsPer15),
     ],
   ] as const;
 

@@ -1,24 +1,27 @@
 "use client";
 
-import { formatEventDate } from "@/lib/format";
+import { formatEventDate, formatEventDateCompact } from "@/lib/format";
 
 export function LocalEventTime({
   startsAt,
   venueTimezone,
+  compact = false,
 }: {
   startsAt: string;
   venueTimezone: string;
+  compact?: boolean;
 }) {
+  const formatter = compact ? formatEventDateCompact : formatEventDate;
   const label =
     typeof window === "undefined"
-      ? formatEventDate(startsAt, venueTimezone)
-      : formatEventDate(startsAt);
+      ? formatter(startsAt, venueTimezone)
+      : formatter(startsAt);
 
   return (
     <time
       dateTime={startsAt}
       suppressHydrationWarning
-      title={`Venue time zone: ${venueTimezone}`}
+      title={`Shown in your local time after page load. Venue time zone: ${venueTimezone}`}
     >
       {label}
     </time>

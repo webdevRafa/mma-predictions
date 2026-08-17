@@ -92,6 +92,11 @@ function prepareFixture(input: unknown, eventStartsAt: string) {
     new Date(eventStartsAt).getTime() - 60 * 60 * 1_000,
   ).toISOString();
   fixture.event.startsAt = eventStartsAt;
+  fixture.event.mainCardStartsAt = eventStartsAt;
+  if (fixture.event.prelimsStartsAt)
+    fixture.event.prelimsStartsAt = new Date(
+      new Date(eventStartsAt).getTime() - 3 * 60 * 60 * 1_000,
+    ).toISOString();
   fixture.event.status = "scheduled";
   fixture.fights.forEach((fight) => {
     fight.status = "scheduled";

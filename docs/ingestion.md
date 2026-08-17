@@ -29,3 +29,20 @@ Provider values and editor overrides are retained in the private `providerEntity
 ## Operations
 
 The admin-only `/admin/sync` page shows recent runs, errors, and archive state without exposing keys or raw payloads. `runEventSync` supports a default dry-run and an explicit production run for trusted admin tooling. `nightlyIntegrityCheck` records missing event/fighter references. `reconcileProviderChanges` performs a daily discovery sweep. `refreshFighterTask` pulls full fighter profiles independently of event-card summaries.
+
+## Manual event schedule contract
+
+Reviewed JSON imports store broadcast starts as ISO 8601 UTC timestamps:
+
+- `prelimsStartsAt` is the first scheduled prelim and controls the public transition from **Next UFC event** to **Happening now**.
+- `mainCardStartsAt` is the advertised main-card start.
+- `startsAt` temporarily mirrors `mainCardStartsAt` for legacy readers and Firestore ordering.
+- `venueTimezone` is an IANA zone such as `America/Chicago`; it labels the event's local zone but is not used as an ambiguous timestamp.
+
+The UI compares the visitor's clock with those absolute instants. `Intl.DateTimeFormat` then renders both starts in the visitor's own time zone, including Eastern, Central, Mountain, Pacific, Alaska, and Hawaii. Do not write display strings such as `8/22/2026 5 PM` to the fixture; they lose the originating zone and daylight-saving offset.
+
+Before a reviewed JSON refresh may write production, the guarded script verifies the exact Firebase project, event identity, and live Firestore fight-ID set. It merges schedule and fighter metadata while preserving live event/fight state, prediction counts, and results. The stored manual-import fixture and audit record are the provenance trail.
+
+## Fighter statistic provenance
+
+Each manually reviewed fighter includes `sourceUrl`, pointing to the official UFC athlete profile used for the record and available statistics. Physical measurements and career rates remain absent when UFC does not publish them; importers must never infer or fabricate a debutant's values. The public Tale of the Tape renders those gaps as unavailable until a later reviewed refresh supplies them.
