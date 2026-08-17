@@ -7,7 +7,6 @@ import {
 } from "@fightlobby/domain";
 import {
   AlertTriangle,
-  ArrowDown,
   Ban,
   ChevronUp,
   CornerUpLeft,
@@ -126,7 +125,6 @@ export function FightChatPanel({
   const [busy, setBusy] = useState(false);
   const [loadingOlder, setLoadingOlder] = useState(false);
   const [hasOlder, setHasOlder] = useState(true);
-  const [newMessages, setNewMessages] = useState(0);
   const [notice, setNotice] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(
     isFirebaseRealtimeConfigured
@@ -134,9 +132,6 @@ export function FightChatPanel({
       : "Live chat needs the Firebase Realtime Database URL.",
   );
   const listRef = useRef<HTMLDivElement>(null);
-  const nearBottomRef = useRef(true);
-  const initializedRef = useRef(false);
-  const previousLatestRef = useRef(0);
   const presenceUidRef = useRef<string | null>(null);
 
   const visibleMessages = useMemo(
@@ -148,8 +143,15 @@ export function FightChatPanel({
     const list = listRef.current;
     if (!list) return;
     list.scrollTo({ top: list.scrollHeight, behavior: "smooth" });
-    setNewMessages(0);
   }, []);
+
+  const latestVisibleMessageId = visibleMessages.at(-1)?.id;
+
+  useEffect(() => {
+    if (!latestVisibleMessageId) return;
+    const frame = requestAnimationFrame(scrollToBottom);
+    return () => cancelAnimationFrame(frame);
+  }, [latestVisibleMessageId, scrollToBottom]);
 
   useEffect(() => {
     if (!isFirebaseRealtimeConfigured) {
@@ -165,23 +167,7 @@ export function FightChatPanel({
       messagesReference,
       (snapshot) => {
         const incoming = parseMessages(snapshot.val());
-        const latest = incoming.at(-1)?.createdAt ?? 0;
         setMessages((current) => mergeMessages(current, incoming));
-        if (!initializedRef.current) {
-          initializedRef.current = true;
-          requestAnimationFrame(() => {
-            const list = listRef.current;
-            if (list) list.scrollTop = list.scrollHeight;
-          });
-        } else if (latest > previousLatestRef.current) {
-          if (nearBottomRef.current)
-            requestAnimationFrame(() => {
-              const list = listRef.current;
-              if (list) list.scrollTop = list.scrollHeight;
-            });
-          else setNewMessages((count) => count + 1);
-        }
-        previousLatestRef.current = Math.max(previousLatestRef.current, latest);
       },
       () => {
         setRoomStatus("unavailable");
@@ -296,10 +282,8 @@ export function FightChatPanel({
         throw new Error(apiMessage(payload, "Message could not be sent"));
       setBody("");
       setReplyTo(null);
-      setNotice("Message sent");
       trackAnalyticsEvent("chat_message_sent", { room_type: roomType });
-      nearBottomRef.current = true;
-      requestAnimationFrame(scrollToBottom);
+      requestAnimationFrame(() => scrollToBottom());
     } catch (sendError) {
       setError(
         sendError instanceof Error
@@ -429,13 +413,6 @@ export function FightChatPanel({
       <div className="relative min-h-0 flex-1">
         <div
           className="h-full space-y-3 overflow-y-auto p-4"
-          onScroll={(event) => {
-            const element = event.currentTarget;
-            nearBottomRef.current =
-              element.scrollHeight - element.scrollTop - element.clientHeight <
-              100;
-            if (nearBottomRef.current) setNewMessages(0);
-          }}
           ref={listRef}
           tabIndex={0}
         >
@@ -535,15 +512,6 @@ export function FightChatPanel({
             </article>
           ))}
         </div>
-        {newMessages > 0 ? (
-          <button
-            className="focus-ring absolute right-4 bottom-4 inline-flex items-center gap-2 rounded-full bg-fl-accent px-3 py-2 text-xs font-bold text-fl-bg shadow-lg"
-            onClick={scrollToBottom}
-            type="button"
-          >
-            <ArrowDown size={14} /> {newMessages} new
-          </button>
-        ) : null}
       </div>
 
       <div className="border-t border-fl-border bg-fl-surface-1 p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">

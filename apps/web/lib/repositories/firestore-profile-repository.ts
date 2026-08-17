@@ -1,39 +1,17 @@
 import "server-only";
 
+import { normalizeHandle } from "@fightlobby/domain";
 import {
-  normalizeHandle,
-  publicProfileSchema,
-  type PublicProfile,
-} from "@fightlobby/domain";
-import {
-  Timestamp,
   type DocumentData,
   type Firestore,
   type QueryDocumentSnapshot,
 } from "firebase-admin/firestore";
 
+import { parseFirestoreProfile } from "./firestore-profile-parser";
 import type { ProfileRepository } from "./profile-repository";
 
-function timestampToIso(value: unknown) {
-  if (value instanceof Timestamp) {
-    return value.toDate().toISOString();
-  }
-  return value;
-}
-
-function parseProfile(
-  snapshot: QueryDocumentSnapshot<DocumentData>,
-): PublicProfile {
-  const value: unknown = snapshot.data();
-  if (!value || typeof value !== "object") {
-    throw new Error(`Profile ${snapshot.id} is not a valid object`);
-  }
-  const raw = value as Record<string, unknown>;
-  return publicProfileSchema.parse({
-    ...raw,
-    joinedAt: timestampToIso(raw.joinedAt),
-    updatedAt: timestampToIso(raw.updatedAt),
-  });
+function parseProfile(snapshot: QueryDocumentSnapshot<DocumentData>) {
+  return parseFirestoreProfile(snapshot.id, snapshot.data());
 }
 
 export class FirestoreProfileRepository implements ProfileRepository {
@@ -67,13 +45,6 @@ export class FirestoreProfileRepository implements ProfileRepository {
     if (typeof uid !== "string") return null;
     const profile = await this.firestore.collection("profiles").doc(uid).get();
     if (!profile.exists) return null;
-    const value: unknown = profile.data();
-    if (!value || typeof value !== "object") return null;
-    const raw = value as Record<string, unknown>;
-    return publicProfileSchema.parse({
-      ...raw,
-      joinedAt: timestampToIso(profile.get("joinedAt")),
-      updatedAt: timestampToIso(profile.get("updatedAt")),
-    });
+    return parseFirestoreProfile(profile.id, profile.data());
   }
 }
