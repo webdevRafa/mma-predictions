@@ -10,6 +10,7 @@ import {
 } from "@/components/admin/admin-form";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { providerDiff } from "@/lib/admin/diff";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
@@ -40,6 +41,7 @@ export default async function AdminFightPage({
   params: Promise<{ fightId: string }>;
   searchParams: Promise<{ adminSuccess?: string; adminError?: string }>;
 }) {
+  await requireAdminPage("/admin/fights");
   const { fightId } = await params;
   const firestore = getFirebaseAdmin().firestore;
   const [fightSnapshot, stateSnapshot] = await Promise.all([

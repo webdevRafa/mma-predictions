@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export const dynamic = "force-dynamic";
@@ -12,6 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminFightersPage() {
+  await requireAdminPage("/admin/fighters");
   const snapshot = await getFirebaseAdmin()
     .firestore.collection("fighters")
     .orderBy("name.normalized")

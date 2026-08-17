@@ -7,6 +7,7 @@ import {
   adminLabelClass,
 } from "@/components/admin/admin-form";
 import { Card, CardHeader } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { defaultRuntimeFeatureFlags } from "@/lib/features/runtime-flags";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
@@ -34,6 +35,7 @@ export default async function FeatureFlagsPage({
 }: {
   searchParams: Promise<{ adminSuccess?: string; adminError?: string }>;
 }) {
+  await requireAdminPage("/admin/feature-flags");
   const snapshot = await getFirebaseAdmin()
     .firestore.collection("featureFlags")
     .doc("current")

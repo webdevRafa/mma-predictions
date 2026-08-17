@@ -11,6 +11,7 @@ import {
 import Link from "next/link";
 
 import { Card, CardHeader } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export const dynamic = "force-dynamic";
@@ -98,6 +99,7 @@ async function dashboard() {
 }
 
 export default async function AdminDashboardPage() {
+  await requireAdminPage("/admin");
   const data = await dashboard();
   const cards = [
     {

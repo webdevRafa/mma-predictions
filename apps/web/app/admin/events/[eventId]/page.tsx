@@ -12,6 +12,7 @@ import {
 import { PredictionControlBoard } from "@/components/admin/prediction-control-board";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { providerDiff } from "@/lib/admin/diff";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
@@ -47,6 +48,7 @@ export default async function AdminEventPage({
   params: Promise<{ eventId: string }>;
   searchParams: Promise<{ adminSuccess?: string; adminError?: string }>;
 }) {
+  await requireAdminPage("/admin/events");
   const { eventId } = await params;
   const firestore = getFirebaseAdmin().firestore;
   const [eventSnapshot, fights, stateSnapshot] = await Promise.all([

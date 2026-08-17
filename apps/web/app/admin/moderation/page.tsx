@@ -10,6 +10,7 @@ import {
 } from "@/components/admin/admin-form";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export const dynamic = "force-dynamic";
@@ -39,6 +40,7 @@ export default async function ModerationPage({
 }: {
   searchParams: Promise<{ adminSuccess?: string; adminError?: string }>;
 }) {
+  await requireAdminPage("/admin/moderation");
   const firestore = getFirebaseAdmin().firestore;
   const [reports, removals, rooms] = await Promise.all([
     firestore

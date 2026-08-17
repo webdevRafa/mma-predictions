@@ -1,5 +1,8 @@
 import { redirect } from "next/navigation";
 
-export default function AdminDataSyncPage() {
+import { requireAdminPage } from "@/lib/admin/auth";
+
+export default async function AdminDataSyncPage() {
+  await requireAdminPage("/admin/data-sync");
   redirect("/admin/sync");
 }

@@ -3,6 +3,7 @@ import { Timestamp } from "firebase-admin/firestore";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export const dynamic = "force-dynamic";
@@ -18,6 +19,7 @@ function date(value: unknown) {
 }
 
 export default async function AuditPage() {
+  await requireAdminPage("/admin/audit");
   const snapshot = await getFirebaseAdmin()
     .firestore.collection("auditLogs")
     .orderBy("createdAt", "desc")

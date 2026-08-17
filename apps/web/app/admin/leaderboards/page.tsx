@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export const dynamic = "force-dynamic";
@@ -11,6 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminLeaderboardsPage() {
+  await requireAdminPage("/admin/leaderboards");
   const snapshot = await getFirebaseAdmin()
     .firestore.collection("leaderboards")
     .limit(100)

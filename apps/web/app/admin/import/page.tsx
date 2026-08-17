@@ -6,6 +6,7 @@ import {
   adminInputClass,
 } from "@/components/admin/admin-form";
 import { Card, CardHeader } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 
 export const metadata: Metadata = {
   title: "Manual UFC import",
@@ -17,6 +18,7 @@ export default async function AdminImportPage({
 }: {
   searchParams: Promise<{ adminSuccess?: string; adminError?: string }>;
 }) {
+  await requireAdminPage("/admin/import");
   const query = await searchParams;
   return (
     <main id="main-content">

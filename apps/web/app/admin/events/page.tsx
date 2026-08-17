@@ -4,6 +4,7 @@ import Link from "next/link";
 
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export const dynamic = "force-dynamic";
@@ -13,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AdminEventsPage() {
+  await requireAdminPage("/admin/events");
   const snapshot = await getFirebaseAdmin()
     .firestore.collection("events")
     .orderBy("startsAt", "desc")

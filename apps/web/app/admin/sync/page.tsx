@@ -4,6 +4,7 @@ import { Activity, Archive, DatabaseZap, ShieldAlert } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export const dynamic = "force-dynamic";
@@ -60,6 +61,7 @@ async function loadConsoleData() {
 }
 
 export default async function SyncConsolePage() {
+  await requireAdminPage("/admin/sync");
   const data = await loadConsoleData();
   const configured = data.runs.some(
     (run) => run.providerKey === "sportsdataio" && run.status === "complete",

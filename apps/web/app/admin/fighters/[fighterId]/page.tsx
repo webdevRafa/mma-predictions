@@ -9,6 +9,7 @@ import {
   adminLabelClass,
 } from "@/components/admin/admin-form";
 import { Card, CardHeader } from "@/components/ui/card";
+import { requireAdminPage } from "@/lib/admin/auth";
 import { providerDiff } from "@/lib/admin/diff";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
@@ -35,6 +36,7 @@ export default async function AdminFighterPage({
   params: Promise<{ fighterId: string }>;
   searchParams: Promise<{ adminSuccess?: string; adminError?: string }>;
 }) {
+  await requireAdminPage("/admin/fighters");
   const { fighterId } = await params;
   const firestore = getFirebaseAdmin().firestore;
   const [fighterSnapshot, stateSnapshot] = await Promise.all([
