@@ -15,7 +15,16 @@
               ".read": true,
               "$uid": {
                 ".write": "$uid === auth.uid",
-                ".validate": "newData.val() === null || (newData.numChildren() === 2 && newData.hasChildren(['connected', 'lastSeen']) && newData.child('connected').isBoolean() && newData.child('lastSeen').isNumber())"
+                ".validate": "newData.hasChildren(['connected', 'lastSeen'])",
+                "connected": {
+                  ".validate": "newData.isBoolean()"
+                },
+                "lastSeen": {
+                  ".validate": "newData.isNumber()"
+                },
+                "$other": {
+                  ".validate": false
+                }
               }
             },
             "typing": { ".read": false, ".write": false }
