@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { formatEventDate, formatEventDateCompact } from "@/lib/format";
 
 export function LocalEventTime({
@@ -12,16 +14,21 @@ export function LocalEventTime({
   compact?: boolean;
 }) {
   const formatter = compact ? formatEventDateCompact : formatEventDate;
-  const label =
-    typeof window === "undefined"
-      ? formatter(startsAt, venueTimezone)
-      : formatter(startsAt);
+  const [displayTimezone, setDisplayTimezone] = useState(venueTimezone);
+
+  useEffect(() => {
+    const visitorTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    setDisplayTimezone(visitorTimezone || venueTimezone);
+  }, [venueTimezone]);
+
+  const label = formatter(startsAt, displayTimezone);
 
   return (
     <time
+      data-time-zone={displayTimezone}
       dateTime={startsAt}
       suppressHydrationWarning
-      title={`Shown in your local time after page load. Venue time zone: ${venueTimezone}`}
+      title={`Shown in ${displayTimezone}. Venue time zone: ${venueTimezone}`}
     >
       {label}
     </time>
