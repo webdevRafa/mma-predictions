@@ -1,6 +1,17 @@
 "use client";
 
-import { BadgeCheck, ExternalLink, Mail, ShieldCheck } from "lucide-react";
+import {
+  BadgeCheck,
+  BarChart3,
+  ExternalLink,
+  Eye,
+  Flame,
+  Mail,
+  ShieldCheck,
+  Target,
+  Trophy,
+  type LucideIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type MouseEvent } from "react";
@@ -96,22 +107,93 @@ function ProfilePanel({
     profileVisibility: "public" | "limited";
   }) => void;
 }) {
+  const stats: { icon: LucideIcon; label: string; value: string }[] = [
+    {
+      icon: Trophy,
+      label: "Points",
+      value: account.stats.totalPoints.toLocaleString(),
+    },
+    {
+      icon: BarChart3,
+      label: "Graded picks",
+      value: account.stats.gradedPicks.toLocaleString(),
+    },
+    {
+      icon: Target,
+      label: "Winner accuracy",
+      value: `${Math.round(account.stats.winnerAccuracy * 100)}%`,
+    },
+    {
+      icon: Flame,
+      label: "Current streak",
+      value: account.stats.currentStreak.toLocaleString(),
+    },
+  ];
+
   return (
-    <Card>
-      <CardHeader
-        eyebrow="Public identity"
-        title="Profile settings"
-        description="Only the fields below can appear publicly. Email and provider IDs are never included."
-      />
-      <div className="p-5 sm:p-6">
-        <ProfileSettingsForm
-          displayName={account.displayName}
-          handle={account.handle}
-          onSaved={onSaved}
-          profileVisibility={account.profileVisibility}
+    <div className="space-y-6">
+      <Card className="overflow-hidden">
+        <div className="relative overflow-hidden border-b border-fl-border p-5 sm:p-6">
+          <div
+            aria-hidden="true"
+            className="arena-grid absolute inset-0 opacity-25"
+          />
+          <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="eyebrow">Your public record</p>
+              <h2 className="mt-2 font-display text-4xl leading-none font-extrabold sm:text-5xl">
+                @{account.handle}
+              </h2>
+              <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-fl-text-muted">
+                {account.displayName ? (
+                  <span>{account.displayName}</span>
+                ) : null}
+                {account.displayName ? <span aria-hidden="true">·</span> : null}
+                <span className="capitalize">
+                  {account.profileVisibility} profile
+                </span>
+              </div>
+            </div>
+            <Link
+              className="focus-ring inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-[10px] border border-fl-border bg-fl-surface-2 px-4 text-sm font-bold text-fl-text transition hover:border-fl-text-muted hover:bg-fl-surface-3"
+              href={`/u/${account.handle}`}
+              rel="noreferrer"
+              target="_blank"
+            >
+              <Eye aria-hidden="true" size={16} /> Open full profile
+              <ExternalLink aria-hidden="true" size={14} />
+              <span className="sr-only"> (opens in a new tab)</span>
+            </Link>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-px bg-fl-border lg:grid-cols-4">
+          {stats.map(({ icon: Icon, label, value }) => (
+            <div className="bg-fl-surface-1 p-4 sm:p-5" key={label}>
+              <Icon aria-hidden="true" className="text-fl-accent" size={17} />
+              <p className="mt-3 font-display text-3xl font-extrabold">
+                {value}
+              </p>
+              <p className="mt-1 text-xs text-fl-text-muted">{label}</p>
+            </div>
+          ))}
+        </div>
+      </Card>
+      <Card>
+        <CardHeader
+          eyebrow="Public identity"
+          title="Profile settings"
+          description="Only the fields below can appear publicly. Email and provider IDs are never included."
         />
-      </div>
-    </Card>
+        <div className="p-5 sm:p-6">
+          <ProfileSettingsForm
+            displayName={account.displayName}
+            handle={account.handle}
+            onSaved={onSaved}
+            profileVisibility={account.profileVisibility}
+          />
+        </div>
+      </Card>
+    </div>
   );
 }
 
@@ -267,14 +349,26 @@ export function SettingsWorkspace({
 
   return (
     <main className="shell py-10 sm:py-14" id="main-content">
-      <header>
-        <p className="eyebrow">Private account area</p>
-        <h1 className="mt-2 font-display text-5xl font-extrabold sm:text-6xl">
-          SETTINGS
-        </h1>
-        <p className="mt-3 text-sm text-fl-text-muted">
-          Signed in as @{account.handle}
-        </p>
+      <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="eyebrow">Private account area</p>
+          <h1 className="mt-2 font-display text-5xl font-extrabold sm:text-6xl">
+            SETTINGS
+          </h1>
+          <p className="mt-3 text-sm text-fl-text-muted">
+            Signed in as @{account.handle}
+          </p>
+        </div>
+        <Link
+          className="focus-ring inline-flex min-h-11 w-fit items-center justify-center gap-2 rounded-[10px] border border-fl-border bg-fl-surface-1 px-4 text-sm font-bold text-fl-text transition hover:border-fl-accent hover:bg-fl-surface-2"
+          href={`/u/${account.handle}`}
+          rel="noreferrer"
+          target="_blank"
+        >
+          <Eye aria-hidden="true" size={16} /> View public profile
+          <ExternalLink aria-hidden="true" size={14} />
+          <span className="sr-only"> (opens in a new tab)</span>
+        </Link>
       </header>
       <div className="mt-8 grid gap-8 lg:grid-cols-[15rem_minmax(0,1fr)]">
         <nav

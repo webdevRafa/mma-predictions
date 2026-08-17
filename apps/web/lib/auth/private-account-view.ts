@@ -1,3 +1,5 @@
+import type { PublicProfileStats } from "@fightlobby/domain";
+
 export interface PrivateAccountView {
   email: string;
   emailVerified: boolean;
@@ -5,6 +7,7 @@ export interface PrivateAccountView {
   displayName: string;
   profileVisibility: "public" | "limited";
   accountStatus: string;
+  stats: PublicProfileStats;
   preferences: {
     timezone: string;
     hideUpcomingPicks: boolean;

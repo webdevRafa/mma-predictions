@@ -2,14 +2,27 @@ import "server-only";
 
 import {
   accountStatusSchema,
+  publicProfileStatsSchema,
   userRoleSchema,
   type AccountStatus,
+  type PublicProfileStats,
   type UserRole,
 } from "@fightlobby/domain";
 import { FieldValue } from "firebase-admin/firestore";
 
 import type { PrivateAccountView } from "@/lib/auth/private-account-view";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
+
+const emptyPublicProfileStats: PublicProfileStats = {
+  gradedPicks: 0,
+  correctWinners: 0,
+  winnerAccuracy: 0,
+  totalPoints: 0,
+  exactPicks: 0,
+  currentStreak: 0,
+  longestStreak: 0,
+  eventChampionships: 0,
+};
 
 export interface AccountRecordSummary {
   accountStatus: AccountStatus;
@@ -118,6 +131,7 @@ export async function getPrivateAccountView(
   const handle: unknown = profile.get("handle");
   const displayName: unknown = profile.get("displayName");
   const profileVisibility: unknown = profile.get("profileVisibility");
+  const stats = publicProfileStatsSchema.safeParse(profile.get("stats"));
   return {
     email: authUser.email ?? "No email available",
     emailVerified: authUser.emailVerified,
@@ -129,6 +143,7 @@ export async function getPrivateAccountView(
         : ("limited" as const),
     accountStatus:
       typeof accountStatus === "string" ? accountStatus : "suspended",
+    stats: stats.success ? stats.data : emptyPublicProfileStats,
     preferences: {
       timezone:
         typeof preferenceRecord.timezone === "string"
