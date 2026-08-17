@@ -9,6 +9,7 @@
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
+    "build:deploy": "esbuild src/index.ts --bundle --platform=node --target=node22 --format=esm --sourcemap --outfile=deploy/index.js --external:firebase-admin --external:firebase-admin/* --external:firebase-functions --external:firebase-functions/* --external:zod",
     "typecheck": "tsc --noEmit",
     "test": "vitest run --passWithNoTests"
   },
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "@types/node": "latest",
+    "esbuild": "latest",
     "typescript": "^6.0.2",
     "vitest": "latest"
   }

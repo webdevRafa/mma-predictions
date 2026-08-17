@@ -10,6 +10,8 @@ export default tseslint.config(
     ignores: [
       "**/.next/**",
       "**/coverage/**",
+      "apps/functions/deploy/index.js",
+      "apps/functions/deploy/index.js.map",
       "**/dist/**",
       "**/node_modules/**",
     ],

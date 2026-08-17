@@ -1,5 +1,12 @@
 {
-  "functions": { "source": "apps/functions", "runtime": "nodejs22" },
+  "functions": {
+    "source": "apps/functions/deploy",
+    "runtime": "nodejs22",
+    "predeploy": [
+      "pnpm --dir apps/functions build:deploy",
+      "npm ci --prefix apps/functions/deploy --omit dev --no-audit --no-fund"
+    ]
+  },
   "firestore": {
     "rules": "firebase/firestore.rules",
     "indexes": "firebase/firestore.indexes.json"

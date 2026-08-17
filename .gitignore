@@ -19,6 +19,8 @@ firestore-debug.log*
 ui-debug.log*
 playwright-report/
 test-results/
+apps/functions/deploy/index.js
+apps/functions/deploy/index.js.map
 
 # Editors and operating systems
 .idea/
