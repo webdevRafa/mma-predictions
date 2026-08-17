@@ -9,6 +9,7 @@ import {
   adminInputClass,
   adminLabelClass,
 } from "@/components/admin/admin-form";
+import { PredictionControlBoard } from "@/components/admin/prediction-control-board";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { providerDiff } from "@/lib/admin/diff";
@@ -28,6 +29,15 @@ function record(value: unknown): Record<string, unknown> {
 
 function text(value: unknown, fallback = "") {
   return typeof value === "string" ? value : fallback;
+}
+
+function timestampText(value: unknown) {
+  if (typeof value === "string") return value;
+  if (!value || typeof value !== "object") return undefined;
+  const toDate = (value as { toDate?: () => Date }).toDate;
+  return typeof toDate === "function"
+    ? toDate.call(value).toISOString()
+    : undefined;
 }
 
 export default async function AdminEventPage({
@@ -70,6 +80,31 @@ export default async function AdminEventPage({
         </div>
         <Badge>{String(event.status)}</Badge>
       </div>
+
+      <Card className="mt-8 overflow-hidden">
+        <PredictionControlBoard
+          eventId={eventId}
+          initialFights={fights.docs.map((document) => {
+            const lockedAt = timestampText(document.get("predictionsLockedAt"));
+            return {
+              id: document.id,
+              boutOrder: Number(document.get("boutOrder") ?? 0),
+              cardSegment: String(document.get("cardSegment") ?? "card"),
+              fighterAName: String(
+                document.get("fighterA.name.full") ?? "Unknown fighter",
+              ),
+              fighterBName: String(
+                document.get("fighterB.name.full") ?? "Unknown fighter",
+              ),
+              fightStatus: String(document.get("status") ?? "unknown"),
+              predictionStatus: String(
+                document.get("predictionStatus") ?? "unknown",
+              ),
+              ...(lockedAt ? { lockedAt } : {}),
+            };
+          })}
+        />
+      </Card>
 
       <div className="mt-8 grid gap-6 xl:grid-cols-[1fr_.9fr]">
         <Card>

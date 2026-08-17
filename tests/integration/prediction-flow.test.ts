@@ -3,6 +3,7 @@ import { getFirestore, type Firestore } from "firebase-admin/firestore";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import { lockFightPredictionsCore } from "../../apps/functions/src/predictions/lock-fight-predictions.ts";
+import { reopenFightPredictionsCore } from "../../packages/firebase-ops/src/index.ts";
 import { submitPredictionTransaction } from "../../apps/web/lib/predictions/firestore.ts";
 
 const emulatorDescribe =
@@ -118,6 +119,63 @@ emulatorDescribe(
       expect(publicPick.exists).toBe(true);
       expect(JSON.stringify(publicPick.data())).not.toContain("uid");
       expect(JSON.stringify(publicPick.data())).not.toContain("email");
+
+      const reopened = await reopenFightPredictionsCore(firestore, fightId);
+      expect(reopened).toMatchObject({ changed: true, hiddenPublicPicks: 1 });
+      expect(
+        (await firestore.collection("fights").doc(fightId).get()).get(
+          "predictionStatus",
+        ),
+      ).toBe("open");
+      expect(
+        await firestore
+          .collection("profiles")
+          .doc(uid)
+          .collection("publicPicks")
+          .doc(fightId)
+          .get(),
+      ).toMatchObject({ exists: false });
+      expect(
+        (await firestore.collection("predictions").doc(predictionId).get()).get(
+          "status",
+        ),
+      ).toBe("locked");
+
+      await expect(
+        submitPredictionTransaction(firestore, {
+          fightId,
+          uid,
+          requestId: "30000000-0000-4000-8000-000000000003",
+          pick: {
+            winnerFighterId: fighterBId,
+            method: "decision",
+            detail: "split",
+          },
+        }),
+      ).rejects.toMatchObject({ code: "prediction_already_locked" });
+
+      const newUid = `${uid}_new`;
+      await submitPredictionTransaction(firestore, {
+        fightId,
+        uid: newUid,
+        requestId: "40000000-0000-4000-8000-000000000004",
+        pick: {
+          winnerFighterId: fighterBId,
+          method: "decision",
+          detail: "split",
+        },
+      });
+      expect(
+        (
+          await firestore
+            .collection("predictions")
+            .doc(`${fightId}_${newUid}`)
+            .get()
+        ).get("status"),
+      ).toBe("locked");
+
+      const relocked = await lockFightPredictionsCore(firestore, fightId);
+      expect(relocked).toMatchObject({ changed: true, materialized: 2 });
 
       const retryAfterFightLock = await submitPredictionTransaction(firestore, {
         fightId,

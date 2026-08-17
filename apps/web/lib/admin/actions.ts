@@ -6,6 +6,10 @@ import {
   userRoleSchema,
 } from "@fightlobby/domain";
 import {
+  lockFightPredictionsCore,
+  reopenFightPredictionsCore,
+} from "@fightlobby/firebase-ops";
+import {
   FieldValue,
   Timestamp,
   type Firestore,
@@ -564,56 +568,49 @@ async function predictionControl(
 ) {
   const reference = firestore.collection("fights").doc(action.fightId);
   const logRef = auditRef(firestore);
-  return firestore.runTransaction(async (transaction) => {
-    const snapshot = await transaction.get(reference);
-    if (!snapshot.exists)
-      throw new ApiError("Fight not found", 404, "fight_not_found");
-    const before = record(snapshot.data());
-    if (
-      action.operation === "reopen" &&
-      !["scheduled", "prefight"].includes(String(before.status))
-    )
-      throw new ApiError(
-        "Only scheduled or prefight matchups can reopen",
-        409,
-        "fight_already_started",
-      );
-    const update =
+  const snapshot = await reference.get();
+  if (!snapshot.exists)
+    throw new ApiError("Fight not found", 404, "fight_not_found");
+  const before = record(snapshot.data());
+  let result: unknown;
+  try {
+    result =
       action.operation === "lock"
-        ? {
-            predictionStatus: "locked",
-            predictionsLockedAt: new Date().toISOString(),
-          }
-        : {
-            predictionStatus: "open",
-            predictionsLockedAt: FieldValue.delete(),
-          };
-    transaction.set(
-      reference,
-      { ...update, updatedAt: new Date().toISOString() },
-      { merge: true },
+        ? await lockFightPredictionsCore(firestore, action.fightId)
+        : await reopenFightPredictionsCore(firestore, action.fightId);
+  } catch (error) {
+    throw new ApiError(
+      error instanceof Error
+        ? error.message
+        : "Prediction control could not be updated",
+      409,
+      "prediction_control_failed",
     );
-    transaction.set(logRef, {
-      id: logRef.id,
-      ...adminAuditData({
-        actorUid,
-        action: `${action.operation}_predictions`,
-        targetType: "fight",
-        targetId: action.fightId,
-        reason: action.reason,
-        before: {
-          predictionStatus: before.predictionStatus,
-          predictionsLockedAt: before.predictionsLockedAt,
-        },
-        after: {
-          predictionStatus: update.predictionStatus,
-          predictionsLockedAt:
-            action.operation === "lock" ? update.predictionsLockedAt : null,
-        },
-      }),
-    });
-    return { auditId: logRef.id };
+  }
+  const afterSnapshot = await reference.get();
+  const after = record(afterSnapshot.data());
+  await logRef.set({
+    id: logRef.id,
+    ...adminAuditData({
+      actorUid,
+      action: `${action.operation}_predictions`,
+      targetType: "fight",
+      targetId: action.fightId,
+      reason:
+        action.operation === "lock"
+          ? "Manual live matchup lock"
+          : action.reason,
+      before: {
+        predictionStatus: before.predictionStatus,
+        predictionsLockedAt: before.predictionsLockedAt,
+      },
+      after: {
+        predictionStatus: after.predictionStatus,
+        predictionsLockedAt: after.predictionsLockedAt ?? null,
+      },
+    }),
   });
+  return { auditId: logRef.id, result };
 }
 
 async function updateFeatureFlags(

@@ -64,7 +64,7 @@ export default async function AdminEventsPage() {
                         className="focus-ring inline-flex items-center gap-1 rounded text-xs font-bold text-fl-accent"
                         href={`/admin/events/${document.id}`}
                       >
-                        <Pencil aria-hidden="true" size={13} /> Edit
+                        <Pencil aria-hidden="true" size={13} /> Manage
                       </Link>
                       <Link
                         className="focus-ring inline-flex items-center gap-1 rounded text-xs text-fl-text-muted"

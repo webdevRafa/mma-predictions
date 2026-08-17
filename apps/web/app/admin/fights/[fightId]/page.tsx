@@ -266,7 +266,7 @@ export default async function AdminFightPage({
           <CardHeader
             eyebrow="Emergency control"
             title="Prediction lock"
-            description="Reopening is refused after the provider reports that the fight has started."
+            description="Routine locks are available from the event control board. Emergency reopening always requires a reason and typed confirmation. Existing user picks remain immutable."
           />
           <div className="grid gap-px bg-fl-border sm:grid-cols-2">
             {(["lock", "reopen"] as const).map((operation) => (

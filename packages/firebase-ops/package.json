@@ -1,11 +1,10 @@
 {
-  "name": "@fightlobby/functions",
+  "name": "@fightlobby/firebase-ops",
   "version": "0.1.0",
   "private": true,
-  "main": "dist/index.js",
   "type": "module",
-  "engines": {
-    "node": "22"
+  "exports": {
+    ".": "./src/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
@@ -14,14 +13,9 @@
   },
   "dependencies": {
     "@fightlobby/domain": "workspace:*",
-    "@fightlobby/firebase-ops": "workspace:*",
-    "@fightlobby/providers": "workspace:*",
-    "firebase-admin": "latest",
-    "firebase-functions": "latest",
-    "zod": "latest"
+    "firebase-admin": "latest"
   },
   "devDependencies": {
-    "@types/node": "latest",
     "typescript": "^6.0.2",
     "vitest": "latest"
   }
