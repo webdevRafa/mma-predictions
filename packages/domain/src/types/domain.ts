@@ -189,7 +189,6 @@ export interface PredictionPick {
   winnerFighterId: string;
   method: PredictionMethod;
   detail?: number | "unanimous" | "split" | "majority" | undefined;
-  confidence: number;
 }
 
 export type PredictionRecordStatus = "active" | "locked" | "graded" | "void";

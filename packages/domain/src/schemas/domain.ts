@@ -99,7 +99,6 @@ export const predictionPickSchema = z
         z.enum(["unanimous", "split", "majority"]),
       ])
       .optional(),
-    confidence: z.number().int().min(50).max(100),
   })
   .strict()
   .superRefine((pick, context) => {

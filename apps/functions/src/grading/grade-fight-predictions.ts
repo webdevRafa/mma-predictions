@@ -1,6 +1,6 @@
 import {
   SCORING_VERSION,
-  predictionPickSchema,
+  parseStoredPredictionPick,
   resultMethodSchema,
   scorePredictionV1,
   type FightResult,
@@ -186,8 +186,8 @@ export async function gradeFightPredictionsCore(
       const raw: unknown = document.data();
       const prediction = record(raw);
       const uid = prediction.uid;
-      const parsedPick = predictionPickSchema.safeParse(prediction.pick);
-      if (typeof uid !== "string" || !parsedPick.success) continue;
+      const parsedPick = parseStoredPredictionPick(prediction.pick);
+      if (typeof uid !== "string" || !parsedPick) continue;
       affectedUids.add(uid);
       const oldGrade = record(prediction.grade);
       if (oldGrade.gradeKey === runId) {
@@ -212,7 +212,7 @@ export async function gradeFightPredictionsCore(
         );
       }
       const score = result
-        ? scorePredictionV1(parsedPick.data, result)
+        ? scorePredictionV1(parsedPick, result)
         : {
             status: "void" as const,
             reason: "invalid_result",
@@ -244,7 +244,7 @@ export async function gradeFightPredictionsCore(
           publicPick(
             fight,
             fightId,
-            parsedPick.data,
+            parsedPick,
             "graded",
             score.points,
             gradedAt,
@@ -268,7 +268,7 @@ export async function gradeFightPredictionsCore(
             .doc(uid)
             .collection("publicPicks")
             .doc(fightId),
-          publicPick(fight, fightId, parsedPick.data, "void", 0, gradedAt),
+          publicPick(fight, fightId, parsedPick, "void", 0, gradedAt),
           { merge: true },
         );
         voidPredictions += 1;

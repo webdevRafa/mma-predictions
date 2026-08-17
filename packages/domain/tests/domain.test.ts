@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   canonicalSlug,
   normalizeSearchText,
+  parseStoredPredictionPick,
   predictionPickSchema,
 } from "../src/index";
 
@@ -18,10 +19,24 @@ describe("domain normalization", () => {
     const result = predictionPickSchema.safeParse({
       winnerFighterId: "ftr_1",
       method: "submission",
-      confidence: 70,
     });
     expect(result.success).toBe(false);
     if (!result.success)
       expect(result.error.issues[0]?.path).toEqual(["detail"]);
+  });
+
+  it("rejects confidence in new input but tolerates it in legacy storage", () => {
+    const legacy = {
+      winnerFighterId: "ftr_1",
+      method: "decision",
+      detail: "split",
+      confidence: 75,
+    };
+    expect(predictionPickSchema.safeParse(legacy).success).toBe(false);
+    expect(parseStoredPredictionPick(legacy)).toEqual({
+      winnerFighterId: "ftr_1",
+      method: "decision",
+      detail: "split",
+    });
   });
 });

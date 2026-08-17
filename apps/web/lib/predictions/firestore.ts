@@ -1,6 +1,6 @@
 import {
   fightStatusSchema,
-  predictionPickSchema,
+  parseStoredPredictionPick,
   predictionStatusSchema,
   validatePredictionForFight,
   type FightStatus,
@@ -35,7 +35,6 @@ export interface SubmissionResult {
   summary: PredictionSummary;
   created: boolean;
   idempotent: boolean;
-  canEdit: boolean;
 }
 
 function record(value: unknown): Record<string, unknown> {
@@ -118,13 +117,13 @@ export function assertPredictionSubmissionOpen(
 function safePrediction(snapshot: DocumentSnapshot): SafePredictionView {
   const value: unknown = snapshot.data();
   const data = record(value);
-  const pick = predictionPickSchema.safeParse(data.pick);
+  const pick = parseStoredPredictionPick(data.pick);
   const status = predictionStatus(data.status);
   const submittedAt = timestampIso(data.submittedAt);
   const updatedAt = timestampIso(data.updatedAt);
   const version = data.predictionVersion;
   if (
-    !pick.success ||
+    !pick ||
     !status ||
     !submittedAt ||
     !updatedAt ||
@@ -159,7 +158,7 @@ function safePrediction(snapshot: DocumentSnapshot): SafePredictionView {
         }
       : undefined;
   return {
-    pick: pick.data,
+    pick,
     status,
     predictionVersion: version,
     submittedAt,
@@ -173,7 +172,6 @@ function pickForStorage(pick: PredictionPick) {
   return {
     winnerFighterId: pick.winnerFighterId,
     method: pick.method,
-    confidence: pick.confidence,
     ...(pick.detail !== undefined ? { detail: pick.detail } : {}),
   };
 }
@@ -307,6 +305,26 @@ export async function submitPredictionTransaction(
       ]);
     if (!fightSnapshot.exists)
       throw new ApiError("Fight was not found", 404, "fight_not_found");
+    const existingValue: unknown = existingPrediction.data();
+    const existing = record(existingValue);
+    if (existingRevision.exists) {
+      if (existing.lastRequestId === input.requestId) {
+        idempotent = true;
+        return;
+      }
+      throw new ApiError(
+        "That prediction request was already used",
+        409,
+        "request_conflict",
+      );
+    }
+    if (existingPrediction.exists) {
+      throw new ApiError(
+        "This prediction is already locked and cannot be changed",
+        409,
+        "prediction_already_locked",
+      );
+    }
     const fightValue: unknown = fightSnapshot.data();
     const fight = record(fightValue);
     const serverState = assertPredictionSubmissionOpen(fight, now.toMillis());
@@ -334,78 +352,39 @@ export async function submitPredictionTransaction(
     if (!validated.success) {
       throw new ApiError(validated.message, 400, "invalid_prediction");
     }
-    const existingValue: unknown = existingPrediction.data();
-    const existing = record(existingValue);
-    if (existingRevision.exists) {
-      if (existing.lastRequestId === input.requestId) {
-        idempotent = true;
-        return;
-      }
-      throw new ApiError(
-        "That prediction request was already used",
-        409,
-        "request_conflict",
-      );
-    }
-    const existingStatus = existingPrediction.exists
-      ? predictionStatus(existing.status)
-      : null;
-    if (existingPrediction.exists && existingStatus !== "active") {
-      throw new ApiError(
-        "This prediction can no longer be edited",
-        409,
-        "prediction_immutable",
-      );
-    }
-    const oldPickResult = existingPrediction.exists
-      ? predictionPickSchema.safeParse(existing.pick)
-      : null;
-    if (oldPickResult && !oldPickResult.success) {
-      throw new ApiError(
-        "The saved prediction must be reviewed before editing",
-        409,
-        "prediction_invalid",
-      );
-    }
-    const oldPick = oldPickResult?.success ? oldPickResult.data : null;
-    const currentVersion = numberValue(existing.predictionVersion);
-    created = !existingPrediction.exists;
+    created = true;
     const storedPick = pickForStorage(validated.data);
-    transaction.set(
-      predictionRef,
-      {
-        id: predictionId,
-        fightId: input.fightId,
-        eventId,
-        uid: input.uid,
-        pick: storedPick,
-        status: "active",
-        ...(created ? { submittedAt: now } : {}),
-        updatedAt: now,
-        providerStatusAtSubmission: serverState.fightStatus,
-        lateReviewFlag: false,
-        predictionVersion: currentVersion + 1,
-        lastRequestId: input.requestId,
-      },
-      { merge: true },
-    );
+    transaction.create(predictionRef, {
+      id: predictionId,
+      fightId: input.fightId,
+      eventId,
+      uid: input.uid,
+      pick: storedPick,
+      status: "locked",
+      submittedAt: now,
+      updatedAt: now,
+      lockedAt: now,
+      providerStatusAtSubmission: serverState.fightStatus,
+      lateReviewFlag: false,
+      predictionVersion: 1,
+      lastRequestId: input.requestId,
+    });
     transaction.create(revisionRef, {
       requestId: input.requestId,
-      reason: created ? "user_create" : "user_update",
-      oldPick: oldPick ? pickForStorage(oldPick) : null,
+      reason: "user_create",
+      oldPick: null,
       newPick: storedPick,
-      predictionVersion: currentVersion + 1,
+      predictionVersion: 1,
       createdAt: now,
     });
 
     const delta: CounterDelta = {
-      total: created ? 1 : 0,
+      total: 1,
       fighterA: 0,
       fighterB: 0,
       methods: {},
       rounds: {},
     };
-    if (oldPick) applyPickDelta(delta, oldPick, fighterAId, -1);
     applyPickDelta(delta, validated.data, fighterAId, 1);
     const shardRef = fightRef
       .collection("predictionShards")
@@ -439,7 +418,6 @@ export async function submitPredictionTransaction(
     summary,
     created,
     idempotent,
-    canEdit: prediction.status === "active",
   };
 }
 
@@ -456,12 +434,13 @@ export async function getPredictionExperience(
     throw new ApiError("Fight was not found", 404, "fight_not_found");
   const fightValue: unknown = fightSnapshot.data();
   const fight = record(fightValue);
-  let canSubmit = true;
+  let fightAcceptsSubmissions = true;
   try {
     assertPredictionSubmissionOpen(fight, Date.now());
   } catch {
-    canSubmit = false;
+    fightAcceptsSubmissions = false;
   }
+  const canSubmit = fightAcceptsSubmissions && !predictionSnapshot.exists;
   const rawSummary = record(fight.predictionSummary);
   const summary: PredictionSummary = {
     total: numberValue(rawSummary.total),

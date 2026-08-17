@@ -19,6 +19,7 @@
     "launch:preflight": "tsx scripts/production-preflight.ts",
     "launch:verify": "tsx scripts/verify-production.ts",
     "admin:grant": "tsx scripts/grant-admin.ts",
+    "migrate:remove-confidence": "tsx scripts/migrate-remove-confidence.ts",
     "import:production:event": "tsx scripts/import-production-event.ts",
     "validate:fixtures": "tsx scripts/validate-fixture.ts fixtures",
     "format": "prettier --write .",

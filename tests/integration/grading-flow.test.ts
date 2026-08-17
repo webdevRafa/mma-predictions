@@ -98,7 +98,6 @@ emulatorDescribe("grading, corrections, and reconciled leaderboards", () => {
             winnerFighterId: fighterAId,
             method: "decision",
             detail: "unanimous",
-            confidence: 80,
           },
         }),
       firestore
@@ -113,7 +112,6 @@ emulatorDescribe("grading, corrections, and reconciled leaderboards", () => {
             winnerFighterId: fighterBId,
             method: "ko_tko",
             detail: 2,
-            confidence: 75,
           },
         }),
     ]);

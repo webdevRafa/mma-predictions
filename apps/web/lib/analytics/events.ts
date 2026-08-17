@@ -8,7 +8,6 @@ export type AnalyticsEventName =
   | "signup_completed"
   | "handle_created"
   | "prediction_submitted"
-  | "prediction_updated"
   | "prediction_revealed"
   | "prediction_graded"
   | "chat_opened"

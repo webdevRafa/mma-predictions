@@ -14,10 +14,10 @@ describe("analytics privacy boundary", () => {
         email: "member@example.test",
         message_body: "private chat text",
         handle: "public_but_personal",
-        confidence_bucket: 70,
+        card_position: 3,
         broken: Number.NaN,
       }),
-    ).toEqual({ fight_id: "fgt_public_001", confidence_bucket: 70 });
+    ).toEqual({ fight_id: "fgt_public_001", card_position: 3 });
   });
 
   it("maps separate analytics and advertising choices to consent mode v2", () => {

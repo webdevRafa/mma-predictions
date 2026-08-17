@@ -238,13 +238,11 @@ function pickFor(
         winnerFighterId: fight.fighterAId,
         method: "decision",
         detail: "unanimous",
-        confidence: 64 + memberIndex * 7,
       }
     : {
         winnerFighterId: fight.fighterBId,
         method: "ko_tko",
         detail: Math.min(2, fight.scheduledRounds),
-        confidence: 61 + memberIndex * 8,
       };
 }
 

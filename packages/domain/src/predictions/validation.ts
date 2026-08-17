@@ -10,6 +10,25 @@ export interface PredictionFightContext {
 export type PredictionValidationResult =
   { success: true; data: PredictionPick } | { success: false; message: string };
 
+function record(value: unknown): Record<string, unknown> {
+  return value && typeof value === "object"
+    ? (value as Record<string, unknown>)
+    : {};
+}
+
+/** Reads legacy stored picks without weakening strict validation for new input. */
+export function parseStoredPredictionPick(
+  value: unknown,
+): PredictionPick | null {
+  const source = record(value);
+  const parsed = predictionPickSchema.safeParse({
+    winnerFighterId: source.winnerFighterId,
+    method: source.method,
+    ...(source.detail !== undefined ? { detail: source.detail } : {}),
+  });
+  return parsed.success ? parsed.data : null;
+}
+
 export function validatePredictionForFight(
   value: unknown,
   fight: PredictionFightContext,

@@ -8,6 +8,7 @@
   },
   "include": [
     "./production-preflight.ts",
+    "./migrate-remove-confidence.ts",
     "./import-production-event.ts",
     "./run-staging-simulation.ts",
     "./staging-simulation.ts",

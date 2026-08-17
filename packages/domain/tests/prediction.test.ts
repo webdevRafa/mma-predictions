@@ -11,7 +11,6 @@ const basePick: PredictionPick = {
   winnerFighterId: "ftr_winner",
   method: "ko_tko",
   detail: 2,
-  confidence: 70,
 };
 
 function result(overrides: Partial<FightResult> = {}): FightResult {

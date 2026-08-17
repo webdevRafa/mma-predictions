@@ -1,4 +1,4 @@
-import { predictionPickSchema } from "@fightlobby/domain";
+import { parseStoredPredictionPick } from "@fightlobby/domain";
 import {
   FieldPath,
   Timestamp,
@@ -90,9 +90,9 @@ export async function lockFightPredictionsCore(
       const value: unknown = document.data();
       const prediction = record(value);
       if (!["active", "locked"].includes(String(prediction.status))) continue;
-      const parsedPick = predictionPickSchema.safeParse(prediction.pick);
+      const parsedPick = parseStoredPredictionPick(prediction.pick);
       const uid = prediction.uid;
-      if (!parsedPick.success || typeof uid !== "string") continue;
+      if (!parsedPick || typeof uid !== "string") continue;
       if (prediction.status === "active") {
         batch.set(
           document.ref,
@@ -101,7 +101,7 @@ export async function lockFightPredictionsCore(
         );
         locked += 1;
       }
-      const selectedWinnerName = names[parsedPick.data.winnerFighterId];
+      const selectedWinnerName = names[parsedPick.winnerFighterId];
       if (!selectedWinnerName) continue;
       batch.set(
         firestore
@@ -115,11 +115,11 @@ export async function lockFightPredictionsCore(
           fightSlug,
           fighterAName: names[fighterAId],
           fighterBName: names[fighterBId],
-          selectedWinnerFighterId: parsedPick.data.winnerFighterId,
+          selectedWinnerFighterId: parsedPick.winnerFighterId,
           selectedWinnerName,
-          method: parsedPick.data.method,
-          ...(parsedPick.data.detail !== undefined
-            ? { detail: parsedPick.data.detail }
+          method: parsedPick.method,
+          ...(parsedPick.detail !== undefined
+            ? { detail: parsedPick.detail }
             : {}),
           status: "locked",
           lockedAt: fightState.lockedAt,
