@@ -33,12 +33,12 @@ export async function SiteHeader() {
             <Image
               alt=""
               aria-hidden="true"
-              className="size-14 object-contain drop-shadow-[0_0_12px_rgba(241,64,29,0.16)] transition duration-200 group-hover:scale-[1.04] group-hover:drop-shadow-[0_0_16px_rgba(241,64,29,0.28)] sm:size-16"
-              height={64}
-              priority
-              sizes="(max-width: 639px) 56px, 64px"
+              className="h-12 w-auto object-contain drop-shadow-[0_0_12px_rgba(224,12,15,0.2)] transition duration-200 group-hover:scale-[1.04] group-hover:drop-shadow-[0_0_16px_rgba(224,12,15,0.34)] sm:h-14"
+              height={2802}
+              preload
+              sizes="(max-width: 639px) 49px, 57px"
               src="/brand/fightlobby-mark.png"
-              width={64}
+              width={2859}
             />
           </Link>
           <nav
