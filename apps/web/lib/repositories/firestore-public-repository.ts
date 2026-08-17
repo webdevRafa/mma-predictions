@@ -2,11 +2,14 @@ import "server-only";
 
 import type { Event, EventCard, Fight, Fighter } from "@fightlobby/domain";
 import type {
+  DocumentData,
+  DocumentSnapshot,
   Firestore,
   QueryDocumentSnapshot,
 } from "firebase-admin/firestore";
 import { z } from "zod";
 
+import { serializeFirestoreValue } from "./firestore-serialization";
 import type { PublicRepository } from "./public-repository";
 
 const eventDocSchema = z
@@ -36,13 +39,21 @@ const fighterDocSchema = z
   })
   .passthrough();
 
-function parseDoc<T>(snapshot: QueryDocumentSnapshot, schema: z.ZodType): T {
-  const result = schema.safeParse(snapshot.data());
+function parseData<T>(path: string, data: unknown, schema: z.ZodType): T {
+  const result = schema.safeParse(serializeFirestoreValue(data));
   if (!result.success)
     throw new Error(
-      `Invalid ${snapshot.ref.path}: ${result.error.issues.map((issue) => `${issue.path.join(".")}: ${issue.message}`).join(", ")}`,
+      `Invalid ${path}: ${result.error.issues.map((issue) => `${issue.path.join(".")}: ${issue.message}`).join(", ")}`,
     );
   return result.data as T;
+}
+
+function parseDoc<T>(
+  snapshot:
+    QueryDocumentSnapshot<DocumentData> | DocumentSnapshot<DocumentData>,
+  schema: z.ZodType,
+): T {
+  return parseData<T>(snapshot.ref.path, snapshot.data(), schema);
 }
 
 export class FirestorePublicRepository implements PublicRepository {
@@ -98,8 +109,11 @@ export class FirestorePublicRepository implements PublicRepository {
       throw new Error(`Fight ${fight.id} references missing public documents`);
     return {
       fight,
-      event: eventDoc.data() as Event,
-      fighters: [fighterADoc.data() as Fighter, fighterBDoc.data() as Fighter],
+      event: parseDoc<Event>(eventDoc, eventDocSchema),
+      fighters: [
+        parseDoc<Fighter>(fighterADoc, fighterDocSchema),
+        parseDoc<Fighter>(fighterBDoc, fighterDocSchema),
+      ],
     };
   }
 

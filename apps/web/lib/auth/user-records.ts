@@ -8,6 +8,7 @@ import {
 } from "@fightlobby/domain";
 import { FieldValue } from "firebase-admin/firestore";
 
+import type { PrivateAccountView } from "@/lib/auth/private-account-view";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 
 export interface AccountRecordSummary {
@@ -99,18 +100,14 @@ export async function getAccountRecordSummary(
   };
 }
 
-export async function getPrivateAccountView(uid: string) {
+export async function getPrivateAccountView(
+  uid: string,
+): Promise<PrivateAccountView> {
   const { auth, firestore } = getFirebaseAdmin();
-  const [authUser, user, profile, follows] = await Promise.all([
+  const [authUser, user, profile] = await Promise.all([
     auth.getUser(uid),
     firestore.collection("users").doc(uid).get(),
     firestore.collection("profiles").doc(uid).get(),
-    firestore
-      .collection("users")
-      .doc(uid)
-      .collection("follows")
-      .limit(250)
-      .get(),
   ]);
   const preferences: unknown = user.get("preferences");
   const preferenceRecord =
@@ -141,14 +138,5 @@ export async function getPrivateAccountView(uid: string) {
       emailEventReminders: preferenceRecord.emailEventReminders === true,
       emailResults: preferenceRecord.emailResults === true,
     },
-    follows: follows.docs.map((document) => {
-      const data: unknown = document.data();
-      return {
-        id: document.id,
-        ...(data && typeof data === "object"
-          ? (data as Record<string, unknown>)
-          : {}),
-      };
-    }),
   };
 }

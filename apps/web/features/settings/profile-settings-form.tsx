@@ -21,10 +21,16 @@ async function responseMessage(response: Response) {
 export function ProfileSettingsForm({
   handle,
   displayName,
+  onSaved,
   profileVisibility,
 }: {
   handle: string;
   displayName: string;
+  onSaved?: (update: {
+    handle: string;
+    displayName: string;
+    profileVisibility: "public" | "limited";
+  }) => void;
   profileVisibility: "public" | "limited";
 }) {
   const [busy, setBusy] = useState(false);
@@ -36,12 +42,15 @@ export function ProfileSettingsForm({
     setStatus(null);
     const form = new FormData(event.currentTarget);
     try {
+      const nextDisplayName = getFormString(form, "displayName");
+      const nextVisibility = getFormString(form, "profileVisibility") as
+        "public" | "limited";
       const settingsResponse = await fetch("/api/profile/settings", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          displayName: getFormString(form, "displayName") || null,
-          profileVisibility: getFormString(form, "profileVisibility"),
+          displayName: nextDisplayName || null,
+          profileVisibility: nextVisibility,
         }),
       });
       const settingsError = await responseMessage(settingsResponse);
@@ -56,6 +65,11 @@ export function ProfileSettingsForm({
         const handleError = await responseMessage(handleResponse);
         if (handleError) throw new Error(handleError);
       }
+      onSaved?.({
+        handle: nextHandle,
+        displayName: nextDisplayName,
+        profileVisibility: nextVisibility,
+      });
       setStatus("Profile saved.");
     } catch (error) {
       setStatus(

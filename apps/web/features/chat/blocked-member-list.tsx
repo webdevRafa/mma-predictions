@@ -14,8 +14,10 @@ export interface BlockedMemberItem {
 
 export function BlockedMemberList({
   initialMembers,
+  onUnblocked,
 }: {
   initialMembers: BlockedMemberItem[];
+  onUnblocked?: (uid: string) => void;
 }) {
   const [members, setMembers] = useState(initialMembers);
   const [busyUid, setBusyUid] = useState<string | null>(null);
@@ -38,6 +40,7 @@ export function BlockedMemberList({
       setMembers((current) =>
         current.filter((item) => item.uid !== member.uid),
       );
+      onUnblocked?.(member.uid);
     } catch (unblockError) {
       setError(
         unblockError instanceof Error

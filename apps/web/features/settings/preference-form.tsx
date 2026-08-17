@@ -7,9 +7,11 @@ import { getFormString } from "@/lib/forms/form-data";
 
 export function PreferenceForm({
   children,
+  onSaved,
   values,
 }: {
   children: ReactNode;
+  onSaved?: (values: Record<string, string | boolean>) => void;
   values: Record<string, string | boolean>;
 }) {
   const [busy, setBusy] = useState(false);
@@ -41,6 +43,7 @@ export function PreferenceForm({
         throw new Error(
           result.error?.message ?? "Preferences could not be saved",
         );
+      onSaved?.(payload);
       setStatus("Preferences saved.");
     } catch (error) {
       setStatus(
