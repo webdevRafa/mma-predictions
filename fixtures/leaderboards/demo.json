@@ -1,0 +1,131 @@
+{
+  "generatedAt": "2026-08-16T18:00:00.000Z",
+  "event": {
+    "id": "evt_fl_demo_001",
+    "label": "UFC FightLobby Demo"
+  },
+  "season": { "id": "2026", "label": "2026 Season" },
+  "gradedEventFights": 5,
+  "members": [
+    {
+      "uid": "demo_member_01",
+      "handle": "fightdesk_demo",
+      "avatarVersion": 1,
+      "badges": ["First Pick", "Five-Fight Streak", "Event Champion"],
+      "event": {
+        "gradedPicks": 5,
+        "correctWinners": 4,
+        "totalPoints": 42,
+        "exactPicks": 3,
+        "currentStreak": 3
+      },
+      "season": {
+        "gradedPicks": 48,
+        "correctWinners": 31,
+        "totalPoints": 286,
+        "exactPicks": 9,
+        "currentStreak": 3
+      }
+    },
+    {
+      "uid": "demo_member_02",
+      "handle": "southpaw_read",
+      "avatarVersion": 2,
+      "badges": ["First Pick", "Perfect Read", "Five-Fight Streak"],
+      "event": {
+        "gradedPicks": 5,
+        "correctWinners": 5,
+        "totalPoints": 40,
+        "exactPicks": 2,
+        "currentStreak": 8
+      },
+      "season": {
+        "gradedPicks": 61,
+        "correctWinners": 43,
+        "totalPoints": 372,
+        "exactPicks": 12,
+        "currentStreak": 8
+      }
+    },
+    {
+      "uid": "demo_member_03",
+      "handle": "cagecraft",
+      "avatarVersion": 1,
+      "badges": ["First Pick", "Perfect Read"],
+      "event": {
+        "gradedPicks": 4,
+        "correctWinners": 4,
+        "totalPoints": 38,
+        "exactPicks": 3,
+        "currentStreak": 4
+      },
+      "season": {
+        "gradedPicks": 39,
+        "correctWinners": 29,
+        "totalPoints": 251,
+        "exactPicks": 10,
+        "currentStreak": 4
+      }
+    },
+    {
+      "uid": "demo_member_04",
+      "handle": "round_reader",
+      "avatarVersion": 3,
+      "badges": ["First Pick", "Perfect Read"],
+      "event": {
+        "gradedPicks": 5,
+        "correctWinners": 3,
+        "totalPoints": 34,
+        "exactPicks": 3,
+        "currentStreak": 1
+      },
+      "season": {
+        "gradedPicks": 72,
+        "correctWinners": 45,
+        "totalPoints": 411,
+        "exactPicks": 15,
+        "currentStreak": 1
+      }
+    },
+    {
+      "uid": "demo_member_05",
+      "handle": "clinch_notes",
+      "avatarVersion": 1,
+      "badges": ["First Pick"],
+      "event": {
+        "gradedPicks": 4,
+        "correctWinners": 3,
+        "totalPoints": 29,
+        "exactPicks": 2,
+        "currentStreak": 2
+      },
+      "season": {
+        "gradedPicks": 24,
+        "correctWinners": 18,
+        "totalPoints": 164,
+        "exactPicks": 6,
+        "currentStreak": 2
+      }
+    },
+    {
+      "uid": "demo_member_06",
+      "handle": "late_rounds",
+      "avatarVersion": 0,
+      "badges": ["First Pick"],
+      "event": {
+        "gradedPicks": 3,
+        "correctWinners": 3,
+        "totalPoints": 26,
+        "exactPicks": 2,
+        "currentStreak": 6
+      },
+      "season": {
+        "gradedPicks": 19,
+        "correctWinners": 15,
+        "totalPoints": 133,
+        "exactPicks": 5,
+        "currentStreak": 6
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+packages:
+  - apps/*
+  - packages/*
+
+overrides:
+  jwks-rsa>jose: 4.15.9
+
+onlyBuiltDependencies:
+  - esbuild
+  - protobufjs
+  - sharp

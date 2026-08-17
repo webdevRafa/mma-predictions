@@ -1,0 +1,378 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-16T18:00:00.000Z",
+  "source": { "provider": "mock", "externalEventId": "mock-ufc-fl-001" },
+  "event": {
+    "id": "evt_fl_demo_001",
+    "promotion": "ufc",
+    "name": "UFC FightLobby Demo: Navarro vs Okafor",
+    "shortName": "UFC FightLobby Demo",
+    "slug": "ufc-fightlobby-demo-navarro-vs-okafor-fl001",
+    "slugHistory": ["ufc-fightlobby-demo"],
+    "status": "scheduled",
+    "startsAt": "2026-09-06T00:00:00.000Z",
+    "venueTimezone": "America/Chicago",
+    "venue": {
+      "name": "Demo Arena",
+      "city": "Chicago",
+      "region": "IL",
+      "countryCode": "US"
+    },
+    "editorial": {
+      "summary": "A fictional development card used to test FightLobby event, prediction, ranking, and lobby experiences without relying on unlicensed production data.",
+      "status": "published"
+    }
+  },
+  "fighters": [
+    {
+      "id": "ftr_asha_navarro",
+      "slug": "asha-navarro-navarr",
+      "slugHistory": ["asha-navarro"],
+      "name": {
+        "full": "Asha Navarro",
+        "first": "Asha",
+        "last": "Navarro",
+        "nickname": "Northstar",
+        "normalized": "asha navarro"
+      },
+      "countryCode": "US",
+      "stance": "southpaw",
+      "heightCm": 168,
+      "reachCm": 173,
+      "currentWeightClass": "Women's Flyweight",
+      "record": { "wins": 14, "losses": 2, "draws": 0, "noContests": 0 },
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.82,
+        "significantStrikeAccuracy": 0.51,
+        "significantStrikeDefense": 0.62,
+        "takedownsPer15": 1.7,
+        "takedownAccuracy": 0.44,
+        "takedownDefense": 0.79,
+        "submissionsPer15": 0.4
+      }
+    },
+    {
+      "id": "ftr_naomi_okafor",
+      "slug": "naomi-okafor-okafor",
+      "slugHistory": [],
+      "name": {
+        "full": "Naomi Okafor",
+        "first": "Naomi",
+        "last": "Okafor",
+        "nickname": "Voltage",
+        "normalized": "naomi okafor"
+      },
+      "countryCode": "NG",
+      "stance": "orthodox",
+      "heightCm": 170,
+      "reachCm": 177,
+      "currentWeightClass": "Women's Flyweight",
+      "record": { "wins": 13, "losses": 1, "draws": 0, "noContests": 0 },
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 5.31,
+        "significantStrikeAccuracy": 0.48,
+        "significantStrikeDefense": 0.57,
+        "takedownsPer15": 0.8,
+        "takedownAccuracy": 0.36,
+        "takedownDefense": 0.84,
+        "submissionsPer15": 0.2
+      }
+    },
+    {
+      "id": "ftr_marcus_vale",
+      "slug": "marcus-vale-usvale",
+      "slugHistory": [],
+      "name": {
+        "full": "Marcus Vale",
+        "first": "Marcus",
+        "last": "Vale",
+        "normalized": "marcus vale"
+      },
+      "countryCode": "GB",
+      "stance": "switch",
+      "heightCm": 183,
+      "reachCm": 190,
+      "currentWeightClass": "Middleweight",
+      "record": { "wins": 18, "losses": 4, "draws": 0, "noContests": 1 },
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.12,
+        "significantStrikeAccuracy": 0.54,
+        "significantStrikeDefense": 0.6,
+        "takedownsPer15": 2.1,
+        "takedownAccuracy": 0.47,
+        "takedownDefense": 0.73,
+        "submissionsPer15": 0.6
+      }
+    },
+    {
+      "id": "ftr_idris_cole",
+      "slug": "idris-cole-iscole",
+      "slugHistory": [],
+      "name": {
+        "full": "Idris Cole",
+        "first": "Idris",
+        "last": "Cole",
+        "nickname": "Meter",
+        "normalized": "idris cole"
+      },
+      "countryCode": "CA",
+      "stance": "orthodox",
+      "heightCm": 185,
+      "reachCm": 188,
+      "currentWeightClass": "Middleweight",
+      "record": { "wins": 16, "losses": 3, "draws": 1, "noContests": 0 },
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.88,
+        "significantStrikeAccuracy": 0.46,
+        "significantStrikeDefense": 0.66,
+        "takedownsPer15": 3.2,
+        "takedownAccuracy": 0.51,
+        "takedownDefense": 0.81,
+        "submissionsPer15": 0.9
+      }
+    },
+    {
+      "id": "ftr_hiro_tanaka",
+      "slug": "hiro-tanaka-tanaka",
+      "slugHistory": [],
+      "name": {
+        "full": "Hiro Tanaka",
+        "first": "Hiro",
+        "last": "Tanaka",
+        "normalized": "hiro tanaka"
+      },
+      "countryCode": "JP",
+      "stance": "southpaw",
+      "heightCm": 175,
+      "reachCm": 178,
+      "currentWeightClass": "Lightweight",
+      "record": { "wins": 20, "losses": 5, "draws": 0, "noContests": 0 }
+    },
+    {
+      "id": "ftr_thiago_moura",
+      "slug": "thiago-moura-omoura",
+      "slugHistory": [],
+      "name": {
+        "full": "Thiago Moura",
+        "first": "Thiago",
+        "last": "Moura",
+        "nickname": "Current",
+        "normalized": "thiago moura"
+      },
+      "countryCode": "BR",
+      "stance": "orthodox",
+      "heightCm": 178,
+      "reachCm": 182,
+      "currentWeightClass": "Lightweight",
+      "record": { "wins": 17, "losses": 3, "draws": 0, "noContests": 0 }
+    },
+    {
+      "id": "ftr_elena_petrov",
+      "slug": "elena-petrov-petrov",
+      "slugHistory": [],
+      "name": {
+        "full": "Elena Petrov",
+        "first": "Elena",
+        "last": "Petrov",
+        "normalized": "elena petrov"
+      },
+      "countryCode": "DE",
+      "stance": "orthodox",
+      "heightCm": 165,
+      "reachCm": 168,
+      "currentWeightClass": "Women's Strawweight",
+      "record": { "wins": 12, "losses": 2, "draws": 0, "noContests": 0 }
+    },
+    {
+      "id": "ftr_june_park",
+      "slug": "june-park-nepark",
+      "slugHistory": [],
+      "name": {
+        "full": "June Park",
+        "first": "June",
+        "last": "Park",
+        "normalized": "june park"
+      },
+      "countryCode": "KR",
+      "stance": "switch",
+      "heightCm": 163,
+      "reachCm": 166,
+      "currentWeightClass": "Women's Strawweight",
+      "record": { "wins": 11, "losses": 1, "draws": 0, "noContests": 0 }
+    },
+    {
+      "id": "ftr_owen_mercer",
+      "slug": "owen-mercer-mercer",
+      "slugHistory": [],
+      "name": {
+        "full": "Owen Mercer",
+        "first": "Owen",
+        "last": "Mercer",
+        "normalized": "owen mercer"
+      },
+      "countryCode": "AU",
+      "stance": "orthodox",
+      "heightCm": 188,
+      "reachCm": 193,
+      "currentWeightClass": "Light Heavyweight",
+      "record": { "wins": 10, "losses": 2, "draws": 0, "noContests": 0 }
+    },
+    {
+      "id": "ftr_rafael_costa",
+      "slug": "rafael-costa-lcosta",
+      "slugHistory": [],
+      "name": {
+        "full": "Rafael Costa",
+        "first": "Rafael",
+        "last": "Costa",
+        "normalized": "rafael costa"
+      },
+      "countryCode": "BR",
+      "stance": "southpaw",
+      "heightCm": 190,
+      "reachCm": 198,
+      "currentWeightClass": "Light Heavyweight",
+      "record": { "wins": 15, "losses": 4, "draws": 0, "noContests": 0 }
+    }
+  ],
+  "fights": [
+    {
+      "id": "fgt_fl_demo_001",
+      "slug": "asha-navarro-vs-naomi-okafor-fl001",
+      "slugHistory": ["navarro-vs-okafor"],
+      "eventId": "evt_fl_demo_001",
+      "fighterAId": "ftr_asha_navarro",
+      "fighterBId": "ftr_naomi_okafor",
+      "cardSegment": "main_card",
+      "boutOrder": 1,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Women's Flyweight",
+      "isTitleFight": true,
+      "titleType": "undisputed",
+      "scheduledRounds": 5,
+      "estimatedStartsAt": "2026-09-06T04:30:00.000Z",
+      "predictionSummary": {
+        "total": 1842,
+        "fighterA": 1050,
+        "fighterB": 792,
+        "methods": { "ko_tko": 642, "submission": 310, "decision": 890 },
+        "rounds": { "1": 238, "2": 316, "3": 276, "4": 72, "5": 50 }
+      },
+      "editorial": {
+        "biggestQuestion": "Can Navarro slow Okafor's pace without giving up the center?",
+        "styleContrast": "Navarro's layered counters and clinch control meet Okafor's volume, range changes, and late-round pressure.",
+        "keysForFighterA": [
+          "Turn open-space exchanges into clinch entries",
+          "Counter after Okafor's second strike"
+        ],
+        "keysForFighterB": [
+          "Force resets with volume",
+          "Exit the clinch before Navarro settles"
+        ],
+        "fightLobbyTake": "The matchup hinges less on raw volume than on who controls where the second exchange starts.",
+        "status": "published"
+      }
+    },
+    {
+      "id": "fgt_fl_demo_002",
+      "slug": "marcus-vale-vs-idris-cole-fl002",
+      "slugHistory": [],
+      "eventId": "evt_fl_demo_001",
+      "fighterAId": "ftr_marcus_vale",
+      "fighterBId": "ftr_idris_cole",
+      "cardSegment": "main_card",
+      "boutOrder": 2,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Middleweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 1310,
+        "fighterA": 598,
+        "fighterB": 712,
+        "methods": { "ko_tko": 410, "submission": 260, "decision": 640 },
+        "rounds": { "1": 152, "2": 244, "3": 274 }
+      },
+      "editorial": {
+        "biggestQuestion": "Which fighter can make the fence work in their favor?",
+        "styleContrast": "Vale blends pressure striking into reactive shots while Cole prefers position-first wrestling and patient exits.",
+        "fightLobbyTake": "Small positional wins should matter more here than highlight moments.",
+        "status": "published"
+      }
+    },
+    {
+      "id": "fgt_fl_demo_003",
+      "slug": "hiro-tanaka-vs-thiago-moura-fl003",
+      "slugHistory": [],
+      "eventId": "evt_fl_demo_001",
+      "fighterAId": "ftr_hiro_tanaka",
+      "fighterBId": "ftr_thiago_moura",
+      "cardSegment": "main_card",
+      "boutOrder": 3,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Lightweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 904,
+        "fighterA": 486,
+        "fighterB": 418,
+        "methods": { "ko_tko": 322, "submission": 190, "decision": 392 },
+        "rounds": { "1": 148, "2": 201, "3": 163 }
+      },
+      "editorial": {
+        "styleContrast": "Tanaka's southpaw timing meets Moura's body work and layered orthodox combinations.",
+        "status": "reviewed"
+      }
+    },
+    {
+      "id": "fgt_fl_demo_004",
+      "slug": "elena-petrov-vs-june-park-fl004",
+      "slugHistory": [],
+      "eventId": "evt_fl_demo_001",
+      "fighterAId": "ftr_elena_petrov",
+      "fighterBId": "ftr_june_park",
+      "cardSegment": "prelims",
+      "boutOrder": 4,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Women's Strawweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 611,
+        "fighterA": 295,
+        "fighterB": 316,
+        "methods": { "ko_tko": 104, "submission": 161, "decision": 346 },
+        "rounds": { "1": 73, "2": 106, "3": 86 }
+      },
+      "editorial": { "status": "draft" }
+    },
+    {
+      "id": "fgt_fl_demo_005",
+      "slug": "owen-mercer-vs-rafael-costa-fl005",
+      "slugHistory": [],
+      "eventId": "evt_fl_demo_001",
+      "fighterAId": "ftr_owen_mercer",
+      "fighterBId": "ftr_rafael_costa",
+      "cardSegment": "early_prelims",
+      "boutOrder": 5,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Light Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 388,
+        "fighterA": 174,
+        "fighterB": 214,
+        "methods": { "ko_tko": 246, "submission": 42, "decision": 100 },
+        "rounds": { "1": 112, "2": 96, "3": 80 }
+      },
+      "editorial": { "status": "missing" }
+    }
+  ]
+}

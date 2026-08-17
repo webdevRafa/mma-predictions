@@ -1,0 +1,17 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["../apps/web/*"]
+    },
+    "types": ["node"]
+  },
+  "include": [
+    "./production-preflight.ts",
+    "./migrate-remove-confidence.ts",
+    "./import-production-event.ts",
+    "./run-staging-simulation.ts",
+    "./staging-simulation.ts",
+    "./verify-production.ts"
+  ]
+}

@@ -1,0 +1,754 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-17T00:47:23.939Z",
+  "source": {
+    "provider": "manual",
+    "externalEventId": "ufc-fight-night-august-22-2026",
+    "sourceUrl": "https://www.ufc.com/event/ufc-fight-night-august-22-2026#12928",
+    "retrievedAt": "2026-08-17T00:47:23.939Z"
+  },
+  "event": {
+    "id": "evt_ufc_fn_2026_08_22",
+    "promotion": "ufc",
+    "name": "UFC Fight Night: Hernandez vs Rodrigues",
+    "shortName": "Hernandez vs Rodrigues",
+    "slug": "ufc-fight-night-hernandez-vs-rodrigues-2026",
+    "slugHistory": [],
+    "status": "scheduled",
+    "startsAt": "2026-08-23T00:00:00.000Z",
+    "venueTimezone": "America/Los_Angeles",
+    "venue": {
+      "name": "Golden 1 Center",
+      "city": "Sacramento",
+      "region": "CA",
+      "countryCode": "US"
+    },
+    "editorial": {
+      "summary": "Anthony Hernandez meets Gregory Rodrigues in the middleweight main event at Golden 1 Center in Sacramento, California.",
+      "status": "reviewed"
+    }
+  },
+  "fighters": [
+    {
+      "id": "ftr_anthony_hernandez",
+      "slug": "anthony-hernandez",
+      "slugHistory": [],
+      "name": {
+        "full": "Anthony Hernandez",
+        "first": "Anthony",
+        "last": "Hernandez",
+        "nickname": "Fluffy",
+        "normalized": "anthony hernandez"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Middleweight",
+      "record": { "wins": 15, "losses": 3, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_gregory_rodrigues",
+      "slug": "gregory-rodrigues",
+      "slugHistory": [],
+      "name": {
+        "full": "Gregory Rodrigues",
+        "first": "Gregory",
+        "last": "Rodrigues",
+        "nickname": "Robocop",
+        "normalized": "gregory rodrigues"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Middleweight",
+      "record": { "wins": 19, "losses": 6, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_serghei_spivac",
+      "slug": "serghei-spivac",
+      "slugHistory": [],
+      "name": {
+        "full": "Serghei Spivac",
+        "first": "Serghei",
+        "last": "Spivac",
+        "nickname": "Polar Bear",
+        "normalized": "serghei spivac"
+      },
+      "countryCode": "MD",
+      "currentWeightClass": "Heavyweight",
+      "record": { "wins": 18, "losses": 6, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_vitor_petrino",
+      "slug": "vitor-petrino",
+      "slugHistory": [],
+      "name": {
+        "full": "Vitor Petrino",
+        "first": "Vitor",
+        "last": "Petrino",
+        "normalized": "vitor petrino"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Heavyweight",
+      "record": { "wins": 14, "losses": 2, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_reinier_de_ridder",
+      "slug": "reinier-de-ridder",
+      "slugHistory": [],
+      "name": {
+        "full": "Reinier de Ridder",
+        "first": "Reinier",
+        "last": "de Ridder",
+        "nickname": "RdR",
+        "normalized": "reinier de ridder"
+      },
+      "countryCode": "NL",
+      "currentWeightClass": "Light Heavyweight",
+      "record": { "wins": 21, "losses": 4, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_roman_dolidze",
+      "slug": "roman-dolidze",
+      "slugHistory": [],
+      "name": {
+        "full": "Roman Dolidze",
+        "first": "Roman",
+        "last": "Dolidze",
+        "normalized": "roman dolidze"
+      },
+      "countryCode": "GE",
+      "currentWeightClass": "Light Heavyweight",
+      "record": { "wins": 15, "losses": 5, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_marquel_mederos",
+      "slug": "marquel-mederos",
+      "slugHistory": [],
+      "name": {
+        "full": "MarQuel Mederos",
+        "first": "MarQuel",
+        "last": "Mederos",
+        "normalized": "marquel mederos"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Lightweight",
+      "record": { "wins": 11, "losses": 1, "draws": 1, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_mason_jones",
+      "slug": "mason-jones",
+      "slugHistory": [],
+      "name": {
+        "full": "Mason Jones",
+        "first": "Mason",
+        "last": "Jones",
+        "nickname": "The Dragon",
+        "normalized": "mason jones"
+      },
+      "countryCode": "GB",
+      "currentWeightClass": "Lightweight",
+      "record": { "wins": 18, "losses": 2, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_carli_judice",
+      "slug": "carli-judice",
+      "slugHistory": [],
+      "name": {
+        "full": "Carli Judice",
+        "first": "Carli",
+        "last": "Judice",
+        "nickname": "Crispy",
+        "normalized": "carli judice"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Women's Flyweight",
+      "record": { "wins": 6, "losses": 2, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_jeisla_chaves",
+      "slug": "jeisla-chaves",
+      "slugHistory": [],
+      "name": {
+        "full": "Jeisla Chaves",
+        "first": "Jeisla",
+        "last": "Chaves",
+        "nickname": "A Braba",
+        "normalized": "jeisla chaves"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Women's Flyweight",
+      "record": { "wins": 8, "losses": 0, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_terrance_chatman",
+      "slug": "terrance-chatman",
+      "slugHistory": [],
+      "name": {
+        "full": "Terrance Chatman",
+        "first": "Terrance",
+        "last": "Chatman",
+        "normalized": "terrance chatman"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Heavyweight",
+      "record": { "wins": 0, "losses": 0, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_anthony_wint",
+      "slug": "anthony-wint",
+      "slugHistory": [],
+      "name": {
+        "full": "Anthony Wint",
+        "first": "Anthony",
+        "last": "Wint",
+        "nickname": "Bow Down",
+        "normalized": "anthony wint"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Heavyweight",
+      "record": { "wins": 1, "losses": 0, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_jamall_emmers",
+      "slug": "jamall-emmers",
+      "slugHistory": [],
+      "name": {
+        "full": "Jamall Emmers",
+        "first": "Jamall",
+        "last": "Emmers",
+        "nickname": "Pretty Boy",
+        "normalized": "jamall emmers"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Featherweight",
+      "record": { "wins": 22, "losses": 8, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_lerryan_douglas",
+      "slug": "lerryan-douglas",
+      "slugHistory": [],
+      "name": {
+        "full": "Lerryan Douglas",
+        "first": "Lerryan",
+        "last": "Douglas",
+        "nickname": "Gunslinger",
+        "normalized": "lerryan douglas"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Featherweight",
+      "record": { "wins": 14, "losses": 5, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_kennedy_nzechukwu",
+      "slug": "kennedy-nzechukwu",
+      "slugHistory": [],
+      "name": {
+        "full": "Kennedy Nzechukwu",
+        "first": "Kennedy",
+        "last": "Nzechukwu",
+        "nickname": "Chosen",
+        "normalized": "kennedy nzechukwu"
+      },
+      "countryCode": "NG",
+      "currentWeightClass": "Heavyweight",
+      "record": { "wins": 14, "losses": 6, "draws": 1, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_shamil_gaziev",
+      "slug": "shamil-gaziev",
+      "slugHistory": [],
+      "name": {
+        "full": "Shamil Gaziev",
+        "first": "Shamil",
+        "last": "Gaziev",
+        "normalized": "shamil gaziev"
+      },
+      "countryCode": "BH",
+      "currentWeightClass": "Heavyweight",
+      "record": { "wins": 14, "losses": 3, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_chris_padilla",
+      "slug": "chris-padilla",
+      "slugHistory": [],
+      "name": {
+        "full": "Chris Padilla",
+        "first": "Chris",
+        "last": "Padilla",
+        "nickname": "Taco",
+        "normalized": "chris padilla"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Lightweight",
+      "record": { "wins": 17, "losses": 6, "draws": 1, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_nasrat_haqparast",
+      "slug": "nasrat-haqparast",
+      "slugHistory": [],
+      "name": {
+        "full": "Nasrat Haqparast",
+        "first": "Nasrat",
+        "last": "Haqparast",
+        "normalized": "nasrat haqparast"
+      },
+      "countryCode": "MA",
+      "currentWeightClass": "Lightweight",
+      "record": { "wins": 18, "losses": 6, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_marcio_barbosa",
+      "slug": "marcio-barbosa",
+      "slugHistory": [],
+      "name": {
+        "full": "Marcio Barbosa",
+        "first": "Marcio",
+        "last": "Barbosa",
+        "nickname": "Ticoto",
+        "normalized": "marcio barbosa"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Featherweight",
+      "record": { "wins": 17, "losses": 2, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_ryan_kuse",
+      "slug": "ryan-kuse",
+      "slugHistory": [],
+      "name": {
+        "full": "Ryan Kuse",
+        "first": "Ryan",
+        "last": "Kuse",
+        "normalized": "ryan kuse"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Featherweight",
+      "record": { "wins": 0, "losses": 0, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_gauge_young",
+      "slug": "gauge-young",
+      "slugHistory": [],
+      "name": {
+        "full": "Gauge Young",
+        "first": "Gauge",
+        "last": "Young",
+        "nickname": "Gee Money",
+        "normalized": "gauge young"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Lightweight",
+      "record": { "wins": 11, "losses": 3, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_stan_dorsainvil",
+      "slug": "stan-dorsainvil",
+      "slugHistory": [],
+      "name": {
+        "full": "Stan Dorsainvil",
+        "first": "Stan",
+        "last": "Dorsainvil",
+        "normalized": "stan dorsainvil"
+      },
+      "countryCode": "HT",
+      "currentWeightClass": "Lightweight",
+      "record": { "wins": 0, "losses": 0, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_wes_schultz",
+      "slug": "wes-schultz",
+      "slugHistory": [],
+      "name": {
+        "full": "Wes Schultz",
+        "first": "Wes",
+        "last": "Schultz",
+        "nickname": "Party Time",
+        "normalized": "wes schultz"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Middleweight",
+      "record": { "wins": 9, "losses": 3, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_jackson_mcvey",
+      "slug": "jackson-mcvey",
+      "slugHistory": [],
+      "name": {
+        "full": "Jackson McVey",
+        "first": "Jackson",
+        "last": "McVey",
+        "nickname": "The Moose",
+        "normalized": "jackson mcvey"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Middleweight",
+      "record": { "wins": 7, "losses": 2, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_shanelle_dyer",
+      "slug": "shanelle-dyer",
+      "slugHistory": [],
+      "name": {
+        "full": "Shanelle Dyer",
+        "first": "Shanelle",
+        "last": "Dyer",
+        "nickname": "The Nightmare",
+        "normalized": "shanelle dyer"
+      },
+      "countryCode": "GB",
+      "currentWeightClass": "Women's Strawweight",
+      "record": { "wins": 7, "losses": 1, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "ftr_elise_reed",
+      "slug": "elise-reed",
+      "slugHistory": [],
+      "name": {
+        "full": "Elise Reed",
+        "first": "Elise",
+        "last": "Reed",
+        "normalized": "elise reed"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Women's Strawweight",
+      "record": { "wins": 8, "losses": 5, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified"
+    }
+  ],
+  "fights": [
+    {
+      "id": "fgt_ufc_2026_08_22_01",
+      "slug": "anthony-hernandez-vs-gregory-rodrigues-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_anthony_hernandez",
+      "fighterBId": "ftr_gregory_rodrigues",
+      "cardSegment": "main_card",
+      "boutOrder": 1,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Middleweight",
+      "isTitleFight": false,
+      "scheduledRounds": 5,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "reviewed" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_02",
+      "slug": "serghei-spivac-vs-vitor-petrino-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_serghei_spivac",
+      "fighterBId": "ftr_vitor_petrino",
+      "cardSegment": "main_card",
+      "boutOrder": 2,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_03",
+      "slug": "reinier-de-ridder-vs-roman-dolidze-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_reinier_de_ridder",
+      "fighterBId": "ftr_roman_dolidze",
+      "cardSegment": "main_card",
+      "boutOrder": 3,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Light Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_04",
+      "slug": "marquel-mederos-vs-mason-jones-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_marquel_mederos",
+      "fighterBId": "ftr_mason_jones",
+      "cardSegment": "main_card",
+      "boutOrder": 4,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Lightweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_05",
+      "slug": "carli-judice-vs-jeisla-chaves-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_carli_judice",
+      "fighterBId": "ftr_jeisla_chaves",
+      "cardSegment": "main_card",
+      "boutOrder": 5,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Women's Flyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_06",
+      "slug": "terrance-chatman-vs-anthony-wint-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_terrance_chatman",
+      "fighterBId": "ftr_anthony_wint",
+      "cardSegment": "main_card",
+      "boutOrder": 6,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_07",
+      "slug": "jamall-emmers-vs-lerryan-douglas-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_jamall_emmers",
+      "fighterBId": "ftr_lerryan_douglas",
+      "cardSegment": "prelims",
+      "boutOrder": 7,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Featherweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_08",
+      "slug": "kennedy-nzechukwu-vs-shamil-gaziev-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_kennedy_nzechukwu",
+      "fighterBId": "ftr_shamil_gaziev",
+      "cardSegment": "prelims",
+      "boutOrder": 8,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_09",
+      "slug": "chris-padilla-vs-nasrat-haqparast-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_chris_padilla",
+      "fighterBId": "ftr_nasrat_haqparast",
+      "cardSegment": "prelims",
+      "boutOrder": 9,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Lightweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_10",
+      "slug": "marcio-barbosa-vs-ryan-kuse-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_marcio_barbosa",
+      "fighterBId": "ftr_ryan_kuse",
+      "cardSegment": "prelims",
+      "boutOrder": 10,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Featherweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_11",
+      "slug": "gauge-young-vs-stan-dorsainvil-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_gauge_young",
+      "fighterBId": "ftr_stan_dorsainvil",
+      "cardSegment": "prelims",
+      "boutOrder": 11,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Lightweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_12",
+      "slug": "wes-schultz-vs-jackson-mcvey-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_wes_schultz",
+      "fighterBId": "ftr_jackson_mcvey",
+      "cardSegment": "prelims",
+      "boutOrder": 12,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Middleweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_13",
+      "slug": "shanelle-dyer-vs-elise-reed-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_shanelle_dyer",
+      "fighterBId": "ftr_elise_reed",
+      "cardSegment": "prelims",
+      "boutOrder": 13,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Women's Strawweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    }
+  ]
+}

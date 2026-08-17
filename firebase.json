@@ -1,5 +1,25 @@
 {
+  "functions": {
+    "source": "apps/functions/deploy",
+    "runtime": "nodejs22",
+    "predeploy": [
+      "pnpm --dir apps/functions build:deploy",
+      "npm ci --prefix apps/functions/deploy --omit dev --no-audit --no-fund"
+    ]
+  },
   "firestore": {
-    "rules": "firestore.rules"
+    "rules": "firebase/firestore.rules",
+    "indexes": "firebase/firestore.indexes.json"
+  },
+  "database": { "rules": "firebase/database.rules.json" },
+  "storage": { "rules": "firebase/storage.rules" },
+  "emulators": {
+    "auth": { "port": 9099 },
+    "functions": { "port": 5001 },
+    "firestore": { "port": 8080 },
+    "database": { "port": 9000 },
+    "storage": { "port": 9199 },
+    "ui": { "enabled": true, "port": 4000 },
+    "singleProjectMode": true
   }
 }
