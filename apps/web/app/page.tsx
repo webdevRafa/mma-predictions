@@ -14,7 +14,6 @@ import { LocalEventTime } from "@/components/events/local-event-time";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
 import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { formatRecord } from "@/lib/format";
@@ -22,9 +21,9 @@ import { formatRecord } from "@/lib/format";
 export const metadata: Metadata = {
   alternates: { canonical: "/" },
   openGraph: {
-    title: "FightLobby — Every fight has a lobby",
+    title: "FightLobby — UFC predictions and live fight chat",
     description:
-      "Make UFC predictions, compare the community read, and join the conversation around every matchup.",
+      "Make UFC predictions, compare picks, and join live matchup chats with the FightLobby community.",
     url: "/",
     type: "website",
   },
@@ -53,21 +52,21 @@ export default async function HomePage() {
         />
         <div className="shell relative grid gap-12 py-14 lg:min-h-[44rem] lg:grid-cols-[.86fr_1.14fr] lg:items-center lg:py-20">
           <div className="max-w-3xl">
-            <Badge tone="accent">UFC launch edition</Badge>
-            <h1 className="mt-6 font-display text-[clamp(4rem,9vw,8rem)] leading-[0.79] font-extrabold tracking-[-0.035em] text-balance">
-              EVERY FIGHT
-              <span className="block text-fl-accent">HAS A LOBBY.</span>
+            <h1 className="font-display text-[clamp(3.4rem,6vw,6rem)] leading-[0.82] font-extrabold tracking-[-0.035em] text-balance">
+              JOIN THE
+              <span className="block">FIGHT NIGHT</span>
+              <span className="block text-fl-accent">CONVERSATION.</span>
             </h1>
             <p className="mt-7 max-w-xl text-base leading-7 text-fl-text-muted sm:text-lg">
-              Make the call before the walkout, reveal the community read, and
-              build a prediction record that keeps the receipts.
+              Make predictions, compare picks, and join live matchup chats with
+              the FightLobby community.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 className="focus-ring inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-fl-accent px-5 text-sm font-bold text-fl-bg shadow-[0_10px_28px_rgba(241,64,29,0.2)] transition hover:bg-fl-accent-strong"
                 href={event ? `/events/${event.slug}` : "/events"}
               >
-                Enter the next card <ArrowRight aria-hidden="true" size={17} />
+                Join the next event <ArrowRight aria-hidden="true" size={17} />
               </Link>
               <Link
                 className="focus-ring inline-flex min-h-12 items-center rounded-[10px] border border-fl-border bg-fl-surface-1 px-5 text-sm font-bold text-fl-text transition hover:border-fl-text-muted hover:bg-fl-surface-2"

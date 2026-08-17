@@ -33,10 +33,10 @@ export async function SiteHeader() {
             <Image
               alt=""
               aria-hidden="true"
-              className="h-12 w-auto object-contain drop-shadow-[0_0_12px_rgba(224,12,15,0.2)] transition duration-200 group-hover:scale-[1.04] group-hover:drop-shadow-[0_0_16px_rgba(224,12,15,0.34)] sm:h-14"
+              className="h-10 w-auto object-contain drop-shadow-[0_0_10px_rgba(224,12,15,0.18)] transition duration-200 group-hover:scale-[1.04] group-hover:drop-shadow-[0_0_14px_rgba(224,12,15,0.3)] sm:h-12"
               height={2802}
               preload
-              sizes="(max-width: 639px) 49px, 57px"
+              sizes="(max-width: 639px) 41px, 49px"
               src="/brand/fightlobby-mark.png"
               width={2859}
             />
@@ -57,13 +57,15 @@ export async function SiteHeader() {
           </nav>
           {activeEvent ? (
             <Link
-              className="ml-auto hidden items-center gap-2 rounded-full border border-fl-live/30 bg-fl-live/10 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-[0.08em] text-[#ff8398] uppercase lg:flex"
+              aria-label={`${activeEvent.status === "live" ? "Open live event" : "Open upcoming event"}: ${activeEvent.name}`}
+              className="ml-auto hidden max-w-64 items-center gap-2 rounded-full border border-fl-live/30 bg-fl-live/10 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-[0.06em] text-[#ff8398] uppercase lg:flex"
               href={`/events/${activeEvent.slug}`}
+              title={activeEvent.name}
             >
               {activeEvent.status === "live" ? (
                 <span aria-hidden="true" className="live-dot" />
               ) : null}
-              {activeEvent.status === "live" ? "Live now" : "Next UFC event"}
+              <span className="truncate">{activeEvent.shortName}</span>
             </Link>
           ) : null}
           <Link

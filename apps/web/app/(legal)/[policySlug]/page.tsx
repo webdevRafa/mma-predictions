@@ -30,7 +30,7 @@ const policies: Record<string, PolicyPage> = {
     eyebrow: "Independent fight community",
     sections: [
       {
-        heading: "Every fight has a lobby",
+        heading: "Predictions, discussion, and live fight chat",
         paragraphs: [
           "FightLobby gives UFC fans one place to compare verified matchup information, make pre-fight predictions, see the community consensus, and discuss each bout in a focused lobby.",
           "Predictions are for entertainment and community competition. FightLobby does not accept wagers, sell guaranteed picks, or operate a sportsbook.",

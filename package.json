@@ -2,7 +2,7 @@
   "name": "fightlobby",
   "version": "0.1.0",
   "private": true,
-  "description": "FightLobby — every fight has a lobby.",
+  "description": "UFC predictions, live matchup chat, and fight-night discussion.",
   "packageManager": "pnpm@10.17.0",
   "engines": {
     "node": "22.x"

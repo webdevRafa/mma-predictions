@@ -33,11 +33,11 @@ const monoFont = IBM_Plex_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "FightLobby — Every fight has a lobby",
+    default: "FightLobby — UFC predictions and live fight chat",
     template: "%s | FightLobby",
   },
   description:
-    "Make UFC predictions, compare the community consensus, and join a lobby built for every matchup.",
+    "Make UFC predictions, compare picks, and join live matchup chats with the FightLobby community.",
   applicationName: "FightLobby",
   alternates: { canonical: "/" },
   openGraph: {
