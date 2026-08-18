@@ -535,7 +535,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
             </div>
 
             <button
-              className="focus-ring mt-7 flex min-h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-fl-accent px-5 text-sm font-bold text-fl-bg transition hover:bg-fl-accent-strong disabled:cursor-not-allowed disabled:opacity-50"
+              className="focus-ring mt-7 inline-flex min-h-12 max-w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-fl-accent px-6 text-sm font-bold text-fl-bg transition hover:bg-fl-accent-strong disabled:cursor-not-allowed disabled:opacity-50 sm:px-7"
               disabled={formDisabled}
               type="submit"
             >
