@@ -9,6 +9,7 @@ import {
   adminInputClass,
   adminLabelClass,
 } from "@/components/admin/admin-form";
+import { EventStatusControl } from "@/components/admin/event-status-control";
 import { PredictionControlBoard } from "@/components/admin/prediction-control-board";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
@@ -66,6 +67,12 @@ export default async function AdminEventPage({
   const query = await searchParams;
   const returnTo = `/admin/events/${eventId}`;
   const diff = providerDiff(event, stateSnapshot.data());
+  const unresolvedFights = fights.docs.filter(
+    (document) =>
+      !["completed", "canceled", "postponed"].includes(
+        String(document.get("status") ?? "unknown"),
+      ),
+  ).length;
   return (
     <main id="main-content">
       <AdminNotice
@@ -82,6 +89,14 @@ export default async function AdminEventPage({
         </div>
         <Badge>{String(event.status)}</Badge>
       </div>
+
+      <EventStatusControl
+        eventId={eventId}
+        eventName={String(event.name)}
+        initialStatus={String(event.status)}
+        totalFights={fights.size}
+        unresolvedFights={unresolvedFights}
+      />
 
       <Card className="mt-8 overflow-hidden">
         <PredictionControlBoard
