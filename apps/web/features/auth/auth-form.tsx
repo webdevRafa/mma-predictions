@@ -28,6 +28,14 @@ import {
 
 type Mode = "login" | "signup";
 
+interface AuthFormProps {
+  mode: Mode;
+  returnTo: string;
+  onAuthenticated?: (() => void) | undefined;
+  onModeChange?: ((mode: Mode) => void) | undefined;
+  onOnboardingRequired?: (() => void) | undefined;
+}
+
 function friendlyAuthError(error: unknown) {
   const code =
     typeof error === "object" && error && "code" in error
@@ -46,7 +54,13 @@ function friendlyAuthError(error: unknown) {
     : "Authentication could not be completed.";
 }
 
-export function AuthForm({ mode, returnTo }: { mode: Mode; returnTo: string }) {
+export function AuthForm({
+  mode,
+  returnTo,
+  onAuthenticated,
+  onModeChange,
+  onOnboardingRequired,
+}: AuthFormProps) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -87,9 +101,13 @@ export function AuthForm({ mode, returnTo }: { mode: Mode; returnTo: string }) {
     if (["banned", "deleted"].includes(result.accountStatus ?? "")) {
       router.push("/account/restricted");
     } else if (result.onboardingRequired) {
-      router.push(
-        `/onboarding?returnTo=${encodeURIComponent(result.returnTo ?? destination)}`,
-      );
+      if (onOnboardingRequired) onOnboardingRequired();
+      else
+        router.push(
+          `/onboarding?returnTo=${encodeURIComponent(result.returnTo ?? destination)}`,
+        );
+    } else if (onAuthenticated) {
+      onAuthenticated();
     } else {
       router.push(result.returnTo ?? destination);
     }
@@ -261,12 +279,22 @@ export function AuthForm({ mode, returnTo }: { mode: Mode; returnTo: string }) {
       ) : null}
       <p className="mt-6 text-center text-sm text-fl-text-muted">
         {mode === "signup" ? "Already have a record?" : "New to FightLobby?"}{" "}
-        <Link
-          className="font-bold text-fl-accent"
-          href={`${mode === "signup" ? "/login" : "/signup"}?returnTo=${encodeURIComponent(returnTo)}`}
-        >
-          {mode === "signup" ? "Sign in" : "Create an account"}
-        </Link>
+        {onModeChange ? (
+          <button
+            className="focus-ring rounded font-bold text-fl-accent"
+            onClick={() => onModeChange(mode === "signup" ? "login" : "signup")}
+            type="button"
+          >
+            {mode === "signup" ? "Sign in" : "Create an account"}
+          </button>
+        ) : (
+          <Link
+            className="font-bold text-fl-accent"
+            href={`${mode === "signup" ? "/login" : "/signup"}?returnTo=${encodeURIComponent(returnTo)}`}
+          >
+            {mode === "signup" ? "Sign in" : "Create an account"}
+          </Link>
+        )}
       </p>
     </div>
   );

@@ -8,7 +8,13 @@ import { useState, type FormEvent } from "react";
 
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
 
-export function HandleForm({ returnTo }: { returnTo: string }) {
+export function HandleForm({
+  returnTo,
+  onCompleted,
+}: {
+  returnTo: string;
+  onCompleted?: (() => void) | undefined;
+}) {
   const router = useRouter();
   const [handle, setHandle] = useState("");
   const [busy, setBusy] = useState(false);
@@ -43,7 +49,8 @@ export function HandleForm({ returnTo }: { returnTo: string }) {
         throw new Error(message);
       }
       trackAnalyticsEvent("handle_created");
-      router.push(returnTo);
+      if (onCompleted) onCompleted();
+      else router.push(returnTo);
       router.refresh();
     } catch (caught) {
       setError(

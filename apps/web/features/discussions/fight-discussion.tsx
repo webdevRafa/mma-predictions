@@ -15,6 +15,7 @@ import {
   CornerUpLeft,
   Flag,
   LoaderCircle,
+  LogIn,
   MessageSquareText,
   RefreshCw,
   Send,
@@ -34,6 +35,8 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
+import { AuthForm } from "@/features/auth/auth-form";
+import { HandleForm } from "@/features/auth/handle-form";
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
 import {
   getFirebaseAppCheckToken,
@@ -44,6 +47,8 @@ import {
 import { mergeDiscussionThreads, sortDiscussionThreads } from "./threading";
 
 type ReplyTarget = { post: DiscussionPost; rootPostId: string };
+type AuthMode = "login" | "signup";
+type AuthStep = "authenticate" | "handle";
 type ReportReason =
   | "harassment"
   | "hate"
@@ -130,8 +135,13 @@ export function FightDiscussion({
   const [reportReason, setReportReason] = useState<ReportReason>("other");
   const [reportNote, setReportNote] = useState("");
   const [reportBusy, setReportBusy] = useState(false);
+  const [authPromptOpen, setAuthPromptOpen] = useState(false);
+  const [authMode, setAuthMode] = useState<AuthMode>("login");
+  const [authStep, setAuthStep] = useState<AuthStep>("authenticate");
   const textarea = useRef<HTMLTextAreaElement>(null);
+  const authDialog = useRef<HTMLDialogElement>(null);
   const reportDialog = useRef<HTMLDialogElement>(null);
+  const discussionReturnTo = `${pathname}#discussion`;
 
   const visibleThreads = useMemo(
     () =>
@@ -222,6 +232,13 @@ export function FightDiscussion({
   }, []);
 
   useEffect(() => {
+    const dialog = authDialog.current;
+    if (!dialog) return;
+    if (authPromptOpen && !dialog.open) dialog.showModal();
+    if (!authPromptOpen && dialog.open) dialog.close();
+  }, [authPromptOpen]);
+
+  useEffect(() => {
     const dialog = reportDialog.current;
     if (!dialog) return;
     if (reporting && !dialog.open) dialog.showModal();
@@ -231,6 +248,19 @@ export function FightDiscussion({
   async function appCheckHeaders() {
     const token = await getFirebaseAppCheckToken();
     return token ? { "X-Firebase-AppCheck": token } : {};
+  }
+
+  function openAuthPrompt(mode: AuthMode = "login") {
+    setAuthMode(mode);
+    setAuthStep("authenticate");
+    setAuthPromptOpen(true);
+    if (mode === "signup")
+      trackAnalyticsEvent("signup_prompted", { source: "discussion" });
+  }
+
+  function closeAuthPrompt() {
+    setAuthPromptOpen(false);
+    setAuthStep("authenticate");
   }
 
   function chooseReply(post: DiscussionPost, rootPostId: string) {
@@ -497,11 +527,21 @@ export function FightDiscussion({
               ref={textarea}
               value={body}
             />
-            <div className="mt-3 flex items-center justify-between gap-4">
-              <span className="font-mono text-[10px] text-fl-text-dim">
-                {[...body].length}/{DISCUSSION_POST_MAX_LENGTH.toLocaleString()}
-              </span>
+            <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
+              <p
+                className="text-xs text-fl-text-dim"
+                id={`discussion-composer-help-${fightId}`}
+              >
+                {!body.trim() ? (
+                  <span>Start typing to enable publishing. </span>
+                ) : null}
+                <span className="font-mono text-[10px]">
+                  {[...body].length}/
+                  {DISCUSSION_POST_MAX_LENGTH.toLocaleString()}
+                </span>
+              </p>
               <Button
+                aria-describedby={`discussion-composer-help-${fightId}`}
                 disabled={publishing || !body.trim()}
                 size="sm"
                 type="submit"
@@ -529,12 +569,14 @@ export function FightDiscussion({
               Sign in with a verified FightLobby account to publish posts and
               replies.
             </p>
-            <Link
-              className="focus-ring mt-4 inline-flex min-h-10 items-center rounded-lg bg-fl-accent px-4 text-xs font-bold text-fl-bg"
-              href={`/login?returnTo=${encodeURIComponent(`${pathname}#discussion`)}`}
+            <button
+              className="focus-ring mt-4 inline-flex min-h-10 cursor-pointer items-center gap-2 rounded-lg bg-fl-accent px-4 text-xs font-bold text-fl-bg transition hover:bg-fl-accent-strong"
+              onClick={() => openAuthPrompt("login")}
+              type="button"
             >
+              <LogIn aria-hidden="true" size={14} />
               Sign in to post
-            </Link>
+            </button>
           </div>
         )}
       </div>
@@ -660,6 +702,78 @@ export function FightDiscussion({
           </Button>
         </div>
       ) : null}
+
+      <dialog
+        aria-describedby="discussion-auth-description"
+        aria-labelledby="discussion-auth-title"
+        className="m-auto max-h-[min(90vh,48rem)] w-[min(92vw,34rem)] overflow-y-auto rounded-2xl border border-fl-border bg-fl-surface-1 p-0 text-fl-text shadow-2xl backdrop:bg-black/75"
+        onCancel={closeAuthPrompt}
+        onClose={() => setAuthPromptOpen(false)}
+        ref={authDialog}
+      >
+        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-fl-border bg-fl-surface-1 p-5">
+          <div>
+            <p className="eyebrow">
+              {authStep === "handle" ? "One last step" : "FightLobby account"}
+            </p>
+            <h2
+              className="mt-2 font-display text-2xl font-bold"
+              id="discussion-auth-title"
+            >
+              {authStep === "handle"
+                ? "Choose your corner"
+                : authMode === "login"
+                  ? "Sign in to join the discussion"
+                  : "Create your account"}
+            </h2>
+            <p
+              className="mt-2 text-sm leading-6 text-fl-text-muted"
+              id="discussion-auth-description"
+            >
+              {authStep === "handle"
+                ? "Choose the public handle that will appear beside your posts."
+                : "You’ll stay on this matchup and return to this discussion when you’re done."}
+            </p>
+          </div>
+          <button
+            aria-label="Close account dialog"
+            className="focus-ring shrink-0 rounded-lg border border-fl-border p-2 text-fl-text-muted transition hover:bg-fl-surface-2 hover:text-fl-text"
+            onClick={closeAuthPrompt}
+            type="button"
+          >
+            <X aria-hidden="true" size={18} />
+          </button>
+        </div>
+        <div className="p-5 sm:p-6">
+          {authStep === "handle" ? (
+            <HandleForm
+              onCompleted={() => {
+                closeAuthPrompt();
+                requestAnimationFrame(() => textarea.current?.focus());
+              }}
+              returnTo={discussionReturnTo}
+            />
+          ) : (
+            <AuthForm
+              key={authMode}
+              mode={authMode}
+              onAuthenticated={() => {
+                closeAuthPrompt();
+                requestAnimationFrame(() => textarea.current?.focus());
+              }}
+              onModeChange={(mode) => {
+                setAuthMode(mode);
+                if (mode === "signup")
+                  trackAnalyticsEvent("signup_prompted", {
+                    source: "discussion",
+                  });
+              }}
+              onOnboardingRequired={() => setAuthStep("handle")}
+              returnTo={discussionReturnTo}
+            />
+          )}
+        </div>
+      </dialog>
 
       <dialog
         aria-labelledby="discussion-report-title"
