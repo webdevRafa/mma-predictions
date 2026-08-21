@@ -22,7 +22,12 @@ export interface SessionUser {
   handle?: string;
 }
 
-export async function getOptionalSession(): Promise<SessionUser | null> {
+export interface SessionIdentity {
+  uid: string;
+  emailVerified: boolean;
+}
+
+async function getOptionalSessionIdentity(): Promise<SessionIdentity | null> {
   const cookie = (await cookies()).get(SESSION_COOKIE_NAME)?.value;
   if (!cookie) return null;
   try {
@@ -30,10 +35,29 @@ export async function getOptionalSession(): Promise<SessionUser | null> {
       cookie,
       true,
     );
-    const account = await getAccountRecordSummary(decoded.uid);
     return {
       uid: decoded.uid,
       emailVerified: decoded.email_verified === true,
+    };
+  } catch {
+    return null;
+  }
+}
+
+export async function requireSessionIdentity(): Promise<SessionIdentity> {
+  const identity = await getOptionalSessionIdentity();
+  if (!identity)
+    throw new ApiError("Authentication is required", 401, "unauthenticated");
+  return identity;
+}
+
+export async function getOptionalSession(): Promise<SessionUser | null> {
+  const identity = await getOptionalSessionIdentity();
+  if (!identity) return null;
+  try {
+    const account = await getAccountRecordSummary(identity.uid);
+    return {
+      ...identity,
       ...account,
     };
   } catch {
