@@ -229,14 +229,12 @@ export default async function FightPage({ params }: Props) {
           </>
         }
         prediction={<PredictionExperience fight={fight} />}
-        stats={
-          <>
-            <StatsComparison fighterA={fighterA} fighterB={fighterB} />
-            <FightDiscussion
-              fightId={fight.id}
-              fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
-            />
-          </>
+        stats={<StatsComparison fighterA={fighterA} fighterB={fighterB} />}
+        posts={
+          <FightDiscussion
+            fightId={fight.id}
+            fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
+          />
         }
       />
     </main>

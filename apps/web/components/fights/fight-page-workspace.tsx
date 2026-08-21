@@ -12,12 +12,13 @@ import {
 
 import { cn } from "@/lib/cn";
 
-type MobileFightSection = "predict" | "stats" | "lobby";
+type MobileFightSection = "predict" | "stats" | "posts" | "lobby";
 
 const sections: { id: MobileFightSection; label: string }[] = [
   { id: "predict", label: "Predict" },
   { id: "stats", label: "Stats" },
-  { id: "lobby", label: "Lobby" },
+  { id: "posts", label: "Posts" },
+  { id: "lobby", label: "Live chat" },
 ];
 
 export function FightPageWorkspace({
@@ -25,6 +26,7 @@ export function FightPageWorkspace({
   fighterBName,
   prediction,
   stats,
+  posts,
   lobby,
   backHref,
   backLabel,
@@ -33,6 +35,7 @@ export function FightPageWorkspace({
   fighterBName: string;
   prediction: ReactNode;
   stats: ReactNode;
+  posts: ReactNode;
   lobby: ReactNode;
   backHref: string;
   backLabel: string;
@@ -113,7 +116,7 @@ export function FightPageWorkspace({
         </div>
         <div
           aria-label="Choose fight section"
-          className="shell grid grid-cols-3"
+          className="shell grid grid-cols-4"
           role="tablist"
         >
           {sections.map((section, index) => {
@@ -123,7 +126,7 @@ export function FightPageWorkspace({
                 aria-controls={panelId(section.id)}
                 aria-selected={selected}
                 className={cn(
-                  "focus-ring relative min-h-12 cursor-pointer px-3 text-xs font-bold transition-colors",
+                  "focus-ring relative min-h-12 cursor-pointer px-1 text-[11px] font-bold transition-colors sm:px-3 sm:text-xs",
                   selected
                     ? "text-fl-text"
                     : "text-fl-text-muted hover:text-fl-text",
@@ -175,6 +178,15 @@ export function FightPageWorkspace({
             tabIndex={0}
           >
             <div className="min-w-0 space-y-6">{stats}</div>
+          </section>
+          <section
+            aria-labelledby={tabId("posts")}
+            className={panelClassName("posts")}
+            id={panelId("posts")}
+            role="tabpanel"
+            tabIndex={0}
+          >
+            {posts}
           </section>
           <Link
             className="focus-ring hidden items-center gap-2 rounded-lg text-sm font-bold text-fl-accent lg:inline-flex"
