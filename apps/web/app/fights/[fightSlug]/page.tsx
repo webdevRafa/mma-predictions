@@ -4,6 +4,7 @@ import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
 import { AdSlot } from "@/components/ads/ad-slot";
+import { FightResultBadge } from "@/components/fights/fight-result-badge";
 import { FightPageWorkspace } from "@/components/fights/fight-page-workspace";
 import { StatsComparison } from "@/components/fights/stats-comparison";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
@@ -15,6 +16,7 @@ import { FightDiscussion } from "@/features/discussions/fight-discussion";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
 import { PredictionExperience } from "@/features/predictions/prediction-experience";
 import { getPublicFight } from "@/lib/data/public";
+import { resultBelongsToFighter } from "@/lib/fight-result";
 import { formatCardSegment, formatRecord } from "@/lib/format";
 import { isFightIndexable } from "@/lib/seo/indexability";
 import { absoluteUrl } from "@/lib/seo/site";
@@ -76,6 +78,10 @@ export default async function FightPage({ params }: Props) {
   const fighterA = fighters.find((fighter) => fighter.id === fight.fighterAId);
   const fighterB = fighters.find((fighter) => fighter.id === fight.fighterBId);
   if (!fighterA || !fighterB) notFound();
+  const fighterAWon = resultBelongsToFighter(fight.result, fighterA.id);
+  const fighterBWon = resultBelongsToFighter(fight.result, fighterB.id);
+  const noWinnerResult =
+    fight.result && !fight.result.winnerFighterId ? fight.result : undefined;
   return (
     <main className="overflow-x-clip" id="main-content">
       <TrackAnalyticsEvent
@@ -148,10 +154,28 @@ export default async function FightPage({ params }: Props) {
             {fighterA.name.full} vs {fighterB.name.full} predictions, stats, and
             live chat
           </h1>
-          <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-8">
+          {noWinnerResult ? (
+            <div className="mt-8 flex justify-center">
+              <FightResultBadge
+                className="justify-center text-center"
+                result={noWinnerResult}
+              />
+            </div>
+          ) : null}
+          <div
+            className={`${noWinnerResult ? "mt-5" : "mt-8"} grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-8`}
+          >
             <div className="min-w-0 text-center">
               {fighterA.name.nickname ? (
                 <p className="eyebrow">“{fighterA.name.nickname}”</p>
+              ) : null}
+              {fighterAWon && fight.result ? (
+                <div className="mt-2 flex justify-center">
+                  <FightResultBadge
+                    className="justify-center text-center"
+                    result={fight.result}
+                  />
+                </div>
               ) : null}
               <Link
                 className="focus-ring mt-2 inline-block rounded-md"
@@ -174,6 +198,14 @@ export default async function FightPage({ params }: Props) {
             <div className="min-w-0 text-center">
               {fighterB.name.nickname ? (
                 <p className="eyebrow">“{fighterB.name.nickname}”</p>
+              ) : null}
+              {fighterBWon && fight.result ? (
+                <div className="mt-2 flex justify-center">
+                  <FightResultBadge
+                    className="justify-center text-center"
+                    result={fight.result}
+                  />
+                </div>
               ) : null}
               <Link
                 className="focus-ring mt-2 inline-block rounded-md"

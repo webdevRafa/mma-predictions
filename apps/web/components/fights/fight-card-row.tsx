@@ -2,8 +2,10 @@ import type { Fight } from "@fightlobby/domain";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import Link from "next/link";
 
+import { FightResultBadge } from "@/components/fights/fight-result-badge";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Badge } from "@/components/ui/badge";
+import { resultBelongsToFighter } from "@/lib/fight-result";
 import { formatRecord } from "@/lib/format";
 
 export function FightCardRow({
@@ -13,6 +15,11 @@ export function FightCardRow({
   fight: Fight;
   featuredLabel?: "Main event" | "Co-main event";
 }) {
+  const fighterAWon = resultBelongsToFighter(fight.result, fight.fighterAId);
+  const fighterBWon = resultBelongsToFighter(fight.result, fight.fighterBId);
+  const noWinnerResult =
+    fight.result && !fight.result.winnerFighterId ? fight.result : undefined;
+
   return (
     <article className="group border-b border-fl-border/80 p-4 last:border-b-0 sm:p-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
@@ -23,6 +30,7 @@ export function FightCardRow({
             </span>
           ) : null}
           {fight.isTitleFight ? <Badge tone="accent">Title fight</Badge> : null}
+          {noWinnerResult ? <FightResultBadge result={noWinnerResult} /> : null}
         </div>
         <LiveStatusFragment
           collection="fights"
@@ -36,9 +44,14 @@ export function FightCardRow({
         href={`/fights/${fight.slug}`}
       >
         <div className="min-w-0">
-          <h3 className="font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent">
-            {fight.fighterA.name.full}
-          </h3>
+          <div className="flex flex-wrap items-center gap-2">
+            <h3 className="font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent">
+              {fight.fighterA.name.full}
+            </h3>
+            {fighterAWon && fight.result ? (
+              <FightResultBadge result={fight.result} />
+            ) : null}
+          </div>
           <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
             {formatRecord(fight.fighterA.record)}
           </p>
@@ -49,9 +62,17 @@ export function FightCardRow({
           <span className="h-px flex-1 bg-fl-border md:hidden" />
         </div>
         <div className="min-w-0 md:text-right">
-          <h3 className="font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent">
-            {fight.fighterB.name.full}
-          </h3>
+          <div className="flex flex-wrap items-center gap-2 md:justify-end">
+            {fighterBWon && fight.result ? (
+              <FightResultBadge
+                className="order-2 md:order-1"
+                result={fight.result}
+              />
+            ) : null}
+            <h3 className="order-1 font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent md:order-2">
+              {fight.fighterB.name.full}
+            </h3>
+          </div>
           <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
             {formatRecord(fight.fighterB.record)}
           </p>
