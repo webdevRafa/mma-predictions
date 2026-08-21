@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  DISCUSSION_POST_MAX_LENGTH,
   discussionPageSchema,
   type DiscussionPost,
   type DiscussionThread,
@@ -18,7 +17,6 @@ import {
   LogIn,
   MessageSquareText,
   RefreshCw,
-  Send,
   ShieldCheck,
   X,
 } from "lucide-react";
@@ -45,6 +43,7 @@ import {
 } from "@/lib/firebase/client";
 
 import { mergeDiscussionThreads, sortDiscussionThreads } from "./threading";
+import { DiscussionComposer } from "./discussion-composer";
 
 type ReplyTarget = { post: DiscussionPost; rootPostId: string };
 type AuthMode = "login" | "signup";
@@ -138,7 +137,14 @@ export function FightDiscussion({
   const [authPromptOpen, setAuthPromptOpen] = useState(false);
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [authStep, setAuthStep] = useState<AuthStep>("authenticate");
+  const [composerInView, setComposerInView] = useState(true);
+  const [mobileComposerOpen, setMobileComposerOpen] = useState(false);
+  const [resumeMobileComposerAfterAuth, setResumeMobileComposerAfterAuth] =
+    useState(false);
   const textarea = useRef<HTMLTextAreaElement>(null);
+  const composerAnchor = useRef<HTMLDivElement>(null);
+  const mobileComposerDialog = useRef<HTMLDialogElement>(null);
+  const mobileTextarea = useRef<HTMLTextAreaElement>(null);
   const authDialog = useRef<HTMLDialogElement>(null);
   const reportDialog = useRef<HTMLDialogElement>(null);
   const discussionReturnTo = `${pathname}#discussion`;
@@ -239,6 +245,30 @@ export function FightDiscussion({
   }, [authPromptOpen]);
 
   useEffect(() => {
+    const dialog = mobileComposerDialog.current;
+    if (!dialog) return;
+    if (mobileComposerOpen && !dialog.open) {
+      dialog.showModal();
+      requestAnimationFrame(() => mobileTextarea.current?.focus());
+    }
+    if (!mobileComposerOpen && dialog.open) dialog.close();
+  }, [mobileComposerOpen]);
+
+  useEffect(() => {
+    const anchor = composerAnchor.current;
+    if (!anchor || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setComposerInView(Boolean(entry?.isIntersecting)),
+      {
+        rootMargin: "-152px 0px 0px 0px",
+        threshold: 0,
+      },
+    );
+    observer.observe(anchor);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     const dialog = reportDialog.current;
     if (!dialog) return;
     if (reporting && !dialog.open) dialog.showModal();
@@ -250,9 +280,13 @@ export function FightDiscussion({
     return token ? { "X-Firebase-AppCheck": token } : {};
   }
 
-  function openAuthPrompt(mode: AuthMode = "login") {
+  function openAuthPrompt(
+    mode: AuthMode = "login",
+    resumeMobileComposer = false,
+  ) {
     setAuthMode(mode);
     setAuthStep("authenticate");
+    setResumeMobileComposerAfterAuth(resumeMobileComposer);
     setAuthPromptOpen(true);
     if (mode === "signup")
       trackAnalyticsEvent("signup_prompted", { source: "discussion" });
@@ -261,10 +295,35 @@ export function FightDiscussion({
   function closeAuthPrompt() {
     setAuthPromptOpen(false);
     setAuthStep("authenticate");
+    setResumeMobileComposerAfterAuth(false);
+  }
+
+  function completeAuthPrompt() {
+    const resumeMobile = resumeMobileComposerAfterAuth;
+    setAuthPromptOpen(false);
+    setAuthStep("authenticate");
+    setResumeMobileComposerAfterAuth(false);
+    if (resumeMobile) {
+      setMobileComposerOpen(true);
+      return;
+    }
+    requestAnimationFrame(() => textarea.current?.focus());
+  }
+
+  function openMobileComposer() {
+    if (!currentUser) {
+      openAuthPrompt("login", true);
+      return;
+    }
+    setMobileComposerOpen(true);
   }
 
   function chooseReply(post: DiscussionPost, rootPostId: string) {
     setReplyTarget({ post, rootPostId });
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      setMobileComposerOpen(true);
+      return;
+    }
     requestAnimationFrame(() => textarea.current?.focus());
   }
 
@@ -301,6 +360,7 @@ export function FightDiscussion({
       const rootPostId = replyTarget?.rootPostId;
       setBody("");
       setReplyTarget(null);
+      setMobileComposerOpen(false);
       if (rootPostId)
         setExpanded((current) => new Set([...current, rootPostId]));
       trackAnalyticsEvent(
@@ -463,13 +523,16 @@ export function FightDiscussion({
   }
 
   return (
-    <Card className="overflow-hidden" id="discussion">
+    <Card className="overflow-clip" id="discussion">
       <CardHeader
         description="Persistent matchup analysis and replies. Separate from the live fight lobby."
         eyebrow="Community posts"
         title="Matchup discussion"
       />
-      <div className="border-b border-fl-border p-5 sm:p-6">
+      <div
+        className="border-b border-fl-border p-5 sm:p-6"
+        ref={composerAnchor}
+      >
         {error ? (
           <p
             className="mb-4 flex items-start gap-2 rounded-xl border border-fl-danger/30 bg-fl-danger/10 p-3 text-sm text-fl-danger"
@@ -489,72 +552,24 @@ export function FightDiscussion({
         {!authReady ? (
           <div className="h-28 animate-pulse rounded-xl bg-fl-surface-2" />
         ) : currentUser ? (
-          <form onSubmit={publish}>
-            {replyTarget ? (
-              <div className="mb-3 flex items-start justify-between gap-3 rounded-xl border border-fl-border bg-fl-surface-2 p-3 text-xs text-fl-text-muted">
-                <span>
-                  Replying to{" "}
-                  <strong className="text-fl-text">
-                    @{replyTarget.post.author.handle}
-                  </strong>
-                  <span className="mt-1 block truncate text-fl-text-dim">
-                    {replyTarget.post.body}
-                  </span>
-                </span>
-                <button
-                  aria-label="Cancel reply"
-                  className="focus-ring shrink-0 rounded p-1 hover:text-fl-text"
-                  onClick={() => setReplyTarget(null)}
-                  type="button"
-                >
-                  <X size={15} />
-                </button>
-              </div>
-            ) : null}
-            <label className="sr-only" htmlFor={`discussion-${fightId}`}>
-              Add a post about {fightLabel}
-            </label>
-            <textarea
-              className="focus-ring min-h-28 w-full resize-y rounded-xl border border-fl-border bg-fl-surface-2 p-4 text-sm leading-6 placeholder:text-fl-text-dim"
-              id={`discussion-${fightId}`}
-              maxLength={DISCUSSION_POST_MAX_LENGTH}
-              onChange={(event) => setBody(event.target.value)}
-              placeholder={
-                replyTarget
-                  ? `Reply to @${replyTarget.post.author.handle}…`
-                  : "Share your matchup read…"
-              }
-              ref={textarea}
-              value={body}
-            />
-            <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-              <p
-                className="text-xs text-fl-text-dim"
-                id={`discussion-composer-help-${fightId}`}
-              >
-                {!body.trim() ? (
-                  <span>Start typing to enable publishing. </span>
-                ) : null}
-                <span className="font-mono text-[10px]">
-                  {[...body].length}/
-                  {DISCUSSION_POST_MAX_LENGTH.toLocaleString()}
-                </span>
-              </p>
-              <Button
-                aria-describedby={`discussion-composer-help-${fightId}`}
-                disabled={publishing || !body.trim()}
-                size="sm"
-                type="submit"
-              >
-                {publishing ? (
-                  <LoaderCircle className="animate-spin" size={15} />
-                ) : (
-                  <Send size={15} />
-                )}
-                {replyTarget ? "Post reply" : "Publish post"}
-              </Button>
-            </div>
-          </form>
+          <DiscussionComposer
+            body={body}
+            composerId={`discussion-${fightId}`}
+            fightLabel={fightLabel}
+            onBodyChange={setBody}
+            onCancelReply={() => setReplyTarget(null)}
+            onSubmit={publish}
+            publishing={publishing}
+            reply={
+              replyTarget
+                ? {
+                    body: replyTarget.post.body,
+                    handle: replyTarget.post.author.handle,
+                  }
+                : null
+            }
+            textareaRef={textarea}
+          />
         ) : (
           <div className="rounded-xl border border-dashed border-fl-border bg-fl-surface-2 p-5 text-center">
             <MessageSquareText
@@ -580,6 +595,40 @@ export function FightDiscussion({
           </div>
         )}
       </div>
+
+      {authReady && !composerInView ? (
+        <div className="fixed inset-x-0 top-[9.5rem] z-40 border-y border-fl-border bg-fl-bg/95 p-2 shadow-[0_10px_30px_rgba(0,0,0,0.35)] backdrop-blur md:hidden">
+          <button
+            aria-controls={
+              currentUser
+                ? `discussion-mobile-composer-${fightId}`
+                : `discussion-auth-dialog-${fightId}`
+            }
+            aria-haspopup="dialog"
+            className="focus-ring flex min-h-11 w-full cursor-pointer items-center gap-3 rounded-xl border border-fl-border bg-fl-surface-2 px-3 text-left transition hover:border-fl-accent/50 hover:bg-fl-surface-3"
+            onClick={openMobileComposer}
+            type="button"
+          >
+            <MessageSquareText
+              aria-hidden="true"
+              className="shrink-0 text-fl-accent"
+              size={17}
+            />
+            <span className="min-w-0 flex-1 truncate text-sm text-fl-text-muted">
+              {!currentUser
+                ? "Sign in to write a post"
+                : replyTarget
+                  ? `Reply to @${replyTarget.post.author.handle}`
+                  : body.trim()
+                    ? "Continue your post draft…"
+                    : "Write a post…"}
+            </span>
+            <span className="shrink-0 text-xs font-bold text-fl-accent">
+              {currentUser ? "Open" : "Sign in"}
+            </span>
+          </button>
+        </div>
+      ) : null}
 
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-fl-border px-5 py-3 sm:px-6">
         <div className="flex items-center gap-1 rounded-lg border border-fl-border bg-fl-surface-2 p-1">
@@ -704,8 +753,66 @@ export function FightDiscussion({
       ) : null}
 
       <dialog
+        aria-describedby="discussion-mobile-composer-description"
+        aria-labelledby="discussion-mobile-composer-title"
+        className="fixed inset-x-0 bottom-0 top-auto m-0 max-h-[85dvh] w-full max-w-none overflow-y-auto rounded-t-2xl border border-b-0 border-fl-border bg-fl-surface-1 p-0 text-fl-text shadow-2xl backdrop:bg-black/75 md:hidden"
+        id={`discussion-mobile-composer-${fightId}`}
+        onCancel={() => setMobileComposerOpen(false)}
+        onClose={() => setMobileComposerOpen(false)}
+        ref={mobileComposerDialog}
+      >
+        <div className="flex items-start justify-between gap-4 border-b border-fl-border p-5">
+          <div>
+            <p className="eyebrow">Community posts</p>
+            <h2
+              className="mt-2 font-display text-2xl font-bold"
+              id="discussion-mobile-composer-title"
+            >
+              {replyTarget ? "Write your reply" : "Write a post"}
+            </h2>
+            <p
+              className="mt-1 text-xs leading-5 text-fl-text-muted"
+              id="discussion-mobile-composer-description"
+            >
+              {fightLabel}
+            </p>
+          </div>
+          <button
+            aria-label="Close post composer"
+            className="focus-ring shrink-0 rounded-lg border border-fl-border p-2 text-fl-text-muted transition hover:bg-fl-surface-2 hover:text-fl-text"
+            onClick={() => setMobileComposerOpen(false)}
+            type="button"
+          >
+            <X aria-hidden="true" size={18} />
+          </button>
+        </div>
+        <div className="p-5 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+          <DiscussionComposer
+            body={body}
+            composerId={`discussion-mobile-${fightId}`}
+            fightLabel={fightLabel}
+            onBodyChange={setBody}
+            onCancelReply={() => setReplyTarget(null)}
+            onSubmit={publish}
+            publishing={publishing}
+            reply={
+              replyTarget
+                ? {
+                    body: replyTarget.post.body,
+                    handle: replyTarget.post.author.handle,
+                  }
+                : null
+            }
+            textareaRef={mobileTextarea}
+            variant="sheet"
+          />
+        </div>
+      </dialog>
+
+      <dialog
         aria-describedby="discussion-auth-description"
         aria-labelledby="discussion-auth-title"
+        id={`discussion-auth-dialog-${fightId}`}
         className="m-auto max-h-[min(90vh,48rem)] w-[min(92vw,34rem)] overflow-y-auto rounded-2xl border border-fl-border bg-fl-surface-1 p-0 text-fl-text shadow-2xl backdrop:bg-black/75"
         onCancel={closeAuthPrompt}
         onClose={() => setAuthPromptOpen(false)}
@@ -748,8 +855,7 @@ export function FightDiscussion({
           {authStep === "handle" ? (
             <HandleForm
               onCompleted={() => {
-                closeAuthPrompt();
-                requestAnimationFrame(() => textarea.current?.focus());
+                completeAuthPrompt();
               }}
               returnTo={discussionReturnTo}
             />
@@ -758,8 +864,7 @@ export function FightDiscussion({
               key={authMode}
               mode={authMode}
               onAuthenticated={() => {
-                closeAuthPrompt();
-                requestAnimationFrame(() => textarea.current?.focus());
+                completeAuthPrompt();
               }}
               onModeChange={(mode) => {
                 setAuthMode(mode);
