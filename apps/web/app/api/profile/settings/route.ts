@@ -10,9 +10,6 @@ const settingsSchema = z
     displayName: z.string().trim().min(2).max(50).nullable().optional(),
     profileVisibility: z.enum(["public", "limited"]).optional(),
     timezone: z.string().trim().min(1).max(100).optional(),
-    hideUpcomingPicks: z.boolean().optional(),
-    emailEventReminders: z.boolean().optional(),
-    emailResults: z.boolean().optional(),
   })
   .strict()
   .refine(
@@ -46,15 +43,6 @@ export async function PATCH(request: Request) {
     }
     const preferences = {
       ...(input.timezone !== undefined ? { timezone: input.timezone } : {}),
-      ...(input.hideUpcomingPicks !== undefined
-        ? { hideUpcomingPicks: input.hideUpcomingPicks }
-        : {}),
-      ...(input.emailEventReminders !== undefined
-        ? { emailEventReminders: input.emailEventReminders }
-        : {}),
-      ...(input.emailResults !== undefined
-        ? { emailResults: input.emailResults }
-        : {}),
     };
     if (Object.keys(preferences).length > 0) {
       batch.set(

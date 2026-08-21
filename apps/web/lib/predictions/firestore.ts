@@ -463,9 +463,10 @@ export async function getPredictionExperience(
       : null,
     summary,
     canSubmit,
-    reveal:
-      predictionSnapshot.exists ||
-      fight.predictionStatus !== "open" ||
-      !canSubmit,
+    reveal: shouldRevealConsensus(predictionSnapshot.exists),
   };
+}
+
+export function shouldRevealConsensus(hasOwnPrediction: boolean) {
+  return hasOwnPrediction;
 }

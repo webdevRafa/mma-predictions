@@ -20,7 +20,7 @@ export default async function DeleteAccountPage() {
         <CardHeader
           eyebrow="Permanent account action"
           title="Delete your FightLobby account"
-          description="This signs you out, quarantines your handle, marks private account data for deletion, and limits the public profile."
+          description="This permanently removes your sign-in, private account data, predictions, follows, and uploaded files. Public posts and chat history are deleted or anonymized so conversations remain understandable."
         />
         <div className="p-5 sm:p-6">
           <DeleteAccountForm />

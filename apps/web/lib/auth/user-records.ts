@@ -50,11 +50,7 @@ export async function ensureUserRecords(
         roles: ["member"],
         termsVersion: "pending",
         onboardingComplete: false,
-        preferences: {
-          hideUpcomingPicks: true,
-          emailEventReminders: false,
-          emailResults: false,
-        },
+        preferences: {},
         moderation: { trustLevel: 0 },
         createdAt: FieldValue.serverTimestamp(),
         updatedAt: FieldValue.serverTimestamp(),
@@ -149,9 +145,6 @@ export async function getPrivateAccountView(
         typeof preferenceRecord.timezone === "string"
           ? preferenceRecord.timezone
           : "America/Chicago",
-      hideUpcomingPicks: preferenceRecord.hideUpcomingPicks !== false,
-      emailEventReminders: preferenceRecord.emailEventReminders === true,
-      emailResults: preferenceRecord.emailResults === true,
     },
   };
 }

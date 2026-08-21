@@ -10,8 +10,5 @@ export interface PrivateAccountView {
   stats: PublicProfileStats;
   preferences: {
     timezone: string;
-    hideUpcomingPicks: boolean;
-    emailEventReminders: boolean;
-    emailResults: boolean;
   };
 }

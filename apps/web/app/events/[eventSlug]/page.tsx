@@ -14,8 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
-import { FollowButton } from "@/features/profiles/follow-button";
-import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
+import { getPublicEvent } from "@/lib/data/public";
 import { absoluteUrl } from "@/lib/seo/site";
 import { isEventIndexable } from "@/lib/seo/indexability";
 import { resolveEventSchedule } from "@/lib/events/timing";
@@ -23,8 +22,8 @@ import { getServerRenderTime } from "@/lib/time/server";
 
 type Props = { params: Promise<{ eventSlug: string }> };
 
-export async function generateStaticParams() {
-  return (await listPublicEvents()).map((event) => ({ eventSlug: event.slug }));
+export function generateStaticParams() {
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -169,7 +168,6 @@ export default async function EventPage({ params }: Props) {
                   eventTiming={eventTiming}
                   renderedAt={renderedAt}
                 />
-                <FollowButton targetId={event.id} targetType="event" />
               </div>
               <h1 className="mt-5 font-display text-5xl leading-[.88] font-extrabold text-balance sm:text-7xl lg:text-8xl">
                 {event.name}

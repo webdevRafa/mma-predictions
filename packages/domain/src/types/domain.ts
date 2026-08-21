@@ -265,9 +265,6 @@ export interface PublicProfile {
 
 export interface PrivateUserPreferences {
   timezone?: string | undefined;
-  hideUpcomingPicks: boolean;
-  emailEventReminders: boolean;
-  emailResults: boolean;
 }
 
 export interface PrivateUser {

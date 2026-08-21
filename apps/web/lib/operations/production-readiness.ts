@@ -12,17 +12,36 @@ export interface ProductionReadinessReport {
 }
 
 const requiredValues = [
-  "NEXT_PUBLIC_FIREBASE_API_KEY",
-  "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN",
-  "NEXT_PUBLIC_FIREBASE_PROJECT_ID",
-  "NEXT_PUBLIC_FIREBASE_DATABASE_URL",
-  "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
-  "NEXT_PUBLIC_FIREBASE_APP_ID",
-  "VITE_FIREBASE_APP_CHECK_SITE_KEY",
-  "FIREBASE_ADMIN_PROJECT_ID",
-  "FIREBASE_ADMIN_CLIENT_EMAIL",
-  "FIREBASE_ADMIN_PRIVATE_KEY",
-  "SPORTSDATAIO_MMA_KEY",
+  ["Firebase API key", "VITE_FIREBASE_API_KEY", "NEXT_PUBLIC_FIREBASE_API_KEY"],
+  [
+    "Firebase Auth domain",
+    "VITE_FIREBASE_AUTH_DOMAIN",
+    "NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN",
+  ],
+  [
+    "Firebase project ID",
+    "VITE_FIREBASE_PROJECT_ID",
+    "NEXT_PUBLIC_FIREBASE_PROJECT_ID",
+  ],
+  [
+    "Firebase Realtime Database URL",
+    "VITE_FIREBASE_DATABASE_URL",
+    "NEXT_PUBLIC_FIREBASE_DATABASE_URL",
+  ],
+  [
+    "Firebase Storage bucket",
+    "VITE_FIREBASE_STORAGE_BUCKET",
+    "NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET",
+  ],
+  ["Firebase app ID", "VITE_FIREBASE_APP_ID", "NEXT_PUBLIC_FIREBASE_APP_ID"],
+  [
+    "Firebase App Check site key",
+    "VITE_FIREBASE_APP_CHECK_SITE_KEY",
+    "NEXT_PUBLIC_FIREBASE_APP_CHECK_SITE_KEY",
+  ],
+  ["Firebase Admin project ID", "FIREBASE_ADMIN_PROJECT_ID"],
+  ["Firebase Admin client email", "FIREBASE_ADMIN_CLIENT_EMAIL"],
+  ["Firebase Admin private key", "FIREBASE_ADMIN_PRIVATE_KEY"],
 ] as const;
 
 const adConfiguration = [
@@ -38,6 +57,10 @@ const adConfiguration = [
 
 function value(environment: Environment, key: string) {
   return environment[key]?.trim() ?? "";
+}
+
+function firstValue(environment: Environment, keys: readonly string[]) {
+  return keys.map((key) => value(environment, key)).find(Boolean) ?? "";
 }
 
 function looksLikePlaceholder(input: string) {
@@ -81,13 +104,13 @@ export function evaluateProductionReadiness(
   const blockers: ReadinessIssue[] = [];
   const warnings: ReadinessIssue[] = [];
 
-  for (const key of requiredValues) {
-    const configured = value(environment, key);
+  for (const [label, ...keys] of requiredValues) {
+    const configured = firstValue(environment, keys);
     if (!configured || looksLikePlaceholder(configured))
       blockers.push(
         issue(
-          `missing_${key.toLowerCase()}`,
-          `${key} must contain a non-placeholder production value.`,
+          `missing_${keys[0].toLowerCase()}`,
+          `${label} must contain a non-placeholder production value (${keys.join(" or ")}).`,
         ),
       );
   }
@@ -95,7 +118,10 @@ export function evaluateProductionReadiness(
   const canonicalIssue = canonicalUrlIssue(environment);
   if (canonicalIssue) blockers.push(canonicalIssue);
 
-  const publicProject = value(environment, "NEXT_PUBLIC_FIREBASE_PROJECT_ID");
+  const publicProject = firstValue(environment, [
+    "VITE_FIREBASE_PROJECT_ID",
+    "NEXT_PUBLIC_FIREBASE_PROJECT_ID",
+  ]);
   const adminProject = value(environment, "FIREBASE_ADMIN_PROJECT_ID");
   if (publicProject && adminProject && publicProject !== adminProject)
     blockers.push(
@@ -120,20 +146,6 @@ export function evaluateProductionReadiness(
       issue(
         "fixture_data_source",
         "FIGHTLOBBY_DATA_SOURCE must be firestore in production.",
-      ),
-    );
-  if (value(environment, "MMA_PROVIDER").toLowerCase() !== "sportsdataio")
-    blockers.push(
-      issue(
-        "non_production_provider",
-        "MMA_PROVIDER must select the licensed sportsdataio adapter.",
-      ),
-    );
-  if (value(environment, "SPORTSDATAIO_COMMERCIAL_RIGHTS_CONFIRMED") !== "true")
-    blockers.push(
-      issue(
-        "provider_rights_unconfirmed",
-        "SPORTSDATAIO_COMMERCIAL_RIGHTS_CONFIRMED must be true.",
       ),
     );
   if (value(environment, "NEXT_PUBLIC_USE_FIREBASE_EMULATORS") !== "false")
@@ -169,7 +181,12 @@ export function evaluateProductionReadiness(
       ),
     );
 
-  if (!value(environment, "NEXT_PUBLIC_GA_MEASUREMENT_ID"))
+  if (
+    !firstValue(environment, [
+      "NEXT_PUBLIC_GA_MEASUREMENT_ID",
+      "VITE_FIREBASE_MEASUREMENT_ID",
+    ])
+  )
     warnings.push(
       issue(
         "analytics_not_configured",

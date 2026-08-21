@@ -18,6 +18,7 @@ import { useState, type MouseEvent } from "react";
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { BlockedMemberList } from "@/features/chat/blocked-member-list";
+import { FollowingList } from "@/features/profiles/following-list";
 import { PreferenceForm } from "@/features/settings/preference-form";
 import { ProfileSettingsForm } from "@/features/settings/profile-settings-form";
 import {
@@ -82,8 +83,8 @@ function AccountPanel({ account }: { account: PrivateAccountView }) {
       <Card className="p-5 sm:p-6">
         <h2 className="font-display text-2xl font-bold">Account controls</h2>
         <p className="mt-2 text-sm leading-6 text-fl-text-muted">
-          Profile visibility, reminders, follows, and account deletion stay
-          separate from public stats.
+          Public profile settings, followed members, safety controls, and
+          permanent account deletion stay separate from your public stats.
         </p>
         <Link
           className="focus-ring mt-5 inline-block rounded-md text-sm font-bold text-fl-danger"
@@ -197,69 +198,6 @@ function ProfilePanel({
   );
 }
 
-function NotificationsPanel({
-  account,
-  onSaved,
-}: {
-  account: PrivateAccountView;
-  onSaved: (update: Record<string, string | boolean>) => void;
-}) {
-  const { preferences } = account;
-  return (
-    <Card>
-      <CardHeader
-        eyebrow="Private preferences"
-        title="Notifications"
-        description="Delivery arrives in a later engagement pass; these choices establish your consent now."
-      />
-      <div className="p-5 sm:p-6">
-        <PreferenceForm
-          onSaved={onSaved}
-          values={{
-            emailEventReminders: preferences.emailEventReminders,
-            emailResults: preferences.emailResults,
-          }}
-        >
-          {[
-            [
-              "emailEventReminders",
-              "Event reminders",
-              "A reminder before followed UFC cards begin.",
-              preferences.emailEventReminders,
-            ],
-            [
-              "emailResults",
-              "Prediction results",
-              "A summary after your picks are officially graded.",
-              preferences.emailResults,
-            ],
-          ].map(([name, title, copy, checked]) => (
-            <label
-              className="flex items-start justify-between gap-5 rounded-xl border border-fl-border bg-fl-surface-2 p-4"
-              key={String(name)}
-            >
-              <span>
-                <span className="block text-sm font-semibold">
-                  {String(title)}
-                </span>
-                <span className="mt-1 block text-xs leading-5 text-fl-text-muted">
-                  {String(copy)}
-                </span>
-              </span>
-              <input
-                className="mt-1 accent-fl-accent"
-                defaultChecked={Boolean(checked)}
-                name={String(name)}
-                type="checkbox"
-              />
-            </label>
-          ))}
-        </PreferenceForm>
-      </div>
-    </Card>
-  );
-}
-
 function PrivacyPanel({
   account,
   onSaved,
@@ -271,34 +209,15 @@ function PrivacyPanel({
   return (
     <Card>
       <CardHeader
-        eyebrow="Pick privacy"
-        title="Upcoming predictions"
-        description="Locked picks can be public for transparency. Open picks stay private by default."
+        eyebrow="Local display"
+        title="Time zone"
+        description="Event times are automatically shown in your device time zone. Save a fallback for devices that cannot report one."
       />
       <div className="p-5 sm:p-6">
         <PreferenceForm
           onSaved={onSaved}
-          values={{
-            hideUpcomingPicks: preferences.hideUpcomingPicks,
-            timezone: preferences.timezone,
-          }}
+          values={{ timezone: preferences.timezone }}
         >
-          <label className="flex items-start justify-between gap-5 rounded-xl border border-fl-border bg-fl-surface-2 p-4">
-            <span>
-              <span className="block text-sm font-semibold">
-                Hide upcoming picks
-              </span>
-              <span className="mt-1 block text-xs leading-5 text-fl-text-muted">
-                Do not publish future picks unless you explicitly share one.
-              </span>
-            </span>
-            <input
-              className="mt-1 accent-fl-accent"
-              defaultChecked={preferences.hideUpcomingPicks}
-              name="hideUpcomingPicks"
-              type="checkbox"
-            />
-          </label>
           <label className="block">
             <span className="mb-2 block text-xs font-semibold text-fl-text-muted">
               Time zone
@@ -408,11 +327,18 @@ export function SettingsWorkspace({
               }
             />
           ) : null}
-          {section === "notifications" ? (
-            <NotificationsPanel account={account} onSaved={updatePreferences} />
-          ) : null}
           {section === "privacy" ? (
             <PrivacyPanel account={account} onSaved={updatePreferences} />
+          ) : null}
+          {section === "following" ? (
+            <Card>
+              <CardHeader
+                eyebrow="Member network"
+                title="Following"
+                description="Keep a short list of FightLobby members whose public prediction records you want to revisit."
+              />
+              <FollowingList />
+            </Card>
           ) : null}
           {section === "blocked-users" ? (
             <Card>

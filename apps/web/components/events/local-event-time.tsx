@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 
 import { formatEventDate, formatEventDateCompact } from "@/lib/format";
+
+const subscribeToTimezone = () => () => undefined;
 
 export function LocalEventTime({
   startsAt,
@@ -14,12 +16,11 @@ export function LocalEventTime({
   compact?: boolean;
 }) {
   const formatter = compact ? formatEventDateCompact : formatEventDate;
-  const [displayTimezone, setDisplayTimezone] = useState(venueTimezone);
-
-  useEffect(() => {
-    const visitorTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    setDisplayTimezone(visitorTimezone || venueTimezone);
-  }, [venueTimezone]);
+  const displayTimezone = useSyncExternalStore(
+    subscribeToTimezone,
+    () => Intl.DateTimeFormat().resolvedOptions().timeZone || venueTimezone,
+    () => venueTimezone,
+  );
 
   const label = formatter(startsAt, displayTimezone);
 

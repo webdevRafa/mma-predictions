@@ -175,7 +175,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   const [canSubmit, setCanSubmit] = useState(initiallyOpen);
   const [saved, setSaved] = useState<SavedPrediction | null>(null);
   const [summary, setSummary] = useState(fight.predictionSummary);
-  const [reveal, setReveal] = useState(fight.predictionStatus !== "open");
+  const [reveal, setReveal] = useState(false);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);

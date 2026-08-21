@@ -21,7 +21,7 @@ export function ConsensusCard({
   summary?: PredictionSummary;
 }) {
   const summary = summaryOverride ?? fight.predictionSummary;
-  const reveal = revealOverride ?? fight.predictionStatus !== "open";
+  const reveal = revealOverride ?? false;
   const fighterAPercentage = percentage(summary.fighterA, summary.total);
   const fighterBPercentage = percentage(summary.fighterB, summary.total);
   const methodEntries = Object.entries(summary.methods).filter(
@@ -119,7 +119,7 @@ export function ConsensusCard({
             </p>
             <p className="mt-1 text-xs leading-5 text-fl-text-muted">
               The count is public. The lean stays behind the curtain until you
-              participate or picks lock.
+              lock in your own prediction.
             </p>
           </div>
         )}

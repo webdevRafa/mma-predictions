@@ -54,9 +54,8 @@ Configure all non-empty production values from `.env.example`, with these launch
 constraints:
 
 - `FIGHTLOBBY_DATA_SOURCE=firestore`;
-- `MMA_PROVIDER=sportsdataio`;
-- `SPORTSDATAIO_COMMERCIAL_RIGHTS_CONFIRMED=true` only after licensed production
-  rights are documented;
+- event, fight, and fighter records come from the operator-reviewed JSON import
+  workflow documented in `docs/ingestion.md`;
 - `NEXT_PUBLIC_USE_FIREBASE_EMULATORS=false`;
 - `FIREBASE_APP_CHECK_ENFORCED=true` after the metrics review;
 - `NEXT_PUBLIC_SITE_URL` is the bare HTTPS custom-domain origin;
@@ -109,7 +108,6 @@ Before public traffic, assign a named primary and backup operator and configure:
   uptime check for `/api/health` and `/`;
 - Firebase/Google Cloud alerts for Functions errors and latency, Firestore and
   Realtime Database usage, Storage growth, and App Check rejection rate;
-- provider quota and error notifications;
 - GA4 only behind analytics consent; and
 - Google Search Console ownership and sitemap submission.
 
@@ -129,7 +127,7 @@ Record these outside the repository in the restricted operations system:
 | Firebase production | project ID, region, billing owner, rules/functions deploy SHA              |
 | Vercel production   | project, Production Branch, Root Directory `.`, deploy URL and SHA         |
 | Domain              | registrar owner, DNS verified, HTTPS verified, canonical redirect verified |
-| Provider            | contract owner, allowed uses, quota, production key rotation date          |
+| Data import         | reviewed fixture, source URLs, operator, import timestamp and audit record |
 | Budget              | monthly amount, notification recipients, escalation owner                  |
 | Monitoring          | uptime monitor URL, alert routes, test-alert timestamp                     |
 | Moderation          | primary/backup coverage and contact channel                                |

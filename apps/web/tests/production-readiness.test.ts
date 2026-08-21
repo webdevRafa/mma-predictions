@@ -9,23 +9,19 @@ function productionEnvironment(
   overrides: Environment = {},
 ): Record<string, string | undefined> {
   return {
-    NEXT_PUBLIC_FIREBASE_API_KEY: "public-firebase-key",
-    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN: "mma-cortex.firebaseapp.com",
-    NEXT_PUBLIC_FIREBASE_PROJECT_ID: "mma-cortex",
-    NEXT_PUBLIC_FIREBASE_DATABASE_URL:
+    VITE_FIREBASE_API_KEY: "public-firebase-key",
+    VITE_FIREBASE_AUTH_DOMAIN: "mma-cortex.firebaseapp.com",
+    VITE_FIREBASE_PROJECT_ID: "mma-cortex",
+    VITE_FIREBASE_DATABASE_URL:
       "https://mma-cortex-default-rtdb.firebaseio.com",
-    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET:
-      "mma-cortex.firebasestorage.app",
-    NEXT_PUBLIC_FIREBASE_APP_ID: "1:123:web:abc",
+    VITE_FIREBASE_STORAGE_BUCKET: "mma-cortex.firebasestorage.app",
+    VITE_FIREBASE_APP_ID: "1:123:web:abc",
     VITE_FIREBASE_APP_CHECK_SITE_KEY: "app-check-site-key",
     FIREBASE_ADMIN_PROJECT_ID: "mma-cortex",
     FIREBASE_ADMIN_CLIENT_EMAIL:
       "firebase-admin@mma-cortex.iam.gserviceaccount.com",
     FIREBASE_ADMIN_PRIVATE_KEY: "private-key-material",
     FIGHTLOBBY_DATA_SOURCE: "firestore",
-    MMA_PROVIDER: "sportsdataio",
-    SPORTSDATAIO_MMA_KEY: "licensed-provider-key",
-    SPORTSDATAIO_COMMERCIAL_RIGHTS_CONFIRMED: "true",
     NEXT_PUBLIC_USE_FIREBASE_EMULATORS: "false",
     FIREBASE_APP_CHECK_ENFORCED: "true",
     REVALIDATION_SECRET: "a-secure-secret-with-more-than-32-characters",
@@ -42,11 +38,10 @@ describe("production readiness", () => {
     expect(report).toEqual({ ready: true, blockers: [], warnings: [] });
   });
 
-  it("rejects fixture data, mock providers, emulators, and disabled App Check", () => {
+  it("rejects fixture data, emulators, and disabled App Check", () => {
     const report = evaluateProductionReadiness(
       productionEnvironment({
         FIGHTLOBBY_DATA_SOURCE: "fixture",
-        MMA_PROVIDER: "mock",
         NEXT_PUBLIC_USE_FIREBASE_EMULATORS: "true",
         FIREBASE_APP_CHECK_ENFORCED: "false",
       }),
@@ -54,7 +49,6 @@ describe("production readiness", () => {
     expect(report.blockers.map(({ code }) => code)).toEqual(
       expect.arrayContaining([
         "fixture_data_source",
-        "non_production_provider",
         "firebase_emulators_enabled",
         "app_check_not_enforced",
       ]),
@@ -64,7 +58,7 @@ describe("production readiness", () => {
   it("requires a matching production Firebase project", () => {
     const report = evaluateProductionReadiness(
       productionEnvironment({
-        NEXT_PUBLIC_FIREBASE_PROJECT_ID: "fightlobby-staging",
+        VITE_FIREBASE_PROJECT_ID: "fightlobby-staging",
       }),
     );
     expect(report.blockers.map(({ code }) => code)).toEqual(

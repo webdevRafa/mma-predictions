@@ -17,8 +17,7 @@ import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
-import { FollowButton } from "@/features/profiles/follow-button";
-import { getPublicFighter, listPublicCards } from "@/lib/data/public";
+import { getPublicFighter } from "@/lib/data/public";
 import {
   formatHeightMeasurement,
   formatReachMeasurement,
@@ -29,15 +28,8 @@ import { absoluteUrl } from "@/lib/seo/site";
 
 type Props = { params: Promise<{ fighterSlug: string }> };
 
-export async function generateStaticParams() {
-  const fighters = new Map(
-    (await listPublicCards())
-      .flatMap((card) => card.fighters)
-      .map((fighter) => [fighter.id, fighter]),
-  );
-  return [...fighters.values()].map((fighter) => ({
-    fighterSlug: fighter.slug,
-  }));
+export function generateStaticParams() {
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -134,7 +126,6 @@ export default async function FighterPage({ params }: Props) {
                 {fighter.currentWeightClass ?? "UFC fighter"}
               </Badge>
               <Badge tone="neutral">{fighter.status}</Badge>
-              <FollowButton targetId={fighter.id} targetType="fighter" />
             </div>
             {fighter.name.nickname ? (
               <p className="eyebrow mt-5">“{fighter.name.nickname}”</p>

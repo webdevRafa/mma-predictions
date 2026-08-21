@@ -1,20 +1,18 @@
-# UFC provider ingestion
+# UFC data ingestion
 
-FightLobby's production ingestion boundary is `@fightlobby/providers`. The web app imports only canonical domain models. The first real adapter targets SportsDataIO's documented MMA v3 endpoints and is gated behind all three of:
+FightLobby launches with an operator-reviewed JSON-to-Firestore workflow. The web app reads only canonical domain models, and no third-party provider subscription or commercial-rights flag is required for this manual workflow.
 
-- `MMA_PROVIDER=sportsdataio`
-- `SPORTSDATAIO_MMA_KEY`
-- `SPORTSDATAIO_COMMERCIAL_RIGHTS_CONFIRMED=true`
+For every UFC event, the operator compares the fixture against the cited official sources, runs the guarded production import script, reviews its target project and diff, and retains the fixture plus audit record as provenance. Production must use `FIGHTLOBBY_DATA_SOURCE=firestore`.
 
-The rights flag is an operational acknowledgement, not a substitute for a signed provider agreement. Keep it false until the production license permits FightLobby's storage, display, and archive behavior.
+The optional `@fightlobby/providers` adapters remain available for a later licensed automated feed. Their API keys and rights acknowledgement stay unset while manual imports are used.
 
 ## Pipeline
 
-`discoverUpcomingEvents` runs every six hours and enqueues one `syncEventCardTask` per UFC event. Near event time, `syncLiveEvents` re-enqueues current cards every five minutes. Cloud Tasks applies bounded exponential retry and the sync run checksum makes retries idempotent.
+`scripts/import-production-event.ts` validates and imports a new reviewed card. `scripts/refresh-production-event.ts` safely refreshes an existing card. Both scripts guard the exact Firebase project and event identity before writing.
 
-Each task validates the vendor payload with Zod, normalizes US Eastern datetimes to UTC, resolves external identifiers through `providerMappings`, computes a diff, applies allowlisted `manualOverrides`, writes canonical event/fight/fighter documents, archives the raw response, creates a manifest, and calls the internal revalidation endpoint. A completed official result invokes the existing idempotent prediction grader.
+The importer validates the fixture with Zod, stores absolute UTC timestamps, preserves live event/fight state and prediction totals during refreshes, writes canonical event/fight/fighter documents, records an audit entry, and calls the internal revalidation endpoint. Saving an official result through the admin dashboard invokes the existing idempotent prediction grader.
 
-Raw objects use:
+If a licensed automated provider is enabled later, raw objects use:
 
 `raw/{providerKey}/{entityType}/{yyyy}/{mm}/{dd}/{externalId}/{timestamp}.json.gz`
 

@@ -14,17 +14,15 @@ import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { FightDiscussion } from "@/features/discussions/fight-discussion";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
 import { PredictionExperience } from "@/features/predictions/prediction-experience";
-import { getPublicFight, listPublicCards } from "@/lib/data/public";
+import { getPublicFight } from "@/lib/data/public";
 import { formatCardSegment, formatRecord } from "@/lib/format";
 import { isFightIndexable } from "@/lib/seo/indexability";
 import { absoluteUrl } from "@/lib/seo/site";
 
 type Props = { params: Promise<{ fightSlug: string }> };
 
-export async function generateStaticParams() {
-  return (await listPublicCards()).flatMap((card) =>
-    card.fights.map((fight) => ({ fightSlug: fight.slug })),
-  );
+export function generateStaticParams() {
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
