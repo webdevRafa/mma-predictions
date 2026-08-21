@@ -99,6 +99,15 @@ describe("fight-aware prediction validation", () => {
     });
   });
 
+  it("explains that a method must be selected", () => {
+    expect(
+      validatePredictionForFight({ ...basePick, method: "" }, fight),
+    ).toEqual({
+      success: false,
+      message: "Choose a method before locking in your prediction",
+    });
+  });
+
   it("rejects a winner outside the matchup", () => {
     expect(
       validatePredictionForFight(

@@ -42,6 +42,10 @@ interface SavedPrediction {
   grade?: PredictionGrade;
 }
 
+type PredictionDraft = Omit<PredictionPick, "method"> & {
+  method: PredictionMethod | "";
+};
+
 const methodOptions: { value: PredictionMethod; label: string }[] = [
   { value: "ko_tko", label: "KO / TKO" },
   { value: "submission", label: "Submission" },
@@ -138,13 +142,13 @@ function defaultDetail(method: PredictionMethod): PredictionPick["detail"] {
   return undefined;
 }
 
-function methodLabel(method: PredictionMethod) {
+function methodLabel(method: PredictionMethod | "") {
   return (
     methodOptions.find((option) => option.value === method)?.label ?? method
   );
 }
 
-function detailLabel(pick: PredictionPick) {
+function detailLabel(pick: Pick<PredictionPick, "detail">) {
   if (typeof pick.detail === "number") return `Round ${pick.detail}`;
   if (typeof pick.detail === "string")
     return `${pick.detail[0]?.toUpperCase()}${pick.detail.slice(1)} decision`;
@@ -162,10 +166,10 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   const initiallyOpen =
     fight.predictionStatus === "open" &&
     ["scheduled", "prefight"].includes(fight.status);
-  const [pick, setPick] = useState<PredictionPick>({
+  const [pick, setPick] = useState<PredictionDraft>({
     winnerFighterId: "",
-    method: "decision",
-    detail: "unanimous",
+    method: "",
+    detail: undefined,
   });
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [canSubmit, setCanSubmit] = useState(initiallyOpen);
@@ -471,7 +475,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
                     className={cn(
                       "focus-ring min-h-10 cursor-pointer rounded-lg border px-3.5 text-xs font-bold transition",
                       pick.method === option.value
-                        ? "border-fl-accent bg-fl-accent text-fl-bg"
+                        ? "border-fl-accent bg-fl-accent-soft text-fl-text"
                         : "border-fl-border bg-fl-surface-2 text-fl-text-muted hover:text-fl-text",
                     )}
                     key={option.value}
@@ -528,7 +532,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
                   </select>
                 ) : (
                   <span className="mt-3 flex min-h-11 items-center rounded-lg border border-fl-border bg-fl-surface-2 px-3 text-sm text-fl-text-dim">
-                    No extra detail
+                    {pick.method ? "No extra detail" : "Choose a method first"}
                   </span>
                 )}
               </label>
