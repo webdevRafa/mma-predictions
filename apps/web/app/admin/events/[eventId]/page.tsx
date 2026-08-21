@@ -103,13 +103,19 @@ export default async function AdminEventPage({
           eventId={eventId}
           initialFights={fights.docs.map((document) => {
             const lockedAt = timestampText(document.get("predictionsLockedAt"));
+            const result = record(document.get("result"));
+            const resultMethod = text(result.method);
+            const resultRound = Number(result.round);
+            const resultVersion = Number(result.resultVersion);
             return {
               id: document.id,
               boutOrder: Number(document.get("boutOrder") ?? 0),
               cardSegment: String(document.get("cardSegment") ?? "card"),
+              fighterAId: String(document.get("fighterAId") ?? ""),
               fighterAName: String(
                 document.get("fighterA.name.full") ?? "Unknown fighter",
               ),
+              fighterBId: String(document.get("fighterBId") ?? ""),
               fighterBName: String(
                 document.get("fighterB.name.full") ?? "Unknown fighter",
               ),
@@ -117,7 +123,23 @@ export default async function AdminEventPage({
               predictionStatus: String(
                 document.get("predictionStatus") ?? "unknown",
               ),
+              scheduledRounds: Number(document.get("scheduledRounds") ?? 3),
+              resultVersion: Number.isFinite(resultVersion) ? resultVersion : 0,
               ...(lockedAt ? { lockedAt } : {}),
+              ...(resultMethod
+                ? {
+                    currentResult: {
+                      ...(text(result.winnerFighterId)
+                        ? { winnerFighterId: text(result.winnerFighterId) }
+                        : {}),
+                      method: resultMethod,
+                      ...(Number.isFinite(resultRound)
+                        ? { round: resultRound }
+                        : {}),
+                      official: result.official !== false,
+                    },
+                  }
+                : {}),
             };
           })}
         />
