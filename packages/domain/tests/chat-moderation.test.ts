@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 
-import { moderateChatBody, normalizeChatBody } from "../src/index.ts";
+import {
+  moderateChatBody,
+  moderateDiscussionBody,
+  normalizeChatBody,
+} from "../src/index.ts";
 
 describe("chat moderation normalization", () => {
   it("normalizes Unicode and whitespace without breaking emoji", () => {
@@ -22,5 +26,26 @@ describe("chat moderation normalization", () => {
     ["kill yourself", "prohibited"],
   ])("rejects unsafe text: %s", (body, code) => {
     expect(moderateChatBody(body)).toMatchObject({ accepted: false, code });
+  });
+});
+
+describe("persistent discussion moderation", () => {
+  it("supports long-form posts without changing the live-chat limit", () => {
+    const body = Array.from(
+      { length: 35 },
+      (_, index) => `matchup-thought-${index}`,
+    ).join(" ");
+    expect(moderateDiscussionBody(body)).toMatchObject({ accepted: true });
+    expect(moderateChatBody(body)).toMatchObject({
+      accepted: false,
+      code: "too_long",
+    });
+  });
+
+  it("uses discussion-specific safety messages", () => {
+    expect(moderateDiscussionBody("https://spam.example")).toMatchObject({
+      accepted: false,
+      message: "Links are not supported in matchup posts",
+    });
   });
 });

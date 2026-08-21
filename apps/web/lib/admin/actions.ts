@@ -236,6 +236,15 @@ export const adminActionSchema = z.discriminatedUnion("action", [
     .strict(),
   z
     .object({
+      action: z.literal("remove_discussion_post"),
+      fightId: idSchema,
+      postId: idSchema,
+      rootPostId: idSchema,
+      ...base,
+    })
+    .strict(),
+  z
+    .object({
       action: z.literal("restore_message"),
       moderationActionId: idSchema,
       ...base,
@@ -724,6 +733,77 @@ async function removeMessage(
     status: "removed",
   });
   await batch.commit();
+  return { auditId: logRef.id, moderationActionId: moderationRef.id };
+}
+
+async function removeDiscussionPost(
+  firestore: Firestore,
+  actorUid: string,
+  action: Extract<AdminAction, { action: "remove_discussion_post" }>,
+) {
+  const rootReference = firestore
+    .collection("fightDiscussions")
+    .doc(action.fightId)
+    .collection("posts")
+    .doc(action.rootPostId);
+  const postReference =
+    action.postId === action.rootPostId
+      ? rootReference
+      : rootReference.collection("replies").doc(action.postId);
+  const moderationRef = firestore.collection("moderationActions").doc();
+  const logRef = auditRef(firestore);
+  const updatedAt = Date.now();
+
+  await firestore.runTransaction(async (transaction) => {
+    const snapshot = await transaction.get(postReference);
+    if (!snapshot.exists)
+      throw new ApiError(
+        "Discussion post not found",
+        404,
+        "discussion_post_not_found",
+      );
+    const post = record(snapshot.data());
+    if (post.status === "removed")
+      throw new ApiError(
+        "Discussion post was already removed",
+        409,
+        "discussion_post_already_removed",
+      );
+    transaction.create(moderationRef, {
+      id: moderationRef.id,
+      type: "remove_discussion_post",
+      actorUid,
+      fightId: action.fightId,
+      postId: action.postId,
+      rootPostId: action.rootPostId,
+      reason: action.reason,
+      postSnapshot: post,
+      status: "active",
+      createdAt: FieldValue.serverTimestamp(),
+    });
+    transaction.update(postReference, {
+      body: "Post removed by moderation.",
+      status: "removed",
+      updatedAt,
+    });
+    transaction.set(logRef, {
+      id: logRef.id,
+      ...adminAuditData({
+        actorUid,
+        action: "remove_discussion_post",
+        targetType: "discussion_post",
+        targetId: action.postId,
+        reason: action.reason,
+        before: post,
+        after: { status: "removed", updatedAt },
+        metadata: {
+          fightId: action.fightId,
+          rootPostId: action.rootPostId,
+          moderationActionId: moderationRef.id,
+        },
+      }),
+    });
+  });
   return { auditId: logRef.id, moderationActionId: moderationRef.id };
 }
 
@@ -1447,6 +1527,12 @@ export async function executeAdminAction(
     case "remove_message":
       requireConfirmation(action.confirmation, `REMOVE ${action.messageId}`);
       return removeMessage(firestore, actorUid, action);
+    case "remove_discussion_post":
+      requireConfirmation(
+        action.confirmation,
+        `REMOVE POST ${action.postId}`,
+      );
+      return removeDiscussionPost(firestore, actorUid, action);
     case "restore_message":
       requireConfirmation(
         action.confirmation,
@@ -1496,6 +1582,8 @@ export function confirmationFor(action: AdminAction) {
       return `ROOM ${action.roomId}`;
     case "remove_message":
       return `REMOVE ${action.messageId}`;
+    case "remove_discussion_post":
+      return `REMOVE POST ${action.postId}`;
     case "restore_message":
       return `RESTORE ${action.moderationActionId}`;
     case "resolve_report":

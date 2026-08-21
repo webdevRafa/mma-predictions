@@ -367,3 +367,36 @@ export interface ChatMessage {
   status: "published" | "removed";
   moderationVersion: number;
 }
+
+export interface DiscussionReplySnapshot {
+  postId: string;
+  uid: string;
+  handle: string;
+  excerpt: string;
+}
+
+export interface DiscussionPost {
+  id: string;
+  fightId: string;
+  uid: string;
+  author: {
+    handle: string;
+    roleBadge?: ChatRoleBadge | undefined;
+  };
+  body: string;
+  bodyNormalizedHash: string;
+  rootPostId: string;
+  parentPostId?: string | undefined;
+  replyTo?: DiscussionReplySnapshot | undefined;
+  replyCount: number;
+  createdAt: number;
+  updatedAt: number;
+  clientNonce: string;
+  status: "published" | "removed";
+  moderationVersion: number;
+}
+
+export interface DiscussionThread {
+  post: DiscussionPost;
+  replies: DiscussionPost[];
+}

@@ -32,7 +32,7 @@ export function ConsensusCard({
   );
 
   return (
-    <Card>
+    <Card className="mt-6">
       <CardHeader eyebrow="Community read" title="Consensus" />
       <div className="p-5 sm:p-6">
         <div className="flex items-center gap-3">

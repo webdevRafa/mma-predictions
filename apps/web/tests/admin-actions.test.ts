@@ -75,4 +75,16 @@ describe("admin action validation", () => {
     };
     expect(adminActionSchema.safeParse(merge).success).toBe(false);
   });
+
+  it("keeps discussion moderation distinct from live chat moderation", () => {
+    const parsed = adminActionSchema.parse({
+      action: "remove_discussion_post",
+      fightId: "fgt_test_001",
+      postId: "post_12345678",
+      rootPostId: "post_12345678",
+      reason: "Reported matchup post",
+      confirmation: "REMOVE POST post_12345678",
+    });
+    expect(confirmationFor(parsed)).toBe("REMOVE POST post_12345678");
+  });
 });
