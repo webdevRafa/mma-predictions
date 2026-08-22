@@ -119,6 +119,20 @@ const predictionSummarySchema = z
     fighterB: z.number().int().nonnegative(),
     methods: z.record(z.string(), z.number().int().nonnegative()),
     rounds: z.record(z.string(), z.number().int().nonnegative()),
+    methodsByFighter: z
+      .object({
+        fighterA: z.record(z.string(), z.number().int().nonnegative()),
+        fighterB: z.record(z.string(), z.number().int().nonnegative()),
+      })
+      .strict()
+      .optional(),
+    roundsByFighter: z
+      .object({
+        fighterA: z.record(z.string(), z.number().int().nonnegative()),
+        fighterB: z.record(z.string(), z.number().int().nonnegative()),
+      })
+      .strict()
+      .optional(),
   })
   .strict()
   .superRefine((summary, context) => {

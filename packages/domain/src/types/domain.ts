@@ -158,6 +158,14 @@ export interface PredictionSummary {
   fighterB: number;
   methods: Record<string, number>;
   rounds: Record<string, number>;
+  methodsByFighter?: {
+    fighterA: Record<string, number>;
+    fighterB: Record<string, number>;
+  } | undefined;
+  roundsByFighter?: {
+    fighterA: Record<string, number>;
+    fighterB: Record<string, number>;
+  } | undefined;
   lastAggregatedAt?: string | undefined;
 }
 

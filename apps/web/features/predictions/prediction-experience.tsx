@@ -81,12 +81,21 @@ function parseSummary(value: unknown): PredictionSummary | null {
         (entry): entry is [string, number] => typeof entry[1] === "number",
       ),
     );
+  const breakdown = (candidate: unknown) => {
+    const breakdownSource = objectRecord(candidate);
+    return {
+      fighterA: numericMap(breakdownSource.fighterA),
+      fighterB: numericMap(breakdownSource.fighterB),
+    };
+  };
   return {
     total,
     fighterA,
     fighterB,
     methods: numericMap(source.methods),
     rounds: numericMap(source.rounds),
+    methodsByFighter: breakdown(source.methodsByFighter),
+    roundsByFighter: breakdown(source.roundsByFighter),
   };
 }
 
