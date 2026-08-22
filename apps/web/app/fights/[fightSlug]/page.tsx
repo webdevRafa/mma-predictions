@@ -247,11 +247,11 @@ export default async function FightPage({ params }: Props) {
             <Card className="p-5 sm:p-6">
               <Target aria-hidden="true" className="text-fl-accent" size={22} />
               <h2 className="mt-4 font-display text-2xl font-bold">
-                10 points available
+                Earn up to 10 points for this match
               </h2>
               <p className="mt-2 text-sm leading-6 text-fl-text-muted">
-                5 winner · 3 method · 2 exact detail. A wrong winner scores zero
-                for the fight.
+                5 pts for the winner · 3 pts for the method · 2 pts for the
+                exact detail. Getting the winner wrong scores 0 for the fight.
               </p>
             </Card>
           </>

@@ -8,7 +8,7 @@ import { EventPhaseLabel } from "@/components/events/event-phase-label";
 import { EventSchedule } from "@/components/events/event-schedule";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { EventPredictionModal } from "@/features/predictions/event-prediction-modal";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { formatRecord } from "@/lib/format";
@@ -225,7 +225,7 @@ export default async function HomePage() {
         <div className="shell grid gap-px py-16 lg:grid-cols-3 lg:py-20">
           <Card className="rounded-none p-6 shadow-none sm:p-8">
             <Target aria-hidden="true" className="text-fl-accent" size={22} />
-            <p className="eyebrow mt-5">01 · Predict</p>
+            <p className="eyebrow mt-5">Predict</p>
             <h2 className="mt-2 font-display text-3xl font-bold">
               Call the outcome
             </h2>
@@ -240,7 +240,7 @@ export default async function HomePage() {
               className="text-fl-accent"
               size={22}
             />
-            <p className="eyebrow mt-5">02 · React</p>
+            <p className="eyebrow mt-5">React</p>
             <h2 className="mt-2 font-display text-3xl font-bold">
               Meet in the lobby
             </h2>
@@ -251,7 +251,7 @@ export default async function HomePage() {
           </Card>
           <Card className="rounded-none p-6 shadow-none sm:p-8">
             <Trophy aria-hidden="true" className="text-fl-accent" size={22} />
-            <p className="eyebrow mt-5">03 · Prove it</p>
+            <p className="eyebrow mt-5">Prove it</p>
             <h2 className="mt-2 font-display text-3xl font-bold">
               Build your record
             </h2>
@@ -262,55 +262,6 @@ export default async function HomePage() {
           </Card>
         </div>
       </section>
-
-      {card && mainFight ? (
-        <section className="shell grid gap-6 py-16 lg:grid-cols-[1.2fr_.8fr] lg:py-20">
-          <Card>
-            <CardHeader
-              eyebrow="Active matchup spotlight"
-              title={
-                mainFight.editorial.biggestQuestion ??
-                `${mainFight.fighterA.name.full} vs ${mainFight.fighterB.name.full}`
-              }
-            />
-            <div className="p-5 sm:p-6">
-              <p className="max-w-3xl text-base leading-7 text-fl-text-muted">
-                {mainFight.editorial.styleContrast ??
-                  "A verified matchup comparison is being prepared by the FightLobby desk."}
-              </p>
-              <Link
-                className="focus-ring mt-5 inline-flex items-center gap-2 rounded-lg text-sm font-bold text-fl-accent"
-                href={`/fights/${mainFight.slug}`}
-              >
-                Read the matchup <ArrowRight aria-hidden="true" size={15} />
-              </Link>
-            </div>
-          </Card>
-          <Card>
-            <CardHeader
-              eyebrow="Lobby pulse"
-              title="Where the card is talking"
-            />
-            <div className="divide-y divide-fl-border px-5 sm:px-6">
-              {card.fights.slice(0, 3).map((fight) => (
-                <Link
-                  className="focus-ring flex items-center justify-between gap-3 py-4 text-sm transition hover:text-fl-accent"
-                  href={`/fights/${fight.slug}`}
-                  key={fight.id}
-                >
-                  <span>
-                    {fight.fighterA.name.last ?? fight.fighterA.name.full} vs{" "}
-                    {fight.fighterB.name.last ?? fight.fighterB.name.full}
-                  </span>
-                  <span className="font-mono text-[10px] text-fl-text-muted">
-                    {fight.predictionSummary.total.toLocaleString()} picks
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </Card>
-        </section>
-      ) : null}
     </main>
   );
 }

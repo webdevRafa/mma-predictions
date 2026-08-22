@@ -15,7 +15,7 @@ interface PolicySection {
 interface PolicyPage {
   title: string;
   description: string;
-  eyebrow: string;
+  eyebrow?: string;
   sections: PolicySection[];
 }
 
@@ -196,7 +196,6 @@ const policies: Record<string, PolicyPage> = {
     title: "Data Corrections",
     description:
       "Report an incorrect UFC event, matchup, fighter profile, or official result shown on FightLobby.",
-    eyebrow: "Accuracy request",
     sections: [
       {
         heading: "What to include",
@@ -207,12 +206,6 @@ const policies: Record<string, PolicyPage> = {
         ],
         paragraphs: [
           `Send the request to ${supportEmail} with the subject “Data correction.” Do not include passwords, identity documents, or unrelated personal data.`,
-        ],
-      },
-      {
-        heading: "How corrections work",
-        paragraphs: [
-          "Administrators compare canonical data with the provider snapshot, record a reason, apply a persistent override, and retain an audit entry. Result corrections create a new result version and run the idempotent regrading workflow so points are not applied twice.",
         ],
       },
     ],
@@ -273,8 +266,10 @@ export default async function PolicyPage({ params }: Props) {
       />
       <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <article>
-          <p className="eyebrow">{page.eyebrow}</p>
-          <h1 className="mt-3 font-display text-5xl font-extrabold sm:text-7xl">
+          {page.eyebrow ? <p className="eyebrow">{page.eyebrow}</p> : null}
+          <h1
+            className={`${page.eyebrow ? "mt-3" : ""} font-display text-5xl font-extrabold sm:text-7xl`}
+          >
             {page.title}
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-fl-text-muted">
@@ -316,17 +311,19 @@ export default async function PolicyPage({ params }: Props) {
           </div>
         </article>
         <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <Card className="p-5">
-            <Scale aria-hidden="true" className="text-fl-accent" size={20} />
-            <h2 className="mt-4 font-display text-2xl font-bold">
-              Launch review
-            </h2>
-            <p className="mt-3 text-xs leading-6 text-fl-text-muted">
-              These pages describe the implemented product controls. Final
-              production wording, business identity, and jurisdiction-specific
-              requirements should be reviewed by qualified counsel.
-            </p>
-          </Card>
+          {policySlug !== "data-corrections" ? (
+            <Card className="p-5">
+              <Scale aria-hidden="true" className="text-fl-accent" size={20} />
+              <h2 className="mt-4 font-display text-2xl font-bold">
+                Launch review
+              </h2>
+              <p className="mt-3 text-xs leading-6 text-fl-text-muted">
+                These pages describe the implemented product controls. Final
+                production wording, business identity, and jurisdiction-specific
+                requirements should be reviewed by qualified counsel.
+              </p>
+            </Card>
+          ) : null}
           <a
             className="focus-ring flex items-center justify-between rounded-xl border border-fl-border bg-fl-surface-1 p-4 text-sm font-bold hover:border-fl-accent"
             href={`mailto:${supportEmail}`}
