@@ -11,11 +11,15 @@ import {
 } from "react";
 
 import { cn } from "@/lib/cn";
+import {
+  EventFightSwitcher,
+  type EventFightOption,
+} from "@/components/fights/event-fight-switcher";
 
 type MobileFightSection = "predict" | "stats" | "posts" | "lobby";
 
 const sections: { id: MobileFightSection; label: string }[] = [
-  { id: "predict", label: "Predict" },
+  { id: "predict", label: "Predictions" },
   { id: "stats", label: "Stats" },
   { id: "posts", label: "Posts" },
   { id: "lobby", label: "Live chat" },
@@ -28,6 +32,10 @@ export function FightPageWorkspace({
   stats,
   posts,
   lobby,
+  scoring,
+  eventName,
+  fightOptions,
+  currentFightSlug,
   backHref,
   backLabel,
 }: {
@@ -37,6 +45,10 @@ export function FightPageWorkspace({
   stats: ReactNode;
   posts: ReactNode;
   lobby: ReactNode;
+  scoring: ReactNode;
+  eventName: string;
+  fightOptions: EventFightOption[];
+  currentFightSlug: string;
   backHref: string;
   backLabel: string;
 }) {
@@ -101,10 +113,10 @@ export function FightPageWorkspace({
         className="sticky top-16 z-30 border-b border-fl-border bg-fl-bg/95 shadow-[0_10px_30px_rgba(0,0,0,0.24)] backdrop-blur md:hidden"
         ref={stickyNavRef}
       >
-        <div className="border-b border-fl-border/70 bg-fl-surface-1/70">
+        <div className="relative border-b border-fl-border/70 bg-fl-surface-1/70">
           <p
             aria-label={`${fighterAName} versus ${fighterBName}`}
-            className="shell truncate py-2.5 text-center text-xs font-bold text-fl-text-muted"
+            className="shell truncate px-12 py-2.5 text-center text-xs font-bold text-fl-text-muted"
             title={`${fighterAName} vs ${fighterBName}`}
           >
             <span className="text-fl-text">{fighterAName}</span>
@@ -113,6 +125,12 @@ export function FightPageWorkspace({
             </span>
             <span className="text-fl-text">{fighterBName}</span>
           </p>
+          <EventFightSwitcher
+            className="absolute top-1/2 right-3 -translate-y-1/2"
+            currentSlug={currentFightSlug}
+            eventName={eventName}
+            options={fightOptions}
+          />
         </div>
         <div
           aria-label="Choose fight section"
@@ -169,6 +187,7 @@ export function FightPageWorkspace({
             tabIndex={0}
           >
             {prediction}
+            <div className="mt-6 md:hidden">{scoring}</div>
           </section>
           <section
             aria-labelledby={tabId("stats")}
@@ -206,7 +225,10 @@ export function FightPageWorkspace({
           role="tabpanel"
           tabIndex={0}
         >
-          <div className="min-w-0 space-y-5">{lobby}</div>
+          <div className="min-w-0 space-y-5">
+            {lobby}
+            <div className="hidden md:block">{scoring}</div>
+          </div>
         </aside>
 
         <Link

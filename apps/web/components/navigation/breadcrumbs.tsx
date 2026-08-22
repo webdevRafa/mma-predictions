@@ -1,20 +1,32 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import type { ReactNode } from "react";
 
 import { JsonLd } from "@/components/seo/json-ld";
+import { cn } from "@/lib/cn";
 import { absoluteUrl } from "@/lib/seo/site";
 
 export interface BreadcrumbItem {
   label: string;
   href?: string;
+  suffix?: ReactNode;
 }
 
-export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
+export function Breadcrumbs({
+  items,
+  className,
+}: {
+  items: BreadcrumbItem[];
+  className?: string;
+}) {
   return (
     <>
       <nav
         aria-label="Breadcrumb"
-        className="flex flex-wrap items-center gap-1.5 text-xs text-fl-text-muted"
+        className={cn(
+          "flex flex-wrap items-center gap-1.5 text-xs text-fl-text-muted",
+          className,
+        )}
       >
         {items.map((item, index) => (
           <span
@@ -30,8 +42,12 @@ export function Breadcrumbs({ items }: { items: BreadcrumbItem[] }) {
                 {item.label}
               </Link>
             ) : (
-              <span aria-current="page" className="text-fl-text">
-                {item.label}
+              <span
+                aria-current="page"
+                className="inline-flex items-center gap-1.5 text-fl-text"
+              >
+                <span>{item.label}</span>
+                {item.suffix}
               </span>
             )}
           </span>

@@ -6,6 +6,10 @@ import { notFound, permanentRedirect } from "next/navigation";
 import { AdSlot } from "@/components/ads/ad-slot";
 import { FightResultBadge } from "@/components/fights/fight-result-badge";
 import { FightPageWorkspace } from "@/components/fights/fight-page-workspace";
+import {
+  EventFightSwitcher,
+  type EventFightOption,
+} from "@/components/fights/event-fight-switcher";
 import { StatsComparison } from "@/components/fights/stats-comparison";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -15,7 +19,7 @@ import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { FightDiscussion } from "@/features/discussions/fight-discussion";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
 import { PredictionExperience } from "@/features/predictions/prediction-experience";
-import { getPublicFight } from "@/lib/data/public";
+import { getPublicEvent, getPublicFight } from "@/lib/data/public";
 import { resultBelongsToFighter } from "@/lib/fight-result";
 import { formatCardSegment, formatRecord } from "@/lib/format";
 import { isFightIndexable } from "@/lib/seo/indexability";
@@ -73,6 +77,15 @@ export default async function FightPage({ params }: Props) {
   if (fightSlug !== detail.fight.slug)
     permanentRedirect(`/fights/${detail.fight.slug}`);
   const { event, fight, fighters } = detail;
+  const eventCard = await getPublicEvent(event.slug);
+  const fightOptions: EventFightOption[] = (eventCard?.fights ?? [fight])
+    .slice()
+    .sort((left, right) => left.boutOrder - right.boutOrder)
+    .map((eventFight) => ({
+      slug: eventFight.slug,
+      label: `${eventFight.fighterA.name.full} vs ${eventFight.fighterB.name.full}`,
+      cardSegment: formatCardSegment(eventFight.cardSegment),
+    }));
   const fighterA = fighters.find((fighter) => fighter.id === fight.fighterAId);
   const fighterB = fighters.find((fighter) => fighter.id === fight.fighterBId);
   if (!fighterA || !fighterB) notFound();
@@ -124,12 +137,21 @@ export default async function FightPage({ params }: Props) {
         />
         <div className="shell relative py-8 sm:py-12">
           <Breadcrumbs
+            className="sm:gap-2 sm:text-sm"
             items={[
               { label: "Home", href: "/" },
               { label: "Events", href: "/events" },
               { label: event.name, href: `/events/${event.slug}` },
               {
                 label: `${fighterA.name.last ?? fighterA.name.full} vs ${fighterB.name.last ?? fighterB.name.full}`,
+                suffix: (
+                  <EventFightSwitcher
+                    className="hidden sm:inline-flex"
+                    currentSlug={fight.slug}
+                    eventName={event.name}
+                    options={fightOptions}
+                  />
+                ),
               },
             ]}
           />
@@ -238,23 +260,14 @@ export default async function FightPage({ params }: Props) {
         backLabel={`Back to ${event.shortName}`}
         fighterAName={fighterA.name.full}
         fighterBName={fighterB.name.full}
+        currentFightSlug={fight.slug}
+        eventName={event.name}
+        fightOptions={fightOptions}
         lobby={
-          <>
-            <FightChatLauncher
-              fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
-              roomId={fight.chatRoomId}
-            />
-            <Card className="p-5 sm:p-6">
-              <Target aria-hidden="true" className="text-fl-accent" size={22} />
-              <h2 className="mt-4 font-display text-2xl font-bold">
-                Earn up to 10 points for this match
-              </h2>
-              <p className="mt-2 text-sm leading-6 text-fl-text-muted">
-                5 pts for the winner · 3 pts for the method · 2 pts for the
-                exact detail. Getting the winner wrong scores 0 for the fight.
-              </p>
-            </Card>
-          </>
+          <FightChatLauncher
+            fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
+            roomId={fight.chatRoomId}
+          />
         }
         prediction={<PredictionExperience fight={fight} />}
         stats={<StatsComparison fighterA={fighterA} fighterB={fighterB} />}
@@ -263,6 +276,18 @@ export default async function FightPage({ params }: Props) {
             fightId={fight.id}
             fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
           />
+        }
+        scoring={
+          <Card className="p-5 sm:p-6">
+            <Target aria-hidden="true" className="text-fl-accent" size={22} />
+            <h2 className="mt-4 font-display text-2xl font-bold">
+              Earn up to 10 points for this match
+            </h2>
+            <p className="mt-2 text-sm leading-6 text-fl-text-muted">
+              5 pts for the winner · 3 pts for the method · 2 pts for the exact
+              detail. Getting the winner wrong scores 0 for the fight.
+            </p>
+          </Card>
         }
       />
     </main>
