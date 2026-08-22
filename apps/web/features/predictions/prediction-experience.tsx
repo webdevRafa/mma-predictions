@@ -50,7 +50,6 @@ const methodOptions: { value: PredictionMethod; label: string }[] = [
   { value: "ko_tko", label: "KO / TKO" },
   { value: "submission", label: "Submission" },
   { value: "decision", label: "Decision" },
-  { value: "other", label: "Other" },
 ];
 
 function objectRecord(value: unknown): Record<string, unknown> {

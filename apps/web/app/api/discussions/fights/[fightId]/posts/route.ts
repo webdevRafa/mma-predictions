@@ -1,4 +1,9 @@
-import { discussionPostInputSchema } from "@fightlobby/domain";
+import {
+  discussionPostInputSchema,
+  type DiscussionPost,
+  type DiscussionThread,
+  type PublicPredictionBadge,
+} from "@fightlobby/domain";
 
 import {
   ApiError,
@@ -13,8 +18,35 @@ import {
 } from "@/lib/discussions/server";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
 import { assertValidAppCheck } from "@/lib/firebase/app-check";
+import { getPublicPredictionBadges } from "@/lib/predictions/public-badges";
 
 type Context = { params: Promise<{ fightId: string }> };
+
+function withPredictionBadge(
+  post: DiscussionPost,
+  badges: ReadonlyMap<string, PublicPredictionBadge>,
+): DiscussionPost {
+  const predictionBadge = badges.get(post.uid);
+  return predictionBadge
+    ? { ...post, author: { ...post.author, predictionBadge } }
+    : post;
+}
+
+async function enrichThreads(fightId: string, threads: DiscussionThread[]) {
+  const firestore = getFirebaseAdmin().firestore;
+  const badges = await getPublicPredictionBadges(
+    firestore,
+    fightId,
+    threads.flatMap((thread) => [
+      thread.post.uid,
+      ...thread.replies.map((reply) => reply.uid),
+    ]),
+  );
+  return threads.map((thread) => ({
+    post: withPredictionBadge(thread.post, badges),
+    replies: thread.replies.map((reply) => withPredictionBadge(reply, badges)),
+  }));
+}
 
 export async function GET(request: Request, { params }: Context) {
   try {
@@ -28,11 +60,16 @@ export async function GET(request: Request, { params }: Context) {
     if (limit !== undefined && (!Number.isInteger(limit) || limit < 1))
       throw new ApiError("Invalid discussion limit", 400, "invalid_limit");
     const { fightId } = await params;
-    return Response.json(
-      await listFightDiscussionCore(getFirebaseAdmin().firestore, fightId, {
+    const page = await listFightDiscussionCore(
+      getFirebaseAdmin().firestore,
+      fightId,
+      {
         ...(cursor === undefined ? {} : { cursor }),
         ...(limit === undefined ? {} : { limit }),
-      }),
+      },
+    );
+    return Response.json(
+      { ...page, threads: await enrichThreads(fightId, page.threads) },
       { headers: { "Cache-Control": "no-store" } },
     );
   } catch (error) {
@@ -46,12 +83,21 @@ export async function POST(request: Request, { params }: Context) {
     await assertValidAppCheck(request);
     const session = await requireMutationSession();
     const input = await parseJson(request, discussionPostInputSchema);
+    const fightId = (await params).fightId;
     const result = await createDiscussionPostCore(
       getFirebaseAdmin().firestore,
       session,
-      { fightId: (await params).fightId, ...input },
+      { fightId, ...input },
     );
-    return Response.json(result, { status: result.idempotent ? 200 : 201 });
+    const badges = await getPublicPredictionBadges(
+      getFirebaseAdmin().firestore,
+      fightId,
+      [result.post.uid],
+    );
+    return Response.json(
+      { ...result, post: withPredictionBadge(result.post, badges) },
+      { status: result.idempotent ? 200 : 201 },
+    );
   } catch (error) {
     return apiErrorResponse(error);
   }

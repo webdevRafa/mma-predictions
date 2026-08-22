@@ -1,11 +1,13 @@
 import { z } from "zod";
 
 import { chatRoleBadgeSchema } from "./chat.ts";
+import { publicPredictionBadgeSchema } from "./domain.ts";
 
 const discussionAuthorSchema = z
   .object({
     handle: z.string().min(3).max(20),
     roleBadge: chatRoleBadgeSchema.optional(),
+    predictionBadge: publicPredictionBadgeSchema.optional(),
   })
   .strict();
 

@@ -33,6 +33,7 @@ import {
 
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
+import { PublicPredictionBadge } from "@/components/predictions/public-prediction-badge";
 import { AuthForm } from "@/features/auth/auth-form";
 import { HandleForm } from "@/features/auth/handle-form";
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
@@ -498,6 +499,9 @@ export function FightDiscussion({
             <span className="rounded-full border border-fl-accent/30 bg-fl-accent-soft px-2 py-0.5 font-mono text-[9px] tracking-[.06em] text-fl-accent uppercase">
               {badge}
             </span>
+          ) : null}
+          {post.author.predictionBadge ? (
+            <PublicPredictionBadge badge={post.author.predictionBadge} />
           ) : null}
           <time
             className="font-mono text-[10px] text-fl-text-dim"

@@ -25,7 +25,7 @@ export type ResultMethod =
   | "no_contest"
   | "overturned"
   | "other";
-export type PredictionMethod = "ko_tko" | "submission" | "decision" | "other";
+export type PredictionMethod = "ko_tko" | "submission" | "decision";
 export type DataQuality = "verified" | "complete" | "partial" | "blocked";
 export type UserRole = "member" | "trusted" | "moderator" | "admin";
 export type AccountStatus =
@@ -197,6 +197,12 @@ export interface PredictionPick {
   detail?: number | "unanimous" | "split" | "majority" | undefined;
 }
 
+export interface PublicPredictionBadge {
+  winnerFighterId: string;
+  winnerLastName: string;
+  method: PredictionMethod;
+}
+
 export type PredictionRecordStatus = "active" | "locked" | "graded" | "void";
 
 export interface PredictionGrade {
@@ -355,6 +361,7 @@ export interface ChatMessage {
     handle: string;
     avatarVersion: number;
     roleBadge?: ChatRoleBadge | undefined;
+    predictionBadge?: PublicPredictionBadge | undefined;
   };
   body: string;
   bodyNormalizedHash: string;
@@ -379,6 +386,7 @@ export interface DiscussionPost {
   author: {
     handle: string;
     roleBadge?: ChatRoleBadge | undefined;
+    predictionBadge?: PublicPredictionBadge | undefined;
   };
   body: string;
   bodyNormalizedHash: string;

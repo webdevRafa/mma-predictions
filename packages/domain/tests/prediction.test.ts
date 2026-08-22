@@ -125,4 +125,13 @@ describe("fight-aware prediction validation", () => {
       validatePredictionForFight({ ...basePick, detail: 4 }, fight),
     ).toMatchObject({ success: false });
   });
+
+  it("rejects the removed other prediction method", () => {
+    expect(
+      validatePredictionForFight({ ...basePick, method: "other" }, fight),
+    ).toMatchObject({
+      success: false,
+      message: "Choose a method before locking in your prediction",
+    });
+  });
 });

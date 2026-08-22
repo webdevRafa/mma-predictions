@@ -26,6 +26,8 @@ import {
   useState,
   type FormEvent,
 } from "react";
+
+import { PublicPredictionBadge } from "@/components/predictions/public-prediction-badge";
 import { onAuthStateChanged, type User } from "firebase/auth";
 import {
   endBefore,
@@ -455,15 +457,22 @@ export function FightChatPanel({
               )}
               key={message.id}
             >
-              <div className="flex items-center justify-between gap-3">
-                <Link
-                  className="focus-ring rounded text-xs font-bold hover:text-fl-accent"
-                  href={`/u/${message.author.handle}`}
-                >
-                  @{message.author.handle}
-                </Link>
+              <div className="flex items-start justify-between gap-3">
+                <div className="flex min-w-0 flex-wrap items-center gap-1.5">
+                  <Link
+                    className="focus-ring rounded text-xs font-bold hover:text-fl-accent"
+                    href={`/u/${message.author.handle}`}
+                  >
+                    @{message.author.handle}
+                  </Link>
+                  {message.author.predictionBadge ? (
+                    <PublicPredictionBadge
+                      badge={message.author.predictionBadge}
+                    />
+                  ) : null}
+                </div>
                 <time
-                  className="font-mono text-[9px] text-fl-text-dim"
+                  className="shrink-0 font-mono text-[9px] text-fl-text-dim"
                   dateTime={new Date(message.createdAt).toISOString()}
                 >
                   {timeLabel(message.createdAt)}
