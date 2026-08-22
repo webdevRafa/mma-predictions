@@ -60,8 +60,8 @@ const policies: Record<string, PolicyPage> = {
       {
         heading: "Information we handle",
         bullets: [
-          "Account information from Firebase Authentication, including an email address that is never displayed publicly.",
-          "A public handle, optional display profile, member follows, prediction records, leaderboard results, and chat activity.",
+          "Account information from Firebase Authentication, including an email address that is never displayed publicly. If you continue with Google, Google may also provide your display name and profile photo URL.",
+          "A public handle, optional display profile and avatar, member follows, prediction records, leaderboard results, and chat activity. If you upload an avatar, FightLobby uploads only the cropped 512 × 512 WebP image to Firebase Storage; the original file stays on your device.",
           "Security, rate-limit, moderation, and audit records needed to protect the service.",
           "Product usage and performance measurements only when analytics consent is granted.",
           "Advertising signals only on eligible pages when advertising consent, a certified consent platform, and the global ad flag are all active.",
@@ -83,7 +83,8 @@ const policies: Record<string, PolicyPage> = {
       {
         heading: "Retention and your choices",
         paragraphs: [
-          "Public predictions and leaderboard history are retained to preserve the integrity of community records. Live chat becomes read-only six hours after an administrator completes an event, and its public message history is automatically removed 30 days later. Limited moderation and security records may be retained longer to investigate abuse and protect the service. You can change privacy choices at any time, block members, or request account deletion from your account page.",
+          "Public predictions and leaderboard history are retained to preserve the integrity of community records. Live chat becomes read-only six hours after an administrator completes an event, and its public message history is automatically removed 30 days later. Limited moderation and security records may be retained longer to investigate abuse and protect the service. Your provider photo or uploaded avatar is optional, may appear with your public community identity, and can be replaced or removed in Profile settings. Removing a custom avatar deletes its stored image, and account deletion also removes avatar storage owned by the account.",
+          "You can change privacy choices at any time, block members, manage your profile photo, or request account deletion from your account page.",
           `For privacy questions or rights requests, contact ${supportEmail}. We may need to verify the request before acting on account data.`,
         ],
       },
@@ -276,7 +277,8 @@ export default async function PolicyPage({ params }: Props) {
             {page.description}
           </p>
           <p className="mt-4 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
-            Last updated August 16, 2026
+            Last updated {policySlug === "privacy" ? "August 22" : "August 16"},
+            2026
           </p>
           <div className="mt-10 space-y-8">
             {page.sections.map((section) => (

@@ -308,3 +308,16 @@ new task must verify it against code before a high-risk change.
 
 **Reason:** Documentation can age. Schemas, server actions, rules, tests, and the
 deployed commit remain the executable truth.
+
+## Decision 35 — Member avatars are optional and user-controlled
+
+**Decision:** A Google profile-photo URL may be shown as the member's current
+avatar without copying the source image. Members can replace it with a locally
+cropped 512 × 512 WebP upload or remove it completely from onboarding and
+Profile settings. Custom uploads use one owner-writable Storage object at
+`avatars/{uid}/avatar.webp`; the server validates the stored object before it
+updates the public profile version and Firebase Auth photo URL.
+
+**Reason:** Signed-in identity should be recognizable without turning a provider
+photo into an irreversible data import. A deterministic, size-limited object
+keeps access control, replacement, cache invalidation, and deletion auditable.

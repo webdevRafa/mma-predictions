@@ -103,10 +103,11 @@ export default async function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                className="focus-ring inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-fl-accent px-5 text-sm font-bold text-fl-bg shadow-[0_10px_28px_rgba(241,64,29,0.2)] transition hover:bg-fl-accent-strong"
+                className="focus-ring inline-flex min-h-12 max-w-full items-center gap-2 rounded-[10px] bg-fl-accent px-5 text-left text-sm leading-5 font-bold text-fl-bg shadow-[0_10px_28px_rgba(241,64,29,0.2)] transition hover:bg-fl-accent-strong"
                 href={event ? `/events/${event.slug}` : "/events"}
               >
-                View event <ArrowRight aria-hidden="true" size={17} />
+                <span>{event ? `View ${event.name}` : "View events"}</span>
+                <ArrowRight aria-hidden="true" className="shrink-0" size={17} />
               </Link>
             </div>
           </div>

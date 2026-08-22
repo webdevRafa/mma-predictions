@@ -181,7 +181,7 @@ async function removeStorageData(
   avatarStoragePath?: string,
 ) {
   const bucket = storage.bucket();
-  const prefixes = [`users/${uid}/`, `profiles/${uid}/`];
+  const prefixes = [`users/${uid}/`, `profiles/${uid}/`, `avatars/${uid}/`];
   await Promise.all(prefixes.map((prefix) => bucket.deleteFiles({ prefix })));
   if (avatarStoragePath) {
     try {

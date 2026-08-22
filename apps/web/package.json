@@ -18,6 +18,7 @@
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-easy-crop": "^6.2.3",
     "server-only": "latest",
     "lucide-react": "latest",
     "zod": "latest"

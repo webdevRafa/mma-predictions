@@ -14,6 +14,8 @@ import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
 
+import { AvatarEditor } from "./avatar-editor";
+
 type AvailabilityStatus = "idle" | "checking" | "available" | "taken" | "error";
 
 function readApiError(payload: unknown, fallback: string) {
@@ -168,6 +170,7 @@ export function HandleForm({
 
   return (
     <form className="space-y-5" onSubmit={submit}>
+      <AvatarEditor />
       {error ? (
         <p
           className="rounded-xl border border-fl-danger/30 bg-fl-danger/10 p-4 text-sm text-fl-danger"

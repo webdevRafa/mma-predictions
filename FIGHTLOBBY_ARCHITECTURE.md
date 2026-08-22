@@ -62,7 +62,7 @@ Next.js server components and route handlers load public/durable data and execut
 | Firebase Authentication | Google and email/password identity. A successful Google sign-in creates a Firebase Auth user when one does not already exist.       |
 | Cloud Firestore         | Events, fights, fighters, users, profiles, handles, predictions, discussions, audits, jobs, boards, and room metadata.              |
 | Realtime Database       | Event and matchup live-chat messages under a versioned room path.                                                                   |
-| Firebase Storage        | Permitted user-generated assets when enabled. Fighter imagery is not part of the current launch workflow.                           |
+| Firebase Storage        | Optional member avatar output at `avatars/{uid}/avatar.webp`. Fighter imagery is not part of the current launch workflow.           |
 | App Check               | Web request attestation through reCAPTCHA Enterprise. Production enforcement is controlled by server configuration.                 |
 | Cloud Functions v2      | Background and scheduled operations, including bounded chat lifecycle/retention work and other asynchronous tasks.                  |
 | Security Rules          | Direct-client authorization for Firestore, RTDB, and Storage. Server authorization is still required for privileged route handlers. |
@@ -76,6 +76,12 @@ Next.js server components and route handlers load public/durable data and execut
 | Production     | `mma-cortex`                                                                                                                    |
 
 The production Realtime Database URL is `https://mma-cortex-default-rtdb.firebaseio.com/`. The production Storage bucket is `mma-cortex.firebasestorage.app`.
+
+Member avatar source files are cropped in the browser and are never uploaded.
+Storage accepts only the authenticated owner's final non-empty WebP object up to
+1 MiB at the deterministic avatar path. The profile document stores the path and
+a monotonically increasing version; Firebase Auth stores the display URL used by
+the navbar.
 
 ## Firestore data map
 

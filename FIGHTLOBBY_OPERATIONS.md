@@ -218,6 +218,8 @@ does not replace server authorization; every mutation rechecks authority.
 ### 8.1 Before the card
 
 - Smoke-test email and Google sign-in on the production domain.
+- Verify a Google account photo appears in the signed-in navbar, then upload,
+  crop, replace, and remove a test avatar from Profile settings.
 - Confirm the domain is authorized in Firebase Authentication and the reCAPTCHA
   Enterprise/App Check key.
 - Submit a real test prediction, confirm it becomes a locked receipt, and verify
@@ -400,6 +402,11 @@ npx --yes firebase-tools@latest deploy --only functions
 
 Use narrower targets when possible. Run rule tests before rule deployments. A
 functions deploy requires the production server configuration and Node 22.
+
+An avatar release changes only Storage rules and the Vercel-hosted web app. After
+the rules tests pass, deploy the narrow Firebase target with
+`npx --yes firebase-tools@latest deploy --only storage`; no Functions redeploy is
+required for the avatar route.
 
 ## 13. Launch smoke test
 

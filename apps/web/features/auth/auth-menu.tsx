@@ -7,6 +7,10 @@ import { useEffect, useState } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
 import {
+  AUTH_PROFILE_UPDATED_EVENT,
+  type AuthProfileUpdatedDetail,
+} from "@/lib/auth/client-profile-events";
+import {
   getFirebaseClient,
   isFirebaseClientConfigured,
 } from "@/lib/firebase/client";
@@ -16,12 +20,31 @@ export function AuthMenu() {
     isFirebaseClientConfigured ? undefined : null,
   );
   const [signingOut, setSigningOut] = useState(false);
+  const [photoURL, setPhotoURL] = useState<string | null>(null);
+  const [imageFailed, setImageFailed] = useState(false);
 
   useEffect(() => {
     if (!isFirebaseClientConfigured) return;
-    return onAuthStateChanged(getFirebaseClient().auth, setUser, () =>
-      setUser(null),
+    return onAuthStateChanged(
+      getFirebaseClient().auth,
+      (currentUser) => {
+        setUser(currentUser);
+        setPhotoURL(currentUser?.photoURL ?? null);
+        setImageFailed(false);
+      },
+      () => setUser(null),
     );
+  }, []);
+
+  useEffect(() => {
+    function updateProfile(event: Event) {
+      const detail = (event as CustomEvent<AuthProfileUpdatedDetail>).detail;
+      setPhotoURL(detail.photoURL);
+      setImageFailed(false);
+    }
+    window.addEventListener(AUTH_PROFILE_UPDATED_EVENT, updateProfile);
+    return () =>
+      window.removeEventListener(AUTH_PROFILE_UPDATED_EVENT, updateProfile);
   }, []);
 
   if (user === undefined || signingOut) {
@@ -59,11 +82,26 @@ export function AuthMenu() {
   return (
     <div className="flex items-center gap-1">
       <Link
-        aria-label="Account settings"
-        className="focus-ring grid size-10 place-items-center rounded-lg border border-fl-border bg-fl-surface-1 text-fl-text-muted hover:border-fl-text-muted hover:text-fl-text"
+        aria-label="Signed in — account settings"
+        className="focus-ring inline-flex h-10 items-center gap-2 rounded-lg border border-fl-border bg-fl-surface-1 py-1 pr-2.5 pl-1 text-fl-text-muted hover:border-fl-text-muted hover:text-fl-text"
         href="/settings"
+        title="Account settings"
       >
-        <CircleUserRound aria-hidden="true" size={19} />
+        <span className="grid size-8 shrink-0 place-items-center overflow-hidden rounded-md bg-fl-surface-3">
+          {photoURL && !imageFailed ? (
+            // Firebase Auth photo URLs can come from Google or FightLobby Storage.
+            <img
+              alt=""
+              className="size-full object-cover"
+              onError={() => setImageFailed(true)}
+              referrerPolicy="no-referrer"
+              src={photoURL}
+            />
+          ) : (
+            <CircleUserRound aria-hidden="true" size={19} />
+          )}
+        </span>
+        <span className="hidden text-xs font-bold lg:inline">Account</span>
       </Link>
       <button
         aria-label="Sign out"

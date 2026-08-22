@@ -57,6 +57,8 @@ against the event lifecycle rules.
 - Same-page authentication modal for protected discussion actions.
 - New Google users are created in Firebase Auth and complete handle onboarding.
 - Debounced handle availability checks with transactional uniqueness.
+- Optional provider or custom member avatars with client-side square cropping,
+  owner-only uploads, explicit replacement/removal, and navbar account identity.
 - Public profiles at `/u/{handle}` and a settings entry to view one's profile.
 - User-to-user following.
 - Blocking, reporting, privacy controls, and public/private data separation.
