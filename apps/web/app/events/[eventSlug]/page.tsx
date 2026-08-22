@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { CalendarClock, MapPin, Radio, Trophy, UsersRound } from "lucide-react";
-import Link from "next/link";
+import { CalendarClock, MapPin, Radio, UsersRound } from "lucide-react";
 import { notFound, permanentRedirect } from "next/navigation";
 
 import { AdSlot } from "@/components/ads/ad-slot";
@@ -10,7 +9,7 @@ import { FightCardGroups } from "@/components/fights/fight-card-groups";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
-import { Card, CardHeader } from "@/components/ui/card";
+import { ScoringExplainerCard } from "@/components/predictions/scoring-explainer-card";
 import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
 import { EventPredictionModal } from "@/features/predictions/event-prediction-modal";
@@ -249,10 +248,6 @@ export default async function EventPage({ params }: Props) {
               >
                 Fight card
               </h2>
-              <p className="mt-3 text-sm text-fl-text-muted">
-                Individual bout times are approximate. Prediction availability
-                is controlled by the server.
-              </p>
             </div>
             <EventPredictionModal
               className="self-start sm:self-auto"
@@ -275,29 +270,7 @@ export default async function EventPage({ params }: Props) {
             roomId={event.chatRoomId}
             roomType="event"
           />
-          <Card>
-            <CardHeader
-              eyebrow="Event leaderboard"
-              title="First result sets the board"
-            />
-            <div className="p-5 sm:p-6">
-              <Trophy
-                aria-hidden="true"
-                className="text-fl-warning"
-                size={23}
-              />
-              <p className="mt-4 text-sm leading-6 text-fl-text-muted">
-                Members become event-board eligible after predicting at least
-                70% of graded fights.
-              </p>
-              <Link
-                className="focus-ring mt-4 inline-block rounded-md text-sm font-bold text-fl-accent"
-                href="/leaderboards"
-              >
-                How rankings work
-              </Link>
-            </div>
-          </Card>
+          <ScoringExplainerCard title="Earn up to 10 points for each match" />
         </aside>
       </div>
     </main>

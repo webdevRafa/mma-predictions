@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import { Target } from "lucide-react";
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
@@ -14,7 +13,7 @@ import { StatsComparison } from "@/components/fights/stats-comparison";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import { ScoringExplainerCard } from "@/components/predictions/scoring-explainer-card";
 import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { FightDiscussion } from "@/features/discussions/fight-discussion";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
@@ -269,7 +268,7 @@ export default async function FightPage({ params }: Props) {
             roomId={fight.chatRoomId}
           />
         }
-        prediction={<PredictionExperience fight={fight} />}
+        prediction={<PredictionExperience fight={fight} key={fight.id} />}
         stats={<StatsComparison fighterA={fighterA} fighterB={fighterB} />}
         posts={
           <FightDiscussion
@@ -278,16 +277,7 @@ export default async function FightPage({ params }: Props) {
           />
         }
         scoring={
-          <Card className="p-5 sm:p-6">
-            <Target aria-hidden="true" className="text-fl-accent" size={22} />
-            <h2 className="mt-4 font-display text-2xl font-bold">
-              Earn up to 10 points for this match
-            </h2>
-            <p className="mt-2 text-sm leading-6 text-fl-text-muted">
-              5 pts for the winner · 3 pts for the method · 2 pts for the exact
-              detail. Getting the winner wrong scores 0 for the fight.
-            </p>
-          </Card>
+          <ScoringExplainerCard title="Earn up to 10 points for this match" />
         }
       />
     </main>
