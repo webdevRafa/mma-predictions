@@ -1,5 +1,5 @@
 import type { Fight, PredictionSummary } from "@fightlobby/domain";
-import { EyeOff, UsersRound } from "lucide-react";
+import { EyeOff, LockKeyhole, UsersRound } from "lucide-react";
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { cn } from "@/lib/cn";
@@ -119,10 +119,12 @@ function FighterConsensus({
 
 export function ConsensusCard({
   fight,
+  predictionClosed = false,
   reveal: revealOverride,
   summary: summaryOverride,
 }: {
   fight: Fight;
+  predictionClosed?: boolean;
   reveal?: boolean;
   summary?: PredictionSummary;
 }) {
@@ -189,14 +191,29 @@ export function ConsensusCard({
           </div>
         ) : (
           <div className="mt-6 rounded-xl border border-dashed border-fl-border bg-fl-surface-2 p-4">
-            <p className="flex items-center gap-2 text-sm font-semibold">
-              <EyeOff aria-hidden="true" size={16} /> Make your pick to reveal
-              the split
-            </p>
-            <p className="mt-1 text-xs leading-5 text-fl-text-muted">
-              The count is public. The lean stays behind the curtain until you
-              lock in your own prediction.
-            </p>
+            {predictionClosed ? (
+              <>
+                <p className="flex items-center gap-2 text-sm font-semibold">
+                  <LockKeyhole aria-hidden="true" size={16} /> Consensus remains
+                  private
+                </p>
+                <p className="mt-1 text-xs leading-5 text-fl-text-muted">
+                  The split is only revealed to members who locked a prediction
+                  before this fight closed.
+                </p>
+              </>
+            ) : (
+              <>
+                <p className="flex items-center gap-2 text-sm font-semibold">
+                  <EyeOff aria-hidden="true" size={16} /> Make your pick to
+                  reveal the split
+                </p>
+                <p className="mt-1 text-xs leading-5 text-fl-text-muted">
+                  The count is public. The lean stays behind the curtain until
+                  you lock in your own prediction.
+                </p>
+              </>
+            )}
           </div>
         )}
       </div>

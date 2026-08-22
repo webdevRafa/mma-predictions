@@ -11,6 +11,13 @@ card order, event time, and cancellations. Validate an import with:
 pnpm exec tsx scripts/validate-fixture.ts imports/ufc/<file>.json
 ```
 
+List active fights in the same top-to-bottom order used on the event card:
+main event first, followed by the rest of the main card, prelims, and then early
+prelims. `boutOrder` must be contiguous and start at `1`. Fight IDs identify the
+matchup, not its position on the card, so keep an existing fight ID unchanged
+when a bout moves and update only its card metadata. This preserves predictions,
+which are linked to stable fight and fighter IDs.
+
 Production imports require Firebase Admin credentials, the exact project ID,
 and an explicit migration confirmation phrase. The importer prints a dry-run
 inventory when the confirmation is absent.

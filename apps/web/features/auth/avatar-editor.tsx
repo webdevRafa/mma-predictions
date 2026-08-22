@@ -2,12 +2,13 @@
 
 import { onAuthStateChanged, type User } from "firebase/auth";
 import {
-  getDownloadURL,
   ref as storageRef,
-  uploadBytes,
+  uploadBytesResumable,
+  type UploadTaskSnapshot,
 } from "firebase/storage";
 import {
   Camera,
+  Check,
   CircleUserRound,
   ImagePlus,
   LoaderCircle,
@@ -25,6 +26,10 @@ import {
   AVATAR_OUTPUT_SIZE,
   avatarStoragePath,
 } from "@/lib/auth/avatar";
+import {
+  confirmAvatarSave,
+  readAvatarApiError,
+} from "@/lib/auth/avatar-confirmation";
 import { dispatchAuthProfileUpdated } from "@/lib/auth/client-profile-events";
 import {
   getFirebaseAppCheckToken,
@@ -37,17 +42,6 @@ const ACCEPTED_SOURCE_TYPES = new Set([
   "image/png",
   "image/webp",
 ]);
-
-function readApiError(payload: unknown, fallback: string) {
-  return typeof payload === "object" &&
-    payload &&
-    "error" in payload &&
-    typeof payload.error === "object" &&
-    payload.error &&
-    "message" in payload.error
-    ? String(payload.error.message)
-    : fallback;
-}
 
 async function loadImage(source: string) {
   const image = new Image();
@@ -89,6 +83,42 @@ async function createCroppedAvatar(source: string, crop: Area) {
   return blob;
 }
 
+function uploadAvatar(
+  path: ReturnType<typeof storageRef>,
+  avatar: Blob,
+  onProgress: (progress: number) => void,
+) {
+  const upload = uploadBytesResumable(path, avatar, {
+    cacheControl: "public,max-age=31536000",
+    contentType: AVATAR_CONTENT_TYPE,
+  });
+  return new Promise<UploadTaskSnapshot>((resolve, reject) => {
+    upload.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          snapshot.totalBytes > 0
+            ? Math.round(
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
+              )
+            : 0;
+        onProgress(progress);
+      },
+      reject,
+      () => resolve(upload.snapshot),
+    );
+  });
+}
+
+type SaveStage = "preparing" | "uploading" | "confirming" | "saved";
+
+function saveStageMessage(stage: SaveStage, uploadProgress: number) {
+  if (stage === "preparing") return "Preparing your cropped photo…";
+  if (stage === "uploading") return `Uploading your photo… ${uploadProgress}%`;
+  if (stage === "confirming") return "Confirming your profile photo…";
+  return "Photo saved. Updating your profile…";
+}
+
 export function AvatarEditor() {
   const fileInput = useRef<HTMLInputElement>(null);
   const cropDialog = useRef<HTMLDialogElement>(null);
@@ -102,6 +132,8 @@ export function AvatarEditor() {
   const [zoom, setZoom] = useState(1);
   const [croppedArea, setCroppedArea] = useState<Area | null>(null);
   const [busy, setBusy] = useState<"saving" | "removing" | null>(null);
+  const [saveStage, setSaveStage] = useState<SaveStage | null>(null);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [error, setError] = useState<string | null>(null);
   const [status, setStatus] = useState<string | null>(null);
 
@@ -135,6 +167,8 @@ export function AvatarEditor() {
     setCrop({ x: 0, y: 0 });
     setZoom(1);
     setCroppedArea(null);
+    setSaveStage(null);
+    setUploadProgress(0);
     if (fileInput.current) fileInput.current.value = "";
   }
 
@@ -143,6 +177,8 @@ export function AvatarEditor() {
     if (!file) return;
     setError(null);
     setStatus(null);
+    setSaveStage(null);
+    setUploadProgress(0);
     if (!ACCEPTED_SOURCE_TYPES.has(file.type)) {
       event.target.value = "";
       setError("Choose a JPG, PNG, or WebP image.");
@@ -159,46 +195,40 @@ export function AvatarEditor() {
   async function saveCrop() {
     if (!source || !croppedArea || !user) return;
     setBusy("saving");
+    setSaveStage("preparing");
+    setUploadProgress(0);
     setError(null);
+    setStatus(null);
     try {
       const avatar = await createCroppedAvatar(source, croppedArea);
       const client = getFirebaseClient();
-      const uploaded = await uploadBytes(
+      setSaveStage("uploading");
+      await uploadAvatar(
         storageRef(client.storage, avatarStoragePath(user.uid)),
         avatar,
-        {
-          cacheControl: "public,max-age=31536000",
-          contentType: AVATAR_CONTENT_TYPE,
-        },
+        setUploadProgress,
       );
-      await getDownloadURL(uploaded.ref);
+      setSaveStage("confirming");
       const appCheckToken = await getFirebaseAppCheckToken();
-      const response = await fetch("/api/profile/avatar", {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          ...(appCheckToken ? { "X-Firebase-AppCheck": appCheckToken } : {}),
-        },
-      });
-      const payload: unknown = await response.json().catch(() => null);
-      if (!response.ok) {
-        throw new Error(readApiError(payload, "Photo could not be saved"));
-      }
-      if (
-        !payload ||
-        typeof payload !== "object" ||
-        !("photoURL" in payload) ||
-        typeof payload.photoURL !== "string"
-      ) {
-        throw new Error("Photo could not be saved");
-      }
-      await user.reload();
+      const payload = await confirmAvatarSave(() =>
+        fetch("/api/profile/avatar", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            ...(appCheckToken ? { "X-Firebase-AppCheck": appCheckToken } : {}),
+          },
+        }),
+      );
       setPhotoURL(payload.photoURL);
       setImageFailed(false);
       dispatchAuthProfileUpdated({ photoURL: payload.photoURL });
       setStatus("Profile photo saved.");
+      setSaveStage("saved");
+      void user.reload().catch(() => undefined);
+      await new Promise((resolve) => window.setTimeout(resolve, 600));
       discardCrop();
     } catch (caught) {
+      setSaveStage(null);
       setError(
         caught instanceof Error ? caught.message : "Photo could not be saved",
       );
@@ -223,13 +253,15 @@ export function AvatarEditor() {
       });
       const payload: unknown = await response.json().catch(() => null);
       if (!response.ok) {
-        throw new Error(readApiError(payload, "Photo could not be removed"));
+        throw new Error(
+          readAvatarApiError(payload, "Photo could not be removed"),
+        );
       }
-      await user.reload();
       setPhotoURL(null);
       setImageFailed(false);
       dispatchAuthProfileUpdated({ photoURL: null });
       setStatus("Profile photo removed.");
+      void user.reload().catch(() => undefined);
     } catch (caught) {
       setError(
         caught instanceof Error ? caught.message : "Photo could not be removed",
@@ -348,7 +380,7 @@ export function AvatarEditor() {
         tabIndex={-1}
         type="file"
       />
-      {error ? (
+      {error && !source ? (
         <p
           className="mt-4 rounded-lg border border-fl-danger/30 bg-fl-danger/10 p-3 text-xs text-fl-danger"
           role="alert"
@@ -364,14 +396,14 @@ export function AvatarEditor() {
 
       <dialog
         aria-labelledby="avatar-crop-title"
-        className="m-auto max-h-[calc(100vh-1.25rem)] w-[min(calc(100%-1.25rem),42rem)] overflow-hidden rounded-2xl border border-fl-border bg-fl-surface-1 p-0 text-fl-text shadow-2xl"
+        className="m-auto hidden h-[min(calc(100dvh-1.25rem),42rem)] w-[min(calc(100%-1.25rem),42rem)] flex-col overflow-hidden rounded-2xl border border-fl-border bg-fl-surface-1 p-0 text-fl-text shadow-2xl open:flex"
         onCancel={(event) => {
           if (busy) event.preventDefault();
           else discardCrop();
         }}
         ref={cropDialog}
       >
-        <div className="flex items-center justify-between border-b border-fl-border px-5 py-4">
+        <div className="flex shrink-0 items-center justify-between border-b border-fl-border px-5 py-4">
           <div>
             <p className="eyebrow">Profile photo</p>
             <h2
@@ -391,7 +423,7 @@ export function AvatarEditor() {
             <X aria-hidden="true" size={18} />
           </button>
         </div>
-        <div className="relative h-[min(58vh,26rem)] bg-black">
+        <div className="relative min-h-48 flex-1 bg-black">
           {source ? (
             <Cropper
               aspect={1}
@@ -406,7 +438,7 @@ export function AvatarEditor() {
             />
           ) : null}
         </div>
-        <div className="space-y-4 border-t border-fl-border p-5">
+        <div className="shrink-0 space-y-4 overflow-y-auto border-t border-fl-border p-5">
           <label className="block text-xs font-bold text-fl-text-muted">
             Zoom
             <input
@@ -425,6 +457,31 @@ export function AvatarEditor() {
             Only the cropped 512 × 512 image is uploaded. The original file
             stays on your device.
           </p>
+          {saveStage ? (
+            <p
+              className={`flex items-center gap-2 rounded-lg border p-3 text-xs font-semibold ${saveStage === "saved" ? "border-fl-success/30 bg-fl-success/10 text-fl-success" : "border-fl-border bg-fl-bg text-fl-text-muted"}`}
+              role="status"
+            >
+              {saveStage === "saved" ? (
+                <Check aria-hidden="true" className="shrink-0" size={15} />
+              ) : (
+                <LoaderCircle
+                  aria-hidden="true"
+                  className="shrink-0 animate-spin"
+                  size={15}
+                />
+              )}
+              {saveStageMessage(saveStage, uploadProgress)}
+            </p>
+          ) : null}
+          {error && source ? (
+            <p
+              className="rounded-lg border border-fl-danger/30 bg-fl-danger/10 p-3 text-xs text-fl-danger"
+              role="alert"
+            >
+              {error}
+            </p>
+          ) : null}
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:justify-end">
             <button
               className="focus-ring min-h-11 cursor-pointer rounded-lg border border-fl-border px-4 text-sm font-bold hover:border-fl-text-muted disabled:opacity-40"
@@ -440,14 +497,20 @@ export function AvatarEditor() {
               onClick={saveCrop}
               type="button"
             >
-              {busy === "saving" ? (
+              {saveStage === "saved" ? (
+                <Check aria-hidden="true" size={16} />
+              ) : busy === "saving" ? (
                 <LoaderCircle
                   aria-hidden="true"
                   className="animate-spin"
                   size={16}
                 />
               ) : null}
-              {busy === "saving" ? "Saving photo…" : "Save photo"}
+              {saveStage === "saved"
+                ? "Saved"
+                : busy === "saving"
+                  ? "Saving photo…"
+                  : "Save photo"}
             </button>
           </div>
         </div>

@@ -8,7 +8,6 @@ import {
   initializeApp,
 } from "firebase-admin/app";
 import {
-  FieldValue,
   Timestamp,
   getFirestore,
   type DocumentSnapshot,
@@ -21,6 +20,12 @@ const requiredConfirmation = "REFRESH_AUGUST_22_CARD";
 
 function sorted(values: string[]) {
   return [...values].sort();
+}
+
+function record(value: unknown): Record<string, unknown> {
+  return value && typeof value === "object"
+    ? (value as Record<string, unknown>)
+    : {};
 }
 
 function snapshotField(snapshot: DocumentSnapshot, field: string): unknown {
@@ -59,13 +64,18 @@ async function main() {
   try {
     const firestore = getFirestore(app);
     const eventReference = firestore.collection("events").doc(card.event.id);
-    const [eventSnapshot, fightSnapshot] = await Promise.all([
-      eventReference.get(),
-      firestore
-        .collection("fights")
-        .where("eventId", "==", card.event.id)
-        .get(),
-    ]);
+    const [eventSnapshot, fightSnapshot, predictionSnapshot] =
+      await Promise.all([
+        eventReference.get(),
+        firestore
+          .collection("fights")
+          .where("eventId", "==", card.event.id)
+          .get(),
+        firestore
+          .collection("predictions")
+          .where("eventId", "==", card.event.id)
+          .get(),
+      ]);
     if (!eventSnapshot.exists)
       throw new Error(`Production event ${card.event.id} was not found`);
     if (snapshotField(eventSnapshot, "name") !== expectedEventName)
@@ -78,6 +88,68 @@ async function main() {
         "The live card changed. Reconcile the official UFC card before refreshing metadata.",
       );
 
+    const fixtureFightById = new Map(
+      card.fights.map((fight) => [fight.id, fight]),
+    );
+    const currentFightById = new Map(
+      fightSnapshot.docs.map((fight) => [fight.id, fight]),
+    );
+    for (const fightSnapshot of currentFightById.values()) {
+      const fixtureFight = fixtureFightById.get(fightSnapshot.id);
+      const currentParticipants = sorted(
+        [
+          snapshotField(fightSnapshot, "fighterAId"),
+          snapshotField(fightSnapshot, "fighterBId"),
+        ].filter((value): value is string => typeof value === "string"),
+      );
+      const fixtureParticipants = fixtureFight
+        ? sorted([fixtureFight.fighterAId, fixtureFight.fighterBId])
+        : [];
+      if (
+        currentParticipants.length !== 2 ||
+        JSON.stringify(currentParticipants) !==
+          JSON.stringify(fixtureParticipants)
+      )
+        throw new Error(
+          `Fight identity changed for ${fightSnapshot.id}. Refusing to move prediction-linked data.`,
+        );
+    }
+
+    for (const prediction of predictionSnapshot.docs) {
+      const data = record(prediction.data());
+      const fightId = data.fightId;
+      const winnerFighterId = record(data.pick).winnerFighterId;
+      const fixtureFight =
+        typeof fightId === "string" ? fixtureFightById.get(fightId) : undefined;
+      if (
+        !fixtureFight ||
+        typeof winnerFighterId !== "string" ||
+        ![fixtureFight.fighterAId, fixtureFight.fighterBId].includes(
+          winnerFighterId,
+        )
+      )
+        throw new Error(
+          `Prediction identity check failed for ${prediction.id}. No production data changed.`,
+        );
+    }
+
+    const cardChanges = card.fights.flatMap((fight) => {
+      const current = currentFightById.get(fight.id);
+      if (!current)
+        throw new Error(`Production fight ${fight.id} was not found`);
+      const before = {
+        cardSegment: snapshotField(current, "cardSegment"),
+        boutOrder: snapshotField(current, "boutOrder"),
+      };
+      const after = {
+        cardSegment: fight.cardSegment,
+        boutOrder: fight.boutOrder,
+      };
+      return JSON.stringify(before) === JSON.stringify(after)
+        ? []
+        : [{ fightId: fight.id, before, after }];
+    });
+
     console.log(
       JSON.stringify(
         {
@@ -86,8 +158,9 @@ async function main() {
           currentMainCardStartsAt: snapshotField(eventSnapshot, "startsAt"),
           nextPrelimsStartsAt: card.event.prelimsStartsAt,
           nextMainCardStartsAt: card.event.mainCardStartsAt,
-          fightersToMerge: card.fighters.length,
-          fightSnapshotsToRefresh: card.fights.length,
+          fightDocumentsToUpdate: cardChanges.length,
+          predictionsVerified: predictionSnapshot.size,
+          cardChanges,
         },
         null,
         2,
@@ -105,40 +178,12 @@ async function main() {
 
     const refreshedAt = Timestamp.now();
     const batch = firestore.batch();
-    batch.set(
-      eventReference,
-      {
-        ...card.event,
-        status: snapshotField(eventSnapshot, "status") ?? card.event.status,
-        predictionSummary:
-          snapshotField(eventSnapshot, "predictionSummary") ??
-          card.event.predictionSummary,
-        chatRoomId:
-          snapshotField(eventSnapshot, "chatRoomId") ?? card.event.chatRoomId,
-      },
-      { merge: true },
-    );
-    card.fighters.forEach((fighter) => {
+    cardChanges.forEach(({ fightId, after }) => {
       batch.set(
-        firestore.collection("fighters").doc(fighter.id),
+        firestore.collection("fights").doc(fightId),
         {
-          ...fighter,
-          upcomingEventIds: FieldValue.arrayUnion(card.event.id),
-        },
-        { merge: true },
-      );
-    });
-    card.fights.forEach((fight) => {
-      batch.set(
-        firestore.collection("fights").doc(fight.id),
-        {
-          cardSegment: fight.cardSegment,
-          boutOrder: fight.boutOrder,
-          fighterA: fight.fighterA,
-          fighterB: fight.fighterB,
-          weightClass: fight.weightClass,
-          dataQuality: fight.dataQuality,
-          updatedAt: fight.updatedAt,
+          ...after,
+          updatedAt: refreshedAt,
         },
         { merge: true },
       );
@@ -150,7 +195,7 @@ async function main() {
       id: importReference.id,
       actorUid: "production-refresh-script",
       reason:
-        "Add explicit broadcast times, official bout order, and verified UFC fighter statistics",
+        "Apply the reviewed official card order without changing fight or fighter identities",
       eventId: card.event.id,
       fixture: rawFixture,
       status: "complete",
@@ -159,29 +204,28 @@ async function main() {
     batch.create(auditReference, {
       id: auditReference.id,
       actorUid: "production-refresh-script",
-      action: "refresh_event_schedule_and_fighters",
+      action: "refresh_event_card_order",
       targetType: "event",
       targetId: card.event.id,
       reason:
-        "Use the official UFC schedule, bout order, and athlete profile statistics",
+        "Use the reviewed official UFC card order while preserving prediction-linked identities",
       before: {
-        startsAt: snapshotField(eventSnapshot, "startsAt") ?? null,
-        prelimsStartsAt:
-          snapshotField(eventSnapshot, "prelimsStartsAt") ?? null,
-        mainCardStartsAt:
-          snapshotField(eventSnapshot, "mainCardStartsAt") ?? null,
+        card: cardChanges.map(({ fightId, before }) => ({
+          fightId,
+          ...before,
+        })),
       },
       after: {
-        startsAt: card.event.startsAt,
-        prelimsStartsAt: card.event.prelimsStartsAt,
-        mainCardStartsAt: card.event.mainCardStartsAt,
-        fighterIds: card.fighters.map(({ id }) => id),
+        card: cardChanges.map(({ fightId, after }) => ({
+          fightId,
+          ...after,
+        })),
       },
       createdAt: refreshedAt,
     });
     await batch.commit();
     console.log(
-      `Refreshed ${card.event.name}: ${card.fighters.length} fighters and ${card.fights.length} fight snapshots.`,
+      `Refreshed ${card.event.name}: ${cardChanges.length} fight-order documents updated and ${predictionSnapshot.size} predictions preserved.`,
     );
   } finally {
     await deleteApp(app);

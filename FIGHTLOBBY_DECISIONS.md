@@ -321,3 +321,14 @@ updates the public profile version and Firebase Auth photo URL.
 **Reason:** Signed-in identity should be recognizable without turning a provider
 photo into an irreversible data import. A deterministic, size-limited object
 keeps access control, replacement, cache invalidation, and deletion auditable.
+
+## Decision 36 — Card order is mutable metadata, not matchup identity
+
+**Decision:** Active fights in reviewed fixtures are listed in one contiguous,
+top-to-bottom sequence. Moving a bout changes only `cardSegment` and
+`boutOrder`; existing fight IDs and participant IDs remain stable.
+
+**Reason:** Predictions store stable fight and winner-fighter IDs. Treating card
+position as identity would detach or misattribute picks whenever UFC moves a
+bout. Validation and guarded refresh checks therefore fail closed on identity
+changes while allowing audited card-order corrections.
