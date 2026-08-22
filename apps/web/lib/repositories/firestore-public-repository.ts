@@ -73,19 +73,31 @@ export class FirestorePublicRepository implements PublicRepository {
   async getEventBySlug(slug: string): Promise<EventCard | null> {
     const event = await this.findBySlug<Event>("events", slug, eventDocSchema);
     if (!event) return null;
-    const [fightSnapshot, fighterSnapshot] = await Promise.all([
-      this.firestore
-        .collection("fights")
-        .where("eventId", "==", event.id)
-        .orderBy("boutOrder")
-        .get(),
-      this.firestore
-        .collection("fighters")
-        .where("upcomingEventIds", "array-contains", event.id)
-        .get(),
-    ]);
+    const [fightSnapshot, fighterSnapshot, predictionCountSnapshot] =
+      await Promise.all([
+        this.firestore
+          .collection("fights")
+          .where("eventId", "==", event.id)
+          .orderBy("boutOrder")
+          .get(),
+        this.firestore
+          .collection("fighters")
+          .where("upcomingEventIds", "array-contains", event.id)
+          .get(),
+        this.firestore
+          .collection("predictions")
+          .where("eventId", "==", event.id)
+          .count()
+          .get(),
+      ]);
     return {
-      event,
+      event: {
+        ...event,
+        predictionSummary: {
+          ...event.predictionSummary,
+          totalPredictions: predictionCountSnapshot.data().count,
+        },
+      },
       fights: fightSnapshot.docs.map((doc) =>
         parseDoc<Fight>(doc, fightDocSchema),
       ),
