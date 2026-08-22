@@ -566,7 +566,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
       </Card>
       <dialog
         aria-labelledby="prediction-confirm-title"
-        className="w-[min(92vw,32rem)] rounded-2xl border border-fl-border bg-fl-surface-1 p-0 text-fl-text shadow-2xl backdrop:bg-black/75"
+        className="m-auto max-h-[calc(100dvh-2rem)] w-[min(92vw,32rem)] overflow-y-auto rounded-2xl border border-fl-border bg-fl-surface-1 p-0 text-fl-text shadow-2xl backdrop:bg-black/75"
         onCancel={(event) => {
           if (busy) event.preventDefault();
           else {
