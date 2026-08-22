@@ -1,0 +1,310 @@
+# FightLobby Product and Engineering Decisions
+
+Last verified: 2026-08-22
+
+This log records settled choices so future work does not repeatedly reopen them
+without new evidence. A decision may change, but the change should be explicit,
+documented, tested, and reflected across all five handoff documents.
+
+## Decision 01 — UFC-only launch scope
+
+**Decision:** FightLobby launches for UFC events only.
+
+**Reason:** A narrow scope makes event operations, terminology, scoring, and
+quality control manageable. Other promotions require their own provider rights,
+identity mapping, scheduling conventions, and product review.
+
+## Decision 02 — Operator-reviewed JSON is an approved production source
+
+**Decision:** The owner may manually build and review event JSON against official
+UFC information, validate it, and import it into Firestore.
+
+**Reason:** A careful manual workflow is acceptable for one event at a time and
+avoids shipping an unreliable scraper or paying for a provider before launch.
+
+**Guardrail:** Imports must preserve stable identities, UTC instants, provenance,
+schema validation, project/overwrite protections, and audit records. “Manual”
+does not mean editing Firestore ad hoc.
+
+## Decision 03 — Next.js App Router remains the web framework
+
+**Decision:** Keep the application on Next.js rather than converting it to a
+client-only React/Vite app.
+
+**Reason:** The product uses server rendering, metadata/SEO, route handlers,
+server sessions, admin actions, and server-only Firebase Admin access. React is
+already the UI layer inside Next.js.
+
+## Decision 04 — Existing VITE Firebase variable names remain operator-facing
+
+**Decision:** Vercel and local setup continue using `VITE_FIREBASE_*` public
+configuration names.
+
+**Reason:** They are already configured and working. `next.config.ts` maps them
+to the `NEXT_PUBLIC_FIREBASE_*` build identifiers consumed by Next client code.
+There is no new `VITE_PUBLIC_FIREBASE_*` family.
+
+## Decision 05 — Predictions are permanently immutable
+
+**Decision:** A confirmed prediction is final, even if the fight remains open or
+is later reopened.
+
+**Reason:** FightLobby is a public record of calls, not a rolling odds form.
+Immutability makes consensus, discussion badges, scoring, and user reputation
+credible.
+
+**Implementation rule:** The deterministic document is `${fightId}_${uid}`;
+first write creates locked version 1, identical request retries are idempotent,
+and later submissions return `prediction_already_locked`.
+
+## Decision 06 — Exactly one consensus vote per account per fight
+
+**Decision:** Retries, App Check failures, double clicks, or multiple domains may
+not create additional votes.
+
+**Reason:** Consensus must count unique user predictions. The deterministic
+prediction document, transaction, idempotency revision, and sharded counter
+update are the server authority; UI state is not the safeguard.
+
+## Decision 07 — Consensus is earned by making a pick
+
+**Decision:** Upcoming matchup consensus is hidden until the current user has
+locked their own prediction.
+
+**Reason:** This prevents the crowd from anchoring a user's call and is the only
+“hide picks” privacy behavior required for launch.
+
+**Clarification:** It is not a user setting. Public prediction materialization
+after matchup lock and per-author discussion badges are separate behavior.
+
+## Decision 08 — Confidence is removed
+
+**Decision:** There is no confidence slider, field, analytics dimension, or
+stored confidence value.
+
+**Reason:** It did not affect scoring and added friction/noise.
+
+## Decision 09 — Prediction methods are intentionally narrow
+
+**Decision:** Users choose only KO/TKO, Submission, or Decision. Generic `Other`
+is not a prediction option.
+
+**Reason:** These groups map cleanly to the scoring system and consensus. The
+admin result model remains broader so it can record draws, no contests,
+disqualifications, overturns, and unusual official outcomes.
+
+## Decision 10 — Scoring is 5/3/2
+
+**Decision:** Correct winner earns 5 points, correct method group adds 3, and
+correct exact detail adds 2. A wrong winner earns zero for that fight.
+
+**Exact detail:** Round for KO/TKO/submission; decision type for decisions.
+
+**Reason:** Winner remains the dominant call while method and detail reward
+specificity. Confidence never changes points.
+
+## Decision 11 — Matchups lock individually
+
+**Decision:** Admin locks each matchup at its walkout. There is no bulk or
+event-wide lock.
+
+**Reason:** UFC cards move unpredictably. Individual locking preserves maximum
+participation without allowing picks after a fight is visibly underway.
+
+## Decision 12 — Reopen is exceptional and does not unlock picks
+
+**Decision:** An authorized admin may reopen a matchup with a typed confirmation
+and required reason regardless of provider fight status.
+
+**Effect:** Existing predictions remain immutable. Only users without a pick may
+submit. Public-pick visibility is suppressed while reopened and restored on the
+next lock.
+
+## Decision 13 — Fight result submission and event completion are separate
+
+**Decision:** Saving an official result grades/regrades that fight. Marking the
+event complete only changes event/chat lifecycle.
+
+**Reason:** An event cannot safely infer detailed results, and grading must be
+versioned per fight. Event completion must never fabricate or silently grade
+missing outcomes.
+
+## Decision 14 — Result corrections regrade from source truth
+
+**Decision:** Correct the official fight result and rerun idempotent grading;
+never patch user totals or leaderboards directly.
+
+**Reason:** Predictions, profile aggregates, boards, achievements, and audit
+history must remain reproducible from a versioned result.
+
+## Decision 15 — Six-hour event/chat safety windows remain
+
+**Decision:** Public live state has a six-hour main-card fallback. When the admin
+marks an event complete, chat remains writable for six hours and is then
+read-only.
+
+**Reason:** Actual card end time cannot be known in advance, and fans may discuss
+the conclusion. The owner can mark completion immediately for accurate event
+lifecycle without abruptly ending conversation.
+
+## Decision 16 — Live chat messages expire after 30 days
+
+**Decision:** RTDB live chat is ephemeral and purged 30 days after its write
+window closes.
+
+**Reason:** This bounds cost, limits stale-room activity, and distinguishes live
+conversation from persistent matchup analysis.
+
+## Decision 17 — Posts and live chat are separate products
+
+**Decision:** Persistent posts/replies use Firestore discussion collections;
+live event/matchup messages use RTDB room paths. Messages are never automatically
+copied between them.
+
+**Reason:** Posts support durable threaded analysis. Live chat supports a fast,
+bounded, event-time stream with different retention and moderation needs.
+
+## Decision 18 — Public prediction badges show only winner and method
+
+**Decision:** On matchup posts and live chat, an author's badge may say, for
+example, `Hernandez by Submission`.
+
+**Guardrail:** Never show the predicted round or exact decision detail in that
+badge.
+
+**Reason:** Winner/method makes discussion playful and accountable without
+turning every message header into a full prediction receipt.
+
+## Decision 19 — Public result badges are user-friendly
+
+**Decision:** After an official result, event and matchup pages place a concise
+badge with the winner, method, and appropriate round/detail near the winner.
+
+**Reason:** Users should understand the outcome without opening admin data or a
+raw result document.
+
+## Decision 20 — Viewer-local time is the display default
+
+**Decision:** Store UTC instants and render them using the browser's IANA
+timezone. Do not hardcode Pacific, Central, or venue time for all users.
+
+**Reason:** FightLobby serves the whole country and beyond. The same instant must
+appear correctly for each visitor. Venue timezone remains data for context and
+admin review.
+
+## Decision 21 — No fabricated individual bout times
+
+**Decision:** Publish prelim and main-card start times only. Individual matchup
+pages show division and rounds, not an “event start” date or approximate bout
+clock.
+
+**Reason:** Bout duration and broadcast pacing make individual starts unknown.
+
+## Decision 22 — Fight Night numbering follows official branding
+
+**Decision:** Do not invent a UFC Fight Night sequence number when UFC's official
+event branding omits it. Numbered PPV events retain their official number.
+
+**Reason:** External databases use inconsistent unofficial Fight Night numbering.
+FightLobby should match the reviewed official source.
+
+## Decision 23 — Fighter identity never relies on name alone
+
+**Decision:** Link an imported fighter through a stable official/provider mapping
+or reviewed multi-field identity evidence. Same-name athletes receive separate
+IDs.
+
+**Reason:** Names, weight classes, records, and even nationalities can collide or
+change. Identity errors would corrupt years of stats and prediction history.
+
+## Decision 24 — Fighter photos are deferred pending rights
+
+**Decision:** Do not scrape or upload fighter images merely because the app is
+free. The UI works without circular initial placeholders.
+
+**Reason:** Copyright/publicity rights still apply to a noncommercial launch.
+Use licensed, permissioned, press-kit, or user-supplied assets only after a clear
+policy and attribution record exist.
+
+## Decision 25 — Handles are public, normalized, and transactional
+
+**Decision:** Handles are 3–20 characters, use supported letters/numbers/
+underscore rules, are checked with a debounced availability endpoint, and are
+claimed transactionally through `handles/{normalized}`.
+
+**Reason:** A UI check improves feedback but only the transaction can guarantee
+uniqueness under concurrency. Handle-change cooldown remains a product rule.
+
+## Decision 26 — Admin authority is dual-source and server-enforced
+
+**Decision:** Admin access requires both a Firebase custom claim and the matching
+private Firestore role. Every mutation also requires a valid session, same-origin
+request, action confirmation/reason where applicable, and audit record.
+
+**Reason:** A route hidden in the UI is not security. Dual-role checks protect
+against stale or partially compromised state.
+
+## Decision 27 — Admin UID is not hardcoded in application source
+
+**Decision:** Grant admin through the guarded bootstrap process and refresh the
+user's token by signing out/in.
+
+**Reason:** Source-level identity lists are brittle, leak operational identity,
+and bypass auditable role management.
+
+## Decision 28 — User following remains; event/fighter following is removed
+
+**Decision:** Members may follow other FightLobby members to keep up with their
+public record. Event and fighter follow controls are removed until they power a
+real experience.
+
+**Reason:** Storing unused follows creates misleading UI and dead data.
+
+## Decision 29 — Notification preferences are removed for launch
+
+**Decision:** Do not show notification settings until FightLobby can actually
+deliver the corresponding reminders/results.
+
+**Reason:** A preference UI that has no delivery system is deceptive.
+
+## Decision 30 — Account deletion is real deletion, not a dormant request
+
+**Decision:** A confirmed deletion removes the Firebase Auth user and eligible
+private/public data across Firestore, RTDB, and Storage.
+
+**Guardrail:** Required audit/moderation evidence is retained only as designed and
+anonymized where appropriate.
+
+## Decision 31 — Cost-sensitive reads are bounded
+
+**Decision:** Live chat uses bounded pages and child listeners, discussion uses
+paginated roots/replies and cached previews, prediction consensus uses sharded
+counters/background aggregation, and grading constructs boards once per run.
+
+**Reason:** An event-time product can spike abruptly. Correct data structures are
+more reliable than hoping advertising immediately covers unbounded Firebase
+usage.
+
+## Decision 32 — `codex/builder` is the integration branch
+
+**Decision:** Build, verify, and preview changes on `codex/builder`; merge into
+`main` only after preview review and checks.
+
+**Reason:** `main` is production. Vercel branch aliases can lag during provider
+incidents, so deployments are verified by Git SHA rather than name alone.
+
+## Decision 33 — Vercel and Firebase deploys are independent
+
+**Decision:** Merging/pushing web code deploys through Vercel, but Firebase rules,
+indexes, Storage/RTDB rules, and Functions are deployed explicitly when changed.
+
+**Reason:** Assuming Vercel deploys backend infrastructure causes silent version
+drift and production failures.
+
+## Decision 34 — Documentation is verified, not blindly trusted
+
+**Decision:** The root handoff package is the current written authority, but a
+new task must verify it against code before a high-risk change.
+
+**Reason:** Documentation can age. Schemas, server actions, rules, tests, and the
+deployed commit remain the executable truth.
