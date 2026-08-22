@@ -22,9 +22,7 @@ import { getServerRenderTime } from "@/lib/time/server";
 
 type Props = { params: Promise<{ eventSlug: string }> };
 
-export function generateStaticParams() {
-  return [];
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { eventSlug } = await params;

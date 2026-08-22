@@ -28,9 +28,7 @@ import { absoluteUrl } from "@/lib/seo/site";
 
 type Props = { params: Promise<{ fighterSlug: string }> };
 
-export function generateStaticParams() {
-  return [];
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { fighterSlug } = await params;

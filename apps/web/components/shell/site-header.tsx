@@ -13,12 +13,21 @@ const navigation = [
   { href: "/leaderboards", label: "Leaderboards" },
 ];
 
-export async function SiteHeader() {
-  // The event label is request-time content. Keeping this boundary dynamic
-  // prevents local/CI builds from reaching production Firestore while the
-  // underlying repository result remains briefly cached at runtime.
+async function listHeaderEvents() {
   await connection();
-  const events = await listPublicEvents();
+  try {
+    return await listPublicEvents();
+  } catch (error) {
+    console.error(
+      "Unable to load the event shortcut in the site header",
+      error,
+    );
+    return [];
+  }
+}
+
+export async function SiteHeader() {
+  const events = await listHeaderEvents();
   const activeEvent =
     events.find((event) => event.status === "live") ??
     events.find((event) => event.status === "scheduled");
