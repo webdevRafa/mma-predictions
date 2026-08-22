@@ -390,9 +390,14 @@ export async function submitPredictionTransaction(
   const revisionRef = predictionRef
     .collection("revisions")
     .doc(input.requestId);
+  const aggregationJobRef = firestore
+    .collection("predictionAggregateJobs")
+    .doc(input.fightId);
   const now = Timestamp.now();
   let created = false;
   let idempotent = false;
+  let summary: PredictionSummary = parsePredictionSummary(null);
+  let submittedDelta: CounterDelta | null = null;
 
   await firestore.runTransaction(async (transaction) => {
     const [fightSnapshot, existingPrediction, existingRevision] =
@@ -403,6 +408,9 @@ export async function submitPredictionTransaction(
       ]);
     if (!fightSnapshot.exists)
       throw new ApiError("Fight was not found", 404, "fight_not_found");
+    const fightValue: unknown = fightSnapshot.data();
+    const fight = record(fightValue);
+    summary = parsePredictionSummary(fight.predictionSummary);
     const existingValue: unknown = existingPrediction.data();
     const existing = record(existingValue);
     if (existingRevision.exists) {
@@ -423,8 +431,6 @@ export async function submitPredictionTransaction(
         "prediction_already_locked",
       );
     }
-    const fightValue: unknown = fightSnapshot.data();
-    const fight = record(fightValue);
     const serverState = assertPredictionSubmissionOpen(fight, now.toMillis());
     const fighterAId = fight.fighterAId;
     const fighterBId = fight.fighterBId;
@@ -486,6 +492,7 @@ export async function submitPredictionTransaction(
       roundsByFighter: emptyBreakdown(),
     };
     applyPickDelta(delta, validated.data, fighterAId, 1);
+    submittedDelta = delta;
     const shardRef = fightRef
       .collection("predictionShards")
       .doc(predictionShardId(input.uid));
@@ -530,9 +537,32 @@ export async function submitPredictionTransaction(
       },
       { merge: true },
     );
+    transaction.set(
+      aggregationJobRef,
+      {
+        fightId: input.fightId,
+        requestedAt: now,
+      },
+      { merge: true },
+    );
   });
 
-  const summary = await aggregatePredictionShards(firestore, input.fightId);
+  if (submittedDelta) {
+    const delta = submittedDelta as CounterDelta;
+    summary.total += delta.total;
+    summary.fighterA += delta.fighterA;
+    summary.fighterB += delta.fighterB;
+    sumMap(summary.methods, delta.methods);
+    sumMap(summary.rounds, delta.rounds);
+    sumBreakdown(
+      summary.methodsByFighter ?? emptyBreakdown(),
+      delta.methodsByFighter,
+    );
+    sumBreakdown(
+      summary.roundsByFighter ?? emptyBreakdown(),
+      delta.roundsByFighter,
+    );
+  }
   const saved = await predictionRef.get();
   if (!saved.exists)
     throw new ApiError("Prediction was not saved", 500, "prediction_missing");

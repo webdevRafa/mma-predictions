@@ -23,6 +23,8 @@ import { getFirebaseAdmin } from "@/lib/firebase/admin";
 const reasonSchema = z.string().trim().min(5).max(500);
 const confirmationSchema = z.string().trim().min(3).max(180);
 const idSchema = z.string().regex(/^[a-z0-9_-]{3,160}$/i);
+const POST_EVENT_CHAT_WINDOW_MS = 6 * 60 * 60 * 1_000;
+const CHAT_RETENTION_MS = 30 * 24 * 60 * 60 * 1_000;
 
 const eventPatchSchema = z
   .object({
@@ -351,13 +353,36 @@ async function updateWithOverride(
       throw new ApiError(`${input.entityType} not found`, 404, "not_found");
     const before = record(canonicalSnapshot.data());
     const previousState = record(stateSnapshot.data());
+    const completingEvent =
+      input.entityType === "event" &&
+      input.patch.status === "completed" &&
+      before.status !== "completed";
+    const completedAt = completingEvent ? new Date() : null;
+    const chatClosesAt = completedAt
+      ? new Date(completedAt.getTime() + POST_EVENT_CHAT_WINDOW_MS)
+      : null;
+    const generatedPatch = completedAt
+      ? {
+          completedAt: completedAt.toISOString(),
+          chatClosesAt: chatClosesAt!.toISOString(),
+        }
+      : {};
+    const chatRoomsSnapshot = completingEvent
+      ? await transaction.get(
+          firestore
+            .collection("chatRooms")
+            .where("eventId", "==", input.entityId),
+        )
+      : null;
     const manualOverrides = {
       ...record(previousState.manualOverrides),
       ...input.patch,
+      ...generatedPatch,
     };
     const after = {
       ...before,
       ...input.patch,
+      ...generatedPatch,
       updatedAt: new Date().toISOString(),
     };
     transaction.set(canonicalRef, after);
@@ -376,6 +401,23 @@ async function updateWithOverride(
       },
       { merge: true },
     );
+    if (chatRoomsSnapshot && completedAt && chatClosesAt) {
+      const closesAt = Timestamp.fromDate(chatClosesAt);
+      const retentionExpiresAt = Timestamp.fromMillis(
+        chatClosesAt.getTime() + CHAT_RETENTION_MS,
+      );
+      for (const room of chatRoomsSnapshot.docs)
+        transaction.set(
+          room.ref,
+          {
+            eventCompletedAt: Timestamp.fromDate(completedAt),
+            writableUntil: closesAt,
+            retentionExpiresAt,
+            updatedAt: FieldValue.serverTimestamp(),
+          },
+          { merge: true },
+        );
+    }
     transaction.set(logRef, {
       id: logRef.id,
       ...adminAuditData({
@@ -386,6 +428,15 @@ async function updateWithOverride(
         reason: input.reason,
         before,
         after,
+        ...(chatRoomsSnapshot && chatClosesAt
+          ? {
+              metadata: {
+                chatRoomCount: chatRoomsSnapshot.size,
+                chatClosesAt: chatClosesAt.toISOString(),
+                chatRetentionDays: 30,
+              },
+            }
+          : {}),
       }),
     });
     return { auditId: logRef.id };
@@ -1266,6 +1317,7 @@ function chatRoomDocument(
   fightId?: string,
 ) {
   const starts = new Date(startsAt).getTime();
+  const writableUntil = starts + 24 * 60 * 60 * 1_000;
   return {
     id: roomId,
     type: fightId ? "fight_lobby" : "event_lobby",
@@ -1273,7 +1325,8 @@ function chatRoomDocument(
     ...(fightId ? { fightId } : {}),
     status: "scheduled",
     opensAt: Timestamp.fromMillis(starts - 7 * 24 * 60 * 60 * 1_000),
-    writableUntil: Timestamp.fromMillis(starts + 24 * 60 * 60 * 1_000),
+    writableUntil: Timestamp.fromMillis(writableUntil),
+    retentionExpiresAt: Timestamp.fromMillis(writableUntil + CHAT_RETENTION_MS),
     slowModeSeconds: 7,
     messageCount: 0,
     moderationHealth: "normal",
@@ -1528,10 +1581,7 @@ export async function executeAdminAction(
       requireConfirmation(action.confirmation, `REMOVE ${action.messageId}`);
       return removeMessage(firestore, actorUid, action);
     case "remove_discussion_post":
-      requireConfirmation(
-        action.confirmation,
-        `REMOVE POST ${action.postId}`,
-      );
+      requireConfirmation(action.confirmation, `REMOVE POST ${action.postId}`);
       return removeDiscussionPost(firestore, actorUid, action);
     case "restore_message":
       requireConfirmation(

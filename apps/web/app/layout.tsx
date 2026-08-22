@@ -12,9 +12,10 @@ import { absoluteUrl, SITE_URL } from "@/lib/seo/site";
 
 import "./globals.css";
 
-// Public event, account, and navigation data are live Firestore-backed state.
-// Render routes on request so production builds never depend on database access.
-export const dynamic = "force-dynamic";
+// Public route shells may be shared briefly. Authenticated widgets establish
+// their own client/server sessions, while admin and account routes opt into
+// dynamic rendering in their route segments.
+export const revalidate = 30;
 
 const bodyFont = localFont({
   display: "swap",

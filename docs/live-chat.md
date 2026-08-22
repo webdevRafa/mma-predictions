@@ -35,10 +35,12 @@ room count.
 ## Reader experience
 
 Chat code and realtime listeners load only after a visitor opens the lobby. The
-listener starts with the latest 50 messages; readers can paginate upward 25 at a time.
-Incoming messages do not force scroll when the reader has moved upward. Presence uses
-an authenticated, per-user record with `onDisconnect` cleanup. Members hidden by the
-reader are filtered locally and can be unblocked in Settings.
+listener starts with the latest 50 messages and consumes incremental child add,
+change, and removal events; readers can paginate upward 25 at a time. Incoming
+messages do not force scroll when the reader has moved upward. The UI deliberately
+shows a low-cost “Live room” state instead of maintaining one database presence write
+and a full presence-tree subscription per visitor. Members hidden by the reader are
+filtered locally and can be unblocked in Settings.
 
 ## Moderation and room lifecycle
 
@@ -48,10 +50,14 @@ preserve the original in a private action record. Mutes, suspensions, and bans a
 audited; scheduled cleanup reconciles expired temporary sanctions.
 
 Fight rooms open at their configured `opensAt` time and become read-only at
-`writableUntil` (the default seed window is seven days before the event through 24
-hours after it). An hourly lifecycle job reconciles both transitions. Administrators
-can also place a room in slow mode, read-only, or closed state immediately.
+`writableUntil`. Imported rooms receive a conservative initial window. When an
+administrator marks the event complete, every event and matchup room receives an
+exact `writableUntil` six hours later. The message API checks this timestamp on every
+write, the client closes its composer at the boundary, and an hourly lifecycle job
+reconciles the stored room status. Administrators can also place a room in slow mode,
+read-only, or closed state immediately.
 
-Messages remain in the live room for the initial MVP retention period. A documented
-archive/prune policy must be approved before production retention automation is
-enabled; private moderation evidence follows the account and legal retention policy.
+Public messages remain available for 30 days after the room becomes read-only. A
+daily retention job then removes the room's Realtime Database message history and
+records `messagesPurgedAt` on its Firestore room document. Private moderation
+evidence follows the separate account, abuse-prevention, and legal retention policy.

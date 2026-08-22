@@ -106,6 +106,10 @@ export interface Event {
   prelimsStartsAt?: string | undefined;
   /** Absolute UTC instant when the main-card broadcast begins. */
   mainCardStartsAt?: string | undefined;
+  /** Manual completion instant recorded by live event operations. */
+  completedAt?: string | undefined;
+  /** Absolute instant when post-event live chat becomes read-only. */
+  chatClosesAt?: string | undefined;
   venueTimezone: string;
   venue?: Venue | undefined;
   mainEventFightId?: string | undefined;
@@ -158,14 +162,18 @@ export interface PredictionSummary {
   fighterB: number;
   methods: Record<string, number>;
   rounds: Record<string, number>;
-  methodsByFighter?: {
-    fighterA: Record<string, number>;
-    fighterB: Record<string, number>;
-  } | undefined;
-  roundsByFighter?: {
-    fighterA: Record<string, number>;
-    fighterB: Record<string, number>;
-  } | undefined;
+  methodsByFighter?:
+    | {
+        fighterA: Record<string, number>;
+        fighterB: Record<string, number>;
+      }
+    | undefined;
+  roundsByFighter?:
+    | {
+        fighterA: Record<string, number>;
+        fighterB: Record<string, number>;
+      }
+    | undefined;
   lastAggregatedAt?: string | undefined;
 }
 
@@ -345,6 +353,8 @@ export interface ChatRoom {
   status: ChatRoomStatus;
   opensAt: string;
   writableUntil?: string | undefined;
+  retentionExpiresAt?: string | undefined;
+  messagesPurgedAt?: string | undefined;
   slowModeSeconds: number;
   messageCount: number;
   lastMessageAt?: string | undefined;
