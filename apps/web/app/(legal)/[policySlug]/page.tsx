@@ -18,9 +18,7 @@ interface PolicyPage {
   sections: PolicySection[];
 }
 
-const supportEmail =
-  process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "support@fightlobby.com";
-const termsContactEmail = "fightlobbymma@gmail.com";
+const supportEmail = "fightlobbymma@gmail.com";
 
 const policies: Record<string, PolicyPage> = {
   about: {
@@ -124,7 +122,7 @@ const policies: Record<string, PolicyPage> = {
       {
         heading: "Contact and changes",
         paragraphs: [
-          `Material term changes will receive a new version date and may require renewed acceptance. Questions can be sent to ${termsContactEmail}.`,
+          `Material term changes will receive a new version date and may require renewed acceptance. Questions can be sent to ${supportEmail}.`,
         ],
       },
     ],
@@ -260,12 +258,7 @@ export default async function PolicyPage({ params }: Props) {
   const { policySlug } = await params;
   const page = policies[policySlug];
   if (!page) notFound();
-  const contactEmail =
-    policySlug === "terms" ? termsContactEmail : supportEmail;
-  const lastUpdated =
-    policySlug === "privacy" || policySlug === "terms"
-      ? "August 22"
-      : "August 16";
+  const lastUpdated = "August 22";
   return (
     <main className="shell py-10 sm:py-16" id="main-content">
       <Breadcrumbs
@@ -320,7 +313,7 @@ export default async function PolicyPage({ params }: Props) {
         <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
           <a
             className="focus-ring flex items-center justify-between rounded-xl border border-fl-border bg-fl-surface-1 p-4 text-sm font-bold hover:border-fl-accent"
-            href={`mailto:${contactEmail}`}
+            href={`mailto:${supportEmail}`}
           >
             Contact FightLobby <ArrowUpRight aria-hidden="true" size={16} />
           </a>
