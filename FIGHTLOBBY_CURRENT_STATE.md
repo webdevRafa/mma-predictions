@@ -87,6 +87,8 @@ against the event lifecycle rules.
   were removed.
 - Accessible irreversible confirmation modal and read-only locked receipt.
 - Per-matchup admin lock rejects all later submissions server-side.
+- A locked matchup shows non-predictors a compact closed notice while members
+  with an existing pick continue to see their immutable prediction receipt.
 - Consensus is hidden from a user until that user has submitted a prediction.
 - Consensus is split by fighter, method, and finish-round distributions.
 - 5/3/2 scoring model and wrong-winner-zero rule are implemented.

@@ -28,6 +28,7 @@ import {
 import { cn } from "@/lib/cn";
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
 import { getFirebaseAppCheckToken } from "@/lib/firebase/client";
+import { getPredictionPanelMode } from "@/lib/predictions/experience-state";
 
 interface DraftEnvelope {
   fightId: string;
@@ -251,6 +252,32 @@ function PredictionExperienceError({ retry }: { retry: () => void }) {
   );
 }
 
+function PredictionClosedNotice() {
+  return (
+    <Card id="predict">
+      <div className="flex items-start gap-4 p-5 sm:p-6">
+        <span className="grid size-11 shrink-0 place-items-center rounded-full bg-fl-accent-soft text-fl-accent">
+          <LockKeyhole aria-hidden="true" size={20} />
+        </span>
+        <div className="min-w-0">
+          <p className="eyebrow">Your call</p>
+          <h2 className="mt-2 font-display text-2xl leading-none font-bold tracking-[0.01em]">
+            Predictions are closed
+          </h2>
+          <p className="mt-2 max-w-2xl text-sm leading-6 text-fl-text-muted">
+            Predictions closed when the fighters began their walkouts. This
+            matchup is no longer accepting new picks.
+          </p>
+          <p className="mt-4 flex items-center gap-2 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
+            <ShieldCheck aria-hidden="true" size={14} /> Locked at walkout ·
+            server verified
+          </p>
+        </div>
+      </div>
+    </Card>
+  );
+}
+
 export function PredictionExperience({ fight }: { fight: Fight }) {
   const initiallyOpen =
     fight.predictionStatus === "open" &&
@@ -458,10 +485,24 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   }
 
   const formDisabled = !canSubmit || busy;
+  const panelMode = getPredictionPanelMode(Boolean(saved), canSubmit);
   const detailOptions = Array.from(
     { length: fight.scheduledRounds },
     (_, index) => index + 1,
   );
+
+  if (panelMode === "locked")
+    return (
+      <>
+        <PredictionClosedNotice />
+        <ConsensusCard
+          fight={fight}
+          predictionClosed
+          reveal={reveal}
+          summary={summary}
+        />
+      </>
+    );
 
   return (
     <>
