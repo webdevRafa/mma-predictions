@@ -86,10 +86,9 @@ export default async function HomePage() {
                   <span className="block text-fl-accent">IS LIVE.</span>
                 </>
               ) : isFightDay ? (
-                <>
-                  IT&apos;S
-                  <span className="block text-fl-accent">FIGHT DAY!</span>
-                </>
+                <span className="whitespace-nowrap">
+                  IT&apos;S <span className="text-fl-accent">FIGHT DAY!</span>
+                </span>
               ) : (
                 <>
                   JOIN THE
