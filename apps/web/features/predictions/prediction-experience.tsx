@@ -19,6 +19,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import { ConsensusCard } from "@/components/fights/consensus-card";
 import { Card, CardHeader } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   clearAuthReturnContext,
   readAuthReturnContext,
@@ -45,6 +46,8 @@ interface SavedPrediction {
 type PredictionDraft = Omit<PredictionPick, "method"> & {
   method: PredictionMethod | "";
 };
+
+type PredictionLookupState = "loading" | "ready" | "error";
 
 const methodOptions: { value: PredictionMethod; label: string }[] = [
   { value: "ko_tko", label: "KO / TKO" },
@@ -170,6 +173,84 @@ function fighterName(fight: Fight, fighterId: string) {
   );
 }
 
+function PredictionExperienceLoading() {
+  return (
+    <div aria-busy="true" role="status">
+      <span className="sr-only">
+        Checking your prediction and community consensus…
+      </span>
+      <Card id="predict">
+        <div className="border-b border-fl-border px-5 py-4 sm:px-6">
+          <Skeleton className="h-2.5 w-20" />
+          <Skeleton className="mt-3 h-7 w-52 max-w-full" />
+          <Skeleton className="mt-3 h-3.5 w-44 max-w-full" />
+        </div>
+        <div className="p-5 sm:p-6">
+          <Skeleton className="h-4 w-28" />
+          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+            <Skeleton className="h-[5.5rem]" />
+            <Skeleton className="h-[5.5rem]" />
+          </div>
+          <Skeleton className="mt-7 h-4 w-36" />
+          <div className="mt-3 flex gap-2">
+            <Skeleton className="h-10 w-20" />
+            <Skeleton className="h-10 w-24" />
+            <Skeleton className="h-10 w-20" />
+          </div>
+          <Skeleton className="mt-7 h-4 w-28" />
+          <Skeleton className="mt-3 h-11 w-full" />
+          <Skeleton className="mt-7 h-12 w-44 max-w-full" />
+        </div>
+      </Card>
+      <Card className="mt-6">
+        <div className="border-b border-fl-border px-5 py-4 sm:px-6">
+          <Skeleton className="h-2.5 w-24" />
+          <Skeleton className="mt-3 h-7 w-32" />
+        </div>
+        <div className="p-5 sm:p-6">
+          <div className="flex items-center gap-3">
+            <Skeleton className="size-10 rounded-full" />
+            <div className="flex-1">
+              <Skeleton className="h-6 w-20" />
+              <Skeleton className="mt-2 h-3 w-36" />
+            </div>
+          </div>
+          <Skeleton className="mt-6 h-24 w-full" />
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+function PredictionExperienceError({ retry }: { retry: () => void }) {
+  return (
+    <>
+      <Card id="predict">
+        <CardHeader
+          eyebrow="Your call"
+          title="Prediction status unavailable"
+          description="We couldn’t confirm whether you already made a pick."
+        />
+        <div className="p-5 sm:p-6">
+          <button
+            className="focus-ring min-h-11 rounded-lg bg-fl-accent px-5 text-sm font-bold text-fl-bg transition hover:bg-fl-accent-strong"
+            onClick={retry}
+            type="button"
+          >
+            Try again
+          </button>
+        </div>
+      </Card>
+      <Card className="mt-6">
+        <CardHeader eyebrow="Community read" title="Consensus" />
+        <p className="p-5 text-sm leading-6 text-fl-text-muted sm:p-6">
+          Consensus will appear after your prediction status is confirmed.
+        </p>
+      </Card>
+    </>
+  );
+}
+
 export function PredictionExperience({ fight }: { fight: Fight }) {
   const initiallyOpen =
     fight.predictionStatus === "open" &&
@@ -180,6 +261,9 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
     detail: undefined,
   });
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
+  const [lookupState, setLookupState] =
+    useState<PredictionLookupState>("loading");
+  const [lookupAttempt, setLookupAttempt] = useState(0);
   const [canSubmit, setCanSubmit] = useState(initiallyOpen);
   const [saved, setSaved] = useState<SavedPrediction | null>(null);
   const [summary, setSummary] = useState(fight.predictionSummary);
@@ -217,9 +301,13 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
             errorMessage(payload, "Prediction state is unavailable"),
           );
         const data = objectRecord(payload);
+        if (!active) return;
         const isAuthenticated = data.authenticated === true;
         setAuthenticated(isAuthenticated);
-        if (!isAuthenticated) return;
+        if (!isAuthenticated) {
+          setLookupState("ready");
+          return;
+        }
         if (typeof data.canSubmit === "boolean") setCanSubmit(data.canSubmit);
         if (typeof data.reveal === "boolean") setReveal(data.reveal);
         const nextSummary = parseSummary(data.summary);
@@ -241,17 +329,20 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
           }
           if (!draft) setPick(prediction.pick);
         }
+        setLookupState("ready");
       })
       .catch((caught: unknown) => {
-        if (caught instanceof Error && caught.name !== "AbortError") {
-          setAuthenticated(false);
-        }
+        if (
+          active &&
+          (!(caught instanceof Error) || caught.name !== "AbortError")
+        )
+          setLookupState("error");
       });
     return () => {
       active = false;
       controller.abort();
     };
-  }, [fight]);
+  }, [fight, initiallyOpen, lookupAttempt]);
 
   useEffect(() => {
     const dialog = confirmationDialog.current;
@@ -259,6 +350,17 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
     if (confirming && !dialog.open) dialog.showModal();
     if (!confirming && dialog.open) dialog.close();
   }, [confirming]);
+
+  if (lookupState === "loading") return <PredictionExperienceLoading />;
+  if (lookupState === "error")
+    return (
+      <PredictionExperienceError
+        retry={() => {
+          setLookupState("loading");
+          setLookupAttempt((current) => current + 1);
+        }}
+      />
+    );
 
   function selectMethod(method: PredictionMethod) {
     markStarted();

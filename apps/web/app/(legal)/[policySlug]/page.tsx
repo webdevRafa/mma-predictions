@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
-import { ArrowUpRight, Scale, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
-import { Card } from "@/components/ui/card";
 
 interface PolicySection {
   heading: string;
@@ -15,12 +14,11 @@ interface PolicySection {
 interface PolicyPage {
   title: string;
   description: string;
-  eyebrow: string;
+  eyebrow?: string;
   sections: PolicySection[];
 }
 
-const supportEmail =
-  process.env.NEXT_PUBLIC_SUPPORT_EMAIL ?? "support@fightlobby.com";
+const supportEmail = "fightlobbymma@gmail.com";
 
 const policies: Record<string, PolicyPage> = {
   about: {
@@ -54,36 +52,37 @@ const policies: Record<string, PolicyPage> = {
   privacy: {
     title: "Privacy Policy",
     description:
-      "How FightLobby collects, uses, protects, and gives you control over account and product data.",
+      "A simple explanation of the information FightLobby keeps and the choices you have.",
     eyebrow: "Your data and controls",
     sections: [
       {
-        heading: "Information we handle",
+        heading: "Information we collect",
         bullets: [
-          "Account information from Firebase Authentication, including an email address that is never displayed publicly.",
-          "A public handle, optional display profile, member follows, prediction records, leaderboard results, and chat activity.",
-          "Security, rate-limit, moderation, and audit records needed to protect the service.",
-          "Product usage and performance measurements only when analytics consent is granted.",
-          "Advertising signals only on eligible pages when advertising consent, a certified consent platform, and the global ad flag are all active.",
+          "When you sign up with Google, we receive your email address and Google profile photo. Your email stays private and is kept only to keep your account available and secure. Your profile photo is optional and can be changed or removed at any time.",
+          "When you use FightLobby, we keep the public handle you choose, your predictions, leaderboard results, follows, and chat activity so those features work.",
+          "We keep limited security and moderation records when needed to protect members and FightLobby.",
+          "Analytics and advertising technology are used only according to the choices you make in Privacy choices.",
         ],
       },
       {
         heading: "Why we use it",
         paragraphs: [
-          "We use data to authenticate members, save and grade predictions, operate public leaderboards, deliver chat, enforce community rules, investigate abuse, maintain reliability, and improve FightLobby with consented aggregate measurement.",
-          "FightLobby does not sell personal prediction history. Analytics events exclude email addresses, message bodies, handles, and private prediction details.",
+          "Your email connects you to your account and helps us keep it available and secure. It is never displayed publicly. Your optional avatar and public handle help identify you in community features.",
+          "We use activity created on FightLobby to save and grade predictions, run leaderboards and chat, enforce community rules, investigate abuse, and maintain the service.",
+          "FightLobby does not sell personal prediction history. Analytics measurements do not include email addresses, message bodies, handles, or private prediction details.",
         ],
       },
       {
         heading: "Service providers and disclosure",
         paragraphs: [
-          "We use infrastructure providers such as Firebase and our web host to operate the service. Google Analytics and advertising technology load only according to your choices and the launch controls described in the Cookie Policy. We may preserve or disclose information when reasonably necessary for security, legal compliance, or the protection of users and the service.",
+          "We use service providers, including Google and our web host, to run sign-in, data storage, hosting, analytics, and advertising features. Optional analytics and advertising are used only according to your Privacy choices. We may preserve or disclose information when reasonably necessary for security, legal compliance, or the protection of members and FightLobby.",
         ],
       },
       {
         heading: "Retention and your choices",
         paragraphs: [
-          "Public predictions and leaderboard history are retained to preserve the integrity of community records. Live chat becomes read-only six hours after an administrator completes an event, and its public message history is automatically removed 30 days later. Limited moderation and security records may be retained longer to investigate abuse and protect the service. You can change privacy choices at any time, block members, or request account deletion from your account page.",
+          "Predictions and leaderboard history are kept to preserve community records. Chat history is removed according to FightLobby's retention schedule, while limited moderation and security records may be kept longer when needed to investigate abuse and protect the service.",
+          "You can change your Privacy choices, block members, replace or remove your profile photo, or request account deletion from your account page. Removing a custom avatar deletes its stored image, and deleting your account also removes avatar files owned by the account.",
           `For privacy questions or rights requests, contact ${supportEmail}. We may need to verify the request before acting on account data.`,
         ],
       },
@@ -196,7 +195,6 @@ const policies: Record<string, PolicyPage> = {
     title: "Data Corrections",
     description:
       "Report an incorrect UFC event, matchup, fighter profile, or official result shown on FightLobby.",
-    eyebrow: "Accuracy request",
     sections: [
       {
         heading: "What to include",
@@ -207,12 +205,6 @@ const policies: Record<string, PolicyPage> = {
         ],
         paragraphs: [
           `Send the request to ${supportEmail} with the subject “Data correction.” Do not include passwords, identity documents, or unrelated personal data.`,
-        ],
-      },
-      {
-        heading: "How corrections work",
-        paragraphs: [
-          "Administrators compare canonical data with the provider snapshot, record a reason, apply a persistent override, and retain an audit entry. Result corrections create a new result version and run the idempotent regrading workflow so points are not applied twice.",
         ],
       },
     ],
@@ -266,6 +258,7 @@ export default async function PolicyPage({ params }: Props) {
   const { policySlug } = await params;
   const page = policies[policySlug];
   if (!page) notFound();
+  const lastUpdated = "August 22";
   return (
     <main className="shell py-10 sm:py-16" id="main-content">
       <Breadcrumbs
@@ -273,15 +266,17 @@ export default async function PolicyPage({ params }: Props) {
       />
       <div className="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1fr)_20rem]">
         <article>
-          <p className="eyebrow">{page.eyebrow}</p>
-          <h1 className="mt-3 font-display text-5xl font-extrabold sm:text-7xl">
+          {page.eyebrow ? <p className="eyebrow">{page.eyebrow}</p> : null}
+          <h1
+            className={`${page.eyebrow ? "mt-3" : ""} font-display text-5xl font-extrabold sm:text-7xl`}
+          >
             {page.title}
           </h1>
           <p className="mt-4 max-w-3xl text-base leading-7 text-fl-text-muted">
             {page.description}
           </p>
           <p className="mt-4 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
-            Last updated August 16, 2026
+            Last updated {lastUpdated}, 2026
           </p>
           <div className="mt-10 space-y-8">
             {page.sections.map((section) => (
@@ -316,17 +311,6 @@ export default async function PolicyPage({ params }: Props) {
           </div>
         </article>
         <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-          <Card className="p-5">
-            <Scale aria-hidden="true" className="text-fl-accent" size={20} />
-            <h2 className="mt-4 font-display text-2xl font-bold">
-              Launch review
-            </h2>
-            <p className="mt-3 text-xs leading-6 text-fl-text-muted">
-              These pages describe the implemented product controls. Final
-              production wording, business identity, and jurisdiction-specific
-              requirements should be reviewed by qualified counsel.
-            </p>
-          </Card>
           <a
             className="focus-ring flex items-center justify-between rounded-xl border border-fl-border bg-fl-surface-1 p-4 text-sm font-bold hover:border-fl-accent"
             href={`mailto:${supportEmail}`}

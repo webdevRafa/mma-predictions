@@ -22,9 +22,7 @@ import { isProfileIndexable } from "@/lib/seo/indexability";
 
 type Props = { params: Promise<{ handle: string }> };
 
-export function generateStaticParams() {
-  return [];
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { handle } = await params;

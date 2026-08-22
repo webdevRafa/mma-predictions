@@ -22,7 +22,10 @@ const sessionSchema = z.object({
 
 export async function GET() {
   const session = await getOptionalSession();
-  return Response.json({ authenticated: Boolean(session), session });
+  return Response.json(
+    { authenticated: Boolean(session), session },
+    { headers: { "Cache-Control": "private, no-store" } },
+  );
 }
 
 export async function POST(request: Request) {

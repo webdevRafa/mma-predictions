@@ -73,6 +73,11 @@ export const metadata: Metadata = {
   description:
     "Make UFC predictions, compare picks, and join live matchup chats with the FightLobby community.",
   applicationName: "FightLobby",
+  icons: {
+    icon: [{ url: "/brand/fightlobby-mark.png", type: "image/png" }],
+    shortcut: "/brand/fightlobby-mark.png",
+    apple: "/brand/fightlobby-mark.png",
+  },
   alternates: { canonical: "/" },
   openGraph: {
     siteName: "FightLobby",

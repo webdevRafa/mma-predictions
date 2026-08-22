@@ -4,7 +4,6 @@ import Link from "next/link";
 
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { listPublicEvents } from "@/lib/data/public";
 import { formatCompactDate } from "@/lib/format";
@@ -34,8 +33,7 @@ export default async function EventsPage() {
         items={[{ label: "Home", href: "/" }, { label: "Events" }]}
       />
       <header className="mt-8 max-w-3xl">
-        <Badge tone="accent">UFC cards</Badge>
-        <h1 className="mt-5 font-display text-5xl leading-[.9] font-extrabold sm:text-7xl">
+        <h1 className="font-display text-5xl leading-[.9] font-extrabold sm:text-7xl">
           EVENT COMMAND CENTER
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-7 text-fl-text-muted">
@@ -60,17 +58,14 @@ export default async function EventsPage() {
             return (
               <Card className="group overflow-hidden" key={event.id}>
                 <div className="arena-grid border-b border-fl-border p-5 sm:p-6">
-                  <div className="flex items-center justify-between gap-3">
-                    <Badge tone="neutral">
-                      {event.promotion.toUpperCase()}
-                    </Badge>
+                  <div className="flex justify-end">
                     <LiveStatusFragment
                       collection="events"
                       id={event.id}
                       initialStatus={event.status}
                     />
                   </div>
-                  <h2 className="mt-8 max-w-xl font-display text-4xl leading-[.92] font-extrabold sm:text-5xl">
+                  <h2 className="mt-6 max-w-xl font-display text-4xl leading-[.92] font-extrabold sm:text-5xl">
                     {event.name}
                   </h2>
                 </div>

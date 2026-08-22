@@ -5,6 +5,8 @@ import { useState, type FormEvent } from "react";
 
 import { getFormString } from "@/lib/forms/form-data";
 
+import { AvatarEditor } from "../auth/avatar-editor";
+
 async function responseMessage(response: Response) {
   const payload: unknown = await response.json();
   if (response.ok) return null;
@@ -82,6 +84,7 @@ export function ProfileSettingsForm({
 
   return (
     <form className="space-y-5" onSubmit={submit}>
+      <AvatarEditor />
       {status ? (
         <p
           className="rounded-lg border border-fl-border bg-fl-surface-2 p-3 text-sm"

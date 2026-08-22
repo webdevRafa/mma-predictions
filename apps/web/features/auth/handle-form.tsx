@@ -13,6 +13,9 @@ import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
+import { dispatchAuthProfileUpdated } from "@/lib/auth/client-profile-events";
+
+import { AvatarEditor } from "./avatar-editor";
 
 type AvailabilityStatus = "idle" | "checking" | "available" | "taken" | "error";
 
@@ -152,6 +155,7 @@ export function HandleForm({
         throw new Error(message);
       }
       trackAnalyticsEvent("handle_created");
+      dispatchAuthProfileUpdated({ handle: parsed.data });
       if (onCompleted) onCompleted();
       else router.push(returnTo);
       router.refresh();
@@ -168,6 +172,7 @@ export function HandleForm({
 
   return (
     <form className="space-y-5" onSubmit={submit}>
+      <AvatarEditor />
       {error ? (
         <p
           className="rounded-xl border border-fl-danger/30 bg-fl-danger/10 p-4 text-sm text-fl-danger"

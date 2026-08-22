@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import { CalendarClock, MapPin, Radio, Trophy, UsersRound } from "lucide-react";
-import Link from "next/link";
+import { CalendarClock, MapPin, Radio, UsersRound } from "lucide-react";
 import { notFound, permanentRedirect } from "next/navigation";
 
 import { AdSlot } from "@/components/ads/ad-slot";
@@ -10,10 +9,10 @@ import { FightCardGroups } from "@/components/fights/fight-card-groups";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
-import { Badge } from "@/components/ui/badge";
-import { Card, CardHeader } from "@/components/ui/card";
+import { ScoringExplainerCard } from "@/components/predictions/scoring-explainer-card";
 import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
+import { EventPredictionModal } from "@/features/predictions/event-prediction-modal";
 import { getPublicEvent } from "@/lib/data/public";
 import { absoluteUrl } from "@/lib/seo/site";
 import { isEventIndexable } from "@/lib/seo/indexability";
@@ -22,9 +21,7 @@ import { getServerRenderTime } from "@/lib/time/server";
 
 type Props = { params: Promise<{ eventSlug: string }> };
 
-export function generateStaticParams() {
-  return [];
-}
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { eventSlug } = await params;
@@ -154,13 +151,12 @@ export default async function EventPage({ params }: Props) {
             items={[
               { label: "Home", href: "/" },
               { label: "Events", href: "/events" },
-              { label: event.shortName },
+              { label: event.name },
             ]}
           />
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div className="max-w-5xl">
               <div className="flex flex-wrap items-center gap-3">
-                <Badge tone="accent">{event.promotion.toUpperCase()}</Badge>
                 <LiveStatusFragment
                   collection="events"
                   id={event.id}
@@ -178,9 +174,8 @@ export default async function EventPage({ params }: Props) {
                 </p>
               ) : null}
             </div>
-            <div className="rounded-xl border border-fl-border bg-fl-surface-1/90 p-5 lg:min-w-72">
-              <p className="eyebrow">Event clock</p>
-              <p className="mt-2 font-display text-2xl font-bold">
+            <div className="lg:min-w-72 lg:pb-1 lg:text-right">
+              <p className="font-display text-2xl font-bold">
                 <EventCountdown {...eventTiming} renderedAt={renderedAt} />
               </p>
             </div>
@@ -244,18 +239,24 @@ export default async function EventPage({ params }: Props) {
 
       <div className="shell grid gap-8 py-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:py-16">
         <section aria-labelledby="fight-card-title">
-          <div className="mb-8">
-            <p className="eyebrow">Official card order</p>
-            <h2
-              className="mt-2 font-display text-4xl font-extrabold sm:text-5xl"
-              id="fight-card-title"
-            >
-              Fight card
-            </h2>
-            <p className="mt-3 text-sm text-fl-text-muted">
-              Individual bout times are approximate. Prediction availability is
-              controlled by the server.
-            </p>
+          <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="eyebrow">Official card order</p>
+              <h2
+                className="mt-2 font-display text-4xl font-extrabold sm:text-5xl"
+                id="fight-card-title"
+              >
+                Fight card
+              </h2>
+            </div>
+            <EventPredictionModal
+              className="self-start sm:self-auto"
+              eventId={event.id}
+              eventName={event.name}
+              eventSlug={event.slug}
+              fights={fights}
+              label="Lock your predictions"
+            />
           </div>
           <FightCardGroups fights={fights} />
         </section>
@@ -269,29 +270,7 @@ export default async function EventPage({ params }: Props) {
             roomId={event.chatRoomId}
             roomType="event"
           />
-          <Card>
-            <CardHeader
-              eyebrow="Event leaderboard"
-              title="First result sets the board"
-            />
-            <div className="p-5 sm:p-6">
-              <Trophy
-                aria-hidden="true"
-                className="text-fl-warning"
-                size={23}
-              />
-              <p className="mt-4 text-sm leading-6 text-fl-text-muted">
-                Members become event-board eligible after predicting at least
-                70% of graded fights.
-              </p>
-              <Link
-                className="focus-ring mt-4 inline-block rounded-md text-sm font-bold text-fl-accent"
-                href="/leaderboards"
-              >
-                How rankings work
-              </Link>
-            </div>
-          </Card>
+          <ScoringExplainerCard title="Earn up to 10 points for each match" />
         </aside>
       </div>
     </main>

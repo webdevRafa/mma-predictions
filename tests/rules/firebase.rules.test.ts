@@ -9,7 +9,12 @@ import {
 import type { RulesTestEnvironment } from "@firebase/rules-unit-testing";
 import { get, ref, set } from "firebase/database";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { getBytes, ref as storageRef, uploadString } from "firebase/storage";
+import {
+  deleteObject,
+  getBytes,
+  ref as storageRef,
+  uploadString,
+} from "firebase/storage";
 import { afterAll, beforeAll, describe, it } from "vitest";
 
 const rulesDescribe = process.env.RULES_TEST === "1" ? describe : describe.skip;
@@ -169,5 +174,50 @@ rulesDescribe("Firebase security boundaries", () => {
     await assertFails(
       getBytes(storageRef(storage, "raw/provider/payload.json")),
     );
+  });
+
+  it("lets members manage only their constrained avatar object", async () => {
+    const memberStorage = environment
+      .authenticatedContext("member_a")
+      .storage();
+    const avatar = storageRef(memberStorage, "avatars/member_a/avatar.webp");
+    await assertSucceeds(
+      uploadString(avatar, "cropped avatar", "raw", {
+        contentType: "image/webp",
+      }),
+    );
+    await assertSucceeds(
+      getBytes(
+        storageRef(
+          environment.unauthenticatedContext().storage(),
+          "avatars/member_a/avatar.webp",
+        ),
+      ),
+    );
+    await assertFails(
+      uploadString(
+        storageRef(
+          environment.authenticatedContext("member_b").storage(),
+          "avatars/member_a/avatar.webp",
+        ),
+        "not the owner",
+        "raw",
+        { contentType: "image/webp" },
+      ),
+    );
+    await assertFails(
+      uploadString(
+        storageRef(memberStorage, "avatars/member_a/original.png"),
+        "unexpected path",
+        "raw",
+        { contentType: "image/png" },
+      ),
+    );
+    await assertFails(
+      uploadString(avatar, "wrong type", "raw", {
+        contentType: "image/png",
+      }),
+    );
+    await assertSucceeds(deleteObject(avatar));
   });
 });

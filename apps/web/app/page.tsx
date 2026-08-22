@@ -8,7 +8,8 @@ import { EventPhaseLabel } from "@/components/events/event-phase-label";
 import { EventSchedule } from "@/components/events/event-schedule";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
-import { Card, CardHeader } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
+import { EventPredictionModal } from "@/features/predictions/event-prediction-modal";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { formatRecord } from "@/lib/format";
 import { resolveEventSchedule } from "@/lib/events/timing";
@@ -52,6 +53,22 @@ export default async function HomePage() {
       }
     : null;
   const schedule = eventTiming ? resolveEventSchedule(eventTiming) : null;
+  const isFightDay = Boolean(
+    event &&
+    schedule &&
+    new Intl.DateTimeFormat("en-CA", {
+      timeZone: event.venueTimezone,
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit",
+    }).format(new Date(renderedAt)) ===
+      new Intl.DateTimeFormat("en-CA", {
+        timeZone: event.venueTimezone,
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+      }).format(new Date(schedule.prelimsStartsAt)),
+  );
 
   return (
     <main id="main-content">
@@ -63,9 +80,22 @@ export default async function HomePage() {
         <div className="shell relative grid gap-12 py-14 lg:min-h-[44rem] lg:grid-cols-[.86fr_1.14fr] lg:items-center lg:py-20">
           <div className="max-w-3xl">
             <h1 className="font-display text-[clamp(3.4rem,6vw,6rem)] leading-[0.82] font-extrabold tracking-[-0.035em] text-balance">
-              JOIN THE
-              <span className="block">FIGHT NIGHT</span>
-              <span className="block text-fl-accent">CONVERSATION.</span>
+              {event?.status === "live" ? (
+                <>
+                  FIGHT NIGHT
+                  <span className="block text-fl-accent">IS LIVE.</span>
+                </>
+              ) : isFightDay ? (
+                <span className="whitespace-nowrap">
+                  IT&apos;S <span className="text-fl-accent">FIGHT DAY!</span>
+                </span>
+              ) : (
+                <>
+                  JOIN THE
+                  <span className="block">FIGHT NIGHT</span>
+                  <span className="block text-fl-accent">CONVERSATION.</span>
+                </>
+              )}
             </h1>
             <p className="mt-7 max-w-xl text-base leading-7 text-fl-text-muted sm:text-lg">
               Make predictions, compare picks, and join live matchup chats with
@@ -73,16 +103,11 @@ export default async function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                className="focus-ring inline-flex min-h-12 items-center gap-2 rounded-[10px] bg-fl-accent px-5 text-sm font-bold text-fl-bg shadow-[0_10px_28px_rgba(241,64,29,0.2)] transition hover:bg-fl-accent-strong"
+                className="focus-ring inline-flex min-h-12 max-w-full items-center gap-2 rounded-[10px] bg-fl-accent px-5 text-left text-sm leading-5 font-bold text-fl-bg shadow-[0_10px_28px_rgba(241,64,29,0.2)] transition hover:bg-fl-accent-strong"
                 href={event ? `/events/${event.slug}` : "/events"}
               >
-                Join the next event <ArrowRight aria-hidden="true" size={17} />
-              </Link>
-              <Link
-                className="focus-ring inline-flex min-h-12 items-center rounded-[10px] border border-fl-border bg-fl-surface-1 px-5 text-sm font-bold text-fl-text transition hover:border-fl-text-muted hover:bg-fl-surface-2"
-                href="/events"
-              >
-                Browse events
+                <span>{event ? `View ${event.name}` : "View events"}</span>
+                <ArrowRight aria-hidden="true" className="shrink-0" size={17} />
               </Link>
             </div>
           </div>
@@ -98,7 +123,7 @@ export default async function HomePage() {
                     />
                   </p>
                   <h2 className="font-display text-2xl leading-none font-bold">
-                    {event.shortName}
+                    {event.name}
                   </h2>
                 </div>
                 <LiveStatusFragment
@@ -185,12 +210,12 @@ export default async function HomePage() {
                 The full fight card
               </h2>
             </div>
-            <Link
-              className="focus-ring inline-flex items-center gap-2 rounded-lg text-sm font-bold text-fl-accent"
-              href={`/events/${card.event.slug}`}
-            >
-              Event command center <ArrowRight aria-hidden="true" size={16} />
-            </Link>
+            <EventPredictionModal
+              eventId={card.event.id}
+              eventName={card.event.name}
+              eventSlug={card.event.slug}
+              fights={card.fights}
+            />
           </div>
           <FightCardGroups fights={card.fights} />
         </section>
@@ -200,7 +225,7 @@ export default async function HomePage() {
         <div className="shell grid gap-px py-16 lg:grid-cols-3 lg:py-20">
           <Card className="rounded-none p-6 shadow-none sm:p-8">
             <Target aria-hidden="true" className="text-fl-accent" size={22} />
-            <p className="eyebrow mt-5">01 · Predict</p>
+            <p className="eyebrow mt-5">Predict</p>
             <h2 className="mt-2 font-display text-3xl font-bold">
               Call the outcome
             </h2>
@@ -215,7 +240,7 @@ export default async function HomePage() {
               className="text-fl-accent"
               size={22}
             />
-            <p className="eyebrow mt-5">02 · React</p>
+            <p className="eyebrow mt-5">React</p>
             <h2 className="mt-2 font-display text-3xl font-bold">
               Meet in the lobby
             </h2>
@@ -226,7 +251,7 @@ export default async function HomePage() {
           </Card>
           <Card className="rounded-none p-6 shadow-none sm:p-8">
             <Trophy aria-hidden="true" className="text-fl-accent" size={22} />
-            <p className="eyebrow mt-5">03 · Prove it</p>
+            <p className="eyebrow mt-5">Prove it</p>
             <h2 className="mt-2 font-display text-3xl font-bold">
               Build your record
             </h2>
@@ -237,55 +262,6 @@ export default async function HomePage() {
           </Card>
         </div>
       </section>
-
-      {card && mainFight ? (
-        <section className="shell grid gap-6 py-16 lg:grid-cols-[1.2fr_.8fr] lg:py-20">
-          <Card>
-            <CardHeader
-              eyebrow="Active matchup spotlight"
-              title={
-                mainFight.editorial.biggestQuestion ??
-                `${mainFight.fighterA.name.full} vs ${mainFight.fighterB.name.full}`
-              }
-            />
-            <div className="p-5 sm:p-6">
-              <p className="max-w-3xl text-base leading-7 text-fl-text-muted">
-                {mainFight.editorial.styleContrast ??
-                  "A verified matchup comparison is being prepared by the FightLobby desk."}
-              </p>
-              <Link
-                className="focus-ring mt-5 inline-flex items-center gap-2 rounded-lg text-sm font-bold text-fl-accent"
-                href={`/fights/${mainFight.slug}`}
-              >
-                Read the matchup <ArrowRight aria-hidden="true" size={15} />
-              </Link>
-            </div>
-          </Card>
-          <Card>
-            <CardHeader
-              eyebrow="Lobby pulse"
-              title="Where the card is talking"
-            />
-            <div className="divide-y divide-fl-border px-5 sm:px-6">
-              {card.fights.slice(0, 3).map((fight) => (
-                <Link
-                  className="focus-ring flex items-center justify-between gap-3 py-4 text-sm transition hover:text-fl-accent"
-                  href={`/fights/${fight.slug}`}
-                  key={fight.id}
-                >
-                  <span>
-                    {fight.fighterA.name.last ?? fight.fighterA.name.full} vs{" "}
-                    {fight.fighterB.name.last ?? fight.fighterB.name.full}
-                  </span>
-                  <span className="font-mono text-[10px] text-fl-text-muted">
-                    {fight.predictionSummary.total.toLocaleString()} picks
-                  </span>
-                </Link>
-              ))}
-            </div>
-          </Card>
-        </section>
-      ) : null}
     </main>
   );
 }
