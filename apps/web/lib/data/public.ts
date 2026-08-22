@@ -1,38 +1,25 @@
 import "server-only";
 
-import { unstable_cache } from "next/cache";
 import { cache } from "react";
 
 import { getPublicRepository } from "@/lib/repositories";
 
-const listPublicEventsCached = unstable_cache(
-  () => getPublicRepository().listEvents(),
-  ["public-events-v2"],
-  { revalidate: 30, tags: ["public-events", "public-data"] },
+// Keep database reads deduplicated within a server render. These public routes
+// already inherit the shell's short route revalidation window. Persistently
+// caching the repository call itself is unsafe on Vercel because Firebase
+// Admin may resolve request-scoped workload credentials while opening the
+// Firestore connection; Next rejects that work from inside a cache scope with
+// DYNAMIC_SERVER_USAGE.
+export const listPublicEvents = cache(() => getPublicRepository().listEvents());
+export const getPublicEvent = cache((slug: string) =>
+  getPublicRepository().getEventBySlug(slug),
 );
-
-const getPublicEventCached = unstable_cache(
-  (slug: string) => getPublicRepository().getEventBySlug(slug),
-  ["public-event-v2"],
-  { revalidate: 30, tags: ["public-events", "public-data"] },
+export const getPublicFight = cache((slug: string) =>
+  getPublicRepository().getFightBySlug(slug),
 );
-
-const getPublicFightCached = unstable_cache(
-  (slug: string) => getPublicRepository().getFightBySlug(slug),
-  ["public-fight-v2"],
-  { revalidate: 30, tags: ["public-fights", "public-data"] },
+export const getPublicFighter = cache((slug: string) =>
+  getPublicRepository().getFighterBySlug(slug),
 );
-
-const getPublicFighterCached = unstable_cache(
-  (slug: string) => getPublicRepository().getFighterBySlug(slug),
-  ["public-fighter-v2"],
-  { revalidate: 300, tags: ["public-fighters", "public-data"] },
-);
-
-export const listPublicEvents = cache(listPublicEventsCached);
-export const getPublicEvent = cache(getPublicEventCached);
-export const getPublicFight = cache(getPublicFightCached);
-export const getPublicFighter = cache(getPublicFighterCached);
 
 export const listPublicCards = cache(async () => {
   const events = await listPublicEvents();
