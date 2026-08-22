@@ -142,7 +142,7 @@ export function ConsentProvider({ children }: { children: ReactNode }) {
         <section
           aria-label="Privacy choices"
           aria-live="polite"
-          className="fixed inset-x-3 bottom-20 z-[80] mx-auto max-w-2xl rounded-2xl border border-fl-border bg-fl-surface-1 p-5 shadow-2xl md:bottom-5"
+          className="before:pointer-events-none fixed inset-x-3 bottom-20 z-[80] mx-auto max-w-2xl rounded-2xl border border-fl-border bg-fl-surface-1 p-5 shadow-2xl before:fixed before:inset-0 before:-z-10 before:bg-fl-bg/20 before:backdrop-blur-[2px] before:content-[''] md:bottom-5"
           ref={panelRef}
           role="dialog"
           tabIndex={-1}
