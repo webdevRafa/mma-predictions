@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
+import { EventPredictionModal } from "@/features/predictions/event-prediction-modal";
 import { getPublicEvent } from "@/lib/data/public";
 import { absoluteUrl } from "@/lib/seo/site";
 import { isEventIndexable } from "@/lib/seo/indexability";
@@ -152,7 +153,7 @@ export default async function EventPage({ params }: Props) {
             items={[
               { label: "Home", href: "/" },
               { label: "Events", href: "/events" },
-              { label: event.shortName },
+              { label: event.name },
             ]}
           />
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
@@ -242,18 +243,28 @@ export default async function EventPage({ params }: Props) {
 
       <div className="shell grid gap-8 py-12 lg:grid-cols-[minmax(0,1fr)_22rem] lg:py-16">
         <section aria-labelledby="fight-card-title">
-          <div className="mb-8">
-            <p className="eyebrow">Official card order</p>
-            <h2
-              className="mt-2 font-display text-4xl font-extrabold sm:text-5xl"
-              id="fight-card-title"
-            >
-              Fight card
-            </h2>
-            <p className="mt-3 text-sm text-fl-text-muted">
-              Individual bout times are approximate. Prediction availability is
-              controlled by the server.
-            </p>
+          <div className="mb-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <p className="eyebrow">Official card order</p>
+              <h2
+                className="mt-2 font-display text-4xl font-extrabold sm:text-5xl"
+                id="fight-card-title"
+              >
+                Fight card
+              </h2>
+              <p className="mt-3 text-sm text-fl-text-muted">
+                Individual bout times are approximate. Prediction availability
+                is controlled by the server.
+              </p>
+            </div>
+            <EventPredictionModal
+              className="self-start sm:self-auto"
+              eventId={event.id}
+              eventName={event.name}
+              eventSlug={event.slug}
+              fights={fights}
+              label="Lock your predictions"
+            />
           </div>
           <FightCardGroups fights={fights} />
         </section>

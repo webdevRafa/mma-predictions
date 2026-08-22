@@ -37,6 +37,10 @@ export interface SubmissionResult {
   idempotent: boolean;
 }
 
+export interface EventPredictionView extends SafePredictionView {
+  fightId: string;
+}
+
 function record(value: unknown): Record<string, unknown> {
   return value && typeof value === "object"
     ? (value as Record<string, unknown>)
@@ -607,6 +611,25 @@ export async function getPredictionExperience(
     canSubmit,
     reveal: shouldRevealConsensus(predictionSnapshot.exists),
   };
+}
+
+export async function getEventPredictionsForUser(
+  firestore: Firestore,
+  eventId: string,
+  uid: string,
+): Promise<EventPredictionView[]> {
+  const snapshot = await firestore
+    .collection("predictions")
+    .where("eventId", "==", eventId)
+    .where("uid", "==", uid)
+    .get();
+
+  return snapshot.docs.flatMap((document) => {
+    const fightId = record(document.data()).fightId;
+    return typeof fightId === "string" && fightId.length > 0
+      ? [{ fightId, ...safePrediction(document) }]
+      : [];
+  });
 }
 
 export function shouldRevealConsensus(hasOwnPrediction: boolean) {

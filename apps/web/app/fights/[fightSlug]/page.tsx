@@ -127,7 +127,7 @@ export default async function FightPage({ params }: Props) {
             items={[
               { label: "Home", href: "/" },
               { label: "Events", href: "/events" },
-              { label: event.shortName, href: `/events/${event.slug}` },
+              { label: event.name, href: `/events/${event.slug}` },
               {
                 label: `${fighterA.name.last ?? fighterA.name.full} vs ${fighterB.name.last ?? fighterB.name.full}`,
               },
