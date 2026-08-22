@@ -20,9 +20,16 @@ export function getFirebaseAdmin() {
   const existing = getApps()[0];
   const projectId =
     process.env.FIREBASE_ADMIN_PROJECT_ID ??
+    process.env.VITE_FIREBASE_PROJECT_ID ??
     process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
   const clientEmail = process.env.FIREBASE_ADMIN_CLIENT_EMAIL;
   const key = privateKey();
+  const databaseURL =
+    process.env.VITE_FIREBASE_DATABASE_URL ??
+    process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL;
+  const storageBucket =
+    process.env.VITE_FIREBASE_STORAGE_BUCKET ??
+    process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET;
   const app =
     existing ??
     initializeApp({
@@ -31,12 +38,8 @@ export function getFirebaseAdmin() {
           ? cert({ projectId, clientEmail, privateKey: key })
           : applicationDefault(),
       ...(projectId ? { projectId } : {}),
-      ...(process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL
-        ? { databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL }
-        : {}),
-      ...(process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-        ? { storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET }
-        : {}),
+      ...(databaseURL ? { databaseURL } : {}),
+      ...(storageBucket ? { storageBucket } : {}),
     });
   return {
     app,

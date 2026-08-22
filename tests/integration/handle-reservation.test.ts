@@ -2,7 +2,10 @@ import { deleteApp, initializeApp, type App } from "firebase-admin/app";
 import { getFirestore, type Firestore } from "firebase-admin/firestore";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
-import { reserveHandleTransaction } from "../../apps/web/lib/auth/handles.ts";
+import {
+  getHandleAvailability,
+  reserveHandleTransaction,
+} from "../../apps/web/lib/auth/handles.ts";
 
 const emulatorDescribe =
   process.env.RULES_TEST === "1" ? describe : describe.skip;
@@ -68,5 +71,27 @@ emulatorDescribe("transactional handle reservation", () => {
     expect(
       (await firestore.collection("handles").doc(handle).get()).exists,
     ).toBe(false);
+  });
+
+  it("checks one exact reservation and recognizes the current owner", async () => {
+    const suffix = Date.now().toString(36);
+    const ownerUid = `owner_${suffix}`;
+    const otherUid = `other_${suffix}`;
+    const availableHandle = `open_${suffix}`.slice(0, 20);
+    const reservedHandle = `held_${suffix}`.slice(0, 20);
+    await firestore.collection("handles").doc(reservedHandle).set({
+      uid: ownerUid,
+      handle: reservedHandle,
+    });
+
+    await expect(
+      getHandleAvailability(firestore, otherUid, availableHandle),
+    ).resolves.toEqual({ handle: availableHandle, available: true });
+    await expect(
+      getHandleAvailability(firestore, otherUid, reservedHandle),
+    ).resolves.toEqual({ handle: reservedHandle, available: false });
+    await expect(
+      getHandleAvailability(firestore, ownerUid, reservedHandle),
+    ).resolves.toEqual({ handle: reservedHandle, available: true });
   });
 });

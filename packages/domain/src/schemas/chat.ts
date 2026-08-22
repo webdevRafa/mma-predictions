@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+import { publicPredictionBadgeSchema } from "./domain.ts";
+
 export const chatRoomStatusSchema = z.enum([
   "scheduled",
   "open",
@@ -29,6 +31,7 @@ export const chatMessageSchema = z
         handle: z.string().min(3).max(20),
         avatarVersion: z.number().int().nonnegative(),
         roleBadge: chatRoleBadgeSchema.optional(),
+        predictionBadge: publicPredictionBadgeSchema.optional(),
       })
       .strict(),
     body: z.string().min(1).max(240),

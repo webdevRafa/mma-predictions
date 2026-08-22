@@ -67,7 +67,19 @@ emulatorDescribe(
       });
       expect(created).toMatchObject({
         created: true,
-        summary: { total: 1, fighterA: 1, fighterB: 0 },
+        summary: {
+          total: 1,
+          fighterA: 1,
+          fighterB: 0,
+          methodsByFighter: {
+            fighterA: { ko_tko: 1 },
+            fighterB: {},
+          },
+          roundsByFighter: {
+            fighterA: { "1": 1 },
+            fighterB: {},
+          },
+        },
         prediction: { predictionVersion: 1 },
       });
 

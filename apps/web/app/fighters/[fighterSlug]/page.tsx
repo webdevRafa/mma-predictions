@@ -13,28 +13,23 @@ import {
 import Link from "next/link";
 import { notFound, permanentRedirect } from "next/navigation";
 
-import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
-import { FollowButton } from "@/features/profiles/follow-button";
-import { getPublicFighter, listPublicCards } from "@/lib/data/public";
-import { formatRecord } from "@/lib/format";
+import { getPublicFighter } from "@/lib/data/public";
+import {
+  formatHeightMeasurement,
+  formatReachMeasurement,
+  formatRecord,
+} from "@/lib/format";
 import { isFighterIndexable } from "@/lib/seo/indexability";
 import { absoluteUrl } from "@/lib/seo/site";
 
 type Props = { params: Promise<{ fighterSlug: string }> };
 
-export async function generateStaticParams() {
-  const fighters = new Map(
-    (await listPublicCards())
-      .flatMap((card) => card.fighters)
-      .map((fighter) => [fighter.id, fighter]),
-  );
-  return [...fighters.values()].map((fighter) => ({
-    fighterSlug: fighter.slug,
-  }));
+export function generateStaticParams() {
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -87,12 +82,12 @@ export default async function FighterPage({ params }: Props) {
     {
       icon: Ruler,
       label: "Height",
-      value: fighter.heightCm ? `${fighter.heightCm} cm` : "—",
+      value: formatHeightMeasurement(fighter.heightCm),
     },
     {
       icon: MoveHorizontal,
       label: "Reach",
-      value: fighter.reachCm ? `${fighter.reachCm} cm` : "—",
+      value: formatReachMeasurement(fighter.reachCm),
     },
     { icon: Flag, label: "Country", value: fighter.countryCode ?? "—" },
     { icon: Activity, label: "Data quality", value: fighter.dataQuality },
@@ -125,32 +120,25 @@ export default async function FighterPage({ params }: Props) {
               { label: fighter.name.full },
             ]}
           />
-          <div className="mt-10 grid gap-8 md:grid-cols-[auto_1fr] md:items-center">
-            <FighterAvatar
-              className="size-32 text-4xl sm:size-44 sm:text-6xl"
-              name={fighter.name.full}
-            />
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge tone="accent">
-                  {fighter.currentWeightClass ?? "UFC fighter"}
-                </Badge>
-                <Badge tone="neutral">{fighter.status}</Badge>
-                <FollowButton targetId={fighter.id} targetType="fighter" />
-              </div>
-              {fighter.name.nickname ? (
-                <p className="eyebrow mt-5">“{fighter.name.nickname}”</p>
-              ) : null}
-              <h1 className="mt-2 font-display text-6xl leading-[.84] font-extrabold tracking-[-.02em] sm:text-8xl">
-                {fighter.name.full}
-              </h1>
-              <p className="mt-5 font-mono text-lg font-semibold">
-                {formatRecord(fighter.record)}{" "}
-                <span className="text-sm font-medium text-fl-text-muted">
-                  professional record
-                </span>
-              </p>
+          <div className="mt-10 max-w-4xl">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge tone="accent">
+                {fighter.currentWeightClass ?? "UFC fighter"}
+              </Badge>
+              <Badge tone="neutral">{fighter.status}</Badge>
             </div>
+            {fighter.name.nickname ? (
+              <p className="eyebrow mt-5">“{fighter.name.nickname}”</p>
+            ) : null}
+            <h1 className="mt-2 font-display text-6xl leading-[.84] font-extrabold tracking-[-.02em] sm:text-8xl">
+              {fighter.name.full}
+            </h1>
+            <p className="mt-5 font-mono text-lg font-semibold">
+              {formatRecord(fighter.record)}{" "}
+              <span className="text-sm font-medium text-fl-text-muted">
+                professional record
+              </span>
+            </p>
           </div>
         </div>
       </section>

@@ -43,6 +43,12 @@ export function validatePredictionForFight(
         message: "Pick a winner before locking in your prediction",
       };
     }
+    if (field === "method") {
+      return {
+        success: false,
+        message: "Choose a method before locking in your prediction",
+      };
+    }
     return {
       success: false,
       message: firstIssue?.message ?? "Prediction is invalid",

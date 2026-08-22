@@ -29,7 +29,6 @@ function resultMethodGroup(result: FightResult): PredictionMethod | null {
     result.method === "decision_majority"
   )
     return "decision";
-  if (result.method === "dq" || result.method === "other") return "other";
   return null;
 }
 
@@ -51,7 +50,6 @@ export function scorePredictionV1(
   if (!result.winnerFighterId)
     return { status: "void", reason: "no_winner", points: 0 };
   const method = resultMethodGroup(result);
-  if (!method) return { status: "void", reason: "void_result", points: 0 };
 
   const winnerCorrect = pick.winnerFighterId === result.winnerFighterId;
   if (!winnerCorrect) {
@@ -63,7 +61,7 @@ export function scorePredictionV1(
       points: 0,
     };
   }
-  const methodCorrect = pick.method === method;
+  const methodCorrect = method !== null && pick.method === method;
   const expectedDetail = resultDetail(result);
   const detailCorrect =
     methodCorrect &&

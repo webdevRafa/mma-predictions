@@ -61,7 +61,7 @@ const policies: Record<string, PolicyPage> = {
         heading: "Information we handle",
         bullets: [
           "Account information from Firebase Authentication, including an email address that is never displayed publicly.",
-          "A public handle, optional display profile, follows, prediction records, leaderboard results, and chat activity.",
+          "A public handle, optional display profile, member follows, prediction records, leaderboard results, and chat activity.",
           "Security, rate-limit, moderation, and audit records needed to protect the service.",
           "Product usage and performance measurements only when analytics consent is granted.",
           "Advertising signals only on eligible pages when advertising consent, a certified consent platform, and the global ad flag are all active.",

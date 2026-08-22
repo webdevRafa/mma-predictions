@@ -5,6 +5,20 @@ vi.mock("server-only", () => ({}));
 import { adminActionSchema, confirmationFor } from "../lib/admin/actions";
 
 describe("admin action validation", () => {
+  it("accepts an audited event completion override", () => {
+    const input = {
+      action: "update_event",
+      eventId: "evt_test_001",
+      patch: { status: "completed" },
+      reason:
+        "Final bout concluded; event marked complete by live administrator",
+      confirmation: "UPDATE evt_test_001",
+      returnTo: "/admin/events/evt_test_001",
+    };
+    const parsed = adminActionSchema.parse(input);
+    expect(confirmationFor(parsed)).toBe("UPDATE evt_test_001");
+  });
+
   it("requires a reason and confirmation for emergency controls", () => {
     const input = {
       action: "prediction_control",
@@ -60,5 +74,17 @@ describe("admin action validation", () => {
       confirmation: "MERGE ftr_primary INTO ftr_primary",
     };
     expect(adminActionSchema.safeParse(merge).success).toBe(false);
+  });
+
+  it("keeps discussion moderation distinct from live chat moderation", () => {
+    const parsed = adminActionSchema.parse({
+      action: "remove_discussion_post",
+      fightId: "fgt_test_001",
+      postId: "post_12345678",
+      rootPostId: "post_12345678",
+      reason: "Reported matchup post",
+      confirmation: "REMOVE POST post_12345678",
+    });
+    expect(confirmationFor(parsed)).toBe("REMOVE POST post_12345678");
   });
 });

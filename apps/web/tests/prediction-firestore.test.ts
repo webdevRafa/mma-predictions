@@ -3,6 +3,7 @@ import { describe, expect, it } from "vitest";
 import {
   assertPredictionSubmissionOpen,
   predictionShardId,
+  shouldRevealConsensus,
 } from "../lib/predictions/firestore.ts";
 
 describe("server prediction lock policy", () => {
@@ -47,5 +48,12 @@ describe("prediction counter shard selection", () => {
   it("is deterministic and stays within the configured shard range", () => {
     expect(predictionShardId("member_a")).toBe(predictionShardId("member_a"));
     expect(predictionShardId("member_a")).toMatch(/^shard_(0\d|1\d)$/);
+  });
+});
+
+describe("community consensus privacy", () => {
+  it("reveals consensus only after the viewer has made a prediction", () => {
+    expect(shouldRevealConsensus(false)).toBe(false);
+    expect(shouldRevealConsensus(true)).toBe(true);
   });
 });

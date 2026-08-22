@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { FieldValue } from "firebase-admin/firestore";
 
 import { apiErrorResponse, assertSameOrigin, parseJson } from "@/lib/auth/http";
+import { permanentlyDeleteAccount } from "@/lib/auth/delete-account";
 import {
   requireMutationSession,
   SESSION_COOKIE_NAME,
@@ -15,41 +15,7 @@ export async function POST(request: Request) {
     assertSameOrigin(request);
     const session = await requireMutationSession();
     await parseJson(request, deleteSchema);
-    const { auth, firestore } = getFirebaseAdmin();
-    await firestore.runTransaction(async (transaction) => {
-      const userRef = firestore.collection("users").doc(session.uid);
-      const profileRef = firestore.collection("profiles").doc(session.uid);
-      const profile = await transaction.get(profileRef);
-      const handle: unknown = profile.get("handleNormalized");
-      transaction.set(
-        userRef,
-        {
-          accountStatus: "deleted",
-          onboardingComplete: false,
-          deletionRequestedAt: FieldValue.serverTimestamp(),
-          updatedAt: FieldValue.serverTimestamp(),
-        },
-        { merge: true },
-      );
-      transaction.set(
-        profileRef,
-        {
-          displayName: "Deleted member",
-          profileVisibility: "limited",
-          deletedAt: FieldValue.serverTimestamp(),
-          updatedAt: FieldValue.serverTimestamp(),
-        },
-        { merge: true },
-      );
-      if (typeof handle === "string") {
-        transaction.set(
-          firestore.collection("handles").doc(handle),
-          { releasedAt: FieldValue.serverTimestamp(), quarantined: true },
-          { merge: true },
-        );
-      }
-    });
-    await auth.revokeRefreshTokens(session.uid);
+    await permanentlyDeleteAccount(getFirebaseAdmin(), session.uid);
     const response = Response.json({ deleted: true });
     response.headers.append(
       "Set-Cookie",

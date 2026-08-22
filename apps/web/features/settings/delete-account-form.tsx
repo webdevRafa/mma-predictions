@@ -32,6 +32,11 @@ export function DeleteAccountForm() {
   }
   return (
     <form className="space-y-4" onSubmit={submit}>
+      <div className="rounded-lg border border-fl-danger/30 bg-fl-danger/10 p-4 text-sm leading-6 text-fl-text-muted">
+        This cannot be undone. Your Firebase sign-in and eligible Firestore,
+        Storage, and live-chat data will be permanently removed. Your handle is
+        quarantined instead of immediately becoming available to someone else.
+      </div>
       {error ? (
         <p
           className="rounded-lg border border-fl-danger/30 bg-fl-danger/10 p-3 text-sm text-fl-danger"
@@ -57,7 +62,7 @@ export function DeleteAccountForm() {
         type="submit"
       >
         <Trash2 aria-hidden="true" size={16} />
-        Delete my account
+        Permanently delete my account
       </button>
     </form>
   );

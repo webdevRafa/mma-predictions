@@ -47,7 +47,6 @@ export const predictionMethodSchema = z.enum([
   "ko_tko",
   "submission",
   "decision",
-  "other",
 ]);
 export const dataQualitySchema = z.enum([
   "verified",
@@ -122,11 +121,12 @@ export const predictionPickSchema = z
         message: "Decision subtype is required for decision picks",
       });
     }
-    if (pick.method === "other" && pick.detail !== undefined) {
-      context.addIssue({
-        code: "custom",
-        path: ["detail"],
-        message: "Other picks cannot include a finish detail",
-      });
-    }
   });
+
+export const publicPredictionBadgeSchema = z
+  .object({
+    winnerFighterId: z.string().trim().min(1),
+    winnerLastName: z.string().trim().min(1).max(60),
+    method: predictionMethodSchema,
+  })
+  .strict();

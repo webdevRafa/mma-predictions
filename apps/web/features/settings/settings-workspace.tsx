@@ -1,12 +1,24 @@
 "use client";
 
-import { BadgeCheck, ExternalLink, Mail, ShieldCheck } from "lucide-react";
+import {
+  BadgeCheck,
+  BarChart3,
+  ExternalLink,
+  Eye,
+  Flame,
+  Mail,
+  ShieldCheck,
+  Target,
+  Trophy,
+  type LucideIcon,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type MouseEvent } from "react";
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { BlockedMemberList } from "@/features/chat/blocked-member-list";
+import { FollowingList } from "@/features/profiles/following-list";
 import { PreferenceForm } from "@/features/settings/preference-form";
 import { ProfileSettingsForm } from "@/features/settings/profile-settings-form";
 import {
@@ -71,8 +83,8 @@ function AccountPanel({ account }: { account: PrivateAccountView }) {
       <Card className="p-5 sm:p-6">
         <h2 className="font-display text-2xl font-bold">Account controls</h2>
         <p className="mt-2 text-sm leading-6 text-fl-text-muted">
-          Profile visibility, reminders, follows, and account deletion stay
-          separate from public stats.
+          Public profile settings, followed members, safety controls, and
+          permanent account deletion stay separate from your public stats.
         </p>
         <Link
           className="focus-ring mt-5 inline-block rounded-md text-sm font-bold text-fl-danger"
@@ -96,85 +108,93 @@ function ProfilePanel({
     profileVisibility: "public" | "limited";
   }) => void;
 }) {
-  return (
-    <Card>
-      <CardHeader
-        eyebrow="Public identity"
-        title="Profile settings"
-        description="Only the fields below can appear publicly. Email and provider IDs are never included."
-      />
-      <div className="p-5 sm:p-6">
-        <ProfileSettingsForm
-          displayName={account.displayName}
-          handle={account.handle}
-          onSaved={onSaved}
-          profileVisibility={account.profileVisibility}
-        />
-      </div>
-    </Card>
-  );
-}
+  const stats: { icon: LucideIcon; label: string; value: string }[] = [
+    {
+      icon: Trophy,
+      label: "Points",
+      value: account.stats.totalPoints.toLocaleString(),
+    },
+    {
+      icon: BarChart3,
+      label: "Graded picks",
+      value: account.stats.gradedPicks.toLocaleString(),
+    },
+    {
+      icon: Target,
+      label: "Winner accuracy",
+      value: `${Math.round(account.stats.winnerAccuracy * 100)}%`,
+    },
+    {
+      icon: Flame,
+      label: "Current streak",
+      value: account.stats.currentStreak.toLocaleString(),
+    },
+  ];
 
-function NotificationsPanel({
-  account,
-  onSaved,
-}: {
-  account: PrivateAccountView;
-  onSaved: (update: Record<string, string | boolean>) => void;
-}) {
-  const { preferences } = account;
   return (
-    <Card>
-      <CardHeader
-        eyebrow="Private preferences"
-        title="Notifications"
-        description="Delivery arrives in a later engagement pass; these choices establish your consent now."
-      />
-      <div className="p-5 sm:p-6">
-        <PreferenceForm
-          onSaved={onSaved}
-          values={{
-            emailEventReminders: preferences.emailEventReminders,
-            emailResults: preferences.emailResults,
-          }}
-        >
-          {[
-            [
-              "emailEventReminders",
-              "Event reminders",
-              "A reminder before followed UFC cards begin.",
-              preferences.emailEventReminders,
-            ],
-            [
-              "emailResults",
-              "Prediction results",
-              "A summary after your picks are officially graded.",
-              preferences.emailResults,
-            ],
-          ].map(([name, title, copy, checked]) => (
-            <label
-              className="flex items-start justify-between gap-5 rounded-xl border border-fl-border bg-fl-surface-2 p-4"
-              key={String(name)}
+    <div className="space-y-6">
+      <Card className="overflow-hidden">
+        <div className="relative overflow-hidden border-b border-fl-border p-5 sm:p-6">
+          <div
+            aria-hidden="true"
+            className="arena-grid absolute inset-0 opacity-25"
+          />
+          <div className="relative flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <p className="eyebrow">Your public record</p>
+              <h2 className="mt-2 font-display text-4xl leading-none font-extrabold sm:text-5xl">
+                @{account.handle}
+              </h2>
+              <div className="mt-3 flex flex-wrap items-center gap-2 text-sm text-fl-text-muted">
+                {account.displayName ? (
+                  <span>{account.displayName}</span>
+                ) : null}
+                {account.displayName ? <span aria-hidden="true">·</span> : null}
+                <span className="capitalize">
+                  {account.profileVisibility} profile
+                </span>
+              </div>
+            </div>
+            <Link
+              className="focus-ring inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-[10px] border border-fl-border bg-fl-surface-2 px-4 text-sm font-bold text-fl-text transition hover:border-fl-text-muted hover:bg-fl-surface-3"
+              href={`/u/${account.handle}`}
+              rel="noreferrer"
+              target="_blank"
             >
-              <span>
-                <span className="block text-sm font-semibold">
-                  {String(title)}
-                </span>
-                <span className="mt-1 block text-xs leading-5 text-fl-text-muted">
-                  {String(copy)}
-                </span>
-              </span>
-              <input
-                className="mt-1 accent-fl-accent"
-                defaultChecked={Boolean(checked)}
-                name={String(name)}
-                type="checkbox"
-              />
-            </label>
+              <Eye aria-hidden="true" size={16} /> Open full profile
+              <ExternalLink aria-hidden="true" size={14} />
+              <span className="sr-only"> (opens in a new tab)</span>
+            </Link>
+          </div>
+        </div>
+        <div className="grid grid-cols-2 gap-px bg-fl-border lg:grid-cols-4">
+          {stats.map(({ icon: Icon, label, value }) => (
+            <div className="bg-fl-surface-1 p-4 sm:p-5" key={label}>
+              <Icon aria-hidden="true" className="text-fl-accent" size={17} />
+              <p className="mt-3 font-display text-3xl font-extrabold">
+                {value}
+              </p>
+              <p className="mt-1 text-xs text-fl-text-muted">{label}</p>
+            </div>
           ))}
-        </PreferenceForm>
-      </div>
-    </Card>
+        </div>
+      </Card>
+      <Card>
+        <CardHeader
+          eyebrow="Public identity"
+          title="Profile settings"
+          description="Only the fields below can appear publicly. Email and provider IDs are never included."
+        />
+        <div className="p-5 sm:p-6">
+          <ProfileSettingsForm
+            displayName={account.displayName}
+            handle={account.handle}
+            onSaved={onSaved}
+            profileVisibility={account.profileVisibility}
+          />
+        </div>
+      </Card>
+    </div>
   );
 }
 
@@ -189,34 +209,15 @@ function PrivacyPanel({
   return (
     <Card>
       <CardHeader
-        eyebrow="Pick privacy"
-        title="Upcoming predictions"
-        description="Locked picks can be public for transparency. Open picks stay private by default."
+        eyebrow="Local display"
+        title="Time zone"
+        description="Event times are automatically shown in your device time zone. Save a fallback for devices that cannot report one."
       />
       <div className="p-5 sm:p-6">
         <PreferenceForm
           onSaved={onSaved}
-          values={{
-            hideUpcomingPicks: preferences.hideUpcomingPicks,
-            timezone: preferences.timezone,
-          }}
+          values={{ timezone: preferences.timezone }}
         >
-          <label className="flex items-start justify-between gap-5 rounded-xl border border-fl-border bg-fl-surface-2 p-4">
-            <span>
-              <span className="block text-sm font-semibold">
-                Hide upcoming picks
-              </span>
-              <span className="mt-1 block text-xs leading-5 text-fl-text-muted">
-                Do not publish future picks unless you explicitly share one.
-              </span>
-            </span>
-            <input
-              className="mt-1 accent-fl-accent"
-              defaultChecked={preferences.hideUpcomingPicks}
-              name="hideUpcomingPicks"
-              type="checkbox"
-            />
-          </label>
           <label className="block">
             <span className="mb-2 block text-xs font-semibold text-fl-text-muted">
               Time zone
@@ -267,14 +268,26 @@ export function SettingsWorkspace({
 
   return (
     <main className="shell py-10 sm:py-14" id="main-content">
-      <header>
-        <p className="eyebrow">Private account area</p>
-        <h1 className="mt-2 font-display text-5xl font-extrabold sm:text-6xl">
-          SETTINGS
-        </h1>
-        <p className="mt-3 text-sm text-fl-text-muted">
-          Signed in as @{account.handle}
-        </p>
+      <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+          <p className="eyebrow">Private account area</p>
+          <h1 className="mt-2 font-display text-5xl font-extrabold sm:text-6xl">
+            SETTINGS
+          </h1>
+          <p className="mt-3 text-sm text-fl-text-muted">
+            Signed in as @{account.handle}
+          </p>
+        </div>
+        <Link
+          className="focus-ring inline-flex min-h-11 w-fit items-center justify-center gap-2 rounded-[10px] border border-fl-border bg-fl-surface-1 px-4 text-sm font-bold text-fl-text transition hover:border-fl-accent hover:bg-fl-surface-2"
+          href={`/u/${account.handle}`}
+          rel="noreferrer"
+          target="_blank"
+        >
+          <Eye aria-hidden="true" size={16} /> View public profile
+          <ExternalLink aria-hidden="true" size={14} />
+          <span className="sr-only"> (opens in a new tab)</span>
+        </Link>
       </header>
       <div className="mt-8 grid gap-8 lg:grid-cols-[15rem_minmax(0,1fr)]">
         <nav
@@ -314,11 +327,18 @@ export function SettingsWorkspace({
               }
             />
           ) : null}
-          {section === "notifications" ? (
-            <NotificationsPanel account={account} onSaved={updatePreferences} />
-          ) : null}
           {section === "privacy" ? (
             <PrivacyPanel account={account} onSaved={updatePreferences} />
+          ) : null}
+          {section === "following" ? (
+            <Card>
+              <CardHeader
+                eyebrow="Member network"
+                title="Following"
+                description="Keep a short list of FightLobby members whose public prediction records you want to revisit."
+              />
+              <FollowingList />
+            </Card>
           ) : null}
           {section === "blocked-users" ? (
             <Card>

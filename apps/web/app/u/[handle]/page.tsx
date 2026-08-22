@@ -10,22 +10,20 @@ import {
 } from "lucide-react";
 import { notFound, permanentRedirect } from "next/navigation";
 
-import { FighterAvatar } from "@/components/fighters/fighter-avatar";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { ShareProfileButton } from "@/features/profiles/share-profile-button";
-import { getPublicProfile, listPublicProfiles } from "@/lib/data/profiles";
+import { UserFollowButton } from "@/features/profiles/user-follow-button";
+import { getPublicProfile } from "@/lib/data/profiles";
 import { absoluteUrl } from "@/lib/seo/site";
 import { isProfileIndexable } from "@/lib/seo/indexability";
 
 type Props = { params: Promise<{ handle: string }> };
 
-export async function generateStaticParams() {
-  return (await listPublicProfiles()).map((profile) => ({
-    handle: profile.handleNormalized,
-  }));
+export function generateStaticParams() {
+  return [];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -118,33 +116,28 @@ export default async function PublicProfilePage({ params }: Props) {
               { label: `@${profile.handle}` },
             ]}
           />
-          <div className="mt-10 flex flex-col gap-6 sm:flex-row sm:items-center">
-            <FighterAvatar
-              className="size-28 text-4xl"
-              name={profile.displayName ?? profile.handle}
-            />
-            <div>
-              <div className="flex flex-wrap items-center gap-2">
-                <Badge tone="accent">Member record</Badge>
-                {profile.rankSummary?.pointsRank ? (
-                  <Badge tone="neutral">
-                    Points rank #{profile.rankSummary.pointsRank}
-                  </Badge>
-                ) : null}
-                <ShareProfileButton label={`@${profile.handle}`} />
-              </div>
-              <h1 className="mt-4 font-display text-5xl font-extrabold sm:text-7xl">
-                @{profile.handle}
-              </h1>
-              {profile.displayName ? (
-                <p className="mt-2 text-base text-fl-text-muted">
-                  {profile.displayName}
-                </p>
+          <div className="mt-10">
+            <div className="flex flex-wrap items-center gap-2">
+              <Badge tone="accent">Member record</Badge>
+              {profile.rankSummary?.pointsRank ? (
+                <Badge tone="neutral">
+                  Points rank #{profile.rankSummary.pointsRank}
+                </Badge>
               ) : null}
-              <p className="mt-3 flex items-center gap-2 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
-                <CalendarDays aria-hidden="true" size={13} /> Joined {joined}
-              </p>
+              <ShareProfileButton label={`@${profile.handle}`} />
+              <UserFollowButton targetUid={profile.uid} />
             </div>
+            <h1 className="mt-4 font-display text-5xl font-extrabold sm:text-7xl">
+              @{profile.handle}
+            </h1>
+            {profile.displayName ? (
+              <p className="mt-2 text-base text-fl-text-muted">
+                {profile.displayName}
+              </p>
+            ) : null}
+            <p className="mt-3 flex items-center gap-2 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
+              <CalendarDays aria-hidden="true" size={13} /> Joined {joined}
+            </p>
           </div>
         </div>
       </section>
@@ -165,7 +158,7 @@ export default async function PublicProfilePage({ params }: Props) {
             <CardHeader
               eyebrow="Prediction record"
               title={`${profile.stats.gradedPicks} graded picks`}
-              description="Upcoming picks stay private until lock unless this member explicitly shares one."
+              description="Prediction history appears after official results are graded."
             />
             <div className="p-5 sm:p-6">
               <div className="grid gap-4 sm:grid-cols-3">

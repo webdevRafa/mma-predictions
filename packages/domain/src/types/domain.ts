@@ -25,7 +25,7 @@ export type ResultMethod =
   | "no_contest"
   | "overturned"
   | "other";
-export type PredictionMethod = "ko_tko" | "submission" | "decision" | "other";
+export type PredictionMethod = "ko_tko" | "submission" | "decision";
 export type DataQuality = "verified" | "complete" | "partial" | "blocked";
 export type UserRole = "member" | "trusted" | "moderator" | "admin";
 export type AccountStatus =
@@ -69,6 +69,7 @@ export interface Fighter {
   heightCm?: number | undefined;
   reachCm?: number | undefined;
   currentWeightClass?: string | undefined;
+  sourceUrl?: string | undefined;
   record: FighterRecord;
   careerStats?: CareerStats | undefined;
   dataQuality: DataQuality;
@@ -99,7 +100,12 @@ export interface Event {
   shortName: string;
   eventNumber?: number | undefined;
   status: EventStatus;
+  /** Legacy main-card start retained for backwards-compatible readers. */
   startsAt: string;
+  /** Absolute UTC instant when the first preliminary bout broadcast begins. */
+  prelimsStartsAt?: string | undefined;
+  /** Absolute UTC instant when the main-card broadcast begins. */
+  mainCardStartsAt?: string | undefined;
   venueTimezone: string;
   venue?: Venue | undefined;
   mainEventFightId?: string | undefined;
@@ -152,6 +158,14 @@ export interface PredictionSummary {
   fighterB: number;
   methods: Record<string, number>;
   rounds: Record<string, number>;
+  methodsByFighter?: {
+    fighterA: Record<string, number>;
+    fighterB: Record<string, number>;
+  } | undefined;
+  roundsByFighter?: {
+    fighterA: Record<string, number>;
+    fighterB: Record<string, number>;
+  } | undefined;
   lastAggregatedAt?: string | undefined;
 }
 
@@ -189,6 +203,12 @@ export interface PredictionPick {
   winnerFighterId: string;
   method: PredictionMethod;
   detail?: number | "unanimous" | "split" | "majority" | undefined;
+}
+
+export interface PublicPredictionBadge {
+  winnerFighterId: string;
+  winnerLastName: string;
+  method: PredictionMethod;
 }
 
 export type PredictionRecordStatus = "active" | "locked" | "graded" | "void";
@@ -259,9 +279,6 @@ export interface PublicProfile {
 
 export interface PrivateUserPreferences {
   timezone?: string | undefined;
-  hideUpcomingPicks: boolean;
-  emailEventReminders: boolean;
-  emailResults: boolean;
 }
 
 export interface PrivateUser {
@@ -352,6 +369,7 @@ export interface ChatMessage {
     handle: string;
     avatarVersion: number;
     roleBadge?: ChatRoleBadge | undefined;
+    predictionBadge?: PublicPredictionBadge | undefined;
   };
   body: string;
   bodyNormalizedHash: string;
@@ -360,4 +378,38 @@ export interface ChatMessage {
   clientNonce: string;
   status: "published" | "removed";
   moderationVersion: number;
+}
+
+export interface DiscussionReplySnapshot {
+  postId: string;
+  uid: string;
+  handle: string;
+  excerpt: string;
+}
+
+export interface DiscussionPost {
+  id: string;
+  fightId: string;
+  uid: string;
+  author: {
+    handle: string;
+    roleBadge?: ChatRoleBadge | undefined;
+    predictionBadge?: PublicPredictionBadge | undefined;
+  };
+  body: string;
+  bodyNormalizedHash: string;
+  rootPostId: string;
+  parentPostId?: string | undefined;
+  replyTo?: DiscussionReplySnapshot | undefined;
+  replyCount: number;
+  createdAt: number;
+  updatedAt: number;
+  clientNonce: string;
+  status: "published" | "removed";
+  moderationVersion: number;
+}
+
+export interface DiscussionThread {
+  post: DiscussionPost;
+  replies: DiscussionPost[];
 }

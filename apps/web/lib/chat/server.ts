@@ -20,6 +20,7 @@ import {
 } from "firebase-admin/firestore";
 
 import { ApiError } from "../auth/http";
+import { getPublicPredictionBadge } from "../predictions/public-badges";
 
 const CHAT_MODERATION_VERSION = 1;
 const CHAT_BURST_WINDOW_MS = 30_000;
@@ -342,6 +343,11 @@ export async function postChatMessageCore(
   const avatar = record(profile.get("avatar"));
   const replyTo = await replySnapshot(database, roomId, input.replyToMessageId);
   const badge = roleBadge(roles);
+  const fightId: unknown = room.get("fightId");
+  const predictionBadge =
+    typeof fightId === "string"
+      ? await getPublicPredictionBadge(firestore, fightId, member.uid)
+      : undefined;
   const message: ChatMessage = {
     id: messageId,
     roomId,
@@ -351,6 +357,7 @@ export async function postChatMessageCore(
       avatarVersion:
         typeof avatar.version === "number" ? Math.max(avatar.version, 0) : 0,
       ...(badge ? { roleBadge: badge } : {}),
+      ...(predictionBadge ? { predictionBadge } : {}),
     },
     body: moderation.body,
     bodyNormalizedHash: bodyHash,

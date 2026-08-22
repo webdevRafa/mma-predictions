@@ -10,6 +10,31 @@ import { assertMutationAllowed } from "./policy";
 
 const HANDLE_CHANGE_WAIT_MS = 30 * 24 * 60 * 60 * 1000;
 
+export async function getHandleAvailability(
+  firestore: Firestore,
+  uid: string,
+  requestedHandle: string,
+) {
+  const parsedHandle = handleSchema.safeParse(requestedHandle);
+  if (!parsedHandle.success) {
+    throw new ApiError(
+      parsedHandle.error.issues[0]?.message ?? "That handle is invalid",
+      400,
+      "invalid_handle",
+    );
+  }
+
+  const handle = parsedHandle.data;
+  const reservation = await firestore.collection("handles").doc(handle).get();
+  const existingOwner: unknown = reservation.get("uid");
+  const redirectTo: unknown = reservation.get("redirectTo");
+  const available =
+    !reservation.exists ||
+    (existingOwner === uid && typeof redirectTo !== "string");
+
+  return { handle, available };
+}
+
 export async function reserveHandleTransaction(
   firestore: Firestore,
   uid: string,

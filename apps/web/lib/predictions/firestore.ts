@@ -188,6 +188,17 @@ interface CounterDelta {
   fighterB: number;
   methods: Record<string, number>;
   rounds: Record<string, number>;
+  methodsByFighter: FighterBreakdown;
+  roundsByFighter: FighterBreakdown;
+}
+
+interface FighterBreakdown {
+  fighterA: Record<string, number>;
+  fighterB: Record<string, number>;
+}
+
+function emptyBreakdown(): FighterBreakdown {
+  return { fighterA: {}, fighterB: {} };
 }
 
 function addBucket(
@@ -205,11 +216,16 @@ function applyPickDelta(
   fighterAId: string,
   amount: 1 | -1,
 ) {
-  if (pick.winnerFighterId === fighterAId) delta.fighterA += amount;
+  const side = pick.winnerFighterId === fighterAId ? "fighterA" : "fighterB";
+  if (side === "fighterA") delta.fighterA += amount;
   else delta.fighterB += amount;
   addBucket(delta.methods, pick.method, amount);
+  addBucket(delta.methodsByFighter[side], pick.method, amount);
   const detail = detailBucket(pick);
-  if (detail) addBucket(delta.rounds, detail, amount);
+  if (detail) {
+    addBucket(delta.rounds, detail, amount);
+    addBucket(delta.roundsByFighter[side], detail, amount);
+  }
 }
 
 function incrementMap(values: Record<string, number>) {
@@ -232,6 +248,49 @@ function sumMap(target: Record<string, number>, value: unknown) {
   }
 }
 
+function sumBreakdown(target: FighterBreakdown, value: unknown) {
+  const source = record(value);
+  sumMap(target.fighterA, source.fighterA);
+  sumMap(target.fighterB, source.fighterB);
+}
+
+function mapTotal(value: Record<string, number>) {
+  return Object.values(value).reduce((total, amount) => total + amount, 0);
+}
+
+function hasCompleteFighterBreakdown(summary: PredictionSummary) {
+  return (
+    mapTotal(summary.methodsByFighter?.fighterA ?? {}) === summary.fighterA &&
+    mapTotal(summary.methodsByFighter?.fighterB ?? {}) === summary.fighterB
+  );
+}
+
+function parsePredictionSummary(value: unknown): PredictionSummary {
+  const rawSummary = record(value);
+  const methodsByFighter = emptyBreakdown();
+  const roundsByFighter = emptyBreakdown();
+  const summary: PredictionSummary = {
+    total: numberValue(rawSummary.total),
+    fighterA: numberValue(rawSummary.fighterA),
+    fighterB: numberValue(rawSummary.fighterB),
+    methods: {},
+    rounds: {},
+    methodsByFighter,
+    roundsByFighter,
+    ...(timestampIso(rawSummary.lastAggregatedAt)
+      ? {
+          lastAggregatedAt:
+            timestampIso(rawSummary.lastAggregatedAt) ?? undefined,
+        }
+      : {}),
+  };
+  sumMap(summary.methods, rawSummary.methods);
+  sumMap(summary.rounds, rawSummary.rounds);
+  sumBreakdown(methodsByFighter, rawSummary.methodsByFighter);
+  sumBreakdown(roundsByFighter, rawSummary.roundsByFighter);
+  return summary;
+}
+
 export async function aggregatePredictionShards(
   firestore: Firestore,
   fightId: string,
@@ -250,6 +309,8 @@ export async function aggregatePredictionShards(
       fighterB: 0,
       methods: {},
       rounds: {},
+      methodsByFighter: emptyBreakdown(),
+      roundsByFighter: emptyBreakdown(),
       lastAggregatedAt: Timestamp.now().toDate().toISOString(),
     };
     for (const shard of shards.docs) {
@@ -260,6 +321,43 @@ export async function aggregatePredictionShards(
       summary.fighterB += numberValue(shardData.fighterB);
       sumMap(summary.methods, shardData.methods);
       sumMap(summary.rounds, shardData.rounds);
+      sumBreakdown(
+        summary.methodsByFighter ?? emptyBreakdown(),
+        shardData.methodsByFighter,
+      );
+      sumBreakdown(
+        summary.roundsByFighter ?? emptyBreakdown(),
+        shardData.roundsByFighter,
+      );
+    }
+
+    if (!hasCompleteFighterBreakdown(summary)) {
+      const fightData = record(fight.data());
+      const fighterAId = fightData.fighterAId;
+      if (typeof fighterAId !== "string") {
+        throw new ApiError(
+          "Fight prediction data is incomplete",
+          409,
+          "fight_invalid",
+        );
+      }
+      const predictions = await transaction.get(
+        firestore.collection("predictions").where("fightId", "==", fightId),
+      );
+      const methodsByFighter = emptyBreakdown();
+      const roundsByFighter = emptyBreakdown();
+      for (const prediction of predictions.docs) {
+        const data = record(prediction.data());
+        const pick = parseStoredPredictionPick(data.pick);
+        if (!pick) continue;
+        const side =
+          pick.winnerFighterId === fighterAId ? "fighterA" : "fighterB";
+        addBucket(methodsByFighter[side], pick.method, 1);
+        const detail = detailBucket(pick);
+        if (detail) addBucket(roundsByFighter[side], detail, 1);
+      }
+      summary.methodsByFighter = methodsByFighter;
+      summary.roundsByFighter = roundsByFighter;
     }
     transaction.set(
       fightRef,
@@ -384,6 +482,8 @@ export async function submitPredictionTransaction(
       fighterB: 0,
       methods: {},
       rounds: {},
+      methodsByFighter: emptyBreakdown(),
+      roundsByFighter: emptyBreakdown(),
     };
     applyPickDelta(delta, validated.data, fighterAId, 1);
     const shardRef = fightRef
@@ -402,6 +502,30 @@ export async function submitPredictionTransaction(
         ...(Object.keys(delta.rounds).length > 0
           ? { rounds: incrementMap(delta.rounds) }
           : {}),
+        methodsByFighter: {
+          ...(Object.keys(delta.methodsByFighter.fighterA).length > 0
+            ? {
+                fighterA: incrementMap(delta.methodsByFighter.fighterA),
+              }
+            : {}),
+          ...(Object.keys(delta.methodsByFighter.fighterB).length > 0
+            ? {
+                fighterB: incrementMap(delta.methodsByFighter.fighterB),
+              }
+            : {}),
+        },
+        roundsByFighter: {
+          ...(Object.keys(delta.roundsByFighter.fighterA).length > 0
+            ? {
+                fighterA: incrementMap(delta.roundsByFighter.fighterA),
+              }
+            : {}),
+          ...(Object.keys(delta.roundsByFighter.fighterB).length > 0
+            ? {
+                fighterB: incrementMap(delta.roundsByFighter.fighterB),
+              }
+            : {}),
+        },
         updatedAt: now,
       },
       { merge: true },
@@ -441,31 +565,20 @@ export async function getPredictionExperience(
     fightAcceptsSubmissions = false;
   }
   const canSubmit = fightAcceptsSubmissions && !predictionSnapshot.exists;
-  const rawSummary = record(fight.predictionSummary);
-  const summary: PredictionSummary = {
-    total: numberValue(rawSummary.total),
-    fighterA: numberValue(rawSummary.fighterA),
-    fighterB: numberValue(rawSummary.fighterB),
-    methods: {},
-    rounds: {},
-    ...(timestampIso(rawSummary.lastAggregatedAt)
-      ? {
-          lastAggregatedAt:
-            timestampIso(rawSummary.lastAggregatedAt) ?? undefined,
-        }
-      : {}),
-  };
-  sumMap(summary.methods, rawSummary.methods);
-  sumMap(summary.rounds, rawSummary.rounds);
+  let summary = parsePredictionSummary(fight.predictionSummary);
+  if (predictionSnapshot.exists && !hasCompleteFighterBreakdown(summary)) {
+    summary = await aggregatePredictionShards(firestore, fightId);
+  }
   return {
     prediction: predictionSnapshot.exists
       ? safePrediction(predictionSnapshot)
       : null,
     summary,
     canSubmit,
-    reveal:
-      predictionSnapshot.exists ||
-      fight.predictionStatus !== "open" ||
-      !canSubmit,
+    reveal: shouldRevealConsensus(predictionSnapshot.exists),
   };
+}
+
+export function shouldRevealConsensus(hasOwnPrediction: boolean) {
+  return hasOwnPrediction;
 }

@@ -19,11 +19,7 @@ export const onAuthUserCreated = authV1.user().onCreate(async (user) => {
         roles: ["member"],
         termsVersion: "pending",
         onboardingComplete: false,
-        preferences: {
-          hideUpcomingPicks: true,
-          emailEventReminders: false,
-          emailResults: false,
-        },
+        preferences: {},
         moderation: { trustLevel: 0 },
         createdAt: FieldValue.serverTimestamp(),
         updatedAt: FieldValue.serverTimestamp(),

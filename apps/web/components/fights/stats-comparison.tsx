@@ -1,6 +1,7 @@
 import type { Fighter } from "@fightlobby/domain";
 
 import { Card, CardHeader } from "@/components/ui/card";
+import { formatHeightMeasurement, formatReachMeasurement } from "@/lib/format";
 
 function metric(
   value: number | undefined,
@@ -22,13 +23,13 @@ export function StatsComparison({
   const rows = [
     [
       "Height",
-      fighterA.heightCm ? `${fighterA.heightCm} cm` : "—",
-      fighterB.heightCm ? `${fighterB.heightCm} cm` : "—",
+      formatHeightMeasurement(fighterA.heightCm),
+      formatHeightMeasurement(fighterB.heightCm),
     ],
     [
       "Reach",
-      fighterA.reachCm ? `${fighterA.reachCm} cm` : "—",
-      fighterB.reachCm ? `${fighterB.reachCm} cm` : "—",
+      formatReachMeasurement(fighterA.reachCm),
+      formatReachMeasurement(fighterB.reachCm),
     ],
     [
       "Sig. strikes / min",
@@ -54,6 +55,11 @@ export function StatsComparison({
       "Takedown defense",
       metric(fighterA.careerStats?.takedownDefense, "percentage"),
       metric(fighterB.careerStats?.takedownDefense, "percentage"),
+    ],
+    [
+      "Submission attempts / 15",
+      metric(fighterA.careerStats?.submissionsPer15),
+      metric(fighterB.careerStats?.submissionsPer15),
     ],
   ] as const;
 

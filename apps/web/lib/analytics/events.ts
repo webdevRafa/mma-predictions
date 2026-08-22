@@ -13,10 +13,12 @@ export type AnalyticsEventName =
   | "chat_opened"
   | "chat_message_sent"
   | "chat_message_reported"
+  | "discussion_post_created"
+  | "discussion_reply_created"
+  | "discussion_post_reported"
   | "leaderboard_viewed"
   | "profile_shared"
-  | "fighter_followed"
-  | "event_followed"
+  | "user_followed"
   | "ad_slot_viewed"
   | "web_vital";
 

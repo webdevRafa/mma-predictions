@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow_Condensed, IBM_Plex_Mono, Inter } from "next/font/google";
+import localFont from "next/font/local";
 import type { ReactNode } from "react";
 
 import { AnalyticsRuntime } from "@/features/analytics/analytics-runtime";
@@ -12,22 +12,55 @@ import { absoluteUrl, SITE_URL } from "@/lib/seo/site";
 
 import "./globals.css";
 
-const bodyFont = Inter({
+// Public event, account, and navigation data are live Firestore-backed state.
+// Render routes on request so production builds never depend on database access.
+export const dynamic = "force-dynamic";
+
+const bodyFont = localFont({
   display: "swap",
-  subsets: ["latin"],
+  fallback: ["Arial", "sans-serif"],
+  src: "./fonts/inter-latin-wght-normal.woff2",
   variable: "--font-body",
+  weight: "100 900",
 });
-const displayFont = Barlow_Condensed({
+const displayFont = localFont({
   display: "swap",
-  subsets: ["latin"],
+  fallback: ["Arial Narrow", "Arial", "sans-serif"],
+  src: [
+    {
+      path: "./fonts/barlow-condensed-latin-600-normal.woff2",
+      style: "normal",
+      weight: "600",
+    },
+    {
+      path: "./fonts/barlow-condensed-latin-700-normal.woff2",
+      style: "normal",
+      weight: "700",
+    },
+    {
+      path: "./fonts/barlow-condensed-latin-800-normal.woff2",
+      style: "normal",
+      weight: "800",
+    },
+  ],
   variable: "--font-display",
-  weight: ["600", "700", "800"],
 });
-const monoFont = IBM_Plex_Mono({
+const monoFont = localFont({
   display: "swap",
-  subsets: ["latin"],
+  fallback: ["Consolas", "Courier New", "monospace"],
+  src: [
+    {
+      path: "./fonts/ibm-plex-mono-latin-500-normal.woff2",
+      style: "normal",
+      weight: "500",
+    },
+    {
+      path: "./fonts/ibm-plex-mono-latin-600-normal.woff2",
+      style: "normal",
+      weight: "600",
+    },
+  ],
   variable: "--font-mono",
-  weight: ["500", "600"],
 });
 
 export const metadata: Metadata = {

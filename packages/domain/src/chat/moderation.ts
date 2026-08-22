@@ -1,4 +1,5 @@
 export const CHAT_MESSAGE_MAX_LENGTH = 240;
+export const DISCUSSION_POST_MAX_LENGTH = 1_000;
 export const CHAT_DUPLICATE_WINDOW_MS = 60_000;
 
 export type ChatModerationResult =
@@ -16,6 +17,8 @@ export type ChatModerationResult =
       normalizedBody: string;
       signals: string[];
     };
+
+export type DiscussionModerationResult = ChatModerationResult;
 
 const urlPattern =
   /(?:https?:\/\/|www\.|\b[a-z0-9-]+\.(?:com|net|org|io|gg|tv|co|me|ly)\b)/i;
@@ -47,22 +50,26 @@ export function normalizeChatBody(value: string) {
   return withoutControls.normalize("NFKC").replace(/\s+/gu, " ").trim();
 }
 
-export function moderateChatBody(value: string): ChatModerationResult {
+function moderateBody(
+  value: string,
+  maxLength: number,
+  contentLabel: "Messages" | "Posts",
+): ChatModerationResult {
   const normalizedBody = normalizeChatBody(value);
   if (!normalizedBody) {
     return {
       accepted: false,
       code: "empty",
-      message: "Write a message before sending",
+      message: `Write a ${contentLabel === "Posts" ? "post" : "message"} before sending`,
       normalizedBody,
       signals: ["empty"],
     };
   }
-  if ([...normalizedBody].length > CHAT_MESSAGE_MAX_LENGTH) {
+  if ([...normalizedBody].length > maxLength) {
     return {
       accepted: false,
       code: "too_long",
-      message: `Messages are limited to ${CHAT_MESSAGE_MAX_LENGTH} characters`,
+      message: `${contentLabel} are limited to ${maxLength.toLocaleString("en-US")} characters`,
       normalizedBody,
       signals: ["length"],
     };
@@ -71,7 +78,7 @@ export function moderateChatBody(value: string): ChatModerationResult {
     return {
       accepted: false,
       code: "url",
-      message: "Links are not supported in fight chat",
+      message: `Links are not supported in ${contentLabel === "Posts" ? "matchup posts" : "fight chat"}`,
       normalizedBody,
       signals: ["url"],
     };
@@ -83,7 +90,7 @@ export function moderateChatBody(value: string): ChatModerationResult {
     return {
       accepted: false,
       code: "spam",
-      message: "That message looks like repeated spam",
+      message: `That ${contentLabel === "Posts" ? "post" : "message"} looks like repeated spam`,
       normalizedBody,
       signals: ["repetition"],
     };
@@ -92,7 +99,7 @@ export function moderateChatBody(value: string): ChatModerationResult {
     return {
       accepted: false,
       code: "prohibited",
-      message: "That message violates the community rules",
+      message: `That ${contentLabel === "Posts" ? "post" : "message"} violates the community rules`,
       normalizedBody,
       signals: ["high_risk_language"],
     };
@@ -112,4 +119,14 @@ export function moderateChatBody(value: string): ChatModerationResult {
     decision: mildProfanity ? "soft_flagged" : "approved",
     signals: mildProfanity ? ["mild_profanity_masked"] : [],
   };
+}
+
+export function moderateChatBody(value: string): ChatModerationResult {
+  return moderateBody(value, CHAT_MESSAGE_MAX_LENGTH, "Messages");
+}
+
+export function moderateDiscussionBody(
+  value: string,
+): DiscussionModerationResult {
+  return moderateBody(value, DISCUSSION_POST_MAX_LENGTH, "Posts");
 }

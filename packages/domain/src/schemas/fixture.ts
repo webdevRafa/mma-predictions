@@ -45,6 +45,7 @@ export const fixtureFighterSchema = z
     heightCm: z.number().positive().max(250).optional(),
     reachCm: z.number().positive().max(300).optional(),
     currentWeightClass: z.string().trim().min(1).optional(),
+    sourceUrl: z.string().url().optional(),
     record: fighterRecordSchema,
     careerStats: careerStatsSchema.optional(),
     dataQuality: dataQualitySchema.default("complete"),
@@ -62,6 +63,8 @@ export const fixtureEventSchema = z
     slugHistory: z.array(slugSchema).default([]),
     status: eventStatusSchema,
     startsAt: isoDateTimeSchema,
+    prelimsStartsAt: isoDateTimeSchema.optional(),
+    mainCardStartsAt: isoDateTimeSchema.optional(),
     venueTimezone: z.string().trim().min(1),
     venue: z
       .object({
@@ -83,7 +86,31 @@ export const fixtureEventSchema = z
       .strict()
       .optional(),
   })
-  .strict();
+  .strict()
+  .superRefine((event, context) => {
+    if (
+      event.prelimsStartsAt &&
+      event.mainCardStartsAt &&
+      new Date(event.prelimsStartsAt).getTime() >=
+        new Date(event.mainCardStartsAt).getTime()
+    )
+      context.addIssue({
+        code: "custom",
+        path: ["prelimsStartsAt"],
+        message: "Prelims must begin before the main card",
+      });
+    if (
+      event.mainCardStartsAt &&
+      new Date(event.startsAt).getTime() !==
+        new Date(event.mainCardStartsAt).getTime()
+    )
+      context.addIssue({
+        code: "custom",
+        path: ["startsAt"],
+        message:
+          "Legacy startsAt must match mainCardStartsAt until all readers migrate",
+      });
+  });
 
 const predictionSummarySchema = z
   .object({
@@ -92,6 +119,20 @@ const predictionSummarySchema = z
     fighterB: z.number().int().nonnegative(),
     methods: z.record(z.string(), z.number().int().nonnegative()),
     rounds: z.record(z.string(), z.number().int().nonnegative()),
+    methodsByFighter: z
+      .object({
+        fighterA: z.record(z.string(), z.number().int().nonnegative()),
+        fighterB: z.record(z.string(), z.number().int().nonnegative()),
+      })
+      .strict()
+      .optional(),
+    roundsByFighter: z
+      .object({
+        fighterA: z.record(z.string(), z.number().int().nonnegative()),
+        fighterB: z.record(z.string(), z.number().int().nonnegative()),
+      })
+      .strict()
+      .optional(),
   })
   .strict()
   .superRefine((summary, context) => {

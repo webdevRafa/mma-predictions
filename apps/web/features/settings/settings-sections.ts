@@ -5,12 +5,8 @@ export const settingsSections = [
     id: "profile",
     label: "Public profile",
   },
-  {
-    href: "/settings/notifications",
-    id: "notifications",
-    label: "Notifications",
-  },
-  { href: "/settings/privacy", id: "privacy", label: "Privacy" },
+  { href: "/settings/privacy", id: "privacy", label: "Local display" },
+  { href: "/settings/following", id: "following", label: "Following" },
   {
     href: "/settings/blocked-users",
     id: "blocked-users",

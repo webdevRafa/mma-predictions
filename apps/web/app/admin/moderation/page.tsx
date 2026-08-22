@@ -70,18 +70,27 @@ export default async function ModerationPage({
         MODERATION
       </h1>
       <p className="mt-3 text-sm text-fl-text-muted">
-        Message context, report resolution, sanctions, restoration, and room
-        emergency controls.
+        Chat and post context, report resolution, sanctions, restoration, and
+        room emergency controls.
       </p>
 
       <Card className="mt-8">
         <CardHeader eyebrow={`${reports.size} open`} title="Report queue" />
         <div className="divide-y divide-fl-border">
           {reports.docs.map((document) => {
-            const message = record(document.get("messageSnapshot"));
-            const author = record(message.author);
+            const isDiscussionPost =
+              document.get("type") === "discussion_post";
+            const content = record(
+              document.get(
+                isDiscussionPost ? "postSnapshot" : "messageSnapshot",
+              ),
+            );
+            const author = record(content.author);
             const roomId = String(document.get("roomId") ?? "");
             const messageId = String(document.get("messageId") ?? "");
+            const fightId = String(document.get("fightId") ?? "");
+            const postId = String(document.get("postId") ?? "");
+            const rootPostId = String(document.get("rootPostId") ?? "");
             const targetUid = String(document.get("targetUid") ?? "");
             return (
               <details className="px-5 py-4" key={document.id}>
@@ -97,12 +106,15 @@ export default async function ModerationPage({
                       >
                         {String(document.get("reason") ?? "report")}
                       </Badge>
+                      <Badge tone="neutral">
+                        {isDiscussionPost ? "Matchup post" : "Live chat"}
+                      </Badge>
                       <span className="text-sm font-bold">
                         @{text(author.handle, targetUid)}
                       </span>
                     </div>
                     <p className="mt-2 max-w-3xl text-sm text-fl-text-muted">
-                      {text(message.body, "Message snapshot unavailable")}
+                      {text(content.body, "Content snapshot unavailable")}
                     </p>
                   </div>
                   <span className="text-xs text-fl-text-dim">
@@ -128,15 +140,47 @@ export default async function ModerationPage({
                     />
                   </form>
                   <form action="/api/admin/actions" method="post">
-                    <input name="action" type="hidden" value="remove_message" />
-                    <input name="roomId" type="hidden" value={roomId} />
-                    <input name="messageId" type="hidden" value={messageId} />
-                    <p className="text-sm font-bold">Remove reported message</p>
+                    <input
+                      name="action"
+                      type="hidden"
+                      value={
+                        isDiscussionPost
+                          ? "remove_discussion_post"
+                          : "remove_message"
+                      }
+                    />
+                    {isDiscussionPost ? (
+                      <>
+                        <input name="fightId" type="hidden" value={fightId} />
+                        <input name="postId" type="hidden" value={postId} />
+                        <input
+                          name="rootPostId"
+                          type="hidden"
+                          value={rootPostId}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <input name="roomId" type="hidden" value={roomId} />
+                        <input
+                          name="messageId"
+                          type="hidden"
+                          value={messageId}
+                        />
+                      </>
+                    )}
+                    <p className="text-sm font-bold">
+                      Remove reported {isDiscussionPost ? "post" : "message"}
+                    </p>
                     <AdminSafetyFields
-                      confirmation={`REMOVE ${messageId}`}
+                      confirmation={
+                        isDiscussionPost
+                          ? `REMOVE POST ${postId}`
+                          : `REMOVE ${messageId}`
+                      }
                       danger
                       returnTo="/admin/moderation"
-                      submitLabel="Remove message"
+                      submitLabel={`Remove ${isDiscussionPost ? "post" : "message"}`}
                     />
                   </form>
                   <div>
