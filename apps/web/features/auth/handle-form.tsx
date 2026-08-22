@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
 
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
+import { dispatchAuthProfileUpdated } from "@/lib/auth/client-profile-events";
 
 import { AvatarEditor } from "./avatar-editor";
 
@@ -154,6 +155,7 @@ export function HandleForm({
         throw new Error(message);
       }
       trackAnalyticsEvent("handle_created");
+      dispatchAuthProfileUpdated({ handle: parsed.data });
       if (onCompleted) onCompleted();
       else router.push(returnTo);
       router.refresh();

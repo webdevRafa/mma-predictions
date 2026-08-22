@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 import { Skeleton } from "@/components/ui/skeleton";
+import { getAccountMenuPresentation } from "@/lib/auth/account-menu";
 import {
   AUTH_PROFILE_UPDATED_EVENT,
   type AuthProfileUpdatedDetail,
@@ -21,6 +22,10 @@ export function AuthMenu() {
   );
   const [signingOut, setSigningOut] = useState(false);
   const [photoURL, setPhotoURL] = useState<string | null>(null);
+  const [handle, setHandle] = useState<string | null | undefined>(() =>
+    isFirebaseClientConfigured ? undefined : null,
+  );
+  const [handleUnavailable, setHandleUnavailable] = useState(false);
   const [imageFailed, setImageFailed] = useState(false);
 
   useEffect(() => {
@@ -30,17 +35,60 @@ export function AuthMenu() {
       (currentUser) => {
         setUser(currentUser);
         setPhotoURL(currentUser?.photoURL ?? null);
+        setHandle(currentUser ? undefined : null);
+        setHandleUnavailable(false);
         setImageFailed(false);
       },
-      () => setUser(null),
+      () => {
+        setUser(null);
+        setHandle(null);
+        setHandleUnavailable(false);
+      },
     );
   }, []);
 
   useEffect(() => {
+    if (!user) return;
+    const controller = new AbortController();
+    void (async () => {
+      try {
+        const response = await fetch("/api/profile/identity", {
+          headers: { Accept: "application/json" },
+          cache: "no-store",
+          signal: controller.signal,
+        });
+        const payload: unknown = await response.json().catch(() => null);
+        setHandle(
+          response.ok &&
+            payload &&
+            typeof payload === "object" &&
+            "handle" in payload &&
+            typeof payload.handle === "string"
+            ? payload.handle
+            : null,
+        );
+        setHandleUnavailable(!response.ok);
+      } catch (error) {
+        if (error instanceof DOMException && error.name === "AbortError")
+          return;
+        setHandle(null);
+        setHandleUnavailable(true);
+      }
+    })();
+    return () => controller.abort();
+  }, [user]);
+
+  useEffect(() => {
     function updateProfile(event: Event) {
       const detail = (event as CustomEvent<AuthProfileUpdatedDetail>).detail;
-      setPhotoURL(detail.photoURL);
-      setImageFailed(false);
+      if (detail.photoURL !== undefined) {
+        setPhotoURL(detail.photoURL);
+        setImageFailed(false);
+      }
+      if (detail.handle !== undefined) {
+        setHandle(detail.handle);
+        setHandleUnavailable(false);
+      }
     }
     window.addEventListener(AUTH_PROFILE_UPDATED_EVENT, updateProfile);
     return () =>
@@ -79,13 +127,15 @@ export function AuthMenu() {
     );
   }
 
+  const account = getAccountMenuPresentation(handle, handleUnavailable);
+
   return (
     <div className="flex items-center gap-1">
       <Link
-        aria-label="Signed in — account settings"
-        className="focus-ring inline-flex h-10 items-center gap-2 rounded-lg border border-fl-border bg-fl-surface-1 py-1 pr-2.5 pl-1 text-fl-text-muted hover:border-fl-text-muted hover:text-fl-text"
-        href="/settings"
-        title="Account settings"
+        aria-label={account.title}
+        className={`focus-ring inline-flex h-10 items-center gap-2 rounded-lg border bg-fl-surface-1 py-1 pr-2.5 pl-1 hover:text-fl-text ${account.needsOnboarding ? "border-fl-accent/50 text-fl-accent" : "border-fl-border text-fl-text-muted hover:border-fl-text-muted"}`}
+        href={account.href}
+        title={account.title}
       >
         <span className="grid size-8 shrink-0 place-items-center overflow-hidden rounded-md bg-fl-surface-3">
           {photoURL && !imageFailed ? (
@@ -101,7 +151,13 @@ export function AuthMenu() {
             <CircleUserRound aria-hidden="true" size={19} />
           )}
         </span>
-        <span className="hidden text-xs font-bold lg:inline">Account</span>
+        {handle === undefined ? (
+          <Skeleton className="hidden h-3 w-16 lg:block" />
+        ) : (
+          <span className="hidden max-w-32 truncate text-xs font-bold lg:inline">
+            {account.label}
+          </span>
+        )}
       </Link>
       <button
         aria-label="Sign out"

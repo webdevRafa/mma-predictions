@@ -195,7 +195,7 @@ export function AvatarEditor() {
       await user.reload();
       setPhotoURL(payload.photoURL);
       setImageFailed(false);
-      dispatchAuthProfileUpdated(payload.photoURL);
+      dispatchAuthProfileUpdated({ photoURL: payload.photoURL });
       setStatus("Profile photo saved.");
       discardCrop();
     } catch (caught) {
@@ -228,7 +228,7 @@ export function AvatarEditor() {
       await user.reload();
       setPhotoURL(null);
       setImageFailed(false);
-      dispatchAuthProfileUpdated(null);
+      dispatchAuthProfileUpdated({ photoURL: null });
       setStatus("Profile photo removed.");
     } catch (caught) {
       setError(
