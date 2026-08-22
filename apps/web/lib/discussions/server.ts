@@ -23,6 +23,7 @@ import { ApiError } from "../auth/http";
 const DISCUSSION_MODERATION_VERSION = 1;
 const DISCUSSION_DUPLICATE_WINDOW_MS = 5 * 60_000;
 const DISCUSSION_PAGE_SIZE = 20;
+const DISCUSSION_REPLY_PREVIEW_LIMIT = 3;
 const DISCUSSION_REPLY_LIMIT = 200;
 
 export interface DiscussionMemberContext {
@@ -405,7 +406,7 @@ export async function listFightDiscussionCore(
         document.ref
           .collection("replies")
           .orderBy("createdAt", "asc")
-          .limit(DISCUSSION_REPLY_LIMIT)
+          .limit(DISCUSSION_REPLY_PREVIEW_LIMIT)
           .get()
           .then((replies): DiscussionThread => ({
             post,
@@ -422,6 +423,32 @@ export async function listFightDiscussionCore(
     threads,
     nextCursor: roots.size === limit && last !== undefined ? last : null,
   };
+}
+
+export async function listFightDiscussionRepliesCore(
+  firestore: Firestore,
+  fightIdValue: string,
+  rootPostIdValue: string,
+) {
+  const fightId = safeId(fightIdValue, "fight");
+  const rootPostId = safeId(rootPostIdValue, "root_post");
+  const rootReference = firestore
+    .collection("fightDiscussions")
+    .doc(fightId)
+    .collection("posts")
+    .doc(rootPostId);
+  const root = parsePost(await rootReference.get());
+  if (!root || root.status !== "published")
+    throw new ApiError("Discussion thread not found", 404, "thread_not_found");
+  const snapshot = await rootReference
+    .collection("replies")
+    .orderBy("createdAt", "asc")
+    .limit(DISCUSSION_REPLY_LIMIT)
+    .get();
+  return snapshot.docs.flatMap((reply) => {
+    const parsed = parsePost(reply);
+    return parsed ? [parsed] : [];
+  });
 }
 
 export async function reportDiscussionPostCore(

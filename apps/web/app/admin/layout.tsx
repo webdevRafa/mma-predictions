@@ -5,6 +5,7 @@ import {
   Flag,
   Gauge,
   Import,
+  Landmark,
   Shield,
   Swords,
   UserRound,
@@ -23,6 +24,7 @@ const links = [
   { href: "/admin/feature-flags", label: "Flags", icon: Flag },
   { href: "/admin/audit", label: "Audit", icon: ClipboardList },
   { href: "/admin/leaderboards", label: "Boards", icon: Activity },
+  { href: "/admin/costs", label: "Costs", icon: Landmark },
 ];
 
 export default async function AdminLayout({

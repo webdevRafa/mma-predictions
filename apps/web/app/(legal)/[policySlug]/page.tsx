@@ -83,7 +83,7 @@ const policies: Record<string, PolicyPage> = {
       {
         heading: "Retention and your choices",
         paragraphs: [
-          "Public predictions and leaderboard history are retained to preserve the integrity of community records. Chat and moderation evidence are retained for the MVP safety period and reviewed before automated archival or deletion is enabled. You can change privacy choices at any time, control pick visibility in Settings, block members, or request account deletion from your account page.",
+          "Public predictions and leaderboard history are retained to preserve the integrity of community records. Live chat becomes read-only six hours after an administrator completes an event, and its public message history is automatically removed 30 days later. Limited moderation and security records may be retained longer to investigate abuse and protect the service. You can change privacy choices at any time, block members, or request account deletion from your account page.",
           `For privacy questions or rights requests, contact ${supportEmail}. We may need to verify the request before acting on account data.`,
         ],
       },

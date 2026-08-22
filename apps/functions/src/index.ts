@@ -6,6 +6,7 @@ export {
   applyUserSanction,
   closeExpiredChatRooms,
   expireUserSanctions,
+  purgeExpiredChatMessages,
   removeChatMessage,
 } from "./chat/moderation-admin.js";
 export {
@@ -13,6 +14,7 @@ export {
   regradeFightPredictions,
 } from "./grading/grade-fight-predictions.js";
 export { lockFightPredictions } from "./predictions/lock-fight-predictions.js";
+export { refreshPendingPredictionAggregates } from "./predictions/refresh-prediction-aggregates.js";
 export {
   discoverUpcomingEvents,
   nightlyIntegrityCheck,

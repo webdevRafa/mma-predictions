@@ -111,10 +111,12 @@ Before public traffic, assign a named primary and backup operator and configure:
 - GA4 only behind analytics consent; and
 - Google Search Console ownership and sitemap submission.
 
-Create a project-scoped Cloud Billing budget approved by the owner. Start with
-actual and forecast threshold notifications at 50%, 75%, 90%, and 100%, route
-them to both operators, and review the amount after every event. Budget alerts do
-not automatically cap spend, as the
+Create a project-scoped Cloud Billing budget approved by the owner. During the
+launch period, add actual-cost notifications at $10, $25, $50, and $100, route
+them to both operators, and review the thresholds after every event. Also enable
+Vercel Spend Management notifications and an account-appropriate hard limit or
+pause action before promoting the production deployment. Budget alerts do not
+automatically cap Google Cloud spend, as the
 [Cloud Billing documentation](https://docs.cloud.google.com/billing/docs/how-to/budgets)
 warns, so pair alerts with the feature-flag incident controls below.
 

@@ -107,8 +107,8 @@ export function EventStatusControl({
             </h2>
             <p className="mt-2 max-w-3xl text-sm leading-6 text-fl-text-muted">
               {completed
-                ? "The public live state has ended. If another scheduled card exists, the homepage can advance to it immediately."
-                : "FightLobby still keeps the automatic six-hour main-card safety buffer. Use this control after the final bout to end the live state immediately instead of waiting for that fallback window."}
+                ? "The public live state has ended. Event and matchup chats remain open for a six-hour post-event window, then become read-only automatically."
+                : "FightLobby still keeps the automatic six-hour main-card safety buffer. Use this control after the final bout to end the live state immediately and start the six-hour post-event chat window."}
             </p>
           </div>
 
@@ -211,9 +211,10 @@ export function EventStatusControl({
           </h2>
           <p className="mt-3 text-base font-bold">{eventName}</p>
           <p className="mt-2 text-sm leading-6 text-fl-text-muted">
-            This immediately ends the public live state and overrides the
-            six-hour safety buffer. It does not alter or grade individual fight
-            results.
+            This immediately ends the public live state and starts a six-hour
+            post-event chat window. Chats then become read-only, and their
+            message history is removed after 30 days. This does not alter or
+            grade individual fight results.
           </p>
         </div>
 

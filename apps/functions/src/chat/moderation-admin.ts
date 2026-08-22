@@ -13,6 +13,8 @@ import { z } from "zod";
 import { requireRole } from "../auth/roles.js";
 import { getAdminServices } from "../lib/firebase/admin.js";
 
+const CHAT_RETENTION_MS = 30 * 24 * 60 * 60 * 1_000;
+
 const removeInputSchema = z
   .object({
     roomId: z.string().regex(/^[a-z0-9_-]{3,160}$/i),
@@ -180,20 +182,49 @@ export async function closeExpiredChatRoomsCore(
       writableUntil.toMillis() <= now.toMillis();
     void writer.set(
       room.ref,
-      { status: expired ? "read_only" : "open", updatedAt: now },
+      {
+        status: expired ? "read_only" : "open",
+        ...(expired && !(room.get("retentionExpiresAt") instanceof Timestamp)
+          ? {
+              retentionExpiresAt: Timestamp.fromMillis(
+                writableUntil.toMillis() + CHAT_RETENTION_MS,
+              ),
+            }
+          : {}),
+        updatedAt: now,
+      },
       { merge: true },
     );
     if (expired) closed += 1;
     else opened += 1;
   }
   for (const room of closingSnapshot.docs) {
-    if (!["open", "slow_mode"].includes(String(room.get("status")))) continue;
+    const status = String(room.get("status"));
+    const writableUntil: unknown = room.get("writableUntil");
+    const retentionExpiresAt: unknown = room.get("retentionExpiresAt");
+    const needsRetentionBackfill =
+      writableUntil instanceof Timestamp &&
+      !(retentionExpiresAt instanceof Timestamp);
+    if (!["open", "slow_mode"].includes(status) && !needsRetentionBackfill)
+      continue;
     void writer.set(
       room.ref,
-      { status: "read_only", updatedAt: now },
+      {
+        ...(["open", "slow_mode"].includes(status)
+          ? { status: "read_only" }
+          : {}),
+        ...(needsRetentionBackfill
+          ? {
+              retentionExpiresAt: Timestamp.fromMillis(
+                writableUntil.toMillis() + CHAT_RETENTION_MS,
+              ),
+            }
+          : {}),
+        updatedAt: now,
+      },
       { merge: true },
     );
-    closed += 1;
+    if (["open", "slow_mode"].includes(status)) closed += 1;
   }
   await writer.close();
   return {
@@ -201,6 +232,38 @@ export async function closeExpiredChatRoomsCore(
     opened,
     closed,
   };
+}
+
+export async function purgeExpiredChatMessagesCore(
+  firestore: Firestore,
+  database: Database,
+  now = Timestamp.now(),
+) {
+  const snapshot = await firestore
+    .collection("chatRooms")
+    .where("retentionExpiresAt", "<=", now)
+    .limit(100)
+    .get();
+  let purged = 0;
+  let failed = 0;
+  for (const room of snapshot.docs) {
+    try {
+      await database.ref(`chat/v1/rooms/${room.id}/messages`).remove();
+      await room.ref.set(
+        {
+          messageCount: 0,
+          messagesPurgedAt: now,
+          retentionExpiresAt: FieldValue.delete(),
+          updatedAt: now,
+        },
+        { merge: true },
+      );
+      purged += 1;
+    } catch {
+      failed += 1;
+    }
+  }
+  return { examined: snapshot.size, purged, failed };
 }
 
 export async function expireUserSanctionsCore(
@@ -354,6 +417,14 @@ export const closeExpiredChatRooms = onSchedule(
   { schedule: "every 60 minutes", timeZone: "Etc/UTC" },
   async () => {
     await closeExpiredChatRoomsCore(getAdminServices().firestore);
+  },
+);
+
+export const purgeExpiredChatMessages = onSchedule(
+  { schedule: "every day 03:15", timeZone: "Etc/UTC" },
+  async () => {
+    const { firestore, database } = getAdminServices();
+    await purgeExpiredChatMessagesCore(firestore, database);
   },
 );
 

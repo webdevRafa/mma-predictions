@@ -1,6 +1,7 @@
 import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { connection } from "next/server";
 
 import { listPublicEvents } from "@/lib/data/public";
 import { AuthMenu } from "@/features/auth/auth-menu";
@@ -13,6 +14,10 @@ const navigation = [
 ];
 
 export async function SiteHeader() {
+  // The event label is request-time content. Keeping this boundary dynamic
+  // prevents local/CI builds from reaching production Firestore while the
+  // underlying repository result remains briefly cached at runtime.
+  await connection();
   const events = await listPublicEvents();
   const activeEvent =
     events.find((event) => event.status === "live") ??

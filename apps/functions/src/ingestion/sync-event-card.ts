@@ -552,6 +552,9 @@ function chatRoom(
     status: Date.now() >= opensAt.toMillis() ? "open" : "scheduled",
     opensAt,
     writableUntil,
+    retentionExpiresAt: Timestamp.fromMillis(
+      writableUntil.toMillis() + 30 * 24 * 60 * 60 * 1_000,
+    ),
     slowModeSeconds: 7,
     messageCount: 0,
     moderationHealth: "normal",

@@ -12,20 +12,8 @@
               ".indexOn": ["createdAt"]
             },
             "presence": {
-              ".read": true,
-              "$uid": {
-                ".write": "$uid === auth.uid",
-                ".validate": "newData.hasChildren(['connected', 'lastSeen'])",
-                "connected": {
-                  ".validate": "newData.isBoolean()"
-                },
-                "lastSeen": {
-                  ".validate": "newData.isNumber()"
-                },
-                "$other": {
-                  ".validate": false
-                }
-              }
+              ".read": false,
+              ".write": false
             },
             "typing": { ".read": false, ".write": false }
           }

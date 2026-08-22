@@ -14,7 +14,6 @@ import {
   MessageCircle,
   Send,
   ShieldAlert,
-  Users,
   X,
 } from "lucide-react";
 import Link from "next/link";
@@ -33,13 +32,12 @@ import {
   endBefore,
   get,
   limitToLast,
-  onDisconnect,
-  onValue,
+  onChildAdded,
+  onChildChanged,
+  onChildRemoved,
   orderByChild,
   query,
   ref,
-  serverTimestamp,
-  set,
 } from "firebase/database";
 import { doc, onSnapshot } from "firebase/firestore";
 
@@ -82,6 +80,19 @@ function mergeMessages(current: ChatMessage[], incoming: ChatMessage[]) {
   );
 }
 
+function timestampMillis(value: unknown) {
+  if (typeof value === "string") {
+    const parsed = Date.parse(value);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  if (value && typeof value === "object") {
+    const toMillis = (value as { toMillis?: unknown }).toMillis;
+    if (typeof toMillis === "function")
+      return (toMillis as () => number).call(value);
+  }
+  return null;
+}
+
 function apiMessage(value: unknown, fallback: string) {
   const error = record(record(value).error);
   return typeof error.message === "string" ? error.message : fallback;
@@ -121,7 +132,8 @@ export function FightChatPanel({
     ChatRoomStatus | "loading" | "unavailable"
   >(isFirebaseRealtimeConfigured ? "loading" : "unavailable");
   const [slowModeSeconds, setSlowModeSeconds] = useState(0);
-  const [presence, setPresence] = useState(0);
+  const [writableUntilMs, setWritableUntilMs] = useState<number | null>(null);
+  const [expiryClock, setExpiryClock] = useState(() => Date.now());
   const [body, setBody] = useState("");
   const [replyTo, setReplyTo] = useState<ChatMessage | null>(null);
   const [busy, setBusy] = useState(false);
@@ -134,7 +146,6 @@ export function FightChatPanel({
       : "Live chat needs the Firebase Realtime Database URL.",
   );
   const listRef = useRef<HTMLDivElement>(null);
-  const presenceUidRef = useRef<string | null>(null);
 
   const visibleMessages = useMemo(
     () => messages.filter((message) => !blocked.has(message.uid)),
@@ -165,16 +176,36 @@ export function FightChatPanel({
       orderByChild("createdAt"),
       limitToLast(PAGE_SIZE),
     );
-    const stopMessages = onValue(
+    let active = true;
+    queueMicrotask(() => {
+      if (active) setMessages([]);
+    });
+    const handleMessage = (snapshot: { val(): unknown }) => {
+      const parsed = chatMessageSchema.safeParse(snapshot.val());
+      if (parsed.success)
+        setMessages((current) => mergeMessages(current, [parsed.data]));
+    };
+    const handleConnectionError = () => {
+      setRoomStatus("unavailable");
+      setError("The fight lobby could not connect.");
+    };
+    const stopAdded = onChildAdded(
       messagesReference,
-      (snapshot) => {
-        const incoming = parseMessages(snapshot.val());
-        setMessages((current) => mergeMessages(current, incoming));
-      },
-      () => {
-        setRoomStatus("unavailable");
-        setError("The fight lobby could not connect.");
-      },
+      handleMessage,
+      handleConnectionError,
+    );
+    const stopChanged = onChildChanged(
+      messagesReference,
+      handleMessage,
+      handleConnectionError,
+    );
+    const stopRemoved = onChildRemoved(
+      messagesReference,
+      (snapshot) =>
+        setMessages((current) =>
+          current.filter((message) => message.id !== snapshot.key),
+        ),
+      handleConnectionError,
     );
     const stopRoom = onSnapshot(
       doc(firestore, "chatRooms", roomId),
@@ -189,41 +220,11 @@ export function FightChatPanel({
         );
         const slowMode: unknown = snapshot.get("slowModeSeconds");
         setSlowModeSeconds(typeof slowMode === "number" ? slowMode : 0);
+        setWritableUntilMs(timestampMillis(snapshot.get("writableUntil")));
       },
       () => setRoomStatus("unavailable"),
     );
-    const stopPresence = onValue(
-      ref(database, `chat/v1/rooms/${roomId}/presence`),
-      (snapshot) => {
-        const users = Object.values(record(snapshot.val()));
-        setPresence(
-          users.filter((user) => record(user).connected === true).length,
-        );
-      },
-    );
-    const stopAuth = onAuthStateChanged(auth, (user) => {
-      setCurrentUser(user);
-      const previousUid = presenceUidRef.current;
-      if (previousUid && previousUid !== user?.uid)
-        void set(
-          ref(database, `chat/v1/rooms/${roomId}/presence/${previousUid}`),
-          { connected: false, lastSeen: serverTimestamp() },
-        );
-      presenceUidRef.current = user?.uid ?? null;
-      if (!user) return;
-      const presenceReference = ref(
-        database,
-        `chat/v1/rooms/${roomId}/presence/${user.uid}`,
-      );
-      void set(presenceReference, {
-        connected: true,
-        lastSeen: serverTimestamp(),
-      });
-      void onDisconnect(presenceReference).set({
-        connected: false,
-        lastSeen: serverTimestamp(),
-      });
-    });
+    const stopAuth = onAuthStateChanged(auth, setCurrentUser);
     void fetch("/api/chat/blocks", { cache: "no-store" })
       .then((response) => response.json())
       .then((payload: unknown) => {
@@ -240,20 +241,27 @@ export function FightChatPanel({
       })
       .catch(() => undefined);
     return () => {
-      stopMessages();
+      active = false;
+      stopAdded();
+      stopChanged();
+      stopRemoved();
       stopRoom();
-      stopPresence();
       stopAuth();
-      if (presenceUidRef.current)
-        void set(
-          ref(
-            database,
-            `chat/v1/rooms/${roomId}/presence/${presenceUidRef.current}`,
-          ),
-          { connected: false, lastSeen: serverTimestamp() },
-        );
     };
   }, [roomId]);
+
+  useEffect(() => {
+    if (writableUntilMs === null || expiryClock >= writableUntilMs) return;
+    const remaining = writableUntilMs - Date.now();
+    const timer = setTimeout(
+      () => setExpiryClock(Date.now()),
+      Math.max(0, Math.min(remaining + 250, 6 * 60 * 60_000)),
+    );
+    return () => clearTimeout(timer);
+  }, [expiryClock, writableUntilMs]);
+
+  const roomExpired =
+    writableUntilMs !== null && expiryClock >= writableUntilMs;
 
   async function appCheckHeaders() {
     const token = await getFirebaseAppCheckToken();
@@ -375,7 +383,12 @@ export function FightChatPanel({
     }
   }
 
-  const writable = roomStatus === "open" || roomStatus === "slow_mode";
+  const effectiveRoomStatus =
+    roomExpired && (roomStatus === "open" || roomStatus === "slow_mode")
+      ? "read_only"
+      : roomStatus;
+  const writable =
+    effectiveRoomStatus === "open" || effectiveRoomStatus === "slow_mode";
 
   return (
     <Card className="flex h-full min-h-[34rem] flex-col overflow-hidden lg:max-h-[calc(100vh-7rem)]">
@@ -399,10 +412,10 @@ export function FightChatPanel({
         </div>
         <div className="mt-3 flex flex-wrap gap-2 font-mono text-[10px] tracking-[.06em] text-fl-text-dim uppercase">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-fl-border px-2 py-1">
-            <Users aria-hidden="true" size={11} /> {presence} here
+            <MessageCircle aria-hidden="true" size={11} /> Live room
           </span>
           <span className="rounded-full border border-fl-border px-2 py-1">
-            {roomLabel(roomStatus)}
+            {roomLabel(effectiveRoomStatus)}
           </span>
           {slowModeSeconds > 0 ? (
             <span className="rounded-full border border-fl-border px-2 py-1">

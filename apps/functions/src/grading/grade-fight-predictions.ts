@@ -311,10 +311,6 @@ export async function gradeFightPredictionsCore(
       recomputeProfileAggregates(firestore, uid),
     ),
   );
-  await Promise.all([
-    rebuildEventLeaderboard(firestore, eventId),
-    rebuildSeasonLeaderboards(firestore, seasonId),
-  ]);
 
   const completedAt = Timestamp.now();
   await Promise.all([

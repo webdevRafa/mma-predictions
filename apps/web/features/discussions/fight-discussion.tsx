@@ -2,6 +2,7 @@
 
 import {
   discussionPageSchema,
+  discussionPostSchema,
   type DiscussionPost,
   type DiscussionThread,
 } from "@fightlobby/domain";
@@ -120,6 +121,7 @@ export function FightDiscussion({
   const [nextCursor, setNextCursor] = useState<number | null>(null);
   const [order, setOrder] = useState<"newest" | "oldest">("newest");
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const [loadingReplies, setLoadingReplies] = useState<Set<string>>(new Set());
   const [blocked, setBlocked] = useState<Set<string>>(new Set());
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [authReady, setAuthReady] = useState(!isFirebaseClientConfigured);
@@ -279,6 +281,50 @@ export function FightDiscussion({
   async function appCheckHeaders() {
     const token = await getFirebaseAppCheckToken();
     return token ? { "X-Firebase-AppCheck": token } : {};
+  }
+
+  async function toggleReplies(thread: DiscussionThread) {
+    const rootPostId = thread.post.id;
+    const isOpen = expanded.has(rootPostId);
+    setExpanded((current) => {
+      const next = new Set(current);
+      if (isOpen) next.delete(rootPostId);
+      else next.add(rootPostId);
+      return next;
+    });
+    if (isOpen || thread.post.replyCount <= thread.replies.length) return;
+    setLoadingReplies((current) => new Set(current).add(rootPostId));
+    try {
+      const response = await fetch(
+        `/api/discussions/fights/${encodeURIComponent(fightId)}/posts/${encodeURIComponent(rootPostId)}/replies`,
+        { cache: "no-store" },
+      );
+      const payload: unknown = await response.json();
+      if (!response.ok)
+        throw new Error(apiMessage(payload, "Replies could not be loaded"));
+      const replies = discussionPostSchema
+        .array()
+        .parse(record(payload).replies);
+      setThreads((current) =>
+        current.map((candidate) =>
+          candidate.post.id === rootPostId
+            ? { ...candidate, replies }
+            : candidate,
+        ),
+      );
+    } catch (loadError) {
+      setError(
+        loadError instanceof Error
+          ? loadError.message
+          : "Replies could not be loaded",
+      );
+    } finally {
+      setLoadingReplies((current) => {
+        const next = new Set(current);
+        next.delete(rootPostId);
+        return next;
+      });
+    }
   }
 
   function openAuthPrompt(
@@ -699,17 +745,12 @@ export function FightDiscussion({
                     <button
                       aria-expanded={open}
                       className="focus-ring mt-4 inline-flex min-h-9 items-center gap-2 rounded-lg px-2 text-xs font-bold text-fl-info hover:bg-fl-info/10"
-                      onClick={() =>
-                        setExpanded((current) => {
-                          const next = new Set(current);
-                          if (open) next.delete(thread.post.id);
-                          else next.add(thread.post.id);
-                          return next;
-                        })
-                      }
+                      onClick={() => void toggleReplies(thread)}
                       type="button"
                     >
-                      {open ? (
+                      {loadingReplies.has(thread.post.id) ? (
+                        <LoaderCircle className="animate-spin" size={15} />
+                      ) : open ? (
                         <ChevronUp size={15} />
                       ) : (
                         <ChevronDown size={15} />
