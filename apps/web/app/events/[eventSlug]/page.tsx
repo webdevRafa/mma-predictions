@@ -10,7 +10,6 @@ import { FightCardGroups } from "@/components/fights/fight-card-groups";
 import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
@@ -159,7 +158,6 @@ export default async function EventPage({ params }: Props) {
           <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
             <div className="max-w-5xl">
               <div className="flex flex-wrap items-center gap-3">
-                <Badge tone="accent">{event.promotion.toUpperCase()}</Badge>
                 <LiveStatusFragment
                   collection="events"
                   id={event.id}
@@ -177,9 +175,8 @@ export default async function EventPage({ params }: Props) {
                 </p>
               ) : null}
             </div>
-            <div className="rounded-xl border border-fl-border bg-fl-surface-1/90 p-5 lg:min-w-72">
-              <p className="eyebrow">Event clock</p>
-              <p className="mt-2 font-display text-2xl font-bold">
+            <div className="lg:min-w-72 lg:pb-1 lg:text-right">
+              <p className="font-display text-2xl font-bold">
                 <EventCountdown {...eventTiming} renderedAt={renderedAt} />
               </p>
             </div>
