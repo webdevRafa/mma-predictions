@@ -32,8 +32,9 @@ The current reviewed launch event is:
 - **UFC Fight Night: Hernandez vs Rodrigues**
 - event ID: `evt_ufc_fn_2026_08_22`
 - event date: 2026-08-22
-- 13 scheduled matchups across main card and prelims
+- 13 scheduled matchups: six on the main card and seven on the prelims
 - main event: Anthony Hernandez vs Gregory Rodrigues
+- official top-to-bottom order was re-verified and refreshed on 2026-08-22
 
 Do not treat this card as a permanent fixture. The next operator should import a
 new reviewed event after the current card concludes and verify home/event routing
@@ -140,6 +141,8 @@ against the event lifecycle rules.
 9. Public prediction badges include fighter last name and method only, not round
    or decision detail.
 10. Times are stored as UTC and displayed in the browser's local timezone.
+11. Card movement changes `cardSegment`/`boutOrder`, never an existing fight ID
+    or either participant ID; prediction linkage must survive every reorder.
 
 ## 5. Known limitations and intentional omissions
 

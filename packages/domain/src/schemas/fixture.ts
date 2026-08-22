@@ -295,6 +295,37 @@ export const normalizedFixtureSchema = z
         });
     });
 
+    const activeFights = fixture.fights.flatMap((fight, fixtureIndex) =>
+      fight.status === "canceled" ? [] : [{ fight, fixtureIndex }],
+    );
+    const segmentRank = {
+      main_card: 0,
+      prelims: 1,
+      early_prelims: 2,
+    } as const;
+    activeFights.forEach(({ fight, fixtureIndex }, activeIndex) => {
+      const expectedBoutOrder = activeIndex + 1;
+      if (fight.boutOrder !== expectedBoutOrder)
+        context.addIssue({
+          code: "custom",
+          path: ["fights", fixtureIndex, "boutOrder"],
+          message:
+            "Active fights must be listed in official top-to-bottom card order with contiguous boutOrder values starting at 1",
+        });
+
+      const previousFight = activeFights[activeIndex - 1]?.fight;
+      if (
+        previousFight &&
+        segmentRank[fight.cardSegment] < segmentRank[previousFight.cardSegment]
+      )
+        context.addIssue({
+          code: "custom",
+          path: ["fights", fixtureIndex, "cardSegment"],
+          message:
+            "Card segments must stay grouped in main card, prelims, then early prelims order",
+        });
+    });
+
     fixture.fights.forEach((fight, index) => {
       if (fight.replacedByFightId && !fightIds.has(fight.replacedByFightId))
         context.addIssue({

@@ -101,9 +101,12 @@ pages before import. At minimum verify:
 - fighter records and any tale-of-the-tape statistics being published;
 - provenance URLs and the time the source was verified.
 
-Card order is presentation order: the main event is first in the main-card
-array, followed by the co-main event. Public UI labels only those two special
-positions; it does not display misleading `Bout 1`, `Bout 2` labels.
+Card order is presentation order. List active fights in one contiguous,
+top-to-bottom sequence: main event first, then the rest of the main card,
+prelims, and early prelims. `boutOrder` starts at `1` and matches the bout's
+position among active fights in the fixture array. Public UI labels only the
+main and co-main positions; it does not display misleading `Bout 1`, `Bout 2`
+labels.
 
 ### 5.2 Stable identity
 
@@ -114,6 +117,9 @@ positions; it does not display misleading `Bout 1`, `Bout 2` labels.
 - Two fighters with the same name must have distinct FightLobby IDs.
 - Once imported, keep IDs stable across future events so profile history joins
   correctly.
+- A fight ID identifies its participant pair, not its card position. If UFC
+  moves a matchup, preserve the fight and fighter IDs and change only
+  `cardSegment`/`boutOrder`.
 
 ### 5.3 Time fields
 
@@ -170,9 +176,12 @@ migration. It verifies the production project/RTDB and contains overwrite and
 event-identity guards. Do not assume it accepts an arbitrary new event without
 reviewing and intentionally updating those guards.
 
-`refresh-production-event.ts` refreshes the reviewed current event. Read its
-diff before using it against production, especially if predictions or results
-already exist.
+`refresh-production-event.ts` is a guarded, metadata-only card-order correction
+for the reviewed current event. Before writing, it requires the exact live fight
+ID set, verifies the unordered participant pair for each fight, and validates
+every event prediction's winner fighter ID. It updates only changed
+`cardSegment`/`boutOrder` values plus timestamps and creates import/audit records.
+Run it without the confirmation phrase first and review the dry-run diff.
 
 For recurring new events, prefer the audited Admin Import UI or extend the
 script deliberately in a reviewed commit. Never weaken its project or overwrite
