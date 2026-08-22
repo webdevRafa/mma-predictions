@@ -140,6 +140,26 @@ dialog::backdrop {
   background: rgba(0, 0, 0, 0.75);
   backdrop-filter: blur(5px);
 }
+.fight-card-scrollbar {
+  scrollbar-color: rgba(241, 64, 29, 0.82) rgba(30, 37, 46, 0.8);
+  scrollbar-width: thin;
+}
+.fight-card-scrollbar::-webkit-scrollbar {
+  width: 0.625rem;
+}
+.fight-card-scrollbar::-webkit-scrollbar-track {
+  margin-block: 0.35rem;
+  border-radius: 999px;
+  background: rgba(30, 37, 46, 0.8);
+}
+.fight-card-scrollbar::-webkit-scrollbar-thumb {
+  border: 2px solid #1e252e;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #ff5b3a, #c92f19);
+}
+.fight-card-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #ff5b3a;
+}
 @keyframes live-pulse {
   70% {
     box-shadow: 0 0 0 7px rgba(255, 54, 86, 0);

@@ -75,6 +75,14 @@ function detailLabel(detail: PredictionPick["detail"]) {
   return "—";
 }
 
+function compactDetailLabel(detail: PredictionPick["detail"]) {
+  if (typeof detail === "number") return `R${detail}`;
+  if (typeof detail === "string") {
+    return `${detail[0]?.toUpperCase()}${detail.slice(1)}`;
+  }
+  return null;
+}
+
 function fighterName(fight: Fight, fighterId: string) {
   return fight.fighterA.id === fighterId
     ? fight.fighterA.name.full
@@ -111,27 +119,20 @@ function parseSaved(value: unknown, fight: Fight): SavedPrediction | null {
   };
 }
 
-function FightReceipt({
+function lockedPredictionLabel({
   fight,
   saved,
 }: {
   fight: Fight;
   saved: SavedPrediction;
 }) {
-  return (
-    <dl className="mt-4 grid gap-px overflow-hidden rounded-xl border border-fl-success/25 bg-fl-border sm:grid-cols-3">
-      {[
-        ["Winner", fighterName(fight, saved.pick.winnerFighterId)],
-        ["Method", methodLabel(saved.pick.method)],
-        ["Finish detail", detailLabel(saved.pick.detail)],
-      ].map(([label, value]) => (
-        <div className="bg-fl-success/8 p-3" key={label}>
-          <dt className="eyebrow">{label}</dt>
-          <dd className="mt-1 text-sm font-bold">{value}</dd>
-        </div>
-      ))}
-    </dl>
-  );
+  return [
+    fighterName(fight, saved.pick.winnerFighterId),
+    methodLabel(saved.pick.method),
+    compactDetailLabel(saved.pick.detail),
+  ]
+    .filter(Boolean)
+    .join(", ");
 }
 
 export function EventPredictionModal({
@@ -317,7 +318,7 @@ export function EventPredictionModal({
     <>
       <button
         className={cn(
-          "focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-fl-accent px-4 text-sm font-bold text-fl-bg shadow-[0_10px_28px_rgba(241,64,29,0.18)] transition hover:bg-fl-accent-strong",
+          "focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-fl-accent px-4 text-sm font-bold text-white shadow-[0_10px_28px_rgba(241,64,29,0.18)] transition hover:bg-fl-accent-strong",
           className,
         )}
         onClick={openModal}
@@ -352,11 +353,22 @@ export function EventPredictionModal({
                       ? "Sign in to predict"
                       : "Create your account"}
               </h2>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-fl-text-muted">
-                {view === "card"
-                  ? `${eventName}. Pick as many or as few matchups as you want—every confirmed pick is permanent.`
-                  : "You’ll stay here and return to the fight card as soon as you’re done."}
-              </p>
+              {view === "card" ? (
+                <div className="mt-3 max-w-2xl border-l-2 border-fl-accent pl-3">
+                  <p className="font-display text-lg leading-tight font-bold text-fl-text sm:text-xl">
+                    {eventName}
+                  </p>
+                  <p className="mt-1 text-sm leading-6 text-fl-text-muted">
+                    Pick as many or as few matchups as you want—every confirmed
+                    pick is permanent.
+                  </p>
+                </div>
+              ) : (
+                <p className="mt-2 max-w-2xl text-sm leading-6 text-fl-text-muted">
+                  You’ll stay here and return to the fight card as soon as
+                  you’re done.
+                </p>
+              )}
             </div>
             <button
               aria-label="Close predictions"
@@ -368,14 +380,14 @@ export function EventPredictionModal({
             </button>
           </div>
 
-          <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain">
+          <div className="fight-card-scrollbar min-h-0 flex-1 overflow-y-auto overscroll-contain">
             {view === "card" ? (
               <>
                 <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 border-b border-fl-border bg-fl-surface-1/95 px-5 py-3 backdrop-blur sm:px-6">
                   <div>
                     <p className="text-sm font-bold">{progressLabel}</p>
                     <p className="mt-1 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
-                      {openCount} still open · server verified
+                      {openCount} matchup{openCount === 1 ? "" : "s"} still open
                     </p>
                   </div>
                   {loading ? (
@@ -427,8 +439,17 @@ export function EventPredictionModal({
                             </h3>
                           </div>
                           {saved ? (
-                            <span className="inline-flex shrink-0 items-center gap-2 self-start rounded-full border border-fl-success/30 bg-fl-success/10 px-3 py-2 text-xs font-bold text-fl-success lg:self-auto">
-                              <CheckCircle2 size={15} /> Pick locked
+                            <span
+                              className="inline-flex max-w-full shrink-0 items-center gap-2 self-start rounded-full border border-fl-success/30 bg-fl-success/8 px-3 py-2 text-left text-xs leading-5 font-bold text-fl-text lg:self-auto"
+                              title={`Locked prediction: ${lockedPredictionLabel({ fight, saved })}`}
+                            >
+                              <CheckCircle2
+                                className="shrink-0 text-fl-success"
+                                size={15}
+                              />
+                              <span>
+                                {lockedPredictionLabel({ fight, saved })}
+                              </span>
                             </span>
                           ) : available ? (
                             <button
@@ -456,10 +477,6 @@ export function EventPredictionModal({
                             </span>
                           )}
                         </div>
-
-                        {saved ? (
-                          <FightReceipt fight={fight} saved={saved} />
-                        ) : null}
 
                         {expanded && !saved ? (
                           <div className="mt-5 rounded-xl border border-fl-border bg-fl-bg/55 p-4 sm:p-5">
@@ -518,7 +535,7 @@ export function EventPredictionModal({
                                     Review my pick
                                   </button>
                                   <button
-                                    className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-lg bg-fl-accent px-4 text-sm font-bold text-fl-bg"
+                                    className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-lg bg-fl-accent px-4 text-sm font-bold text-white"
                                     disabled={busyFightId === fight.id}
                                     onClick={() =>
                                       void confirmPrediction(fight)
@@ -640,7 +657,7 @@ export function EventPredictionModal({
                                 ) : null}
                                 <div className="flex justify-end">
                                   <button
-                                    className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-lg bg-fl-accent px-4 text-sm font-bold text-fl-bg disabled:cursor-not-allowed disabled:opacity-45"
+                                    className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-lg bg-fl-accent px-4 text-sm font-bold text-white disabled:cursor-not-allowed disabled:opacity-45"
                                     disabled={!validated.success}
                                     onClick={() => setReviewFightId(fight.id)}
                                     type="button"
