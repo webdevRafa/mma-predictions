@@ -5,18 +5,34 @@ import { CircleUserRound, LogOut } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   getFirebaseClient,
   isFirebaseClientConfigured,
 } from "@/lib/firebase/client";
 
 export function AuthMenu() {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null | undefined>(() =>
+    isFirebaseClientConfigured ? undefined : null,
+  );
+  const [signingOut, setSigningOut] = useState(false);
 
   useEffect(() => {
     if (!isFirebaseClientConfigured) return;
-    return onAuthStateChanged(getFirebaseClient().auth, setUser);
+    return onAuthStateChanged(getFirebaseClient().auth, setUser, () =>
+      setUser(null),
+    );
   }, []);
+
+  if (user === undefined || signingOut) {
+    return (
+      <div aria-busy="true" className="flex items-center gap-2" role="status">
+        <span className="sr-only">Checking account status…</span>
+        <Skeleton className="h-10 w-14 sm:w-16" />
+        <Skeleton className="size-10" />
+      </div>
+    );
+  }
 
   if (!user) {
     return (
@@ -53,11 +69,16 @@ export function AuthMenu() {
         aria-label="Sign out"
         className="focus-ring hidden size-10 cursor-pointer place-items-center rounded-lg text-fl-text-muted hover:bg-fl-surface-2 hover:text-fl-text sm:grid"
         onClick={async () => {
-          await Promise.all([
-            signOut(getFirebaseClient().auth),
-            fetch("/api/auth/session", { method: "DELETE" }),
-          ]);
-          window.location.assign("/");
+          setSigningOut(true);
+          try {
+            await Promise.all([
+              signOut(getFirebaseClient().auth),
+              fetch("/api/auth/session", { method: "DELETE" }),
+            ]);
+            window.location.assign("/");
+          } catch {
+            setSigningOut(false);
+          }
         }}
         type="button"
       >

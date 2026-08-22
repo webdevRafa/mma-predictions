@@ -8,6 +8,7 @@ import {
   type PredictionPick,
 } from "@fightlobby/domain";
 import {
+  AlertCircle,
   ArrowLeft,
   CheckCircle2,
   ChevronDown,
@@ -17,8 +18,9 @@ import {
   Target,
   X,
 } from "lucide-react";
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
+import { Skeleton } from "@/components/ui/skeleton";
 import { AuthForm } from "@/features/auth/auth-form";
 import { HandleForm } from "@/features/auth/handle-form";
 import { cn } from "@/lib/cn";
@@ -40,6 +42,7 @@ type PredictionDraft = Omit<PredictionPick, "method"> & {
 
 type AuthMode = "login" | "signup";
 type View = "card" | "auth" | "handle";
+type PredictionLookupState = "idle" | "loading" | "ready" | "error";
 
 const methodOptions: { value: PredictionMethod; label: string }[] = [
   { value: "ko_tko", label: "KO / TKO" },
@@ -151,6 +154,7 @@ export function EventPredictionModal({
   className?: string;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
+  const loadController = useRef<AbortController | null>(null);
   const [view, setView] = useState<View>("card");
   const [authMode, setAuthMode] = useState<AuthMode>("login");
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
@@ -162,7 +166,7 @@ export function EventPredictionModal({
   const [expandedFightId, setExpandedFightId] = useState<string | null>(null);
   const [reviewFightId, setReviewFightId] = useState<string | null>(null);
   const [busyFightId, setBusyFightId] = useState<string | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [lookupState, setLookupState] = useState<PredictionLookupState>("idle");
   const [error, setError] = useState<string | null>(null);
 
   const lockedCount = Object.keys(savedByFight).length;
@@ -179,14 +183,26 @@ export function EventPredictionModal({
     return `${lockedCount} of ${fights.length} matchup${fights.length === 1 ? "" : "s"} predicted.`;
   }, [fights.length, lockedCount]);
 
+  useEffect(
+    () => () => {
+      loadController.current?.abort();
+    },
+    [],
+  );
+
   async function loadPredictions() {
-    setLoading(true);
+    loadController.current?.abort();
+    const controller = new AbortController();
+    loadController.current = controller;
+    setLookupState("loading");
     setError(null);
     try {
       const response = await fetch(`/api/predictions/events/${eventId}`, {
         cache: "no-store",
+        signal: controller.signal,
       });
       const payload: unknown = await response.json();
+      if (controller.signal.aborted) return;
       if (!response.ok)
         throw new Error(apiError(payload, "Your picks could not be loaded."));
       const data = record(payload);
@@ -200,14 +216,19 @@ export function EventPredictionModal({
         if (saved) next[fight.id] = saved;
       }
       setSavedByFight(next);
+      setLookupState("ready");
     } catch (caught) {
+      if (caught instanceof Error && caught.name === "AbortError") return;
       setError(
         caught instanceof Error
           ? caught.message
           : "Your picks could not be loaded.",
       );
+      setLookupState("error");
     } finally {
-      setLoading(false);
+      if (loadController.current === controller) {
+        loadController.current = null;
+      }
     }
   }
 
@@ -219,8 +240,11 @@ export function EventPredictionModal({
   }
 
   function closeModal() {
+    loadController.current?.abort();
+    loadController.current = null;
     dialog.current?.close();
     setView("card");
+    setLookupState("idle");
     setExpandedFightId(null);
     setReviewFightId(null);
   }
@@ -384,30 +408,65 @@ export function EventPredictionModal({
             {view === "card" ? (
               <>
                 <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-3 border-b border-fl-border bg-fl-surface-1/95 px-5 py-3 backdrop-blur sm:px-6">
-                  <div>
-                    <p className="text-sm font-bold">{progressLabel}</p>
-                    <p className="mt-1 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
-                      {openCount} matchup{openCount === 1 ? "" : "s"} still open
-                    </p>
-                  </div>
-                  {loading ? (
+                  {lookupState === "loading" || lookupState === "idle" ? (
+                    <div aria-hidden="true">
+                      <Skeleton className="h-4 w-56 max-w-full" />
+                      <Skeleton className="mt-2 h-2.5 w-32" />
+                    </div>
+                  ) : lookupState === "error" ? (
+                    <div>
+                      <p className="text-sm font-bold">
+                        Pick status unavailable
+                      </p>
+                      <p className="mt-1 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
+                        Retry to check your fight card
+                      </p>
+                    </div>
+                  ) : (
+                    <div>
+                      <p className="text-sm font-bold">{progressLabel}</p>
+                      <p className="mt-1 font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
+                        {openCount} matchup{openCount === 1 ? "" : "s"} still
+                        open
+                      </p>
+                    </div>
+                  )}
+                  {lookupState === "loading" || lookupState === "idle" ? (
                     <span className="inline-flex items-center gap-2 text-xs text-fl-text-muted">
-                      <LoaderCircle className="animate-spin" size={15} />{" "}
-                      Loading your picks
+                      <LoaderCircle
+                        aria-hidden="true"
+                        className="animate-spin"
+                        size={15}
+                      />{" "}
+                      Checking your picks
                     </span>
                   ) : null}
                 </div>
 
                 {error ? (
-                  <p
-                    className="mx-5 mt-4 rounded-xl border border-fl-danger/30 bg-fl-danger/10 p-4 text-sm text-fl-danger sm:mx-6"
+                  <div
+                    className="mx-5 mt-4 flex flex-wrap items-center justify-between gap-3 rounded-xl border border-fl-danger/30 bg-fl-danger/10 p-4 text-sm text-fl-danger sm:mx-6"
                     role="alert"
                   >
-                    {error}
-                  </p>
+                    <p>{error}</p>
+                    {lookupState === "error" ? (
+                      <button
+                        className="focus-ring min-h-9 rounded-lg border border-fl-danger/35 px-3 text-xs font-bold transition hover:bg-fl-danger/10"
+                        onClick={() => void loadPredictions()}
+                        type="button"
+                      >
+                        Try again
+                      </button>
+                    ) : null}
+                  </div>
                 ) : null}
 
-                <div className="divide-y divide-fl-border">
+                <div
+                  aria-busy={
+                    lookupState === "loading" || lookupState === "idle"
+                  }
+                  className="divide-y divide-fl-border"
+                >
                   {fights.map((fight) => {
                     const saved = savedByFight[fight.id];
                     const draft = drafts[fight.id] ?? emptyDraft();
@@ -438,7 +497,15 @@ export function EventPredictionModal({
                               {fight.fighterB.name.full}
                             </h3>
                           </div>
-                          {saved ? (
+                          {lookupState === "loading" ||
+                          lookupState === "idle" ? (
+                            <Skeleton className="h-11 w-40 max-w-full shrink-0 self-start lg:self-auto" />
+                          ) : lookupState === "error" ? (
+                            <span className="inline-flex min-h-11 shrink-0 items-center gap-2 self-start rounded-lg border border-fl-border bg-fl-surface-2 px-3 text-xs font-bold text-fl-text-muted lg:self-auto">
+                              <AlertCircle aria-hidden="true" size={15} />{" "}
+                              Status unavailable
+                            </span>
+                          ) : saved ? (
                             <span
                               className="inline-flex max-w-full shrink-0 items-center gap-2 self-start rounded-full border border-fl-success/30 bg-fl-success/8 px-3 py-2 text-left text-xs leading-5 font-bold text-fl-text lg:self-auto"
                               title={`Locked prediction: ${lockedPredictionLabel({ fight, saved })}`}
