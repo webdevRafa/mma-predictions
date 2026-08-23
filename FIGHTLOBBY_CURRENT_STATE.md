@@ -122,6 +122,8 @@ against the event lifecycle rules.
 - Event boards rank every prediction participant without a graded-pick floor;
   `/leaderboards` defaults to the latest admin-completed event and provides a
   completed-event history selector.
+- Season accuracy currently ranks every member with a graded pick by raw winner
+  accuracy and has no participation floor.
 - Manual **Mark event complete** plus automatic six-hour live-display safety
   buffer.
 - Admin completion controls disclose how many fight results are not final.

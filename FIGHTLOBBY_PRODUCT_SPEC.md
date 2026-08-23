@@ -188,8 +188,8 @@ When an administrator submits a fight result:
   `completed` by an administrator.
 - **By event** lets members browse every completed event board. Scheduled or live
   events never replace the default completed-event standings.
-- Season accuracy remains a separate volume-sensitive board and may enforce its
-  documented statistical minimum.
+- Season accuracy currently ranks every member with at least one graded pick.
+  A participation floor may be introduced later when the community is larger.
 
 ## Persistent matchup posts
 

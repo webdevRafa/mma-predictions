@@ -1,6 +1,5 @@
 import {
   LEADERBOARD_CALCULATION_VERSION,
-  SEASON_ACCURACY_MINIMUM_PICKS,
   rankAccuracyBoard,
   rankEventBoard,
   rankPointsBoard,
@@ -261,7 +260,7 @@ export async function rebuildSeasonLeaderboards(
         type: "season_accuracy",
         label: `${seasonId} Season · Accuracy`,
         seasonId,
-        minimumPicks: SEASON_ACCURACY_MINIMUM_PICKS,
+        minimumPicks: 0,
       },
       accuracy,
       profiles,

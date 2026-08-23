@@ -69,6 +69,7 @@ async function main() {
       throw new Error(`Event slug ${eventSelector} is not unique`);
     }
     const eventId = eventSnapshot.id;
+    const event = record(eventSnapshot.data());
     const eventBoardRef = firestore
       .collection("leaderboards")
       .doc(`event_${eventId}`);
@@ -89,6 +90,29 @@ async function main() {
       eventBoardRef.get(),
       eventBoardRef.collection("entries").get(),
     ]);
+    const predictionSeasonIds = [
+      ...new Set(
+        predictionsSnapshot.docs.flatMap((prediction) => {
+          const seasonId = record(prediction.data()).seasonId;
+          return typeof seasonId === "string" ? [seasonId] : [];
+        }),
+      ),
+    ];
+    const seasonId =
+      typeof event.seasonId === "string"
+        ? event.seasonId
+        : predictionSeasonIds.length === 1
+          ? predictionSeasonIds[0]
+          : undefined;
+    const seasonAccuracyBoardRef = seasonId
+      ? firestore.collection("leaderboards").doc(`season_${seasonId}_accuracy`)
+      : undefined;
+    const [seasonAccuracyBoardSnapshot, seasonAccuracyEntriesSnapshot] =
+      await Promise.all([
+        seasonAccuracyBoardRef?.get() ?? Promise.resolve(undefined),
+        seasonAccuracyBoardRef?.collection("entries").get() ??
+          Promise.resolve(undefined),
+      ]);
 
     const fightIds = new Set(fightsSnapshot.docs.map((fight) => fight.id));
     const jobs = jobsSnapshot.docs.filter((job) => {
@@ -264,7 +288,6 @@ async function main() {
       },
     );
 
-    const event = record(eventSnapshot.data());
     const eventSummary = record(event.predictionSummary);
     const eventBoard = record(eventBoardSnapshot.data());
     const report = {
@@ -310,6 +333,18 @@ async function main() {
           0,
         ),
       },
+      ...(seasonId
+        ? {
+            seasonAccuracyLeaderboard: {
+              seasonId,
+              exists: seasonAccuracyBoardSnapshot?.exists === true,
+              minimumPicks: numberValue(
+                seasonAccuracyBoardSnapshot?.get("minimumPicks"),
+              ),
+              entries: seasonAccuracyEntriesSnapshot?.size ?? 0,
+            },
+          }
+        : {}),
       profileSummary,
       fights: fightRows,
     };

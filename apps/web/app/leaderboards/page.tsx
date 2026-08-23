@@ -1,28 +1,25 @@
 import type { Metadata } from "next";
-import { Award, Flame, Medal, ShieldCheck, Target, Trophy } from "lucide-react";
+import { Award, Flame, Medal, Trophy } from "lucide-react";
 import Link from "next/link";
 
 import { EventBoardSelect } from "@/components/leaderboards/event-board-select";
-import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
 import { listLeaderboards } from "@/lib/data/leaderboards";
 import { percentage } from "@/lib/format";
 
 export const metadata: Metadata = {
-  title: "UFC Prediction Leaderboards",
+  title: "Leaderboards",
   description:
     "FightLobby UFC prediction rankings for points, winner accuracy, exact reads, and active streaks.",
   alternates: { canonical: "/leaderboards" },
 };
 
-const boardDescriptions = {
+const boardDescriptions: Partial<
+  Record<"event" | "season_points" | "season_accuracy" | "streak", string>
+> = {
   event:
     "Final event standings for every member who made at least one prediction.",
-  season_points:
-    "Participation, correct winners, and exact reads across the season.",
-  season_accuracy:
-    "Sustained winner accuracy ranked by the 95% Wilson lower bound.",
   streak: "Consecutive correct winner calls; void fights never break a run.",
 };
 
@@ -67,23 +64,10 @@ export default async function LeaderboardsPage({
           aria-hidden="true"
           className="arena-grid absolute inset-0 opacity-40"
         />
-        <div className="shell relative py-12 sm:py-16">
-          <Badge tone="accent">Receipts, ranked</Badge>
-          <h1 className="mt-5 max-w-4xl font-display text-6xl font-extrabold sm:text-8xl">
-            UFC PREDICTION LEADERBOARDS
+        <div className="shell relative py-10 sm:py-12">
+          <h1 className="max-w-4xl font-display text-5xl font-extrabold sm:text-6xl">
+            LEADERBOARDS
           </h1>
-          <p className="mt-5 max-w-2xl text-base leading-7 text-fl-text-muted">
-            Points reward complete reads. Accuracy requires volume. Every board
-            uses deterministic server-side tie breaks.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3 text-xs text-fl-text-muted">
-            <span className="inline-flex items-center gap-2 rounded-full border border-fl-border bg-fl-surface-1 px-3 py-2">
-              <ShieldCheck aria-hidden="true" size={14} /> Server graded
-            </span>
-            <span className="inline-flex items-center gap-2 rounded-full border border-fl-border bg-fl-surface-1 px-3 py-2">
-              <Target aria-hidden="true" size={14} /> No wagering
-            </span>
-          </div>
         </div>
       </section>
 
@@ -116,29 +100,26 @@ export default async function LeaderboardsPage({
 
         {active ? (
           <>
-            <div className="mt-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+            <div className="mt-8">
               <div>
-                <p className="eyebrow">
-                  {active.type === "event"
-                    ? active.id === latestEventBoard?.id
+                {active.type === "event" ? (
+                  <p className="eyebrow">
+                    {active.id === latestEventBoard?.id
                       ? "Last completed event"
-                      : "Event standings"
-                    : "Active board"}
-                </p>
-                <h2 className="mt-2 font-display text-4xl font-bold sm:text-5xl">
+                      : "Event standings"}
+                  </p>
+                ) : null}
+                <h2
+                  className={`${active.type === "event" ? "mt-2" : ""} font-display text-4xl font-bold sm:text-5xl`}
+                >
                   {active.label}
                 </h2>
-                <p className="mt-2 max-w-2xl text-sm leading-6 text-fl-text-muted">
-                  {boardDescriptions[active.type]}
-                </p>
+                {boardDescriptions[active.type] ? (
+                  <p className="mt-2 max-w-2xl text-sm leading-6 text-fl-text-muted">
+                    {boardDescriptions[active.type]}
+                  </p>
+                ) : null}
               </div>
-              <p className="font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
-                {active.type === "event"
-                  ? "Every participant included"
-                  : active.type === "season_accuracy"
-                    ? `Minimum ${active.minimumPicks} graded picks`
-                    : "All graded members"}
-              </p>
             </div>
 
             <Card className="mt-7 overflow-hidden">
@@ -294,12 +275,6 @@ export default async function LeaderboardsPage({
                             )}
                             %
                           </span>
-                          {active.type === "season_accuracy" &&
-                          entry.wilsonScore !== undefined ? (
-                            <span className="mt-1 block font-mono text-[9px] text-fl-text-dim">
-                              W {entry.wilsonScore.toFixed(3)}
-                            </span>
-                          ) : null}
                         </td>
                         <td className="px-5 py-4 text-right font-semibold">
                           {entry.exactPicks}

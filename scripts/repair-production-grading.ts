@@ -6,7 +6,10 @@ import {
 import { FieldValue, getFirestore, Timestamp } from "firebase-admin/firestore";
 
 import { gradeFightPredictionsCore } from "../apps/functions/src/grading/grade-fight-predictions.ts";
-import { rebuildEventLeaderboard } from "../apps/functions/src/grading/leaderboard-builders.ts";
+import {
+  rebuildEventLeaderboard,
+  rebuildSeasonLeaderboards,
+} from "../apps/functions/src/grading/leaderboard-builders.ts";
 import { recomputeProfileAggregates } from "../apps/functions/src/grading/profile-aggregates.ts";
 import { refreshPredictionAggregateCore } from "../apps/functions/src/predictions/refresh-prediction-aggregates.ts";
 
@@ -67,6 +70,7 @@ async function main() {
     }
 
     const eventId = eventSnapshot.id;
+    const event = record(eventSnapshot.data());
     const [fightsSnapshot, predictionsSnapshot, jobsSnapshot] =
       await Promise.all([
         firestore
@@ -80,6 +84,23 @@ async function main() {
           .get(),
         firestore.collection("adminJobs").get(),
       ]);
+    const predictionSeasonIds = [
+      ...new Set(
+        predictionsSnapshot.docs.flatMap((prediction) => {
+          const seasonId = record(prediction.data()).seasonId;
+          return typeof seasonId === "string" ? [seasonId] : [];
+        }),
+      ),
+    ];
+    if (predictionSeasonIds.length > 1) {
+      throw new Error(
+        `Refusing to repair event ${eventId} with predictions from multiple seasons`,
+      );
+    }
+    const seasonId =
+      typeof event.seasonId === "string"
+        ? event.seasonId
+        : predictionSeasonIds[0];
     const fightIds = new Set(fightsSnapshot.docs.map((fight) => fight.id));
     const currentResultVersions = new Map(
       fightsSnapshot.docs.map((fight) => [
@@ -239,10 +260,16 @@ async function main() {
       { merge: true },
     );
     const eventBoard = await rebuildEventLeaderboard(firestore, eventId);
+    const seasonBoards = seasonId
+      ? await rebuildSeasonLeaderboards(firestore, seasonId)
+      : undefined;
     await Promise.all(
-      [...eventBoard.achievementUids].map((uid) =>
-        recomputeProfileAggregates(firestore, uid),
-      ),
+      [
+        ...new Set([
+          ...eventBoard.achievementUids,
+          ...(seasonBoards?.achievementUids ?? []),
+        ]),
+      ].map((uid) => recomputeProfileAggregates(firestore, uid)),
     );
 
     console.log(
@@ -260,6 +287,14 @@ async function main() {
             0,
           ),
           eventLeaderboardEntries: eventBoard.ranking.length,
+          ...(seasonId ? { seasonId } : {}),
+          ...(seasonBoards
+            ? {
+                seasonPointsEntries: seasonBoards.points.length,
+                seasonAccuracyEntries: seasonBoards.accuracy.length,
+                seasonStreakEntries: seasonBoards.streak.length,
+              }
+            : {}),
         },
         null,
         2,

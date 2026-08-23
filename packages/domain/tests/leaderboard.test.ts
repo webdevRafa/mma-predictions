@@ -46,13 +46,14 @@ describe("leaderboard ranking", () => {
     ]);
   });
 
-  it("filters the accuracy board and ranks by Wilson lower bound", () => {
+  it("ranks every graded participant by winner accuracy", () => {
     const board = rankAccuracyBoard(entries);
     expect(board.map((entry) => entry.uid)).toEqual([
       "perfect_small",
+      "too_small",
       "steady",
     ]);
-    expect(board.every((entry) => entry.wilsonScore !== undefined)).toBe(true);
+    expect(board.every((entry) => entry.wilsonScore === undefined)).toBe(true);
     expect(wilsonLowerBound(0, 0)).toBe(0);
   });
 

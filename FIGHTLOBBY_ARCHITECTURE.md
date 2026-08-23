@@ -219,6 +219,11 @@ boards to their event documents, excludes events not marked `completed`, and
 sorts completed event boards by event start time so the last event is the stable
 default rather than the most recently rebuilt board.
 
+The season accuracy board currently includes every member with at least one
+graded pick and ranks by raw winner accuracy, then graded-pick volume, points,
+exact picks, and UID. Its stored `minimumPicks` is zero until a future product
+decision introduces a participation threshold.
+
 Marking the event complete is separate. It ends the event's live state and starts chat-close/retention timing; it does not invent results or grade unfinalized fights.
 
 ### Discussions and live chat

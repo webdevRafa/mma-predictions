@@ -355,7 +355,19 @@ The public leaderboard defaults to the newest admin-completed event and exposes
 other completed events through one **By event** selector.
 
 **Reason:** Event standings are a record of that event's community, especially
-when a launch has a small group or members join during the card. Volume-based
-eligibility remains appropriate for the season accuracy board, but applying it
-to an event points board can hide every real participant and make valid grading
-look broken.
+when a launch has a small group or members join during the card. Applying a
+volume threshold can hide every real participant and make valid grading look
+broken.
+
+## Decision 39 — Early season accuracy includes every graded member
+
+**Decision:** The season accuracy board has no participation floor while the
+community is small. Every member with at least one graded pick is ranked by raw
+winner accuracy, followed by deterministic volume, points, exact-pick, and UID
+tie breaks. A statistical eligibility rule may be introduced later as a
+separate product decision.
+
+**Reason:** A 20-pick threshold produced an empty launch leaderboard and exposed
+statistical language that did not help members understand their rank. Showing
+the active community now is more useful, while calculation versioning preserves
+a clean path to change the model later.

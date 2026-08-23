@@ -1,5 +1,4 @@
-export const LEADERBOARD_CALCULATION_VERSION = 2;
-export const SEASON_ACCURACY_MINIMUM_PICKS = 20;
+export const LEADERBOARD_CALCULATION_VERSION = 3;
 
 export interface RankingMetrics {
   uid: string;
@@ -66,22 +65,16 @@ export function rankEventBoard(entries: RankingMetrics[]) {
   };
 }
 
-export function rankAccuracyBoard(
-  entries: RankingMetrics[],
-  minimumPicks = SEASON_ACCURACY_MINIMUM_PICKS,
-): RankedMetrics[] {
+export function rankAccuracyBoard(entries: RankingMetrics[]): RankedMetrics[] {
   return ranked(
-    entries.filter((entry) => entry.gradedPicks >= minimumPicks),
+    entries.filter((entry) => entry.gradedPicks > 0),
     (left, right) =>
-      wilsonLowerBound(right.correctWinners, right.gradedPicks) -
-        wilsonLowerBound(left.correctWinners, left.gradedPicks) ||
       accuracy(right) - accuracy(left) ||
       right.gradedPicks - left.gradedPicks ||
+      right.totalPoints - left.totalPoints ||
+      right.exactPicks - left.exactPicks ||
       left.uid.localeCompare(right.uid),
-  ).map((entry) => ({
-    ...entry,
-    wilsonScore: wilsonLowerBound(entry.correctWinners, entry.gradedPicks),
-  }));
+  );
 }
 
 export function rankStreakBoard(entries: RankingMetrics[]): RankedMetrics[] {
