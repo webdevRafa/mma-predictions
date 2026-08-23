@@ -334,6 +334,11 @@ After each result:
 - event-board entries reflect the new graded fight;
 - no `adminJobs` or grading run remains failed.
 
+The event board must list every member with at least one event prediction. It
+does not enforce the season accuracy board's volume minimum. On
+`/leaderboards`, confirm **Last event** resolves to the newest event whose admin
+status is `completed`, and confirm **By event** contains only completed events.
+
 ### 9.6 Reconcile a stalled grading pipeline
 
 The result workflow depends on two deployed operational workers:

@@ -6,6 +6,8 @@ import {
 import { FieldValue, getFirestore, Timestamp } from "firebase-admin/firestore";
 
 import { gradeFightPredictionsCore } from "../apps/functions/src/grading/grade-fight-predictions.ts";
+import { rebuildEventLeaderboard } from "../apps/functions/src/grading/leaderboard-builders.ts";
+import { recomputeProfileAggregates } from "../apps/functions/src/grading/profile-aggregates.ts";
 import { refreshPredictionAggregateCore } from "../apps/functions/src/predictions/refresh-prediction-aggregates.ts";
 
 const PRODUCTION_PROJECT_ID = "mma-cortex";
@@ -236,6 +238,12 @@ async function main() {
       },
       { merge: true },
     );
+    const eventBoard = await rebuildEventLeaderboard(firestore, eventId);
+    await Promise.all(
+      [...eventBoard.achievementUids].map((uid) =>
+        recomputeProfileAggregates(firestore, uid),
+      ),
+    );
 
     console.log(
       JSON.stringify(
@@ -251,6 +259,7 @@ async function main() {
             (total, job) => total + job.awardedPoints,
             0,
           ),
+          eventLeaderboardEntries: eventBoard.ranking.length,
         },
         null,
         2,

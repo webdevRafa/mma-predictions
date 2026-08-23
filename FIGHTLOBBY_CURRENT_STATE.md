@@ -119,6 +119,9 @@ against the event lifecycle rules.
 - Quick result dropdown on every event matchup row plus detailed result editor.
 - Result versions and idempotent regrading.
 - Prediction grades, profile aggregates, event/season boards, and achievements.
+- Event boards rank every prediction participant without a graded-pick floor;
+  `/leaderboards` defaults to the latest admin-completed event and provides a
+  completed-event history selector.
 - Manual **Mark event complete** plus automatic six-hour live-display safety
   buffer.
 - Admin completion controls disclose how many fight results are not final.
@@ -149,11 +152,12 @@ against the event lifecycle rules.
 5. Reopening accepts new users only; it does not unlock existing predictions.
 6. Submitting a fight result grades that fight.
 7. Marking an event complete does not grade fights.
-8. Persistent posts and live chat remain separate collections and experiences.
-9. Public prediction badges include fighter last name and method only, not round
-   or decision detail.
-10. Times are stored as UTC and displayed in the browser's local timezone.
-11. Card movement changes `cardSegment`/`boutOrder`, never an existing fight ID
+8. Event standings include every member who predicted on that event.
+9. Persistent posts and live chat remain separate collections and experiences.
+10. Public prediction badges include fighter last name and method only, not round
+    or decision detail.
+11. Times are stored as UTC and displayed in the browser's local timezone.
+12. Card movement changes `cardSegment`/`boutOrder`, never an existing fight ID
     or either participant ID; prediction linkage must survive every reorder.
 
 ## 5. Known limitations and intentional omissions

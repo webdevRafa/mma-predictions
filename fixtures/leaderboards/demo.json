@@ -5,7 +5,6 @@
     "label": "UFC FightLobby Demo"
   },
   "season": { "id": "2026", "label": "2026 Season" },
-  "gradedEventFights": 5,
   "members": [
     {
       "uid": "demo_member_01",

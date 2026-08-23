@@ -69,19 +69,26 @@ async function main() {
       throw new Error(`Event slug ${eventSelector} is not unique`);
     }
     const eventId = eventSnapshot.id;
-    const [fightsSnapshot, predictionsSnapshot, jobsSnapshot] =
-      await Promise.all([
-        firestore
-          .collection("fights")
-          .where("eventId", "==", eventId)
-          .orderBy("boutOrder")
-          .get(),
-        firestore
-          .collection("predictions")
-          .where("eventId", "==", eventId)
-          .get(),
-        firestore.collection("adminJobs").get(),
-      ]);
+    const eventBoardRef = firestore
+      .collection("leaderboards")
+      .doc(`event_${eventId}`);
+    const [
+      fightsSnapshot,
+      predictionsSnapshot,
+      jobsSnapshot,
+      eventBoardSnapshot,
+      eventBoardEntriesSnapshot,
+    ] = await Promise.all([
+      firestore
+        .collection("fights")
+        .where("eventId", "==", eventId)
+        .orderBy("boutOrder")
+        .get(),
+      firestore.collection("predictions").where("eventId", "==", eventId).get(),
+      firestore.collection("adminJobs").get(),
+      eventBoardRef.get(),
+      eventBoardRef.collection("entries").get(),
+    ]);
 
     const fightIds = new Set(fightsSnapshot.docs.map((fight) => fight.id));
     const jobs = jobsSnapshot.docs.filter((job) => {
@@ -259,6 +266,7 @@ async function main() {
 
     const event = record(eventSnapshot.data());
     const eventSummary = record(event.predictionSummary);
+    const eventBoard = record(eventBoardSnapshot.data());
     const report = {
       projectId,
       eventId,
@@ -288,6 +296,19 @@ async function main() {
         failed: gradingRunsSnapshot.docs.filter(
           (run) => run.get("status") === "failed",
         ).length,
+      },
+      eventLeaderboard: {
+        exists: eventBoardSnapshot.exists,
+        minimumPicks: numberValue(eventBoard.minimumPicks),
+        entries: eventBoardEntriesSnapshot.size,
+        gradedPicks: eventBoardEntriesSnapshot.docs.reduce(
+          (total, entry) => total + numberValue(entry.get("gradedPicks")),
+          0,
+        ),
+        points: eventBoardEntriesSnapshot.docs.reduce(
+          (total, entry) => total + numberValue(entry.get("totalPoints")),
+          0,
+        ),
       },
       profileSummary,
       fights: fightRows,

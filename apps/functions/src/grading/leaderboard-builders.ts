@@ -28,6 +28,7 @@ async function predictionMetrics(
   firestore: Firestore,
   field: "eventId" | "seasonId",
   value: string,
+  options: { includeUngradedParticipants?: boolean } = {},
 ) {
   const snapshot = await firestore
     .collection("predictions")
@@ -37,9 +38,7 @@ async function predictionMetrics(
   for (const document of snapshot.docs) {
     const raw: unknown = document.data();
     const prediction = record(raw);
-    if (prediction.status !== "graded" || typeof prediction.uid !== "string")
-      continue;
-    const grade = record(prediction.grade);
+    if (typeof prediction.uid !== "string") continue;
     const current = byUser.get(prediction.uid) ?? {
       uid: prediction.uid,
       gradedPicks: 0,
@@ -48,6 +47,13 @@ async function predictionMetrics(
       exactPicks: 0,
       currentStreak: 0,
     };
+    if (prediction.status !== "graded") {
+      if (options.includeUngradedParticipants) {
+        byUser.set(prediction.uid, current);
+      }
+      continue;
+    }
+    const grade = record(prediction.grade);
     current.gradedPicks += 1;
     current.correctWinners += grade.winnerCorrect === true ? 1 : 0;
     current.totalPoints += numberValue(grade.points);
@@ -104,6 +110,8 @@ async function writeBoard(
     eventId?: string;
     seasonId?: string;
     championUid?: string | null;
+    startsAt?: unknown;
+    endsAt?: unknown;
   },
   ranking: RankedMetrics[],
   profiles: DocumentSnapshot[],
@@ -157,15 +165,13 @@ export async function rebuildEventLeaderboard(
   firestore: Firestore,
   eventId: string,
 ) {
-  const [{ byUser }, eventSnapshot, fightsSnapshot] = await Promise.all([
-    predictionMetrics(firestore, "eventId", eventId),
+  const [{ byUser }, eventSnapshot] = await Promise.all([
+    predictionMetrics(firestore, "eventId", eventId, {
+      includeUngradedParticipants: true,
+    }),
     firestore.collection("events").doc(eventId).get(),
-    firestore.collection("fights").where("eventId", "==", eventId).get(),
   ]);
-  const gradedFightCount = fightsSnapshot.docs.filter(
-    (fight) => fight.get("predictionStatus") === "graded",
-  ).length;
-  const ranking = rankEventBoard([...byUser.values()], gradedFightCount);
+  const ranking = rankEventBoard([...byUser.values()]);
   const profiles = await profileSnapshots(
     firestore,
     ranking.entries.map((entry) => entry.uid),
@@ -173,7 +179,7 @@ export async function rebuildEventLeaderboard(
   const eventRaw: unknown = eventSnapshot.data();
   const event = record(eventRaw);
   const label =
-    typeof event.shortName === "string" ? event.shortName : "Current event";
+    typeof event.shortName === "string" ? event.shortName : "Event standings";
   const boardId = `event_${eventId}`;
   const previousBoard = await firestore
     .collection("leaderboards")
@@ -192,6 +198,8 @@ export async function rebuildEventLeaderboard(
       eventId,
       minimumPicks: ranking.minimumPicks,
       championUid: championUid ?? null,
+      ...(event.startsAt !== undefined ? { startsAt: event.startsAt } : {}),
+      ...(event.completedAt !== undefined ? { endsAt: event.completedAt } : {}),
     },
     ranking.entries,
     profiles,

@@ -45,7 +45,7 @@ export class FixtureLeaderboardRepository implements LeaderboardRepository {
       uid: member.uid,
       ...member.season,
     }));
-    const event = rankEventBoard(eventMetrics, fixture.gradedEventFights);
+    const event = rankEventBoard(eventMetrics);
     const shared = {
       calculationVersion: LEADERBOARD_CALCULATION_VERSION,
       lastBuiltAt: fixture.generatedAt,

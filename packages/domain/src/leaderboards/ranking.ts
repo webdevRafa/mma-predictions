@@ -1,4 +1,4 @@
-export const LEADERBOARD_CALCULATION_VERSION = 1;
+export const LEADERBOARD_CALCULATION_VERSION = 2;
 export const SEASON_ACCURACY_MINIMUM_PICKS = 20;
 
 export interface RankingMetrics {
@@ -59,16 +59,10 @@ export function rankPointsBoard(entries: RankingMetrics[]): RankedMetrics[] {
   );
 }
 
-export function rankEventBoard(
-  entries: RankingMetrics[],
-  gradedFightCount: number,
-) {
-  const minimumPicks = Math.ceil(gradedFightCount * 0.7);
+export function rankEventBoard(entries: RankingMetrics[]) {
   return {
-    minimumPicks,
-    entries: rankPointsBoard(
-      entries.filter((entry) => entry.gradedPicks >= minimumPicks),
-    ),
+    minimumPicks: 0,
+    entries: rankPointsBoard(entries),
   };
 }
 

@@ -27,7 +27,8 @@ the profile total equal to the sum of current graded prediction documents.
 
 The public boards are:
 
-- Event: points from members who predicted at least 70% of the event's graded fights.
+- Event: points from every member who made at least one prediction on the event;
+  void-only participation remains visible with zero graded picks.
 - Season points: total points, then deterministic scoring tie breaks.
 - Season accuracy: minimum 20 graded picks, ranked by the 95% Wilson lower bound.
 - Streak: current correct-winner streak, with voids ignored.

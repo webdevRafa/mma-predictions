@@ -346,3 +346,16 @@ worker outage, but visible results do not prove that grades, profiles,
 leaderboards, or row counters were materialized. Keeping durable jobs preserves
 the source data, while explicit worker verification and guarded reconciliation
 make recovery deterministic without editing points by hand.
+
+## Decision 38 — Event standings rank every participant
+
+**Decision:** An event board includes every member who submitted at least one
+prediction for that event. It has no graded-pick or card-participation floor.
+The public leaderboard defaults to the newest admin-completed event and exposes
+other completed events through one **By event** selector.
+
+**Reason:** Event standings are a record of that event's community, especially
+when a launch has a small group or members join during the card. Volume-based
+eligibility remains appropriate for the season accuracy board, but applying it
+to an event points board can hide every real participant and make valid grading
+look broken.

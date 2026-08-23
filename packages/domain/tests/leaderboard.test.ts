@@ -56,10 +56,25 @@ describe("leaderboard ranking", () => {
     expect(wilsonLowerBound(0, 0)).toBe(0);
   });
 
-  it("requires picks for at least 70 percent of graded event fights", () => {
-    const board = rankEventBoard(entries, 10);
-    expect(board.minimumPicks).toBe(7);
-    expect(board.entries.map((entry) => entry.uid)).not.toContain("too_small");
+  it("ranks every event participant without a graded-pick floor", () => {
+    const board = rankEventBoard([
+      ...entries,
+      {
+        uid: "void_only",
+        gradedPicks: 0,
+        correctWinners: 0,
+        totalPoints: 0,
+        exactPicks: 0,
+        currentStreak: 0,
+      },
+    ]);
+    expect(board.minimumPicks).toBe(0);
+    expect(board.entries.map((entry) => entry.uid)).toEqual([
+      "steady",
+      "perfect_small",
+      "too_small",
+      "void_only",
+    ]);
   });
 });
 
