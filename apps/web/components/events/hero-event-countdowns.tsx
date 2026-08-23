@@ -31,11 +31,11 @@ export function HeroEventCountdowns({
           className={`flex min-h-28 items-center justify-between gap-6 py-7 sm:min-h-32 sm:py-8 ${index > 0 ? "border-t border-fl-border" : ""}`}
           key={row.label}
         >
-          <span className="font-mono text-[10px] font-semibold tracking-[0.14em] text-fl-text-dim uppercase sm:text-xs">
+          <span className="font-mono text-[10px] font-medium tracking-[0.14em] text-fl-text-dim uppercase sm:text-xs">
             {row.label}
           </span>
           <time
-            className="text-right font-display text-[clamp(2rem,4vw,3.5rem)] leading-none font-extrabold tracking-[-0.025em] text-fl-text"
+            className="text-right font-display text-[clamp(1.75rem,3vw,2.75rem)] leading-none font-semibold tracking-[-0.015em] text-fl-text/90"
             dateTime={row.dateTime}
           >
             {row.value}

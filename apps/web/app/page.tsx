@@ -53,12 +53,12 @@ export default async function HomePage() {
         />
         <div className="shell relative grid gap-14 py-14 lg:min-h-[44rem] lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:gap-20 lg:py-20">
           <div className="max-w-3xl">
-            <h1 className="font-display text-[clamp(3.5rem,6vw,6.5rem)] leading-[0.84] font-extrabold tracking-[-0.04em] text-balance">
+            <h1 className="font-display text-[clamp(3rem,4.5vw,5.25rem)] leading-[0.9] font-bold tracking-[-0.035em] text-fl-text text-balance">
               {eventTitlePrefix ? (
                 eventTitleMatchup ? (
                   <>
                     {eventTitlePrefix}:
-                    <span className="mt-2 block text-fl-accent">
+                    <span className="mt-2 block font-semibold text-fl-text/90">
                       {eventTitleMatchup}
                     </span>
                   </>
@@ -68,7 +68,9 @@ export default async function HomePage() {
               ) : (
                 <>
                   UPCOMING
-                  <span className="block text-fl-accent">UFC EVENTS</span>
+                  <span className="block font-semibold text-fl-text/90">
+                    UFC EVENTS
+                  </span>
                 </>
               )}
             </h1>
