@@ -2,7 +2,7 @@
 
 import { BarChart3, ChevronDown, Clock3, Target, Trophy } from "lucide-react";
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -14,6 +14,63 @@ import type {
 } from "./prediction-history-types";
 
 const ALL_EVENTS = "all";
+const MOBILE_HEADER_HEIGHT = 64;
+const SCROLL_DIRECTION_THRESHOLD = 8;
+
+function EventFilter({
+  compact = false,
+  eventId,
+  events,
+  onChange,
+}: {
+  compact?: boolean;
+  eventId: string;
+  events: PredictionHistory["events"];
+  onChange: (eventId: string) => void;
+}) {
+  return (
+    <label
+      className={cn(
+        "min-w-0",
+        compact
+          ? "grid grid-cols-[auto_minmax(0,1fr)] items-center gap-3"
+          : "block sm:w-72",
+      )}
+    >
+      <span
+        className={cn(
+          "block font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase",
+          compact ? "whitespace-nowrap" : "mb-2",
+        )}
+      >
+        By event
+      </span>
+      <span className="relative block min-w-0">
+        <select
+          aria-label="Filter predictions by event"
+          className={cn(
+            "focus-ring w-full appearance-none rounded-lg border border-fl-border bg-fl-surface-2 px-4 pr-11 text-sm font-bold text-fl-text transition hover:border-fl-text-muted",
+            compact ? "h-11" : "h-12",
+          )}
+          onChange={(event) => onChange(event.target.value)}
+          value={eventId}
+        >
+          <option value={ALL_EVENTS}>All events</option>
+          {events.map((event) => (
+            <option key={event.id} value={event.id}>
+              {event.shortName}
+            </option>
+          ))}
+        </select>
+        <ChevronDown
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-fl-text-dim"
+          size={16}
+        />
+      </span>
+    </label>
+  );
+}
 
 function pickDetail(entry: PredictionHistoryEntry) {
   const method = {
@@ -214,6 +271,9 @@ export function PredictionHistoryPanel({
   owner?: boolean;
 }) {
   const [eventId, setEventId] = useState(ALL_EVENTS);
+  const [mobileFilterVisible, setMobileFilterVisible] = useState(true);
+  const mobileFilterRef = useRef<HTMLDivElement>(null);
+  const mobileFilterSentinelRef = useRef<HTMLDivElement>(null);
   const entries = useMemo(
     () =>
       eventId === ALL_EVENTS
@@ -232,8 +292,76 @@ export function PredictionHistoryPanel({
     { icon: Target, label: "Winner accuracy", value: `${summary.accuracy}%` },
   ];
 
+  useEffect(() => {
+    if (history.events.length === 0) return;
+
+    const mobileQuery = window.matchMedia("(max-width: 639px)");
+    const reducedMotionQuery = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    let lastScrollY = window.scrollY;
+    let frameId: number | undefined;
+
+    const showFilter = (visible: boolean) => {
+      setMobileFilterVisible((current) =>
+        current === visible ? current : visible,
+      );
+    };
+    const updateFilter = () => {
+      frameId = undefined;
+      const currentScrollY = window.scrollY;
+      const scrollDelta = currentScrollY - lastScrollY;
+      const sentinel = mobileFilterSentinelRef.current;
+      const filterHasFocus = mobileFilterRef.current?.contains(
+        document.activeElement,
+      );
+
+      if (!mobileQuery.matches || reducedMotionQuery.matches || !sentinel) {
+        showFilter(true);
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      const filterHasReachedHeader =
+        sentinel.getBoundingClientRect().top <= MOBILE_HEADER_HEIGHT;
+
+      if (!filterHasReachedHeader || filterHasFocus) {
+        showFilter(true);
+        lastScrollY = currentScrollY;
+        return;
+      }
+
+      if (scrollDelta >= SCROLL_DIRECTION_THRESHOLD) {
+        showFilter(false);
+        lastScrollY = currentScrollY;
+      } else if (scrollDelta <= -SCROLL_DIRECTION_THRESHOLD) {
+        showFilter(true);
+        lastScrollY = currentScrollY;
+      }
+    };
+    const handleScroll = () => {
+      if (frameId !== undefined) return;
+      frameId = window.requestAnimationFrame(updateFilter);
+    };
+    const handlePreferenceChange = () => {
+      lastScrollY = window.scrollY;
+      showFilter(true);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    mobileQuery.addEventListener("change", handlePreferenceChange);
+    reducedMotionQuery.addEventListener("change", handlePreferenceChange);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      mobileQuery.removeEventListener("change", handlePreferenceChange);
+      reducedMotionQuery.removeEventListener("change", handlePreferenceChange);
+      if (frameId !== undefined) window.cancelAnimationFrame(frameId);
+    };
+  }, [history.events.length]);
+
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-visible sm:overflow-hidden">
       <CardHeader
         eyebrow="Prediction record"
         title={owner ? "Your predictions" : "Prediction history"}
@@ -255,32 +383,42 @@ export function PredictionHistoryPanel({
           </p>
         </div>
         {history.events.length > 0 ? (
-          <label className="block min-w-0 sm:w-72">
-            <span className="mb-2 block font-mono text-[10px] tracking-[.08em] text-fl-text-dim uppercase">
-              By event
-            </span>
-            <span className="relative block">
-              <select
-                className="focus-ring h-12 w-full appearance-none rounded-lg border border-fl-border bg-fl-surface-2 px-4 pr-11 text-sm font-bold text-fl-text transition hover:border-fl-text-muted"
-                onChange={(event) => setEventId(event.target.value)}
-                value={eventId}
-              >
-                <option value={ALL_EVENTS}>All events</option>
-                {history.events.map((event) => (
-                  <option key={event.id} value={event.id}>
-                    {event.shortName}
-                  </option>
-                ))}
-              </select>
-              <ChevronDown
-                aria-hidden="true"
-                className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-fl-text-dim"
-                size={16}
-              />
-            </span>
-          </label>
+          <div className="hidden sm:block">
+            <EventFilter
+              eventId={eventId}
+              events={history.events}
+              onChange={setEventId}
+            />
+          </div>
         ) : null}
       </div>
+      {history.events.length > 0 ? (
+        <>
+          <div
+            aria-hidden="true"
+            className="h-px sm:hidden"
+            ref={mobileFilterSentinelRef}
+          />
+          <div
+            className={cn(
+              "sticky top-16 z-30 border-b border-fl-border bg-fl-surface-1/95 px-4 py-3 shadow-[0_12px_30px_rgba(0,0,0,0.28)] backdrop-blur-xl transition-[transform,opacity] duration-200 ease-out will-change-transform sm:hidden",
+              mobileFilterVisible
+                ? "translate-y-0 opacity-100"
+                : "pointer-events-none -translate-y-full opacity-0",
+            )}
+            data-mobile-event-filter
+            onFocus={() => setMobileFilterVisible(true)}
+            ref={mobileFilterRef}
+          >
+            <EventFilter
+              compact
+              eventId={eventId}
+              events={history.events}
+              onChange={setEventId}
+            />
+          </div>
+        </>
+      ) : null}
       <div className="grid grid-cols-3 gap-px border-b border-fl-border bg-fl-border">
         {stats.map(({ icon: Icon, label, value }) => (
           <div className="bg-fl-surface-1 p-4 sm:p-5" key={label}>
