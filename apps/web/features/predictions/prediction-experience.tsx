@@ -25,6 +25,7 @@ import {
   readAuthReturnContext,
   saveAuthReturnContext,
 } from "@/features/auth/auth-return-context";
+import { usePredictionScoring } from "@/features/predictions/prediction-scoring-context";
 import { cn } from "@/lib/cn";
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
 import { getFirebaseAppCheckToken } from "@/lib/firebase/client";
@@ -308,6 +309,16 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   const startedTracked = useRef(false);
   const revealTracked = useRef(false);
   const gradedTracked = useRef(false);
+  const { setState: setPredictionScoringState } = usePredictionScoring();
+
+  useEffect(() => {
+    setPredictionScoringState({
+      lookupState,
+      canSubmit,
+      hasPrediction: Boolean(saved),
+      ...(saved?.grade ? { grade: saved.grade } : {}),
+    });
+  }, [canSubmit, lookupState, saved, setPredictionScoringState]);
 
   useEffect(() => {
     const context = readAuthReturnContext();

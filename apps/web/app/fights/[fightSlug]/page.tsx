@@ -13,11 +13,12 @@ import { StatsComparison } from "@/components/fights/stats-comparison";
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Badge } from "@/components/ui/badge";
-import { ScoringExplainerCard } from "@/components/predictions/scoring-explainer-card";
 import { FightChatLauncher } from "@/features/chat/fight-chat-launcher";
 import { FightDiscussion } from "@/features/discussions/fight-discussion";
 import { TrackAnalyticsEvent } from "@/features/analytics/analytics-runtime";
+import { FightScoringCard } from "@/features/predictions/fight-scoring-card";
 import { PredictionExperience } from "@/features/predictions/prediction-experience";
+import { PredictionScoringProvider } from "@/features/predictions/prediction-scoring-context";
 import { getPublicEvent, getPublicFight } from "@/lib/data/public";
 import { resultBelongsToFighter } from "@/lib/fight-result";
 import { formatCardSegment, formatRecord } from "@/lib/format";
@@ -92,6 +93,9 @@ export default async function FightPage({ params }: Props) {
   const fighterBWon = resultBelongsToFighter(fight.result, fighterB.id);
   const noWinnerResult =
     fight.result && !fight.result.winnerFighterId ? fight.result : undefined;
+  const initiallyOpen =
+    fight.predictionStatus === "open" &&
+    ["scheduled", "prefight"].includes(fight.status);
   return (
     <main className="overflow-x-clip" id="main-content">
       <TrackAnalyticsEvent
@@ -254,32 +258,35 @@ export default async function FightPage({ params }: Props) {
         />
       </div>
 
-      <FightPageWorkspace
-        backHref={`/events/${event.slug}`}
-        backLabel={`Back to ${event.shortName}`}
-        fighterAName={fighterA.name.full}
-        fighterBName={fighterB.name.full}
-        currentFightSlug={fight.slug}
-        eventName={event.name}
-        fightOptions={fightOptions}
-        lobby={
-          <FightChatLauncher
-            fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
-            roomId={fight.chatRoomId}
-          />
-        }
-        prediction={<PredictionExperience fight={fight} key={fight.id} />}
-        stats={<StatsComparison fighterA={fighterA} fighterB={fighterB} />}
-        posts={
-          <FightDiscussion
-            fightId={fight.id}
-            fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
-          />
-        }
-        scoring={
-          <ScoringExplainerCard title="Earn up to 10 points for this match" />
-        }
-      />
+      <PredictionScoringProvider
+        initialCanSubmit={initiallyOpen}
+        key={fight.id}
+      >
+        <FightPageWorkspace
+          backHref={`/events/${event.slug}`}
+          backLabel={`Back to ${event.shortName}`}
+          fighterAName={fighterA.name.full}
+          fighterBName={fighterB.name.full}
+          currentFightSlug={fight.slug}
+          eventName={event.name}
+          fightOptions={fightOptions}
+          lobby={
+            <FightChatLauncher
+              fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
+              roomId={fight.chatRoomId}
+            />
+          }
+          prediction={<PredictionExperience fight={fight} key={fight.id} />}
+          stats={<StatsComparison fighterA={fighterA} fighterB={fighterB} />}
+          posts={
+            <FightDiscussion
+              fightId={fight.id}
+              fightLabel={`${fighterA.name.full} vs ${fighterB.name.full}`}
+            />
+          }
+          scoring={<FightScoringCard fight={fight} />}
+        />
+      </PredictionScoringProvider>
     </main>
   );
 }
