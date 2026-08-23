@@ -78,11 +78,13 @@ export default async function ModerationPage({
         <CardHeader eyebrow={`${reports.size} open`} title="Report queue" />
         <div className="divide-y divide-fl-border">
           {reports.docs.map((document) => {
-            const isDiscussionPost =
-              document.get("type") === "discussion_post";
+            const isDiscussionPost = document.get("type") === "discussion_post";
+            const isForumPost = document.get("type") === "forum_post";
             const content = record(
               document.get(
-                isDiscussionPost ? "postSnapshot" : "messageSnapshot",
+                isDiscussionPost || isForumPost
+                  ? "postSnapshot"
+                  : "messageSnapshot",
               ),
             );
             const author = record(content.author);
@@ -91,6 +93,8 @@ export default async function ModerationPage({
             const fightId = String(document.get("fightId") ?? "");
             const postId = String(document.get("postId") ?? "");
             const rootPostId = String(document.get("rootPostId") ?? "");
+            const threadId = String(document.get("threadId") ?? "");
+            const postType = String(document.get("postType") ?? "reply");
             const targetUid = String(document.get("targetUid") ?? "");
             return (
               <details className="px-5 py-4" key={document.id}>
@@ -107,7 +111,11 @@ export default async function ModerationPage({
                         {String(document.get("reason") ?? "report")}
                       </Badge>
                       <Badge tone="neutral">
-                        {isDiscussionPost ? "Matchup post" : "Live chat"}
+                        {isForumPost
+                          ? "Forum post"
+                          : isDiscussionPost
+                            ? "Matchup post"
+                            : "Live chat"}
                       </Badge>
                       <span className="text-sm font-bold">
                         @{text(author.handle, targetUid)}
@@ -144,12 +152,20 @@ export default async function ModerationPage({
                       name="action"
                       type="hidden"
                       value={
-                        isDiscussionPost
-                          ? "remove_discussion_post"
-                          : "remove_message"
+                        isForumPost
+                          ? "remove_forum_post"
+                          : isDiscussionPost
+                            ? "remove_discussion_post"
+                            : "remove_message"
                       }
                     />
-                    {isDiscussionPost ? (
+                    {isForumPost ? (
+                      <>
+                        <input name="threadId" type="hidden" value={threadId} />
+                        <input name="postId" type="hidden" value={postId} />
+                        <input name="postType" type="hidden" value={postType} />
+                      </>
+                    ) : isDiscussionPost ? (
                       <>
                         <input name="fightId" type="hidden" value={fightId} />
                         <input name="postId" type="hidden" value={postId} />
@@ -170,17 +186,20 @@ export default async function ModerationPage({
                       </>
                     )}
                     <p className="text-sm font-bold">
-                      Remove reported {isDiscussionPost ? "post" : "message"}
+                      Remove reported{" "}
+                      {isDiscussionPost || isForumPost ? "post" : "message"}
                     </p>
                     <AdminSafetyFields
                       confirmation={
-                        isDiscussionPost
-                          ? `REMOVE POST ${postId}`
-                          : `REMOVE ${messageId}`
+                        isForumPost
+                          ? `REMOVE FORUM ${postId}`
+                          : isDiscussionPost
+                            ? `REMOVE POST ${postId}`
+                            : `REMOVE ${messageId}`
                       }
                       danger
                       returnTo="/admin/moderation"
-                      submitLabel={`Remove ${isDiscussionPost ? "post" : "message"}`}
+                      submitLabel={`Remove ${isDiscussionPost || isForumPost ? "post" : "message"}`}
                     />
                   </form>
                   <div>

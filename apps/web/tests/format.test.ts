@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import {
+  formatCompactDate,
   formatEventDateCompact,
   formatEventDateWithZone,
   formatHeightMeasurement,
@@ -27,6 +28,12 @@ describe("fighter measurement formatting", () => {
 });
 
 describe("event date formatting", () => {
+  it("keeps the compact event date in the venue timezone", () => {
+    expect(
+      formatCompactDate("2026-08-23T00:00:00.000Z", "America/Los_Angeles"),
+    ).toBe("Aug 22, 2026");
+  });
+
   it("renders an event instant in the venue timezone", () => {
     expect(
       formatEventDateWithZone(

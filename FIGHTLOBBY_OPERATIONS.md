@@ -164,12 +164,19 @@ metadata, preserves protected prediction/result state where appropriate, writes
 
 ### 6.2 Guarded production scripts
 
-The repository also contains two guarded scripts:
+The repository also contains guarded scripts for distinct production workflows:
 
 ```powershell
+npx --yes pnpm@10.17.0 add:production:event -- .\imports\ufc\event.json
 npx --yes pnpm@10.17.0 import:production:event -- .\fixtures\event.json optional_legacy_event_id
 npx --yes pnpm@10.17.0 refresh:production:event -- .\fixtures\event.json
 ```
+
+`add-production-event.ts` is the recurring create-only path for a new reviewed
+card. It dry-runs without a confirmation phrase; refuses event, fight, fighter,
+and room identity collisions; writes the complete card atomically; and then
+verifies that the protected launch event and both global and launch-event
+prediction counts are unchanged.
 
 `import-production-event.ts` was intentionally written as a guarded launch
 migration. It verifies the production project/RTDB and contains overwrite and
@@ -183,9 +190,9 @@ every event prediction's winner fighter ID. It updates only changed
 `cardSegment`/`boutOrder` values plus timestamps and creates import/audit records.
 Run it without the confirmation phrase first and review the dry-run diff.
 
-For recurring new events, prefer the audited Admin Import UI or extend the
-script deliberately in a reviewed commit. Never weaken its project or overwrite
-guards simply to make an import pass.
+For recurring new events, prefer the create-only script or the audited Admin
+Import UI. Never weaken project, identity, or overwrite guards simply to make an
+import pass.
 
 ### 6.3 Post-import verification
 

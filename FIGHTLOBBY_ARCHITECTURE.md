@@ -102,6 +102,8 @@ The following paths are the important durable records. Exact fields are validate
 | `predictionAggregateJobs/{fightId}`                               | Background aggregation trigger/state for consensus materialization.                                                     |
 | `fightDiscussions/{fightId}/posts/{postId}`                       | Persistent top-level matchup posts. This is separate from live chat.                                                    |
 | `fightDiscussions/{fightId}/posts/{rootPostId}/replies/{replyId}` | Persistent threaded replies.                                                                                            |
+| `forumThreads/{threadId}`                                         | Site-wide forum topic, immutable title slug, author snapshot, reply total, and latest-activity snapshot.                |
+| `forumThreads/{threadId}/forumReplies/{replyId}`                  | Forum reply assigned to one immutable 20-reply page bucket.                                                             |
 | `chatRooms/{roomId}`                                              | Durable room status, moderation, writable window, completion, and retention metadata.                                   |
 | `manualImports/{importId}`                                        | Reviewed JSON import receipt and audit context.                                                                         |
 | `auditLogs/{auditId}`                                             | Security and operator mutation audit records.                                                                           |
@@ -237,6 +239,10 @@ Marking the event complete is separate. It ends the event's live state and start
 ### Discussions and live chat
 
 Persistent posts live in Firestore and support top-level posts plus threaded replies. Live chat lives in RTDB and is optimized for event-day streaming. They never share the same message collection or silently copy messages between systems.
+
+The site-wide forum is another Firestore surface under `forumThreads`. Directory reads are capped at 40 latest-activity topics. Each reply transaction assigns `pageNumber = floor(previousReplyCount / 20) + 1`, so numbered pages query only one equality bucket and sort that bounded result in memory. Forum directory search is client-side over that bounded page. Firebase Auth `getUsers` batches hydrate current avatar URLs without producing Firestore N+1 profile reads.
+
+Forum canonical URLs use `/discussions/{immutableThreadId}/{titleSlug}`. The author handle is only a presentation snapshot and profile link; it never identifies the topic. The existing reserved-handle lookup permanently redirects historical handle URLs to the member's current public profile.
 
 Both surfaces can display a matchup-specific immutable prediction badge beside the author's handle. The badge contains fighter last name and method only, never finish detail.
 

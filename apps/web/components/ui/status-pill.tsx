@@ -32,26 +32,26 @@ const labels: Record<StatusValue, string> = {
 };
 
 const classes: Record<StatusValue, string> = {
-  draft: "border-fl-border bg-fl-surface-2 text-fl-text-muted",
-  live: "border-fl-live/40 bg-fl-live/12 text-[#ff7590]",
-  up_next: "border-fl-warning/35 bg-fl-warning/10 text-fl-warning",
-  scheduled: "border-fl-info/30 bg-fl-info/10 text-fl-info",
-  prefight: "border-fl-warning/35 bg-fl-warning/10 text-fl-warning",
-  walkouts: "border-fl-live/40 bg-fl-live/12 text-[#ff7590]",
-  intros: "border-fl-live/40 bg-fl-live/12 text-[#ff7590]",
-  in_progress: "border-fl-live/40 bg-fl-live/12 text-[#ff7590]",
-  end_of_round: "border-fl-live/40 bg-fl-live/12 text-[#ff7590]",
-  completed: "border-fl-success/30 bg-fl-success/10 text-fl-success",
-  final: "border-fl-success/30 bg-fl-success/10 text-fl-success",
-  postponed: "border-fl-warning/35 bg-fl-warning/10 text-fl-warning",
-  canceled: "border-fl-border bg-fl-surface-2 text-fl-text-muted",
+  draft: "border-fl-border/75 bg-fl-surface-2/55 text-fl-text-dim",
+  live: "border-fl-live/25 bg-fl-live/[0.06] text-[#d7798a]",
+  up_next: "border-fl-warning/20 bg-fl-warning/[0.05] text-fl-warning/75",
+  scheduled: "border-fl-info/20 bg-fl-info/[0.05] text-fl-info/75",
+  prefight: "border-fl-warning/20 bg-fl-warning/[0.05] text-fl-warning/75",
+  walkouts: "border-fl-live/25 bg-fl-live/[0.06] text-[#d7798a]",
+  intros: "border-fl-live/25 bg-fl-live/[0.06] text-[#d7798a]",
+  in_progress: "border-fl-live/25 bg-fl-live/[0.06] text-[#d7798a]",
+  end_of_round: "border-fl-live/25 bg-fl-live/[0.06] text-[#d7798a]",
+  completed: "border-fl-success/15 bg-fl-success/[0.035] text-fl-success/70",
+  final: "border-fl-success/15 bg-fl-success/[0.035] text-fl-success/70",
+  postponed: "border-fl-warning/20 bg-fl-warning/[0.05] text-fl-warning/75",
+  canceled: "border-fl-border/75 bg-fl-surface-2/55 text-fl-text-dim",
 };
 
 export function StatusPill({ status }: { status: StatusValue }) {
   return (
     <span
       className={cn(
-        "inline-flex min-h-7 items-center gap-2 rounded-full border px-3 font-mono text-[10px] font-semibold tracking-[0.12em] uppercase",
+        "inline-flex min-h-6 items-center gap-1.5 rounded-full border px-2.5 font-mono text-[9px] font-medium tracking-[0.1em] uppercase",
         classes[status],
       )}
     >

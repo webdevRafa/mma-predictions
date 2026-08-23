@@ -68,6 +68,14 @@ async function redactPublicDiscussion(firestore: Firestore, uid: string) {
       firestore.collectionGroup("replies").where("uid", "==", uid),
       redaction,
     ),
+    updateQuery(firestore.collection("forumThreads").where("uid", "==", uid), {
+      ...redaction,
+      title: "Discussion by a deleted member",
+    }),
+    updateQuery(
+      firestore.collectionGroup("forumReplies").where("uid", "==", uid),
+      redaction,
+    ),
   ]);
   const replySnapshot = {
     uid: identity,
@@ -89,6 +97,13 @@ async function redactPublicDiscussion(firestore: Firestore, uid: string) {
         "replyTo.uid": replySnapshot.uid,
         "replyTo.handle": replySnapshot.handle,
         "replyTo.excerpt": replySnapshot.excerpt,
+      },
+    ),
+    updateQuery(
+      firestore.collection("forumThreads").where("lastReply.uid", "==", uid),
+      {
+        "lastReply.uid": replySnapshot.uid,
+        "lastReply.author.handle": replySnapshot.handle,
       },
     ),
   ]);

@@ -5,12 +5,15 @@ import { connection } from "next/server";
 
 import { listPublicEvents } from "@/lib/data/public";
 import { AuthMenu } from "@/features/auth/auth-menu";
+import { selectFeaturedEvent } from "@/lib/events/featured-event";
+import { getServerRenderTime } from "@/lib/time/server";
 
 import { OfflineBanner } from "./offline-banner";
 
 const navigation = [
   { href: "/events", label: "Events" },
   { href: "/leaderboards", label: "Leaderboards" },
+  { href: "/discussions", label: "Discussions" },
 ];
 
 async function listHeaderEvents() {
@@ -28,9 +31,11 @@ async function listHeaderEvents() {
 
 export async function SiteHeader() {
   const events = await listHeaderEvents();
+  const featuredEvent = selectFeaturedEvent(events, getServerRenderTime());
   const activeEvent =
-    events.find((event) => event.status === "live") ??
-    events.find((event) => event.status === "scheduled");
+    featuredEvent?.status === "live" || featuredEvent?.status === "scheduled"
+      ? featuredEvent
+      : undefined;
   return (
     <>
       <a className="skip-link" href="#main-content">
@@ -93,7 +98,9 @@ export async function SiteHeader() {
             >
               <Search aria-hidden="true" size={18} />
             </Link>
-            <AuthMenu />
+            <div className="hidden md:block">
+              <AuthMenu />
+            </div>
           </div>
         </div>
       </header>

@@ -2,6 +2,9 @@ import "server-only";
 
 import { listPublicCards } from "@/lib/data/public";
 import { listPublicProfiles } from "@/lib/data/profiles";
+import { getFirebaseAdmin } from "@/lib/firebase/admin";
+import { forumThreadPath } from "@/lib/forum/path";
+import { listForumThreadsCore } from "@/lib/forum/server";
 import {
   isEventIndexable,
   isFightIndexable,
@@ -82,4 +85,13 @@ export async function profileSitemapEntries() {
       url: absoluteUrl(`/u/${profile.handleNormalized}`),
       updatedAt: profile.updatedAt,
     }));
+}
+
+export async function discussionSitemapEntries() {
+  return (await listForumThreadsCore(getFirebaseAdmin().firestore)).map(
+    (thread) => ({
+      url: absoluteUrl(forumThreadPath(thread)),
+      updatedAt: new Date(thread.lastActivityAt).toISOString(),
+    }),
+  );
 }

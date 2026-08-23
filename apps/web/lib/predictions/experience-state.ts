@@ -7,3 +7,15 @@ export function getPredictionPanelMode(
   if (hasSavedPrediction) return "saved";
   return canSubmit ? "form" : "locked";
 }
+
+export function isPredictionSubmissionDisabled({
+  busy,
+  canSubmit,
+  winnerFighterId,
+}: {
+  busy: boolean;
+  canSubmit: boolean;
+  winnerFighterId: string;
+}) {
+  return busy || !canSubmit || !winnerFighterId;
+}

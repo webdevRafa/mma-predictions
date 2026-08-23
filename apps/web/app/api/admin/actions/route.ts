@@ -192,6 +192,14 @@ function parseForm(form: FormData): unknown {
         rootPostId: value(form, "rootPostId"),
         ...common(form),
       };
+    case "remove_forum_post":
+      return {
+        action,
+        threadId: value(form, "threadId"),
+        postId: value(form, "postId"),
+        postType: value(form, "postType"),
+        ...common(form),
+      };
     case "restore_message":
       return {
         action,

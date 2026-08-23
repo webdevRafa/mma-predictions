@@ -3,16 +3,12 @@ import { ArrowRight, MessageCircle, Target, Trophy } from "lucide-react";
 import Link from "next/link";
 
 import { AdSlot } from "@/components/ads/ad-slot";
-import { EventCountdown } from "@/components/events/event-countdown";
-import { EventPhaseLabel } from "@/components/events/event-phase-label";
-import { EventSchedule } from "@/components/events/event-schedule";
+import { HeroEventCountdowns } from "@/components/events/hero-event-countdowns";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
-import { LiveStatusFragment } from "@/components/live/live-status-fragment";
 import { Card } from "@/components/ui/card";
 import { EventPredictionModal } from "@/features/predictions/event-prediction-modal";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
-import { formatRecord } from "@/lib/format";
-import { resolveEventSchedule } from "@/lib/events/timing";
+import { selectFeaturedEvent } from "@/lib/events/featured-event";
 import { getServerRenderTime } from "@/lib/time/server";
 
 export const metadata: Metadata = {
@@ -28,18 +24,10 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const events = await listPublicEvents();
-  const event =
-    events.find((candidate) => candidate.status === "live") ??
-    events.find((candidate) => candidate.status === "scheduled") ??
-    events[0];
-  const card = event ? await getPublicEvent(event.slug) : null;
-  const mainFight =
-    card?.fights.find((fight) => fight.id === event?.mainEventFightId) ??
-    card?.fights.find(
-      (fight) => fight.cardSegment === "main_card" && fight.boutOrder === 1,
-    );
   const renderedAt = getServerRenderTime();
+  const events = await listPublicEvents();
+  const event = selectFeaturedEvent(events, renderedAt);
+  const card = event ? await getPublicEvent(event.slug) : null;
   const eventTiming = event
     ? {
         status: event.status,
@@ -52,23 +40,9 @@ export default async function HomePage() {
           : {}),
       }
     : null;
-  const schedule = eventTiming ? resolveEventSchedule(eventTiming) : null;
-  const isFightDay = Boolean(
-    event &&
-    schedule &&
-    new Intl.DateTimeFormat("en-CA", {
-      timeZone: event.venueTimezone,
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    }).format(new Date(renderedAt)) ===
-      new Intl.DateTimeFormat("en-CA", {
-        timeZone: event.venueTimezone,
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-      }).format(new Date(schedule.prelimsStartsAt)),
-  );
+  const [eventTitlePrefix, eventTitleMatchup] = event?.name.includes(":")
+    ? event.name.split(/:\s+/, 2)
+    : [event?.name, undefined];
 
   return (
     <main id="main-content">
@@ -77,23 +51,26 @@ export default async function HomePage() {
           aria-hidden="true"
           className="arena-grid absolute inset-0 opacity-50"
         />
-        <div className="shell relative grid gap-12 py-14 lg:min-h-[44rem] lg:grid-cols-[.86fr_1.14fr] lg:items-center lg:py-20">
+        <div className="shell relative grid gap-14 py-14 lg:min-h-[44rem] lg:grid-cols-[1.05fr_.95fr] lg:items-center lg:gap-20 lg:py-20">
           <div className="max-w-3xl">
-            <h1 className="font-display text-[clamp(3.4rem,6vw,6rem)] leading-[0.82] font-extrabold tracking-[-0.035em] text-balance">
-              {event?.status === "live" ? (
-                <>
-                  FIGHT NIGHT
-                  <span className="block text-fl-accent">IS LIVE.</span>
-                </>
-              ) : isFightDay ? (
-                <span className="whitespace-nowrap">
-                  IT&apos;S <span className="text-fl-accent">FIGHT DAY!</span>
-                </span>
+            <h1 className="font-display text-[clamp(3rem,4.5vw,5.25rem)] leading-[0.9] font-bold tracking-[-0.035em] text-fl-text text-balance">
+              {eventTitlePrefix ? (
+                eventTitleMatchup ? (
+                  <>
+                    {eventTitlePrefix}:
+                    <span className="mt-2 block font-semibold text-fl-text/90">
+                      {eventTitleMatchup}
+                    </span>
+                  </>
+                ) : (
+                  eventTitlePrefix
+                )
               ) : (
                 <>
-                  JOIN THE
-                  <span className="block">FIGHT NIGHT</span>
-                  <span className="block text-fl-accent">CONVERSATION.</span>
+                  UPCOMING
+                  <span className="block font-semibold text-fl-text/90">
+                    UFC EVENTS
+                  </span>
                 </>
               )}
             </h1>
@@ -103,86 +80,19 @@ export default async function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                className="focus-ring inline-flex min-h-12 max-w-full items-center gap-2 rounded-[10px] bg-fl-accent px-5 text-left text-sm leading-5 font-bold text-fl-bg shadow-[0_10px_28px_rgba(241,64,29,0.2)] transition hover:bg-fl-accent-strong"
+                className="focus-ring inline-flex min-h-12 max-w-full cursor-pointer items-center gap-2 rounded-[10px] border border-fl-accent/80 bg-fl-accent/10 px-5 text-left text-sm leading-5 font-bold text-fl-text shadow-[0_8px_24px_rgba(241,64,29,0.08)] transition hover:bg-fl-accent hover:text-fl-bg hover:shadow-[0_10px_28px_rgba(241,64,29,0.18)]"
                 href={event ? `/events/${event.slug}` : "/events"}
               >
-                <span>{event ? `View ${event.name}` : "View events"}</span>
+                <span>{event ? "View event" : "View events"}</span>
                 <ArrowRight aria-hidden="true" className="shrink-0" size={17} />
               </Link>
             </div>
           </div>
 
-          {event && mainFight ? (
-            <Card className="relative overflow-hidden lg:ml-auto lg:w-full lg:max-w-2xl">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-fl-border px-5 py-4 sm:px-6">
-                <div>
-                  <p className="eyebrow">
-                    <EventPhaseLabel
-                      {...eventTiming!}
-                      renderedAt={renderedAt}
-                    />
-                  </p>
-                  <h2 className="font-display text-2xl leading-none font-bold">
-                    {event.name}
-                  </h2>
-                </div>
-                <LiveStatusFragment
-                  collection="events"
-                  id={event.id}
-                  initialStatus={event.status}
-                  eventTiming={eventTiming!}
-                  renderedAt={renderedAt}
-                />
-              </div>
-              <div className="p-5 sm:p-6">
-                <div className="grid gap-3 font-mono text-[10px] tracking-[0.08em] text-fl-text-muted uppercase">
-                  <EventSchedule
-                    mainCardStartsAt={schedule!.mainCardStartsAt}
-                    prelimsStartsAt={schedule!.prelimsStartsAt}
-                    venueTimezone={event.venueTimezone}
-                  />
-                  <span className="font-semibold text-fl-text sm:justify-self-end">
-                    <EventCountdown {...eventTiming!} renderedAt={renderedAt} />
-                  </span>
-                </div>
-                <div className="mt-8 grid grid-cols-[1fr_auto_1fr] items-center gap-3 sm:gap-6">
-                  <Link
-                    className="focus-ring min-w-0 rounded-xl text-center"
-                    href={`/fighters/${mainFight.fighterA.slug}`}
-                  >
-                    <h3 className="font-display text-2xl leading-none font-extrabold sm:text-4xl">
-                      {mainFight.fighterA.name.full}
-                    </h3>
-                    <p className="mt-2 font-mono text-[10px] text-fl-text-muted">
-                      {formatRecord(mainFight.fighterA.record)}
-                    </p>
-                  </Link>
-                  <span className="font-display text-lg font-extrabold text-fl-text-dim">
-                    VS
-                  </span>
-                  <Link
-                    className="focus-ring min-w-0 rounded-xl text-center"
-                    href={`/fighters/${mainFight.fighterB.slug}`}
-                  >
-                    <h3 className="font-display text-2xl leading-none font-extrabold sm:text-4xl">
-                      {mainFight.fighterB.name.full}
-                    </h3>
-                    <p className="mt-2 font-mono text-[10px] text-fl-text-muted">
-                      {formatRecord(mainFight.fighterB.record)}
-                    </p>
-                  </Link>
-                </div>
-                <Link
-                  className="focus-ring mt-7 flex min-h-11 items-center justify-center gap-2 rounded-lg border border-fl-border bg-fl-surface-2 text-sm font-bold transition hover:border-fl-accent hover:text-fl-accent"
-                  href={`/fights/${mainFight.slug}`}
-                >
-                  Open main event matchup{" "}
-                  <ArrowRight aria-hidden="true" size={15} />
-                </Link>
-              </div>
-            </Card>
+          {eventTiming ? (
+            <HeroEventCountdowns {...eventTiming} renderedAt={renderedAt} />
           ) : (
-            <Card className="p-8">
+            <Card className="p-8 lg:ml-auto lg:w-full lg:max-w-xl">
               <p className="text-fl-text-muted">
                 The next verified UFC card will appear here as soon as it is
                 published.

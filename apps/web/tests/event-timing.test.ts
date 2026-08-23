@@ -4,6 +4,7 @@ import {
   eventCountdownLabel,
   eventPhaseLabel,
   getEventTimingPhase,
+  heroEventCountdownRows,
 } from "../lib/events/timing";
 
 const event = {
@@ -36,6 +37,29 @@ describe("event timing", () => {
     expect(eventCountdownLabel(event, now)).toBe(
       "Prelims live · main card in 01:45:00",
     );
+  });
+
+  it("provides separate prelim and main-card countdown rows", () => {
+    const now = Date.parse("2026-08-20T21:00:00.000Z");
+    expect(heroEventCountdownRows(event, now)).toEqual([
+      {
+        label: "Prelims",
+        value: "2d 0h until prelims",
+        dateTime: event.prelimsStartsAt,
+      },
+      {
+        label: "Main card",
+        value: "2d 3h until main card",
+        dateTime: event.mainCardStartsAt,
+      },
+    ]);
+  });
+
+  it("keeps both hero rows meaningful as the event progresses", () => {
+    const duringPrelims = Date.parse("2026-08-22T22:15:00.000Z");
+    expect(
+      heroEventCountdownRows(event, duringPrelims).map((row) => row.value),
+    ).toEqual(["Live now", "01:45:00 until main card"]);
   });
 
   it("lets terminal event states override clock-derived live state", () => {

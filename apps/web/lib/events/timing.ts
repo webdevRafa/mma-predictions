@@ -77,6 +77,43 @@ function clock(distance: number) {
     .join(":");
 }
 
+function countdown(distance: number) {
+  if (distance <= 24 * HOUR_MS) return clock(distance);
+  const days = Math.floor(distance / (24 * HOUR_MS));
+  const hours = Math.floor((distance % (24 * HOUR_MS)) / HOUR_MS);
+  return `${days}d ${hours}h`;
+}
+
+export function heroEventCountdownRows(
+  event: EventScheduleInput,
+  now = Date.now(),
+) {
+  const phase = getEventTimingPhase(event, now);
+  const { prelimsStartsAt, mainCardStartsAt } = resolveEventSchedule(event);
+  const prelimsAt = new Date(prelimsStartsAt).getTime();
+  const mainCardAt = new Date(mainCardStartsAt).getTime();
+  const rows = (
+    prelims: string,
+    mainCard: string,
+  ): Array<{ label: string; value: string; dateTime: string }> => [
+    { label: "Prelims", value: prelims, dateTime: prelimsStartsAt },
+    { label: "Main card", value: mainCard, dateTime: mainCardStartsAt },
+  ];
+
+  if (phase === "upcoming")
+    return rows(
+      `${countdown(prelimsAt - now)} until prelims`,
+      `${countdown(mainCardAt - now)} until main card`,
+    );
+  if (phase === "prelims_live")
+    return rows("Live now", `${countdown(mainCardAt - now)} until main card`);
+  if (phase === "main_card_live") return rows("Complete", "Live now");
+  if (phase === "awaiting_results") return rows("Complete", "Awaiting results");
+  if (phase === "completed") return rows("Complete", "Official results posted");
+  if (phase === "postponed") return rows("Time pending", "Time pending");
+  return rows("Canceled", "Canceled");
+}
+
 export function eventCountdownLabel(
   event: EventScheduleInput,
   now = Date.now(),
@@ -88,10 +125,7 @@ export function eventCountdownLabel(
 
   if (phase === "upcoming") {
     const distance = prelimsAt - now;
-    if (distance <= 24 * HOUR_MS) return `${clock(distance)} until prelims`;
-    const days = Math.floor(distance / (24 * HOUR_MS));
-    const hours = Math.floor((distance % (24 * HOUR_MS)) / HOUR_MS);
-    return `${days}d ${hours}h until prelims`;
+    return `${countdown(distance)} until prelims`;
   }
   if (phase === "prelims_live")
     return `Prelims live · main card in ${clock(mainCardAt - now)}`;

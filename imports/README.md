@@ -21,3 +21,18 @@ which are linked to stable fight and fighter IDs.
 Production imports require Firebase Admin credentials, the exact project ID,
 and an explicit migration confirmation phrase. The importer prints a dry-run
 inventory when the confirmation is absent.
+
+New events must use the guarded create-only importer. It refuses event, fight,
+or chat-room collisions, verifies any existing fighter identities before a
+merge, and confirms that the protected launch event and every prediction remain
+untouched after the atomic write:
+
+```powershell
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\service-account.json"
+$env:FIGHTLOBBY_PRODUCTION_PROJECT_ID="mma-cortex"
+pnpm add:production:event -- imports/ufc/<file>.json
+
+# Run only after reviewing the dry-run inventory.
+$env:FIGHTLOBBY_PRODUCTION_IMPORT_CONFIRM="ADD <event-id>"
+pnpm add:production:event -- imports/ufc/<file>.json
+```

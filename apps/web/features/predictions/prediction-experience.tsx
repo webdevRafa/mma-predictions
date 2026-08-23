@@ -25,10 +25,14 @@ import {
   readAuthReturnContext,
   saveAuthReturnContext,
 } from "@/features/auth/auth-return-context";
+import { usePredictionScoring } from "@/features/predictions/prediction-scoring-context";
 import { cn } from "@/lib/cn";
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
 import { getFirebaseAppCheckToken } from "@/lib/firebase/client";
-import { getPredictionPanelMode } from "@/lib/predictions/experience-state";
+import {
+  getPredictionPanelMode,
+  isPredictionSubmissionDisabled,
+} from "@/lib/predictions/experience-state";
 
 interface DraftEnvelope {
   fightId: string;
@@ -305,6 +309,16 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   const startedTracked = useRef(false);
   const revealTracked = useRef(false);
   const gradedTracked = useRef(false);
+  const { setState: setPredictionScoringState } = usePredictionScoring();
+
+  useEffect(() => {
+    setPredictionScoringState({
+      lookupState,
+      canSubmit,
+      hasPrediction: Boolean(saved),
+      ...(saved?.grade ? { grade: saved.grade } : {}),
+    });
+  }, [canSubmit, lookupState, saved, setPredictionScoringState]);
 
   useEffect(() => {
     const context = readAuthReturnContext();
@@ -485,6 +499,11 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   }
 
   const formDisabled = !canSubmit || busy;
+  const submissionDisabled = isPredictionSubmissionDisabled({
+    busy,
+    canSubmit,
+    winnerFighterId: pick.winnerFighterId,
+  });
   const panelMode = getPredictionPanelMode(Boolean(saved), canSubmit);
   const detailOptions = Array.from(
     { length: fight.scheduledRounds },
@@ -690,8 +709,8 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
             </div>
 
             <button
-              className="focus-ring mt-7 inline-flex min-h-12 max-w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-fl-accent px-6 text-sm font-bold text-fl-bg transition hover:bg-fl-accent-strong disabled:cursor-not-allowed disabled:opacity-50 sm:px-7"
-              disabled={formDisabled}
+              className="focus-ring mt-7 inline-flex min-h-12 max-w-full cursor-pointer items-center justify-center gap-2 rounded-lg border px-6 text-sm font-bold transition enabled:border-fl-accent enabled:bg-fl-accent enabled:text-fl-bg enabled:shadow-[0_10px_28px_rgba(241,64,29,0.18)] enabled:hover:bg-fl-accent-strong disabled:cursor-not-allowed disabled:border-fl-border disabled:bg-fl-surface-2 disabled:text-fl-text-dim disabled:shadow-none sm:px-7"
+              disabled={submissionDisabled}
               type="submit"
             >
               {busy ? (
