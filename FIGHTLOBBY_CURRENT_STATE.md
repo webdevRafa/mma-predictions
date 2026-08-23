@@ -35,6 +35,11 @@ The current reviewed launch event is:
 - 13 scheduled matchups: six on the main card and seven on the prelims
 - main event: Anthony Hernandez vs Gregory Rodrigues
 - official top-to-bottom order was re-verified and refreshed on 2026-08-22
+- event results are complete; 27 production predictions across five members
+  were reconciled and graded on 2026-08-22, awarding 99 points in total
+- raw prediction documents, sharded counters, displayed bout totals, grade
+  totals, profile aggregates, and terminal admin-job state were verified to
+  agree after recovery
 
 Do not treat this card as a permanent fixture. The next operator should import a
 new reviewed event after the current card concludes and verify home/event routing
@@ -114,6 +119,11 @@ against the event lifecycle rules.
 - Quick result dropdown on every event matchup row plus detailed result editor.
 - Result versions and idempotent regrading.
 - Prediction grades, profile aggregates, event/season boards, and achievements.
+- Event boards rank every prediction participant without a graded-pick floor;
+  `/leaderboards` defaults to the latest admin-completed event and provides a
+  completed-event history selector.
+- Season accuracy currently ranks every member with a graded pick by raw winner
+  accuracy and has no participation floor.
 - Manual **Mark event complete** plus automatic six-hour live-display safety
   buffer.
 - Admin completion controls disclose how many fight results are not final.
@@ -129,6 +139,11 @@ against the event lifecycle rules.
   simulation, and production build.
 - Scalability work: sharded prediction counters, aggregate jobs, bounded chat and
   post reads, cached discussion previews, and one-time leaderboard construction.
+- Production now has both required asynchronous prediction workers active:
+  `processAdminJob` for queued result grading and
+  `refreshPendingPredictionAggregates` for per-fight counter refresh.
+- Guarded production audit and recovery commands are available as
+  `audit:production:predictions` and `repair:production:grading`.
 
 ## 4. Settled behavior that must not regress
 
@@ -139,11 +154,12 @@ against the event lifecycle rules.
 5. Reopening accepts new users only; it does not unlock existing predictions.
 6. Submitting a fight result grades that fight.
 7. Marking an event complete does not grade fights.
-8. Persistent posts and live chat remain separate collections and experiences.
-9. Public prediction badges include fighter last name and method only, not round
-   or decision detail.
-10. Times are stored as UTC and displayed in the browser's local timezone.
-11. Card movement changes `cardSegment`/`boutOrder`, never an existing fight ID
+8. Event standings include every member who predicted on that event.
+9. Persistent posts and live chat remain separate collections and experiences.
+10. Public prediction badges include fighter last name and method only, not round
+    or decision detail.
+11. Times are stored as UTC and displayed in the browser's local timezone.
+12. Card movement changes `cardSegment`/`boutOrder`, never an existing fight ID
     or either participant ID; prediction linkage must survive every reorder.
 
 ## 5. Known limitations and intentional omissions

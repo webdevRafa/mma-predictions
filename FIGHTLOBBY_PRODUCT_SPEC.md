@@ -178,6 +178,19 @@ When an administrator submits a fight result:
 - Prediction receipts and profile history receive their grade once the background grading run completes.
 - Event and season boards are updated by the grading process.
 
+### Event leaderboard participation
+
+- Every member who made at least one prediction for an event appears on that
+  event's points board; event boards have no minimum graded-pick requirement.
+- A participant whose only prediction was voided remains listed with zero graded
+  picks and zero points.
+- `/leaderboards` defaults to the most recent event explicitly marked
+  `completed` by an administrator.
+- **By event** lets members browse every completed event board. Scheduled or live
+  events never replace the default completed-event standings.
+- Season accuracy currently ranks every member with at least one graded pick.
+  A participation floor may be introduced later when the community is larger.
+
 ## Persistent matchup posts
 
 Posts are a durable discussion product and are **not** copied from live chat.

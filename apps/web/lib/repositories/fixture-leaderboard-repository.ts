@@ -1,6 +1,5 @@
 import {
   LEADERBOARD_CALCULATION_VERSION,
-  SEASON_ACCURACY_MINIMUM_PICKS,
   leaderboardFixtureSchema,
   rankAccuracyBoard,
   rankEventBoard,
@@ -45,7 +44,7 @@ export class FixtureLeaderboardRepository implements LeaderboardRepository {
       uid: member.uid,
       ...member.season,
     }));
-    const event = rankEventBoard(eventMetrics, fixture.gradedEventFights);
+    const event = rankEventBoard(eventMetrics);
     const shared = {
       calculationVersion: LEADERBOARD_CALCULATION_VERSION,
       lastBuiltAt: fixture.generatedAt,
@@ -74,7 +73,7 @@ export class FixtureLeaderboardRepository implements LeaderboardRepository {
         type: "season_accuracy",
         label: `${fixture.season.label} · Accuracy`,
         seasonId: fixture.season.id,
-        minimumPicks: SEASON_ACCURACY_MINIMUM_PICKS,
+        minimumPicks: 0,
         entries: entries(rankAccuracyBoard(seasonMetrics), "season"),
         ...shared,
       },

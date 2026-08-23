@@ -27,9 +27,11 @@ the profile total equal to the sum of current graded prediction documents.
 
 The public boards are:
 
-- Event: points from members who predicted at least 70% of the event's graded fights.
+- Event: points from every member who made at least one prediction on the event;
+  void-only participation remains visible with zero graded picks.
 - Season points: total points, then deterministic scoring tie breaks.
-- Season accuracy: minimum 20 graded picks, ranked by the 95% Wilson lower bound.
+- Season accuracy: every member with at least one graded pick, ranked by winner
+  accuracy and deterministic tie breaks.
 - Streak: current correct-winner streak, with voids ignored.
 
 Only completed events award an event championship. Correcting or voiding a result
@@ -38,7 +40,7 @@ rebuilt.
 
 ## Verification
 
-Pure domain tests cover scoring, void outcomes, eligibility, Wilson ranking, streaks,
+Pure domain tests cover scoring, void outcomes, inclusive accuracy ranking, streaks,
 and badges. The Firestore emulator integration test covers an initial grade, repeated
 idempotent execution, a winner correction, grade history, leaderboard reconciliation,
 champion replacement, and a later no-contest void.
