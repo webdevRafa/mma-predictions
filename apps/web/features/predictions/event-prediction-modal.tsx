@@ -342,7 +342,7 @@ export function EventPredictionModal({
     <>
       <button
         className={cn(
-          "focus-ring inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-fl-accent px-4 text-sm font-bold text-white shadow-[0_10px_28px_rgba(241,64,29,0.18)] transition hover:bg-fl-accent-strong",
+          "focus-ring inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-lg border border-fl-accent/80 bg-fl-accent/10 px-4 text-sm font-bold text-fl-text shadow-[0_8px_24px_rgba(241,64,29,0.08)] transition hover:bg-fl-accent hover:text-fl-bg hover:shadow-[0_10px_28px_rgba(241,64,29,0.18)]",
           className,
         )}
         onClick={openModal}

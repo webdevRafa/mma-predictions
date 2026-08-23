@@ -80,7 +80,7 @@ export default async function HomePage() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                className="focus-ring inline-flex min-h-12 max-w-full items-center gap-2 rounded-[10px] bg-fl-accent px-5 text-left text-sm leading-5 font-bold text-fl-bg shadow-[0_10px_28px_rgba(241,64,29,0.2)] transition hover:bg-fl-accent-strong"
+                className="focus-ring inline-flex min-h-12 max-w-full cursor-pointer items-center gap-2 rounded-[10px] border border-fl-accent/80 bg-fl-accent/10 px-5 text-left text-sm leading-5 font-bold text-fl-text shadow-[0_8px_24px_rgba(241,64,29,0.08)] transition hover:bg-fl-accent hover:text-fl-bg hover:shadow-[0_10px_28px_rgba(241,64,29,0.18)]"
                 href={event ? `/events/${event.slug}` : "/events"}
               >
                 <span>{event ? "View event" : "View events"}</span>
