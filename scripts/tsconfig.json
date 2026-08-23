@@ -8,6 +8,8 @@
   },
   "include": [
     "./production-preflight.ts",
+    "./audit-production-predictions.ts",
+    "./repair-production-grading.ts",
     "./migrate-remove-confidence.ts",
     "./import-production-event.ts",
     "./refresh-production-event.ts",

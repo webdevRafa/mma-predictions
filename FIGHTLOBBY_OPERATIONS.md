@@ -334,6 +334,47 @@ After each result:
 - event-board entries reflect the new graded fight;
 - no `adminJobs` or grading run remains failed.
 
+### 9.6 Reconcile a stalled grading pipeline
+
+The result workflow depends on two deployed operational workers:
+
+- `processAdminJob`, the Firestore-created trigger that consumes
+  `regrade_fight` jobs; and
+- `refreshPendingPredictionAggregates`, the every-minute scheduler that folds
+  prediction shards into the per-fight summaries shown on card rows.
+
+A Vercel deploy or a partial callable-only Functions deploy does not install
+these workers. If results are visible but fights remain in `grading`, profiles
+show no points, jobs remain `queued`, or event and row totals disagree, first
+run the read-only reconciliation:
+
+```powershell
+$env:GOOGLE_APPLICATION_CREDENTIALS = "C:\secure\mma-cortex-service-account.json"
+$env:GOOGLE_CLOUD_PROJECT = "mma-cortex"
+npx --yes pnpm@10.17.0 audit:production:predictions -- event-id-or-slug
+```
+
+The report compares raw prediction documents, unique predictors, shards,
+displayed fight summaries, current result versions, grade status, admin jobs,
+and profile aggregates without printing member identifiers or picks.
+
+Deploy missing workers narrowly, then run the repair once without confirmation
+to review its exact scope:
+
+```powershell
+npx --yes firebase-tools@latest deploy --only functions:processAdminJob,functions:refreshPendingPredictionAggregates --project mma-cortex
+npx --yes pnpm@10.17.0 repair:production:grading -- event-id-or-slug
+```
+
+Only after the dry run resolves the intended production event, set
+`FIGHTLOBBY_GRADING_REPAIR_CONFIRM` to the resolved event ID and repeat the
+repair. The repair is result-version/scoring-version idempotent, refreshes fight
+and event counters, processes only queued, interrupted, or failed
+current-result-version jobs for that event, rebuilds profile and leaderboard
+state through the canonical grading core, and records terminal job/run/audit
+state. Run the read-only audit again afterward. Never patch member points or
+leaderboard entries directly.
+
 ## 10. Completing an event
 
 **Mark event complete** is a lifecycle control, not a grading button.
@@ -411,6 +452,18 @@ npx --yes firebase-tools@latest deploy --only functions
 
 Use narrower targets when possible. Run rule tests before rule deployments. A
 functions deploy requires the production server configuration and Node 22.
+
+After a narrow prediction-functions deploy, verify the operational workers were
+not omitted:
+
+```powershell
+npx --yes firebase-tools@latest functions:list --project mma-cortex
+```
+
+The production list must include both `processAdminJob` and
+`refreshPendingPredictionAggregates` in addition to the callable prediction
+controls. A newly enabled Eventarc trigger can require a second deploy after its
+service-agent permissions finish propagating.
 
 An avatar release changes only Storage rules and the Vercel-hosted web app. After
 the rules tests pass, deploy the narrow Firebase target with

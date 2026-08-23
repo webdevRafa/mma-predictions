@@ -35,6 +35,11 @@ The current reviewed launch event is:
 - 13 scheduled matchups: six on the main card and seven on the prelims
 - main event: Anthony Hernandez vs Gregory Rodrigues
 - official top-to-bottom order was re-verified and refreshed on 2026-08-22
+- event results are complete; 27 production predictions across five members
+  were reconciled and graded on 2026-08-22, awarding 99 points in total
+- raw prediction documents, sharded counters, displayed bout totals, grade
+  totals, profile aggregates, and terminal admin-job state were verified to
+  agree after recovery
 
 Do not treat this card as a permanent fixture. The next operator should import a
 new reviewed event after the current card concludes and verify home/event routing
@@ -129,6 +134,11 @@ against the event lifecycle rules.
   simulation, and production build.
 - Scalability work: sharded prediction counters, aggregate jobs, bounded chat and
   post reads, cached discussion previews, and one-time leaderboard construction.
+- Production now has both required asynchronous prediction workers active:
+  `processAdminJob` for queued result grading and
+  `refreshPendingPredictionAggregates` for per-fight counter refresh.
+- Guarded production audit and recovery commands are available as
+  `audit:production:predictions` and `repair:production:grading`.
 
 ## 4. Settled behavior that must not regress
 

@@ -332,3 +332,17 @@ top-to-bottom sequence. Moving a bout changes only `cardSegment` and
 position as identity would detach or misattribute picks whenever UFC moves a
 bout. Validation and guarded refresh checks therefore fail closed on identity
 changes while allowing audited card-order corrections.
+
+## Decision 37 — Prediction workers are required production infrastructure
+
+**Decision:** Result submission remains a durable Firestore job workflow, and
+prediction counts remain sharded with asynchronous materialization. Production
+must deploy and monitor both `processAdminJob` and
+`refreshPendingPredictionAggregates`; callable prediction functions alone are
+not a complete prediction backend.
+
+**Reason:** The web admin can safely persist results and jobs even during a
+worker outage, but visible results do not prove that grades, profiles,
+leaderboards, or row counters were materialized. Keeping durable jobs preserves
+the source data, while explicit worker verification and guarded reconciliation
+make recovery deterministic without editing points by hand.

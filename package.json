@@ -18,6 +18,8 @@
     "staging:simulate": "firebase emulators:exec --only firestore,database,storage --project fightlobby-local \"cross-env STAGING_SIMULATION=1 tsx scripts/run-staging-simulation.ts\"",
     "launch:preflight": "tsx scripts/production-preflight.ts",
     "launch:verify": "tsx scripts/verify-production.ts",
+    "audit:production:predictions": "tsx scripts/audit-production-predictions.ts",
+    "repair:production:grading": "tsx scripts/repair-production-grading.ts",
     "admin:grant": "tsx scripts/grant-admin.ts",
     "migrate:remove-confidence": "tsx scripts/migrate-remove-confidence.ts",
     "import:production:event": "tsx scripts/import-production-event.ts",
