@@ -386,3 +386,17 @@ newest-first order.
 is for site-wide event discovery and rankings. Reusing the post-lock public read
 model prevents early pick disclosure, and lazy-loading the private record avoids
 charging full-history reads on every routine Settings visit.
+
+## Decision 41 — Forum topics use immutable IDs and page-bucketed replies
+
+**Decision:** Site-wide discussion topics use
+`/discussions/{immutableThreadId}/{titleSlug}`. Author handles never identify a
+topic. Replies are assigned transactionally to immutable 20-reply page buckets,
+and the directory loads at most 40 topics ordered by latest activity. Directory
+search filters that bounded client payload rather than issuing search reads on
+each keystroke.
+
+**Reason:** Handle changes must not break shared links, canonical metadata, or
+search indexing. Stable page buckets provide understandable numbered pagination
+without Firestore offset costs, while bounded directory reads keep forum cost
+predictable as activity grows.

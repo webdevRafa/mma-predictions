@@ -1,6 +1,6 @@
 # FightLobby Current State
 
-Snapshot date: 2026-08-22
+Snapshot date: 2026-08-23
 
 Integration branch: `codex/builder`
 
@@ -108,6 +108,13 @@ against the event lifecycle rules.
 
 - Persistent matchup posts and nested replies live in Firestore.
 - Posts are not copied from live chat; they are separate products and data paths.
+- A site-wide forum at `/discussions` provides searchable latest-activity topics,
+  avatar-backed member identity, dedicated canonical thread pages, and numbered
+  20-reply pagination.
+- Forum topic identity is an immutable thread ID plus title slug; author handle
+  changes do not alter or invalidate topic URLs.
+- Forum writes reuse verified-account, moderation, rate-limit, App Check,
+  reporting, admin removal, audit, and account-redaction controls.
 - Mobile has a Posts tab and compact sticky composer affordance.
 - Live matchup/event chat uses Firebase Realtime Database.
 - Bounded initial/history reads and child-level live subscriptions are in place.
@@ -159,7 +166,8 @@ against the event lifecycle rules.
 6. Submitting a fight result grades that fight.
 7. Marking an event complete does not grade fights.
 8. Event standings include every member who predicted on that event.
-9. Persistent posts and live chat remain separate collections and experiences.
+9. Matchup posts, site-wide forum topics, and live chat remain separate
+   collections and experiences.
 10. Public prediction badges include fighter last name and method only, not round
     or decision detail.
 11. Times are stored as UTC and displayed in the browser's local timezone.

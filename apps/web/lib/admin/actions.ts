@@ -247,6 +247,15 @@ export const adminActionSchema = z.discriminatedUnion("action", [
     .strict(),
   z
     .object({
+      action: z.literal("remove_forum_post"),
+      threadId: idSchema,
+      postId: idSchema,
+      postType: z.enum(["thread", "reply"]),
+      ...base,
+    })
+    .strict(),
+  z
+    .object({
       action: z.literal("restore_message"),
       moderationActionId: idSchema,
       ...base,
@@ -850,6 +859,74 @@ async function removeDiscussionPost(
         metadata: {
           fightId: action.fightId,
           rootPostId: action.rootPostId,
+          moderationActionId: moderationRef.id,
+        },
+      }),
+    });
+  });
+  return { auditId: logRef.id, moderationActionId: moderationRef.id };
+}
+
+async function removeForumPost(
+  firestore: Firestore,
+  actorUid: string,
+  action: Extract<AdminAction, { action: "remove_forum_post" }>,
+) {
+  const threadReference = firestore
+    .collection("forumThreads")
+    .doc(action.threadId);
+  const postReference =
+    action.postType === "thread"
+      ? threadReference
+      : threadReference.collection("forumReplies").doc(action.postId);
+  const moderationRef = firestore.collection("moderationActions").doc();
+  const logRef = auditRef(firestore);
+  const updatedAt = Date.now();
+
+  await firestore.runTransaction(async (transaction) => {
+    const snapshot = await transaction.get(postReference);
+    if (!snapshot.exists)
+      throw new ApiError("Forum post not found", 404, "forum_post_not_found");
+    const post = record(snapshot.data());
+    if (post.status === "removed")
+      throw new ApiError(
+        "Forum post was already removed",
+        409,
+        "forum_post_already_removed",
+      );
+    transaction.create(moderationRef, {
+      id: moderationRef.id,
+      type: "remove_forum_post",
+      actorUid,
+      threadId: action.threadId,
+      postId: action.postId,
+      postType: action.postType,
+      reason: action.reason,
+      postSnapshot: post,
+      status: "active",
+      createdAt: FieldValue.serverTimestamp(),
+    });
+    transaction.update(postReference, {
+      body: "Post removed by moderation.",
+      ...(action.postType === "thread"
+        ? { title: "Discussion removed by moderation" }
+        : {}),
+      status: "removed",
+      updatedAt,
+    });
+    transaction.set(logRef, {
+      id: logRef.id,
+      ...adminAuditData({
+        actorUid,
+        action: "remove_forum_post",
+        targetType: "forum_post",
+        targetId: action.postId,
+        reason: action.reason,
+        before: post,
+        after: { status: "removed", updatedAt },
+        metadata: {
+          threadId: action.threadId,
+          postType: action.postType,
           moderationActionId: moderationRef.id,
         },
       }),
@@ -1583,6 +1660,9 @@ export async function executeAdminAction(
     case "remove_discussion_post":
       requireConfirmation(action.confirmation, `REMOVE POST ${action.postId}`);
       return removeDiscussionPost(firestore, actorUid, action);
+    case "remove_forum_post":
+      requireConfirmation(action.confirmation, `REMOVE FORUM ${action.postId}`);
+      return removeForumPost(firestore, actorUid, action);
     case "restore_message":
       requireConfirmation(
         action.confirmation,
@@ -1634,6 +1714,8 @@ export function confirmationFor(action: AdminAction) {
       return `REMOVE ${action.messageId}`;
     case "remove_discussion_post":
       return `REMOVE POST ${action.postId}`;
+    case "remove_forum_post":
+      return `REMOVE FORUM ${action.postId}`;
     case "restore_message":
       return `RESTORE ${action.moderationActionId}`;
     case "resolve_report":

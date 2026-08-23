@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     template: "%s | FightLobby",
   },
   description:
-    "Make UFC predictions, compare picks, and join live matchup chats with the FightLobby community.",
+    "Make UFC predictions, compare picks, and join matchup chats and community discussions on FightLobby.",
   applicationName: "FightLobby",
   icons: {
     icon: [{ url: "/brand/fightlobby-mark.png", type: "image/png" }],

@@ -4,7 +4,7 @@
 
 FightLobby is a UFC-focused prediction and community product. Members make permanent fight predictions, compare the revealed community consensus, participate in persistent matchup discussions and event-day live chat, and build a public prediction record after official results are graded.
 
-This document describes the intended product behavior as of August 22, 2026. It is the concise product source of truth for future work. When an older document conflicts with this file, verify the behavior in the current code and update the older document instead of silently restoring legacy behavior.
+This document describes the intended product behavior as of August 23, 2026. It is the concise product source of truth for future work. When an older document conflicts with this file, verify the behavior in the current code and update the older document instead of silently restoring legacy behavior.
 
 The five root-level handoff documents should be read together:
 
@@ -25,16 +25,18 @@ The five root-level handoff documents should be read together:
 
 ## Primary public routes
 
-| Route            | Purpose                                                                                            |
-| ---------------- | -------------------------------------------------------------------------------------------------- |
-| `/`              | Fight-day home page, current/next event card, card overview, and full-card prediction entry point. |
-| `/events`        | Event discovery when multiple events exist.                                                        |
-| `/events/[slug]` | Official event overview, schedule, fight card, event chat, and full-card prediction entry point.   |
-| `/fights/[slug]` | Dedicated matchup, prediction flow, consensus, stats, posts, and live chat.                        |
-| `/leaderboards`  | Scored member rankings and eligible event/season boards.                                           |
-| `/u/[handle]`    | Public member profile and prediction record.                                                       |
-| `/settings`      | Account, public profile, personal prediction history, privacy, safety, and deletion controls.      |
-| `/admin`         | Server-authorized operations for the owner/admin.                                                  |
+| Route                            | Purpose                                                                                            |
+| -------------------------------- | -------------------------------------------------------------------------------------------------- |
+| `/`                              | Fight-day home page, current/next event card, card overview, and full-card prediction entry point. |
+| `/events`                        | Event discovery when multiple events exist.                                                        |
+| `/events/[slug]`                 | Official event overview, schedule, fight card, event chat, and full-card prediction entry point.   |
+| `/fights/[slug]`                 | Dedicated matchup, prediction flow, consensus, stats, posts, and live chat.                        |
+| `/leaderboards`                  | Scored member rankings and eligible event/season boards.                                           |
+| `/discussions`                   | Site-wide community forum with searchable topics and latest activity.                              |
+| `/discussions/[threadId]/[slug]` | Durable forum topic with numbered, paginated replies.                                              |
+| `/u/[handle]`                    | Public member profile and prediction record.                                                       |
+| `/settings`                      | Account, public profile, personal prediction history, privacy, safety, and deletion controls.      |
+| `/admin`                         | Server-authorized operations for the owner/admin.                                                  |
 
 ## Home page behavior
 
@@ -206,6 +208,19 @@ Posts are a durable discussion product and are **not** copied from live chat.
 - Google sign-in creates a Firebase Auth account when one does not exist, then sends the new member through handle onboarding.
 - Mobile exposes posts as its own `Posts` tab.
 - After the full composer scrolls away on mobile, a compact sticky composer affordance appears beneath the tab row and expands on interaction instead of permanently consuming vertical space.
+
+## Community discussions forum
+
+The site-wide forum complements matchup posts; it does not replace or copy them.
+
+- `/discussions` lists a bounded set of topics ordered by latest activity.
+- Topic rows show subject and preview, starter identity, reply count, and latest activity. Member avatars come from the current Firebase Auth identity without adding per-row Firestore profile reads.
+- Search filters the already-loaded topic page in the browser and does not issue a Firestore query for every keystroke.
+- Publishing a topic or reply requires a signed-in, verified, onboarded member with an active account. Existing moderation, mute, duplicate, rate-limit, App Check, report, audit, and account-deletion policies apply.
+- Guests can read topics and replies.
+- Replies use stable numbered pages of 20 replies. A page fetch reads only its assigned reply bucket rather than skipping through all earlier documents.
+- The canonical topic route contains an immutable thread ID plus a human-readable title slug. Author handles are never part of topic identity, so a member changing a handle cannot break forum links or SEO. Historical author-profile links continue through the handle-reservation redirect behavior.
+- Desktop navigation exposes **Discussions** alongside Events and Leaderboards. Mobile uses the five-item bottom navigation: Home, Events, Discuss, Ranks, and Profile.
 
 ### Prediction transparency badges
 

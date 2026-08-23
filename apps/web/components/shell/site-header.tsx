@@ -13,6 +13,7 @@ import { OfflineBanner } from "./offline-banner";
 const navigation = [
   { href: "/events", label: "Events" },
   { href: "/leaderboards", label: "Leaderboards" },
+  { href: "/discussions", label: "Discussions" },
 ];
 
 async function listHeaderEvents() {
@@ -97,7 +98,9 @@ export async function SiteHeader() {
             >
               <Search aria-hidden="true" size={18} />
             </Link>
-            <AuthMenu />
+            <div className="hidden md:block">
+              <AuthMenu />
+            </div>
           </div>
         </div>
       </header>

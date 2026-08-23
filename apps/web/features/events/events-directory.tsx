@@ -135,8 +135,8 @@ export function EventsDirectory({ events }: { events: Event[] }) {
   return (
     <>
       <header className="mt-8 flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
-        <h1 className="font-display text-5xl leading-none font-extrabold sm:text-6xl">
-          EVENTS
+        <h1 className="font-display text-5xl leading-none font-semibold tracking-[-0.025em] sm:text-6xl">
+          Events
         </h1>
         {events.length > 0 ? (
           <div className="relative w-full sm:max-w-sm">
