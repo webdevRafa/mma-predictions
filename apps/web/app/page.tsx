@@ -12,6 +12,7 @@ import { Card } from "@/components/ui/card";
 import { EventPredictionModal } from "@/features/predictions/event-prediction-modal";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { formatRecord } from "@/lib/format";
+import { selectFeaturedEvent } from "@/lib/events/featured-event";
 import { resolveEventSchedule } from "@/lib/events/timing";
 import { getServerRenderTime } from "@/lib/time/server";
 
@@ -28,18 +29,15 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
+  const renderedAt = getServerRenderTime();
   const events = await listPublicEvents();
-  const event =
-    events.find((candidate) => candidate.status === "live") ??
-    events.find((candidate) => candidate.status === "scheduled") ??
-    events[0];
+  const event = selectFeaturedEvent(events, renderedAt);
   const card = event ? await getPublicEvent(event.slug) : null;
   const mainFight =
     card?.fights.find((fight) => fight.id === event?.mainEventFightId) ??
     card?.fights.find(
       (fight) => fight.cardSegment === "main_card" && fight.boutOrder === 1,
     );
-  const renderedAt = getServerRenderTime();
   const eventTiming = event
     ? {
         status: event.status,
