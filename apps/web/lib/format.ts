@@ -59,11 +59,12 @@ export function formatEventDateCompact(isoDate: string, timeZone?: string) {
   }).format(new Date(isoDate));
 }
 
-export function formatCompactDate(isoDate: string) {
+export function formatCompactDate(isoDate: string, timeZone?: string) {
   return new Intl.DateTimeFormat("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric",
+    ...(timeZone ? { timeZone } : {}),
   }).format(new Date(isoDate));
 }
 
