@@ -110,6 +110,14 @@ The following paths are the important durable records. Exact fields are validate
 | `achievements/{uid}/eventChampionships/{id}`                      | Event achievement history.                                                                                              |
 | `achievements/{uid}/seasonRanks/{id}`                             | Season-rank achievement history.                                                                                        |
 
+Member prediction history uses two bounded server read models. The private
+Settings endpoint queries canonical `predictions` by the authenticated UID and
+loads only when the Predictions section opens. Public profile pages query
+`profiles/{uid}/publicPicks`, never canonical open predictions. Both paths batch
+hydrate referenced fight and event documents, sort events newest first, and
+return the same UI view model. This preserves the post-lock disclosure boundary
+while avoiding full-history reads on unrelated Settings visits.
+
 Other support collections may exist for rate limits, sanctions, reports, consent, and operational cursors. Search the current rules and repositories before changing or deleting a collection.
 
 ## Realtime Database map

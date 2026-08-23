@@ -371,3 +371,18 @@ separate product decision.
 statistical language that did not help members understand their rank. Showing
 the active community now is more useful, while calculation versioning preserves
 a clean path to change the model later.
+
+## Decision 40 — Prediction history belongs to member profiles
+
+**Decision:** Personal prediction history is a dedicated section of the private
+Settings workspace and an event-filterable record on public member profiles; it
+is not another global navigation destination. Private history may include a
+member's submitted open-event picks. Public history reads only materialized
+`publicPicks`, which exist after the matchup locks. Both views use a desktop
+table and mobile cards and can be filtered across participated events in
+newest-first order.
+
+**Reason:** Prediction history is account context, while the global navigation
+is for site-wide event discovery and rankings. Reusing the post-lock public read
+model prevents early pick disclosure, and lazy-loading the private record avoids
+charging full-history reads on every routine Settings visit.

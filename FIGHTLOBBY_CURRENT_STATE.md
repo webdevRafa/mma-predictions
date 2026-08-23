@@ -66,6 +66,10 @@ against the event lifecycle rules.
 - Optional provider or custom member avatars with client-side square cropping,
   owner-only uploads, explicit replacement/removal, and navbar account identity.
 - Public profiles at `/u/{handle}` and a settings entry to view one's profile.
+- Event-filtered prediction history on public profiles and a lazy-loaded private
+  `Predictions` Settings section. The record includes matchup, event, pick,
+  official result, score, and selection-scoped points/accuracy, with dedicated
+  mobile cards below the desktop-table breakpoint.
 - User-to-user following.
 - Blocking, reporting, privacy controls, and public/private data separation.
 - Full account deletion path for eligible Firestore, RTDB, Storage, and Firebase

@@ -517,6 +517,10 @@ On the exact production alias and a private/incognito window, verify:
 - confirm the public hero no longer treats it as the next event after the
   lifecycle window;
 - verify the event leaderboard and sample public profiles;
+- verify a graded pick appears with the correct result and points in both the
+  owner's Settings > Predictions record and the post-lock public profile record;
+- select at least one historical event on each record and confirm the summary
+  totals update without exposing any still-open public pick;
 - monitor failed admin/grading/aggregate jobs;
 - prepare and review the next event JSON with stable fighter identities;
 - retain the source review and manual import audit trail.
