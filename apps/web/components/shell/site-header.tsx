@@ -72,27 +72,29 @@ export async function SiteHeader() {
               </Link>
             ))}
           </nav>
-          {activeEvent ? (
+          <div className="ml-auto flex items-center gap-1 sm:gap-2">
+            {activeEvent ? (
+              <Link
+                aria-label={`${activeEvent.status === "live" ? "Open live event" : "Open upcoming event"}: ${activeEvent.name}`}
+                className="hidden max-w-64 items-center gap-2 rounded-full border border-fl-live/30 bg-fl-live/10 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-[0.06em] text-[#ff8398] uppercase lg:flex"
+                href={`/events/${activeEvent.slug}`}
+                title={activeEvent.name}
+              >
+                {activeEvent.status === "live" ? (
+                  <span aria-hidden="true" className="live-dot" />
+                ) : null}
+                <span className="truncate">{activeEvent.shortName}</span>
+              </Link>
+            ) : null}
             <Link
-              aria-label={`${activeEvent.status === "live" ? "Open live event" : "Open upcoming event"}: ${activeEvent.name}`}
-              className="ml-auto hidden max-w-64 items-center gap-2 rounded-full border border-fl-live/30 bg-fl-live/10 px-3 py-1.5 font-mono text-[10px] font-semibold tracking-[0.06em] text-[#ff8398] uppercase lg:flex"
-              href={`/events/${activeEvent.slug}`}
-              title={activeEvent.name}
+              aria-label="Search FightLobby"
+              className="focus-ring grid size-10 cursor-pointer place-items-center rounded-lg text-fl-text-muted hover:bg-fl-surface-2 hover:text-fl-text"
+              href="/search"
             >
-              {activeEvent.status === "live" ? (
-                <span aria-hidden="true" className="live-dot" />
-              ) : null}
-              <span className="truncate">{activeEvent.shortName}</span>
+              <Search aria-hidden="true" size={18} />
             </Link>
-          ) : null}
-          <Link
-            aria-label="Search FightLobby"
-            className="focus-ring ml-auto grid size-10 cursor-pointer place-items-center rounded-lg text-fl-text-muted hover:bg-fl-surface-2 hover:text-fl-text lg:ml-0"
-            href="/search"
-          >
-            <Search aria-hidden="true" size={18} />
-          </Link>
-          <AuthMenu />
+            <AuthMenu />
+          </div>
         </div>
       </header>
     </>
