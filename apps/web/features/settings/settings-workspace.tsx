@@ -14,11 +14,16 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 
 import { Card, CardHeader } from "@/components/ui/card";
 import { BlockedMemberList } from "@/features/chat/blocked-member-list";
 import { FollowingList } from "@/features/profiles/following-list";
+import {
+  PredictionHistoryPanel,
+  PredictionHistoryPanelSkeleton,
+} from "@/features/profiles/prediction-history-panel";
+import type { PredictionHistory } from "@/features/profiles/prediction-history-types";
 import { PreferenceForm } from "@/features/settings/preference-form";
 import { ProfileSettingsForm } from "@/features/settings/profile-settings-form";
 import {
@@ -245,6 +250,30 @@ export function SettingsWorkspace({
   const section = settingsSectionForPath(pathname);
   const [account, setAccount] = useState(initialAccount);
   const [blockedMembers, setBlockedMembers] = useState(initialBlockedMembers);
+  const [predictionHistory, setPredictionHistory] =
+    useState<PredictionHistory | null>(null);
+  const [predictionHistoryError, setPredictionHistoryError] = useState(false);
+
+  useEffect(() => {
+    if (section !== "predictions" || predictionHistory) return;
+    const controller = new AbortController();
+    setPredictionHistoryError(false);
+    void fetch("/api/profile/prediction-history", {
+      headers: { accept: "application/json" },
+      signal: controller.signal,
+    })
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Prediction history was unavailable");
+        return (await response.json()) as PredictionHistory;
+      })
+      .then(setPredictionHistory)
+      .catch((error: unknown) => {
+        if (error instanceof DOMException && error.name === "AbortError")
+          return;
+        setPredictionHistoryError(true);
+      });
+    return () => controller.abort();
+  }, [predictionHistory, section]);
 
   function navigate(event: MouseEvent<HTMLAnchorElement>, href: string) {
     if (
@@ -268,7 +297,7 @@ export function SettingsWorkspace({
 
   return (
     <main className="shell py-10 sm:py-14" id="main-content">
-      <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+      <header>
         <div>
           <p className="eyebrow">Private account area</p>
           <h1 className="mt-2 font-display text-5xl font-extrabold sm:text-6xl">
@@ -278,16 +307,6 @@ export function SettingsWorkspace({
             Signed in as @{account.handle}
           </p>
         </div>
-        <Link
-          className="focus-ring inline-flex min-h-11 w-fit items-center justify-center gap-2 rounded-[10px] border border-fl-border bg-fl-surface-1 px-4 text-sm font-bold text-fl-text transition hover:border-fl-accent hover:bg-fl-surface-2"
-          href={`/u/${account.handle}`}
-          rel="noreferrer"
-          target="_blank"
-        >
-          <Eye aria-hidden="true" size={16} /> View public profile
-          <ExternalLink aria-hidden="true" size={14} />
-          <span className="sr-only"> (opens in a new tab)</span>
-        </Link>
       </header>
       <div className="mt-8 grid gap-8 lg:grid-cols-[15rem_minmax(0,1fr)]">
         <nav
@@ -326,6 +345,22 @@ export function SettingsWorkspace({
                 setAccount((current) => ({ ...current, ...update }))
               }
             />
+          ) : null}
+          {section === "predictions" ? (
+            predictionHistory ? (
+              <PredictionHistoryPanel history={predictionHistory} owner />
+            ) : predictionHistoryError ? (
+              <Card className="p-5 sm:p-6">
+                <h2 className="font-display text-2xl font-bold">
+                  Predictions could not load
+                </h2>
+                <p className="mt-2 text-sm text-fl-text-muted">
+                  Refresh this page to try again.
+                </p>
+              </Card>
+            ) : (
+              <PredictionHistoryPanelSkeleton />
+            )
           ) : null}
           {section === "privacy" ? (
             <PrivacyPanel account={account} onSaved={updatePreferences} />

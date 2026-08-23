@@ -33,7 +33,7 @@ The five root-level handoff documents should be read together:
 | `/fights/[slug]` | Dedicated matchup, prediction flow, consensus, stats, posts, and live chat.                        |
 | `/leaderboards`  | Scored member rankings and eligible event/season boards.                                           |
 | `/u/[handle]`    | Public member profile and prediction record.                                                       |
-| `/settings`      | Account, public profile, privacy, blocked-user, and account-deletion controls.                     |
+| `/settings`      | Account, public profile, personal prediction history, privacy, safety, and deletion controls.      |
 | `/admin`         | Server-authorized operations for the owner/admin.                                                  |
 
 ## Home page behavior
@@ -253,7 +253,16 @@ Members can use Google or email/password authentication. Browser authentication 
 
 `/u/[handle]` is the public member record. It contains eligible prediction history, accuracy/points data, achievements, and follow relationships without exposing private email or account data.
 
-- Settings include an obvious `View public profile` action.
+- Public prediction history shows only picks materialized after a matchup locks;
+  an open pick is never disclosed early.
+- Prediction history defaults to all participated events, offers a newest-first
+  event selector, and recomputes points, graded picks, and winner accuracy for
+  the selected scope.
+- Desktop presents fight, event, pick, result, and points as a table. Mobile
+  presents the same record as readable cards without horizontal scrolling.
+- The private Settings workspace has a dedicated `Predictions` section that
+  also includes the member's current submitted picks. The Public profile panel
+  contains the single action for opening the public record.
 - Members may follow other FightLobby members.
 - Following events and fighters is intentionally not part of the launch product.
 - Notification preferences and notification delivery are intentionally not part of the launch product.

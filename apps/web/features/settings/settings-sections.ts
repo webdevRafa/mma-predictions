@@ -5,6 +5,11 @@ export const settingsSections = [
     id: "profile",
     label: "Public profile",
   },
+  {
+    href: "/settings/predictions",
+    id: "predictions",
+    label: "Predictions",
+  },
   { href: "/settings/privacy", id: "privacy", label: "Local display" },
   { href: "/settings/following", id: "following", label: "Following" },
   {

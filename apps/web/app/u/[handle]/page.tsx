@@ -16,7 +16,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardHeader } from "@/components/ui/card";
 import { ShareProfileButton } from "@/features/profiles/share-profile-button";
 import { UserFollowButton } from "@/features/profiles/user-follow-button";
+import { PredictionHistoryPanel } from "@/features/profiles/prediction-history-panel";
 import { getPublicProfile } from "@/lib/data/profiles";
+import { getPublicPredictionHistory } from "@/lib/data/prediction-history";
 import { absoluteUrl } from "@/lib/seo/site";
 import { isProfileIndexable } from "@/lib/seo/indexability";
 
@@ -59,6 +61,7 @@ export default async function PublicProfilePage({ params }: Props) {
   if (!profile) notFound();
   if (handle.toLowerCase() !== profile.handleNormalized)
     permanentRedirect(`/u/${profile.handleNormalized}`);
+  const predictionHistory = await getPublicPredictionHistory(profile.uid);
   const joined = new Intl.DateTimeFormat("en-US", {
     month: "long",
     year: "numeric",
@@ -151,12 +154,14 @@ export default async function PublicProfilePage({ params }: Props) {
             </div>
           ))}
         </div>
-        <div className="mt-8 grid gap-6 lg:grid-cols-[1fr_.72fr]">
+        <div className="mt-8">
+          <PredictionHistoryPanel history={predictionHistory} />
+        </div>
+        <div className="mt-6 grid gap-6 lg:grid-cols-[1fr_.72fr]">
           <Card>
             <CardHeader
-              eyebrow="Prediction record"
+              eyebrow="Career marks"
               title={`${profile.stats.gradedPicks} graded picks`}
-              description="Prediction history appears after official results are graded."
             />
             <div className="p-5 sm:p-6">
               <div className="grid gap-4 sm:grid-cols-3">
@@ -179,10 +184,6 @@ export default async function PublicProfilePage({ params }: Props) {
                   </p>
                 </div>
               </div>
-              <p className="mt-5 text-sm leading-6 text-fl-text-muted">
-                Recent graded picks will populate as the prediction engine
-                records official outcomes.
-              </p>
             </div>
           </Card>
           <Card>
