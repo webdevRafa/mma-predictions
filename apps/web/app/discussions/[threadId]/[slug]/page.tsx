@@ -8,6 +8,7 @@ import { ForumPagination } from "@/components/navigation/forum-pagination";
 import { JsonLd } from "@/components/seo/json-ld";
 import { MemberAvatar } from "@/features/forum/member-avatar";
 import { ForumReplyComposer } from "@/features/forum/forum-reply-composer";
+import { MobileForumReplyAccess } from "@/features/forum/mobile-forum-reply-access";
 import { ReportForumPost } from "@/features/forum/report-forum-post";
 import { getOptionalSession } from "@/lib/auth/session";
 import { formatForumTime } from "@/lib/forum/format";
@@ -79,6 +80,10 @@ export default async function DiscussionThreadPage({
   }
   const pages = forumPageCount(result.thread.replyCount);
   const authorRole = roleLabel(result.thread.author.roleBadge);
+  const canReply = Boolean(
+    session?.onboardingComplete && session.accountStatus === "active",
+  );
+  const destinationPage = forumReplyPageNumber(result.thread.replyCount);
 
   return (
     <main className="shell py-10 sm:py-14" id="main-content">
@@ -151,6 +156,12 @@ export default async function DiscussionThreadPage({
         <div className="whitespace-pre-wrap p-5 text-[15px] leading-7 text-fl-text-muted sm:p-7 sm:text-base sm:leading-8">
           {result.thread.body}
         </div>
+        <MobileForumReplyAccess
+          canReply={canReply}
+          destinationPage={destinationPage}
+          returnTo={pathname}
+          threadId={result.thread.id}
+        />
       </article>
 
       <section aria-labelledby="replies-heading" className="mt-8 sm:mt-10">
@@ -260,13 +271,12 @@ export default async function DiscussionThreadPage({
         </div>
       </section>
 
-      <div className="mt-8 sm:mt-10">
+      <div className="mt-8 hidden md:block md:mt-10">
         <ForumReplyComposer
-          canReply={Boolean(
-            session?.onboardingComplete && session.accountStatus === "active",
-          )}
-          destinationPage={forumReplyPageNumber(result.thread.replyCount)}
+          canReply={canReply}
+          destinationPage={destinationPage}
           returnTo={pathname}
+          textareaId="desktop-forum-reply"
           threadId={result.thread.id}
         />
       </div>

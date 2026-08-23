@@ -111,6 +111,9 @@ against the event lifecycle rules.
 - A site-wide forum at `/discussions` provides searchable latest-activity topics,
   avatar-backed member identity, dedicated canonical thread pages, and numbered
   20-reply pagination.
+- Mobile topic pages keep replying accessible with an original-post inline
+  composer and a compact return affordance above the bottom navigation after the
+  original action scrolls away.
 - Forum topic identity is an immutable thread ID plus title slug; author handle
   changes do not alter or invalidate topic URLs.
 - Forum writes reuse verified-account, moderation, rate-limit, App Check,

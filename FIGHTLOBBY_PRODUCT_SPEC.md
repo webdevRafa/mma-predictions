@@ -219,6 +219,7 @@ The site-wide forum complements matchup posts; it does not replace or copy them.
 - Publishing a topic or reply requires a signed-in, verified, onboarded member with an active account. Existing moderation, mute, duplicate, rate-limit, App Check, report, audit, and account-deletion policies apply.
 - Guests can read topics and replies.
 - Replies use stable numbered pages of 20 replies. A page fetch reads only its assigned reply bucket rather than skipping through all earlier documents.
+- On mobile, the reply action is attached to the original post and expands one inline composer directly beneath it. After that action scrolls away, a compact reply control appears above the bottom navigation and returns the member to the same composer. Desktop keeps the full composer after the reply list.
 - The canonical topic route contains an immutable thread ID plus a human-readable title slug. Author handles are never part of topic identity, so a member changing a handle cannot break forum links or SEO. Historical author-profile links continue through the handle-reservation redirect behavior.
 - Desktop navigation exposes **Discussions** alongside Events and Leaderboards. Mobile uses the five-item bottom navigation: Home, Events, Discuss, Ranks, and Profile.
 

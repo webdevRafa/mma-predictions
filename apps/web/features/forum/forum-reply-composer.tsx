@@ -1,11 +1,12 @@
 "use client";
 
-import { LoaderCircle, LogIn, Send } from "lucide-react";
+import { LoaderCircle, LogIn, Send, X } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/cn";
 import { getFirebaseAppCheckToken } from "@/lib/firebase/client";
 import { FORUM_POST_MAX_LENGTH } from "@/lib/forum/types";
 
@@ -23,12 +24,18 @@ function apiMessage(value: unknown, fallback: string) {
 export function ForumReplyComposer({
   canReply,
   destinationPage,
+  embedded = false,
+  onCancel,
   returnTo,
+  textareaId = "forum-reply",
   threadId,
 }: {
   canReply: boolean;
   destinationPage: number;
+  embedded?: boolean;
+  onCancel?: () => void;
   returnTo: string;
+  textareaId?: string;
   threadId: string;
 }) {
   const router = useRouter();
@@ -80,7 +87,9 @@ export function ForumReplyComposer({
       if (!response.ok)
         throw new Error(apiMessage(payload, "Reply could not be published"));
       setBody("");
-      router.push(`${returnTo}?page=${destinationPage}#latest-reply`);
+      const destination =
+        destinationPage > 1 ? `${returnTo}?page=${destinationPage}` : returnTo;
+      router.push(`${destination}#latest-reply`);
       router.refresh();
     } catch (publishError) {
       setError(
@@ -95,23 +104,39 @@ export function ForumReplyComposer({
 
   return (
     <form
-      className="rounded-2xl border border-fl-border bg-fl-surface-1 p-5 sm:p-6"
+      className={cn(
+        embedded
+          ? "border-t border-fl-border bg-fl-surface-2/35 p-5"
+          : "rounded-2xl border border-fl-border bg-fl-surface-1 p-5 sm:p-6",
+      )}
       onSubmit={publish}
     >
       <div className="flex items-end justify-between gap-4">
         <label
           className="font-display text-2xl font-semibold"
-          htmlFor="forum-reply"
+          htmlFor={textareaId}
         >
           Add your reply
         </label>
-        <span className="font-mono text-[10px] text-fl-text-dim">
-          {body.length}/{FORUM_POST_MAX_LENGTH.toLocaleString()}
+        <span className="flex items-center gap-2">
+          <span className="font-mono text-[10px] text-fl-text-dim">
+            {body.length}/{FORUM_POST_MAX_LENGTH.toLocaleString()}
+          </span>
+          {onCancel ? (
+            <button
+              aria-label="Close reply composer"
+              className="focus-ring grid size-8 place-items-center rounded-lg text-fl-text-dim transition hover:bg-fl-surface-3 hover:text-fl-text"
+              onClick={onCancel}
+              type="button"
+            >
+              <X aria-hidden="true" size={16} />
+            </button>
+          ) : null}
         </span>
       </div>
       <textarea
         className="focus-ring mt-4 min-h-36 w-full resize-y rounded-xl border border-fl-border bg-fl-surface-2 p-4 text-sm leading-7 outline-none placeholder:text-fl-text-dim focus:border-fl-accent/55"
-        id="forum-reply"
+        id={textareaId}
         maxLength={FORUM_POST_MAX_LENGTH}
         onChange={(event) => setBody(event.target.value)}
         placeholder="Add something useful to the discussion…"

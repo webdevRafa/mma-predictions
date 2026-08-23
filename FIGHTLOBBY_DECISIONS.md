@@ -400,3 +400,16 @@ each keystroke.
 search indexing. Stable page buckets provide understandable numbered pagination
 without Firestore offset costs, while bounded directory reads keep forum cost
 predictable as activity grows.
+
+## Decision 42 — Mobile forum replies use one anchored composer
+
+**Decision:** Mobile topic pages attach a collapsed reply action to the original
+post. Expanding it reveals one composer directly beneath that post. When the
+anchor scrolls above the viewport, a compact reply action appears above the
+fixed mobile navigation and scrolls back to the same focused composer. Desktop
+retains the conventional composer after the reply list.
+
+**Reason:** Long threads should not force mobile members to scroll through every
+reply before they can participate. A single anchored composer avoids duplicate
+draft state, while the conditional compact action preserves access without
+permanently covering discussion content.
