@@ -6,7 +6,7 @@ type BadgeTone = "neutral" | "accent" | "success" | "warning" | "info";
 
 const toneClasses: Record<BadgeTone, string> = {
   neutral: "border-fl-border bg-fl-surface-2 text-fl-text-muted",
-  accent: "border-fl-accent/30 bg-fl-accent-soft text-[#ff826d]",
+  accent: "border-fl-accent/30 bg-fl-accent-soft text-fl-accent",
   success: "border-fl-success/30 bg-fl-success/10 text-fl-success",
   warning: "border-fl-warning/30 bg-fl-warning/10 text-fl-warning",
   info: "border-fl-info/30 bg-fl-info/10 text-fl-info",

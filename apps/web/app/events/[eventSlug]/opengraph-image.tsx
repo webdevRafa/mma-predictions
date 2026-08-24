@@ -40,15 +40,15 @@ export default async function EventOpenGraphImage({
         }}
       >
         <div style={{ display: "flex", fontSize: 30, fontWeight: 800 }}>
-          FIGHT<span style={{ color: "#F1401D" }}>LOBBY</span>
+          FIGHT<span style={{ color: "#E00C0F" }}>LOBBY</span>
         </div>
         <div
           style={{
             display: "flex",
-            border: "1px solid rgba(241,64,29,.45)",
+            border: "1px solid rgba(224,12,15,.45)",
             borderRadius: 999,
             padding: "10px 18px",
-            color: "#FF826D",
+            color: "#F54548",
             fontSize: 16,
             letterSpacing: 2,
           }}
@@ -76,7 +76,7 @@ export default async function EventOpenGraphImage({
             style={{
               display: "flex",
               marginTop: 28,
-              color: "#F1401D",
+              color: "#E00C0F",
               fontSize: 32,
               fontWeight: 700,
             }}

@@ -27,7 +27,7 @@ export default function OpenGraphImage() {
           width: 560,
           height: 560,
           borderRadius: 560,
-          background: "rgba(241,64,29,.15)",
+          background: "rgba(224,12,15,.15)",
           top: -280,
           right: -80,
           display: "flex",
@@ -48,11 +48,11 @@ export default function OpenGraphImage() {
             width: 7,
             height: 34,
             borderRadius: 8,
-            background: "#F1401D",
+            background: "#E00C0F",
             display: "flex",
           }}
         />
-        FIGHT<span style={{ color: "#F1401D", marginLeft: -14 }}>LOBBY</span>
+        FIGHT<span style={{ color: "#E00C0F", marginLeft: -14 }}>LOBBY</span>
       </div>
       <div style={{ display: "flex", flexDirection: "column" }}>
         <div
@@ -77,7 +77,7 @@ export default function OpenGraphImage() {
           }}
         >
           <span>JOIN THE FIGHT NIGHT</span>
-          <span style={{ color: "#F1401D" }}>CONVERSATION.</span>
+          <span style={{ color: "#E00C0F" }}>CONVERSATION.</span>
         </div>
       </div>
     </div>,

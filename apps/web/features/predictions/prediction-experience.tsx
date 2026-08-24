@@ -709,7 +709,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
             </div>
 
             <button
-              className="focus-ring mt-7 inline-flex min-h-12 max-w-full cursor-pointer items-center justify-center gap-2 rounded-lg border px-6 text-sm font-bold transition enabled:border-fl-accent enabled:bg-fl-accent enabled:text-fl-bg enabled:shadow-[0_10px_28px_rgba(241,64,29,0.18)] enabled:hover:bg-fl-accent-strong disabled:cursor-not-allowed disabled:border-fl-border disabled:bg-fl-surface-2 disabled:text-fl-text-dim disabled:shadow-none sm:px-7"
+              className="focus-ring mt-7 inline-flex min-h-12 max-w-full cursor-pointer items-center justify-center gap-2 rounded-lg border px-6 text-sm font-bold transition enabled:border-fl-accent enabled:bg-fl-accent enabled:text-fl-bg enabled:shadow-[0_10px_28px_rgba(224,12,15,0.18)] enabled:hover:bg-fl-accent-strong disabled:cursor-not-allowed disabled:border-fl-border disabled:bg-fl-surface-2 disabled:text-fl-text-dim disabled:shadow-none sm:px-7"
               disabled={submissionDisabled}
               type="submit"
             >

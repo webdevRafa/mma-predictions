@@ -53,7 +53,7 @@ export function AdminSafetyFields({
         className={`focus-ring mt-5 rounded-lg px-4 py-3 text-xs font-extrabold tracking-[.06em] uppercase ${
           danger
             ? "bg-fl-danger text-white"
-            : "bg-fl-accent text-fl-bg hover:bg-fl-accent-hover"
+            : "bg-fl-accent text-fl-bg hover:bg-fl-accent-strong"
         }`}
         type="submit"
       >
