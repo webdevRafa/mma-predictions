@@ -33,8 +33,8 @@ export default async function LeaderboardsPage({
           className="arena-grid absolute inset-0 opacity-40"
         />
         <div className="shell relative py-10 sm:py-12">
-          <h1 className="max-w-4xl font-display text-5xl font-extrabold sm:text-6xl">
-            LEADERBOARDS
+          <h1 className="font-display text-5xl leading-none font-semibold tracking-[-0.025em] sm:text-6xl">
+            Leaderboards
           </h1>
         </div>
       </section>
