@@ -1,10 +1,13 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
-import type { ReactNode } from "react";
+import { Suspense, type ReactNode } from "react";
 
 import { AnalyticsRuntime } from "@/features/analytics/analytics-runtime";
 import { ConsentProvider } from "@/features/privacy/consent-provider";
-import { MobileNavigation } from "@/components/shell/mobile-navigation";
+import {
+  MobileNavigation,
+  MobileNavigationFallback,
+} from "@/components/shell/mobile-navigation";
 import { SiteFooter } from "@/components/shell/site-footer";
 import { SiteHeader } from "@/components/shell/site-header";
 import { JsonLd } from "@/components/seo/json-ld";
@@ -129,7 +132,9 @@ export default function RootLayout({
           <SiteHeader />
           {children}
           <SiteFooter />
-          <MobileNavigation />
+          <Suspense fallback={<MobileNavigationFallback />}>
+            <MobileNavigation />
+          </Suspense>
         </ConsentProvider>
       </body>
     </html>

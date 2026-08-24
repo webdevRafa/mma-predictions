@@ -1,8 +1,6 @@
 "use client";
 
-import { ChevronDown, LoaderCircle } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useState, useTransition } from "react";
+import { ChevronDown } from "lucide-react";
 
 interface EventBoardOption {
   id: string;
@@ -11,15 +9,13 @@ interface EventBoardOption {
 
 export function EventBoardSelect({
   activeBoardId,
+  onBoardChange,
   options,
 }: {
   activeBoardId?: string | undefined;
+  onBoardChange: (boardId: string) => void;
   options: EventBoardOption[];
 }) {
-  const router = useRouter();
-  const [pending, startTransition] = useTransition();
-  const [selected, setSelected] = useState(activeBoardId ?? "");
-
   if (options.length === 0) return null;
 
   return (
@@ -32,22 +28,14 @@ export function EventBoardSelect({
       </label>
       <div className="relative">
         <select
-          aria-busy={pending}
-          className="focus-ring h-12 w-full appearance-none rounded-lg border border-fl-border bg-fl-surface-1 px-4 pr-11 text-sm font-bold text-fl-text transition hover:border-fl-text-muted disabled:cursor-wait disabled:opacity-70"
-          disabled={pending}
+          className="focus-ring h-12 w-full cursor-pointer appearance-none rounded-lg border border-fl-border bg-fl-surface-1 px-4 pr-11 text-sm font-bold text-fl-text transition hover:border-fl-text-muted"
           id="event-leaderboard"
           onChange={(event) => {
             const boardId = event.target.value;
-            setSelected(boardId);
             if (!boardId) return;
-            startTransition(() => {
-              router.push(
-                `/leaderboards?board=${encodeURIComponent(boardId)}`,
-                { scroll: false },
-              );
-            });
+            onBoardChange(boardId);
           }}
-          value={selected}
+          value={activeBoardId ?? ""}
         >
           <option value="">Choose a completed event</option>
           {options.map((option) => (
@@ -56,19 +44,11 @@ export function EventBoardSelect({
             </option>
           ))}
         </select>
-        {pending ? (
-          <LoaderCircle
-            aria-hidden="true"
-            className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 animate-spin text-fl-accent"
-            size={16}
-          />
-        ) : (
-          <ChevronDown
-            aria-hidden="true"
-            className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-fl-text-dim"
-            size={16}
-          />
-        )}
+        <ChevronDown
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/2 right-4 -translate-y-1/2 text-fl-text-dim"
+          size={16}
+        />
       </div>
     </div>
   );

@@ -35,6 +35,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader } from "@/components/ui/card";
 import { PublicPredictionBadge } from "@/components/predictions/public-prediction-badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { AuthForm } from "@/features/auth/auth-form";
 import { HandleForm } from "@/features/auth/handle-form";
 import { trackAnalyticsEvent } from "@/lib/analytics/events";
@@ -600,7 +601,7 @@ export function FightDiscussion({
           </p>
         ) : null}
         {!authReady ? (
-          <div className="h-28 animate-pulse rounded-xl bg-fl-surface-2" />
+          <Skeleton className="h-28 rounded-xl" />
         ) : currentUser ? (
           <DiscussionComposer
             body={body}
@@ -709,10 +710,7 @@ export function FightDiscussion({
         {loading ? (
           <div className="space-y-5 p-5 sm:p-6">
             {[0, 1, 2].map((value) => (
-              <div
-                className="h-24 animate-pulse rounded-xl bg-fl-surface-2"
-                key={value}
-              />
+              <Skeleton className="h-24 rounded-xl" key={value} />
             ))}
           </div>
         ) : visibleThreads.length === 0 ? (

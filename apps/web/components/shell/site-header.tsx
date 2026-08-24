@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { connection } from "next/server";
+import { Suspense } from "react";
 
 import { listPublicEvents } from "@/lib/data/public";
 import { AuthMenu } from "@/features/auth/auth-menu";
@@ -9,12 +10,10 @@ import { selectFeaturedEvent } from "@/lib/events/featured-event";
 import { getServerRenderTime } from "@/lib/time/server";
 
 import { OfflineBanner } from "./offline-banner";
-
-const navigation = [
-  { href: "/events", label: "Events" },
-  { href: "/leaderboards", label: "Leaderboards" },
-  { href: "/discussions", label: "Discussions" },
-];
+import {
+  PrimaryNavigation,
+  PrimaryNavigationFallback,
+} from "./primary-navigation";
 
 async function listHeaderEvents() {
   await connection();
@@ -63,20 +62,9 @@ export async function SiteHeader() {
               FIGHT<span className="text-fl-accent">LOBBY</span>
             </span>
           </Link>
-          <nav
-            aria-label="Primary navigation"
-            className="ml-6 hidden items-center gap-1 md:flex"
-          >
-            {navigation.map((item) => (
-              <Link
-                className="focus-ring rounded-lg px-3 py-2 text-sm font-semibold text-fl-text-muted transition hover:bg-fl-surface-2 hover:text-fl-text"
-                href={item.href}
-                key={item.href}
-              >
-                {item.label}
-              </Link>
-            ))}
-          </nav>
+          <Suspense fallback={<PrimaryNavigationFallback />}>
+            <PrimaryNavigation />
+          </Suspense>
           <div className="ml-auto flex items-center gap-1 sm:gap-2">
             {activeEvent ? (
               <Link
