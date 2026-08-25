@@ -83,7 +83,7 @@ export function FightCardRow({
           size={20}
         />
       </Link>
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-fl-border/60 pt-3 text-xs text-fl-text-muted">
+      <div className="-mx-4 -mb-4 mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-fl-border/70 bg-fl-bg/55 px-4 py-3 text-xs text-fl-text-muted sm:-mx-5 sm:-mb-5 sm:px-5">
         <span>
           {fight.weightClass} · {fight.scheduledRounds} rounds
         </span>
