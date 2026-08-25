@@ -21,69 +21,75 @@ export function FightCardRow({
     fight.result && !fight.result.winnerFighterId ? fight.result : undefined;
 
   return (
-    <article className="group border-b border-fl-border/80 p-4 last:border-b-0 sm:p-5">
-      <div className="flex flex-wrap items-center justify-between gap-3">
-        <div className="flex items-center gap-2">
-          {featuredLabel ? (
-            <span className="font-mono text-[10px] font-semibold tracking-[0.1em] text-fl-accent uppercase">
-              {featuredLabel}
-            </span>
-          ) : null}
-          {fight.isTitleFight ? <Badge tone="accent">Title fight</Badge> : null}
-          {noWinnerResult ? <FightResultBadge result={noWinnerResult} /> : null}
-        </div>
-        <LiveStatusFragment
-          collection="fights"
-          id={fight.id}
-          initialStatus={fight.status}
-        />
-      </div>
+    <article className="border-b border-fl-border/80 last:border-b-0">
       <Link
         aria-label={`${fight.fighterA.name.full} versus ${fight.fighterB.name.full}`}
-        className="focus-ring mt-4 grid rounded-xl md:grid-cols-[1fr_auto_1fr_auto] md:items-center md:gap-5"
+        className="group block cursor-pointer p-4 transition-colors hover:bg-fl-surface-2/25 focus-visible:bg-fl-surface-2/25 focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-fl-accent focus-visible:outline-none sm:p-5"
         href={`/fights/${fight.slug}`}
       >
-        <div className="min-w-0">
-          <div className="flex flex-wrap items-center gap-2">
-            <h3 className="font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent">
-              {fight.fighterA.name.full}
-            </h3>
-            {fighterAWon && fight.result ? (
-              <FightResultBadge result={fight.result} />
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            {featuredLabel ? (
+              <span className="font-mono text-[10px] font-semibold tracking-[0.1em] text-fl-accent uppercase">
+                {featuredLabel}
+              </span>
+            ) : null}
+            {fight.isTitleFight ? (
+              <Badge tone="accent">Title fight</Badge>
+            ) : null}
+            {noWinnerResult ? (
+              <FightResultBadge result={noWinnerResult} />
             ) : null}
           </div>
-          <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
-            {formatRecord(fight.fighterA.record)}
-          </p>
+          <LiveStatusFragment
+            collection="fights"
+            id={fight.id}
+            initialStatus={fight.status}
+          />
         </div>
-        <div className="my-3 flex items-center gap-3 text-fl-text-dim md:my-0">
-          <span className="h-px flex-1 bg-fl-border md:hidden" />
-          <span className="font-display text-sm font-bold">VS</span>
-          <span className="h-px flex-1 bg-fl-border md:hidden" />
-        </div>
-        <div className="min-w-0 md:text-right">
-          <div className="flex flex-wrap items-center gap-2 md:justify-end">
-            {fighterBWon && fight.result ? (
-              <FightResultBadge
-                className="order-2 md:order-1"
-                result={fight.result}
-              />
-            ) : null}
-            <h3 className="order-1 font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent md:order-2">
-              {fight.fighterB.name.full}
-            </h3>
+        <div className="mt-4 grid md:grid-cols-[1fr_auto_1fr_auto] md:items-center md:gap-5">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2">
+              <h3 className="font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent">
+                {fight.fighterA.name.full}
+              </h3>
+              {fighterAWon && fight.result ? (
+                <FightResultBadge result={fight.result} />
+              ) : null}
+            </div>
+            <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
+              {formatRecord(fight.fighterA.record)}
+            </p>
           </div>
-          <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
-            {formatRecord(fight.fighterB.record)}
-          </p>
+          <div className="my-3 flex items-center gap-3 text-fl-text-dim md:my-0">
+            <span className="h-px flex-1 bg-fl-border md:hidden" />
+            <span className="font-display text-sm font-bold">VS</span>
+            <span className="h-px flex-1 bg-fl-border md:hidden" />
+          </div>
+          <div className="min-w-0 md:text-right">
+            <div className="flex flex-wrap items-center gap-2 md:justify-end">
+              {fighterBWon && fight.result ? (
+                <FightResultBadge
+                  className="order-2 md:order-1"
+                  result={fight.result}
+                />
+              ) : null}
+              <h3 className="order-1 font-display text-2xl leading-none font-bold transition group-hover:text-fl-accent md:order-2">
+                {fight.fighterB.name.full}
+              </h3>
+            </div>
+            <p className="mt-1 font-mono text-[11px] text-fl-text-muted">
+              {formatRecord(fight.fighterB.record)}
+            </p>
+          </div>
+          <ArrowUpRight
+            aria-hidden="true"
+            className="hidden text-fl-text-dim transition group-hover:text-fl-accent md:block"
+            size={20}
+          />
         </div>
-        <ArrowUpRight
-          aria-hidden="true"
-          className="hidden text-fl-text-dim transition group-hover:text-fl-accent md:block"
-          size={20}
-        />
       </Link>
-      <div className="-mx-4 -mb-4 mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-fl-border/70 bg-fl-bg/55 px-4 py-3 text-xs text-fl-text-muted sm:-mx-5 sm:-mb-5 sm:px-5">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-fl-border/70 bg-fl-bg/55 px-4 py-3 text-xs text-fl-text-muted sm:px-5">
         <span>
           {fight.weightClass} · {fight.scheduledRounds} rounds
         </span>
