@@ -36,3 +36,21 @@ pnpm add:production:event -- imports/ufc/<file>.json
 $env:FIGHTLOBBY_PRODUCTION_IMPORT_CONFIRM="ADD <event-id>"
 pnpm add:production:event -- imports/ufc/<file>.json
 ```
+
+## Editorial articles
+
+Article collections are validated against the shared domain schema before any
+production connection is opened. The importer only creates or merges the
+listed article documents, rejects ID and slug ownership conflicts, never
+deletes documents, and verifies that event, fight, and prediction counts are
+unchanged after the write.
+
+```powershell
+$env:GOOGLE_APPLICATION_CREDENTIALS="C:\path\to\service-account.json"
+$env:FIGHTLOBBY_PRODUCTION_PROJECT_ID="mma-cortex"
+pnpm import:production:articles -- imports/articles/<file>.json
+
+# Run only after reviewing the dry-run inventory.
+$env:FIGHTLOBBY_PRODUCTION_IMPORT_CONFIRM="UPSERT ARTICLES <count>"
+pnpm import:production:articles -- imports/articles/<file>.json
+```

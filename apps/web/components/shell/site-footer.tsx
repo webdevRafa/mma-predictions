@@ -3,6 +3,7 @@ import Link from "next/link";
 import { PrivacyChoicesButton } from "@/features/privacy/privacy-choices-button";
 
 const links = [
+  ["Articles", "/articles"],
   ["About", "/about"],
   ["Community guidelines", "/community-guidelines"],
   ["Privacy", "/privacy"],

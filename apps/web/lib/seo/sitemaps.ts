@@ -1,5 +1,6 @@
 import "server-only";
 
+import { listPublishedArticles } from "@/lib/data/articles";
 import { listPublicCards } from "@/lib/data/public";
 import { listPublicProfiles } from "@/lib/data/profiles";
 import { getFirebaseAdmin } from "@/lib/firebase/admin";
@@ -9,6 +10,7 @@ import {
   isEventIndexable,
   isFightIndexable,
   isFighterIndexable,
+  isArticleIndexable,
   isProfileIndexable,
 } from "@/lib/seo/indexability";
 import { absoluteUrl } from "@/lib/seo/site";
@@ -94,4 +96,13 @@ export async function discussionSitemapEntries() {
       updatedAt: new Date(thread.lastActivityAt).toISOString(),
     }),
   );
+}
+
+export async function articleSitemapEntries() {
+  return (await listPublishedArticles())
+    .filter(isArticleIndexable)
+    .map((article) => ({
+      url: absoluteUrl(`/articles/${article.slug}`),
+      updatedAt: article.updatedAt,
+    }));
 }

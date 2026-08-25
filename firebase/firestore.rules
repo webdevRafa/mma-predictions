@@ -23,6 +23,10 @@ service cloud.firestore {
       match /predictionShards/{shardId} { allow read, write: if false; }
     }
     match /fighters/{fighterId} { allow read: if true; allow write: if false; }
+    match /articles/{articleId} {
+      allow read: if resource.data.status == 'published';
+      allow write: if false;
+    }
     match /fightStats/{fightId} { allow read: if true; allow write: if false; }
     match /chatRooms/{roomId} { allow read: if true; allow write: if false; }
     match /leaderboards/{boardId} {

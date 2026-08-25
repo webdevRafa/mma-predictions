@@ -23,6 +23,14 @@
         { "fieldPath": "profileVisibility", "order": "ASCENDING" },
         { "fieldPath": "stats.gradedPicks", "order": "DESCENDING" }
       ]
+    },
+    {
+      "collectionGroup": "articles",
+      "queryScope": "COLLECTION",
+      "fields": [
+        { "fieldPath": "status", "order": "ASCENDING" },
+        { "fieldPath": "publishedAt", "order": "DESCENDING" }
+      ]
     }
   ],
   "fieldOverrides": []

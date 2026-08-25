@@ -25,6 +25,7 @@
     "import:production:event": "tsx scripts/import-production-event.ts",
     "add:production:event": "tsx scripts/add-production-event.ts",
     "refresh:production:event": "tsx scripts/refresh-production-event.ts",
+    "import:production:articles": "tsx scripts/import-production-articles.ts",
     "validate:fixtures": "tsx scripts/validate-fixture.ts fixtures",
     "format": "prettier --write .",
     "format:check": "prettier --check .",

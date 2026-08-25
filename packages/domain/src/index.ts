@@ -18,5 +18,7 @@ export * from "./schemas/discussion.ts";
 export * from "./schemas/fixture.ts";
 export * from "./schemas/identity.ts";
 export * from "./schemas/leaderboard.ts";
+export * from "./schemas/article.ts";
+export * from "./types/article.ts";
 export * from "./types/domain.ts";
 export * from "./validation/fixture.ts";

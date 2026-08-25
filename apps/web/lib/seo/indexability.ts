@@ -1,4 +1,24 @@
-import type { Event, Fight, Fighter, PublicProfile } from "@fightlobby/domain";
+import type {
+  Article,
+  Event,
+  Fight,
+  Fighter,
+  PublicProfile,
+} from "@fightlobby/domain";
+
+export function isArticleIndexable(article: Article) {
+  const wordCount = article.body.reduce((total, block) => {
+    const text =
+      block.type === "bullet_list" ? block.items.join(" ") : block.text;
+    return total + text.trim().split(/\s+/).length;
+  }, 0);
+  return (
+    article.status === "published" &&
+    article.monetizationEligible &&
+    article.sources.length > 0 &&
+    wordCount >= 350
+  );
+}
 
 export function isEventIndexable(event: Event, fights: Fight[]) {
   return (

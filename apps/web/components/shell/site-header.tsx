@@ -86,9 +86,7 @@ export async function SiteHeader() {
             >
               <Search aria-hidden="true" size={18} />
             </Link>
-            <div className="hidden md:block">
-              <AuthMenu />
-            </div>
+            <AuthMenu />
           </div>
         </div>
       </header>

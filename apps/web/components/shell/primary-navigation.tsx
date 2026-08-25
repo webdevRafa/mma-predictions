@@ -13,14 +13,19 @@ const navigation = [
     paths: ["/events", "/fights", "/fighters"],
   },
   {
-    href: "/leaderboards",
-    label: "Leaderboards",
-    paths: ["/leaderboards"],
+    href: "/articles",
+    label: "Articles",
+    paths: ["/articles"],
   },
   {
     href: "/discussions",
     label: "Discussions",
     paths: ["/discussions"],
+  },
+  {
+    href: "/leaderboards",
+    label: "Leaderboards",
+    paths: ["/leaderboards"],
   },
 ];
 

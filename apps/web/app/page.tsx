@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { ArrowRight, MessageCircle, Target, Trophy } from "lucide-react";
+import {
+  ArrowRight,
+  MessageCircle,
+  Newspaper,
+  Target,
+  Trophy,
+} from "lucide-react";
 import Link from "next/link";
 
 import { AdSlot } from "@/components/ads/ad-slot";
@@ -7,6 +13,8 @@ import { HeroEventCountdowns } from "@/components/events/hero-event-countdowns";
 import { FightCardGroups } from "@/components/fights/fight-card-groups";
 import { Card } from "@/components/ui/card";
 import { EventPredictionModal } from "@/features/predictions/event-prediction-modal";
+import { formatArticleDate } from "@/lib/articles/format";
+import { listPublishedArticles } from "@/lib/data/articles";
 import { getPublicEvent, listPublicEvents } from "@/lib/data/public";
 import { selectFeaturedEvent } from "@/lib/events/featured-event";
 import { getServerRenderTime } from "@/lib/time/server";
@@ -25,7 +33,10 @@ export const metadata: Metadata = {
 
 export default async function HomePage() {
   const renderedAt = getServerRenderTime();
-  const events = await listPublicEvents();
+  const [events, articles] = await Promise.all([
+    listPublicEvents(),
+    listPublishedArticles(),
+  ]);
   const event = selectFeaturedEvent(events, renderedAt);
   const card = event ? await getPublicEvent(event.slug) : null;
   const eventTiming = event
@@ -128,6 +139,58 @@ export default async function HomePage() {
             />
           </div>
           <FightCardGroups fights={card.fights} />
+        </section>
+      ) : null}
+
+      {articles.length ? (
+        <section className="border-t border-fl-border bg-fl-surface-1/30">
+          <div className="shell py-14 sm:py-20">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="eyebrow">FightLobby editorial</p>
+                <h2 className="mt-2 font-display text-4xl font-semibold tracking-[-0.02em] sm:text-5xl">
+                  Latest analysis
+                </h2>
+              </div>
+              <Link
+                className="focus-ring inline-flex items-center gap-2 rounded-lg text-sm font-bold text-fl-text transition hover:text-fl-accent"
+                href="/articles"
+              >
+                All articles <ArrowRight aria-hidden="true" size={15} />
+              </Link>
+            </div>
+            <div className="mt-7 grid gap-4 md:grid-cols-3">
+              {articles.slice(0, 3).map((article) => (
+                <Link
+                  className="focus-ring group flex min-h-56 flex-col rounded-2xl border border-fl-border bg-fl-surface-1 p-5 transition hover:border-fl-accent/35 hover:bg-fl-surface-2 sm:p-6"
+                  href={`/articles/${article.slug}`}
+                  key={article.id}
+                >
+                  <span className="flex items-center justify-between gap-3 font-mono text-[10px] tracking-[.07em] text-fl-text-dim uppercase">
+                    <time dateTime={article.publishedAt}>
+                      {formatArticleDate(article.publishedAt)}
+                    </time>
+                    <Newspaper
+                      aria-hidden="true"
+                      className="text-fl-accent"
+                      size={15}
+                    />
+                  </span>
+                  <span className="mt-5 block font-display text-3xl leading-[1.02] font-semibold tracking-[-0.015em] text-fl-text transition group-hover:text-fl-accent">
+                    {article.title}
+                  </span>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-bold text-fl-text">
+                    Read article
+                    <ArrowRight
+                      aria-hidden="true"
+                      className="transition group-hover:translate-x-1"
+                      size={15}
+                    />
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </div>
         </section>
       ) : null}
 

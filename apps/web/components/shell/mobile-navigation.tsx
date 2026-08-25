@@ -4,8 +4,8 @@ import {
   CalendarDays,
   Home,
   MessageSquareText,
+  Newspaper,
   Trophy,
-  UserRound,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -22,6 +22,12 @@ const items = [
     paths: ["/events", "/fights", "/fighters"],
   },
   {
+    href: "/articles",
+    label: "Articles",
+    icon: Newspaper,
+    paths: ["/articles"],
+  },
+  {
     href: "/discussions",
     label: "Discuss",
     icon: MessageSquareText,
@@ -32,12 +38,6 @@ const items = [
     label: "Ranks",
     icon: Trophy,
     paths: ["/leaderboards"],
-  },
-  {
-    href: "/settings",
-    label: "Profile",
-    icon: UserRound,
-    paths: ["/settings", "/u"],
   },
 ];
 

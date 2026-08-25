@@ -39,6 +39,14 @@ rulesDescribe("Firebase security boundaries", () => {
         id: "evt_public",
         status: "scheduled",
       });
+      await setDoc(doc(context.firestore(), "articles/art_published"), {
+        id: "art_published",
+        status: "published",
+      });
+      await setDoc(doc(context.firestore(), "articles/art_draft"), {
+        id: "art_draft",
+        status: "draft",
+      });
       await setDoc(doc(context.firestore(), "users/member_a"), {
         uid: "member_a",
         email: "private@example.test",
@@ -119,6 +127,17 @@ rulesDescribe("Firebase security boundaries", () => {
           "users/member_a",
         ),
       ),
+    );
+  });
+
+  it("publishes reviewed articles while keeping drafts private", async () => {
+    const firestore = environment.unauthenticatedContext().firestore();
+    await assertSucceeds(getDoc(doc(firestore, "articles/art_published")));
+    await assertFails(getDoc(doc(firestore, "articles/art_draft")));
+    await assertFails(
+      setDoc(doc(firestore, "articles/art_published"), {
+        status: "archived",
+      }),
     );
   });
 

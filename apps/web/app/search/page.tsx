@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import {
   ArrowRight,
   CalendarDays,
+  Newspaper,
   Search,
   Swords,
   UserRound,
@@ -11,13 +12,14 @@ import Link from "next/link";
 
 import { Breadcrumbs } from "@/components/navigation/breadcrumbs";
 import { Card } from "@/components/ui/card";
+import { listPublishedArticles } from "@/lib/data/articles";
 import { listPublicCards } from "@/lib/data/public";
 import { listPublicProfiles } from "@/lib/data/profiles";
 
 export const metadata: Metadata = {
   title: "Search",
   description:
-    "Find UFC events, matchup pages, fighters, and FightLobby members.",
+    "Find UFC events, matchup pages, fighters, FightLobby articles, and members.",
   robots: { index: false, follow: true },
 };
 
@@ -25,7 +27,7 @@ interface SearchResult {
   href: string;
   label: string;
   meta: string;
-  type: "Event" | "Fight" | "Fighter" | "Member";
+  type: "Article" | "Event" | "Fight" | "Fighter" | "Member";
 }
 
 function matches(query: string, ...values: Array<string | undefined>) {
@@ -43,7 +45,8 @@ export default async function SearchPage({
     0,
     80,
   );
-  const [cards, profiles] = await Promise.all([
+  const [articles, cards, profiles] = await Promise.all([
+    listPublishedArticles(),
     listPublicCards(),
     listPublicProfiles(),
   ]);
@@ -98,6 +101,22 @@ export default async function SearchPage({
             meta: fighter.currentWeightClass ?? "UFC fighter",
             type: "Fighter" as const,
           })),
+        ...articles
+          .filter((article) =>
+            matches(
+              query,
+              article.title,
+              article.dek,
+              article.excerpt,
+              ...article.tags,
+            ),
+          )
+          .map((article) => ({
+            href: `/articles/${article.slug}`,
+            label: article.title,
+            meta: `${article.readingMinutes} min read`,
+            type: "Article" as const,
+          })),
         ...profiles
           .filter((profile) =>
             matches(query, profile.handle, profile.displayName),
@@ -112,6 +131,7 @@ export default async function SearchPage({
     : [];
 
   const icon = {
+    Article: Newspaper,
     Event: CalendarDays,
     Fight: Swords,
     Fighter: UserRound,
@@ -129,7 +149,8 @@ export default async function SearchPage({
           FIND YOUR FIGHT
         </h1>
         <p className="mt-4 text-base leading-7 text-fl-text-muted">
-          Search UFC events, matchup pages, fighters, and public member handles.
+          Search UFC events, matchup pages, fighters, articles, and public
+          member handles.
         </p>
       </header>
 
@@ -148,7 +169,7 @@ export default async function SearchPage({
           id="site-search"
           maxLength={80}
           name="q"
-          placeholder="Search a fighter, event, matchup, or member…"
+          placeholder="Search a fighter, event, article, or member…"
           type="search"
         />
         <button
@@ -213,8 +234,8 @@ export default async function SearchPage({
           ) : (
             <Card className="mt-5 p-6">
               <p className="text-sm text-fl-text-muted">
-                Try a fighter surname, UFC event name, matchup, or member
-                handle.
+                Try a fighter surname, UFC event name, article topic, matchup,
+                or member handle.
               </p>
             </Card>
           )}
