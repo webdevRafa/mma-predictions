@@ -1,0 +1,985 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-23T17:49:42.168Z",
+  "source": {
+    "provider": "manual",
+    "externalEventId": "ufc-fight-night-august-29-2026",
+    "sourceUrl": "https://www.ufc.com/event/ufc-fight-night-august-29-2026",
+    "retrievedAt": "2026-08-23T17:49:42.168Z"
+  },
+  "event": {
+    "id": "evt_ufc_fn_2026_08_29",
+    "promotion": "ufc",
+    "name": "UFC Fight Night: Nurmagomedov vs Song",
+    "shortName": "Nurmagomedov vs Song",
+    "slug": "ufc-fight-night-nurmagomedov-vs-song-2026",
+    "slugHistory": [],
+    "status": "scheduled",
+    "startsAt": "2026-08-29T10:00:00.000Z",
+    "prelimsStartsAt": "2026-08-29T07:00:00.000Z",
+    "mainCardStartsAt": "2026-08-29T10:00:00.000Z",
+    "venueTimezone": "Asia/Shanghai",
+    "venue": {
+      "name": "Oriental Sports Center",
+      "city": "Shanghai",
+      "region": "Pudong District",
+      "countryCode": "CN"
+    },
+    "editorial": {
+      "summary": "Umar Nurmagomedov meets Song Yadong in the bantamweight main event at Oriental Sports Center in Shanghai, China.",
+      "status": "reviewed"
+    }
+  },
+  "fighters": [
+    {
+      "id": "ftr_umar_nurmagomedov",
+      "slug": "umar-nurmagomedov",
+      "slugHistory": [],
+      "name": {
+        "full": "Umar Nurmagomedov",
+        "first": "Umar",
+        "last": "Nurmagomedov",
+        "normalized": "umar nurmagomedov"
+      },
+      "countryCode": "RU",
+      "currentWeightClass": "Bantamweight",
+      "record": { "wins": 20, "losses": 1, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/umar-nurmagomedov",
+      "heightCm": 172.72,
+      "reachCm": 175.26,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.86,
+        "significantStrikeAccuracy": 0.56,
+        "significantStrikeDefense": 0.61,
+        "takedownsPer15": 4.03,
+        "takedownAccuracy": 0.08,
+        "takedownDefense": 0.79,
+        "submissionsPer15": 0.24
+      }
+    },
+    {
+      "id": "ftr_song_yadong",
+      "slug": "song-yadong",
+      "slugHistory": [],
+      "name": {
+        "full": "Song Yadong",
+        "first": "Song",
+        "last": "Yadong",
+        "normalized": "song yadong"
+      },
+      "countryCode": "CN",
+      "currentWeightClass": "Bantamweight",
+      "record": { "wins": 23, "losses": 9, "draws": 1, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/song-yadong",
+      "heightCm": 172.72,
+      "reachCm": 170.18,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.34,
+        "significantStrikeAccuracy": 0.44,
+        "significantStrikeDefense": 0.55,
+        "takedownsPer15": 0.82,
+        "takedownAccuracy": 0.03,
+        "takedownDefense": 0.74,
+        "submissionsPer15": 0.2
+      }
+    },
+    {
+      "id": "ftr_yan_xiaonan",
+      "slug": "yan-xiaonan",
+      "slugHistory": [],
+      "name": {
+        "full": "Yan Xiaonan",
+        "first": "Yan",
+        "last": "Xiaonan",
+        "normalized": "yan xiaonan"
+      },
+      "countryCode": "CN",
+      "currentWeightClass": "Women's Strawweight",
+      "record": { "wins": 19, "losses": 5, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/yan-xiaonan",
+      "heightCm": 165.1,
+      "reachCm": 160.02,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.69,
+        "significantStrikeAccuracy": 0.45,
+        "significantStrikeDefense": 0.6,
+        "takedownsPer15": 0.84,
+        "takedownAccuracy": 0,
+        "takedownDefense": 0.65,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_denise_gomes",
+      "slug": "denise-gomes",
+      "slugHistory": [],
+      "name": {
+        "full": "Denise Gomes",
+        "first": "Denise",
+        "last": "Gomes",
+        "normalized": "denise gomes"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Women's Strawweight",
+      "record": { "wins": 12, "losses": 3, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/denise-gomes",
+      "heightCm": 157.48,
+      "reachCm": 160.02,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.43,
+        "significantStrikeAccuracy": 0.49,
+        "significantStrikeDefense": 0.52,
+        "takedownsPer15": 1.45,
+        "takedownAccuracy": 0,
+        "takedownDefense": 0.67,
+        "submissionsPer15": 0.72
+      }
+    },
+    {
+      "id": "ftr_aoriqileng",
+      "slug": "aoriqileng",
+      "slugHistory": [],
+      "name": { "full": "Aoriqileng", "normalized": "aoriqileng" },
+      "countryCode": "CN",
+      "currentWeightClass": "Bantamweight",
+      "record": { "wins": 26, "losses": 13, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/aoriqileng",
+      "heightCm": 170.18,
+      "reachCm": 175.26,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.4,
+        "significantStrikeAccuracy": 0.5,
+        "significantStrikeDefense": 0.47,
+        "takedownsPer15": 1.11,
+        "takedownAccuracy": 0.27,
+        "takedownDefense": 0.6,
+        "submissionsPer15": 0.16
+      }
+    },
+    {
+      "id": "ftr_kai_asakura",
+      "slug": "kai-asakura",
+      "slugHistory": [],
+      "name": {
+        "full": "Kai Asakura",
+        "first": "Kai",
+        "last": "Asakura",
+        "normalized": "kai asakura"
+      },
+      "countryCode": "JP",
+      "currentWeightClass": "Bantamweight",
+      "record": { "wins": 22, "losses": 6, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/kai-asakura",
+      "heightCm": 172.72,
+      "reachCm": 175.26,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 2.53,
+        "significantStrikeAccuracy": 0.34,
+        "significantStrikeDefense": 0.52,
+        "takedownsPer15": 0,
+        "takedownDefense": 0.5,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_alex_perez",
+      "slug": "alex-perez",
+      "slugHistory": [],
+      "name": {
+        "full": "Alex Perez",
+        "first": "Alex",
+        "last": "Perez",
+        "normalized": "alex perez"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Flyweight",
+      "record": { "wins": 26, "losses": 10, "draws": 0, "noContests": 1 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/alex-perez",
+      "heightCm": 167.64,
+      "reachCm": 166.37,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.22,
+        "significantStrikeAccuracy": 0.45,
+        "significantStrikeDefense": 0.59,
+        "takedownsPer15": 2.07,
+        "takedownAccuracy": 0.21,
+        "takedownDefense": 0.74,
+        "submissionsPer15": 0.83
+      }
+    },
+    {
+      "id": "ftr_sumudaerji",
+      "slug": "sumudaerji",
+      "slugHistory": [],
+      "name": { "full": "Sumudaerji", "normalized": "sumudaerji" },
+      "countryCode": "CN",
+      "currentWeightClass": "Flyweight",
+      "record": { "wins": 19, "losses": 7, "draws": 0, "noContests": 1 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/sumudaerji",
+      "heightCm": 172.72,
+      "reachCm": 182.88,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.4,
+        "significantStrikeAccuracy": 0.5,
+        "significantStrikeDefense": 0.63,
+        "takedownsPer15": 0.76,
+        "takedownAccuracy": 0,
+        "takedownDefense": 0.73,
+        "submissionsPer15": 0.51
+      }
+    },
+    {
+      "id": "ftr_liu_ce",
+      "slug": "liu-ce",
+      "slugHistory": [],
+      "name": {
+        "full": "Liu Ce",
+        "first": "Liu",
+        "last": "Ce",
+        "normalized": "liu ce"
+      },
+      "countryCode": "CN",
+      "currentWeightClass": "Light Heavyweight",
+      "record": { "wins": 3, "losses": 1, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/liu-ce",
+      "heightCm": 193.04
+    },
+    {
+      "id": "ftr_junior_tafa",
+      "slug": "junior-tafa",
+      "slugHistory": [],
+      "name": {
+        "full": "Junior Tafa",
+        "first": "Junior",
+        "last": "Tafa",
+        "normalized": "junior tafa"
+      },
+      "countryCode": "AU",
+      "currentWeightClass": "Light Heavyweight",
+      "record": { "wins": 7, "losses": 6, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/junior-tafa",
+      "heightCm": 190.5,
+      "reachCm": 190.5,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.53,
+        "significantStrikeAccuracy": 0.52,
+        "significantStrikeDefense": 0.52,
+        "takedownsPer15": 0,
+        "takedownDefense": 0.73,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_bilal_hasan",
+      "slug": "bilal-hasan",
+      "slugHistory": [],
+      "name": {
+        "full": "Bilal Hasan",
+        "first": "Bilal",
+        "last": "Hasan",
+        "normalized": "bilal hasan"
+      },
+      "countryCode": "ID",
+      "currentWeightClass": "Flyweight",
+      "record": { "wins": 9, "losses": 0, "draws": 0, "noContests": 1 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/bilal-hasan",
+      "heightCm": 170.18,
+      "reachCm": 177.8,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 28,
+        "significantStrikeAccuracy": 0.81,
+        "significantStrikeDefense": 0.57,
+        "takedownsPer15": 0,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_nilson_rojas",
+      "slug": "nilson-rojas",
+      "slugHistory": [],
+      "name": {
+        "full": "Nilson Rojas",
+        "first": "Nilson",
+        "last": "Rojas",
+        "normalized": "nilson rojas"
+      },
+      "countryCode": "PE",
+      "currentWeightClass": "Flyweight",
+      "record": { "wins": 9, "losses": 0, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/nilson-rojas",
+      "heightCm": 165.1
+    },
+    {
+      "id": "ftr_namsrai_batbayar",
+      "slug": "namsrai-batbayar",
+      "slugHistory": [],
+      "name": {
+        "full": "Namsrai Batbayar",
+        "first": "Namsrai",
+        "last": "Batbayar",
+        "normalized": "namsrai batbayar"
+      },
+      "countryCode": "MN",
+      "currentWeightClass": "Flyweight",
+      "record": { "wins": 10, "losses": 1, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/namsrai-batbayar",
+      "heightCm": 162.56,
+      "reachCm": 172.72,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.44,
+        "significantStrikeAccuracy": 0.45,
+        "significantStrikeDefense": 0.48,
+        "takedownsPer15": 2.85,
+        "takedownAccuracy": 0,
+        "takedownDefense": 1,
+        "submissionsPer15": 0.95
+      }
+    },
+    {
+      "id": "ftr_andre_lima",
+      "slug": "andre-lima",
+      "slugHistory": [],
+      "name": {
+        "full": "Andre Lima",
+        "first": "Andre",
+        "last": "Lima",
+        "normalized": "andre lima"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Flyweight",
+      "record": { "wins": 11, "losses": 1, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/andre-lima",
+      "heightCm": 170.18,
+      "reachCm": 171.45,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.94,
+        "significantStrikeAccuracy": 0.57,
+        "significantStrikeDefense": 0.59,
+        "takedownsPer15": 1.11,
+        "takedownAccuracy": 0.1,
+        "takedownDefense": 0.76,
+        "submissionsPer15": 0.93
+      }
+    },
+    {
+      "id": "ftr_rei_tsuruya",
+      "slug": "rei-tsuruya",
+      "slugHistory": [],
+      "name": {
+        "full": "Rei Tsuruya",
+        "first": "Rei",
+        "last": "Tsuruya",
+        "normalized": "rei tsuruya"
+      },
+      "countryCode": "JP",
+      "currentWeightClass": "Flyweight",
+      "record": { "wins": 11, "losses": 1, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/rei-tsuruya",
+      "heightCm": 167.64,
+      "reachCm": 172.72,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 2.4,
+        "significantStrikeAccuracy": 0.54,
+        "significantStrikeDefense": 0.43,
+        "takedownsPer15": 5.03,
+        "takedownAccuracy": 0.06,
+        "takedownDefense": 0.5,
+        "submissionsPer15": 2.01
+      }
+    },
+    {
+      "id": "ftr_kevin_borjas",
+      "slug": "kevin-borjas",
+      "slugHistory": [],
+      "name": {
+        "full": "Kevin Borjas",
+        "first": "Kevin",
+        "last": "Borjas",
+        "normalized": "kevin borjas"
+      },
+      "countryCode": "PE",
+      "currentWeightClass": "Flyweight",
+      "record": { "wins": 11, "losses": 5, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/kevin-borjas",
+      "heightCm": 165.1,
+      "reachCm": 172.72,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.87,
+        "significantStrikeAccuracy": 0.43,
+        "significantStrikeDefense": 0.5,
+        "takedownsPer15": 0,
+        "takedownAccuracy": 0,
+        "takedownDefense": 0.73,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_jack_jenkins",
+      "slug": "jack-jenkins",
+      "slugHistory": [],
+      "name": {
+        "full": "Jack Jenkins",
+        "first": "Jack",
+        "last": "Jenkins",
+        "normalized": "jack jenkins"
+      },
+      "countryCode": "AU",
+      "currentWeightClass": "Featherweight",
+      "record": { "wins": 14, "losses": 4, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/jack-jenkins",
+      "heightCm": 170.18,
+      "reachCm": 172.72,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.48,
+        "significantStrikeAccuracy": 0.61,
+        "significantStrikeDefense": 0.59,
+        "takedownsPer15": 1.98,
+        "takedownAccuracy": 0.2,
+        "takedownDefense": 0.72,
+        "submissionsPer15": 0.17
+      }
+    },
+    {
+      "id": "ftr_sean_woodson",
+      "slug": "sean-woodson",
+      "slugHistory": [],
+      "name": {
+        "full": "Sean Woodson",
+        "first": "Sean",
+        "last": "Woodson",
+        "normalized": "sean woodson"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Featherweight",
+      "record": { "wins": 13, "losses": 2, "draws": 1, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/sean-woodson",
+      "heightCm": 189.23,
+      "reachCm": 198.12,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 5.57,
+        "significantStrikeAccuracy": 0.47,
+        "significantStrikeDefense": 0.59,
+        "takedownsPer15": 0.58,
+        "takedownAccuracy": 0,
+        "takedownDefense": 0.85,
+        "submissionsPer15": 0.35
+      }
+    },
+    {
+      "id": "ftr_xiao_long",
+      "slug": "xiao-long",
+      "slugHistory": [],
+      "name": {
+        "full": "Xiao Long",
+        "first": "Xiao",
+        "last": "Long",
+        "normalized": "xiao long"
+      },
+      "countryCode": "CN",
+      "currentWeightClass": "Bantamweight",
+      "record": { "wins": 27, "losses": 11, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/xiao-long",
+      "heightCm": 172.72,
+      "reachCm": 177.8,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 5.06,
+        "significantStrikeAccuracy": 0.47,
+        "significantStrikeDefense": 0.5,
+        "takedownsPer15": 0.74,
+        "takedownAccuracy": 0.11,
+        "takedownDefense": 0.82,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_francesco_nuzzi",
+      "slug": "francesco-nuzzi",
+      "slugHistory": [],
+      "name": {
+        "full": "Francesco Nuzzi",
+        "first": "Francesco",
+        "last": "Nuzzi",
+        "normalized": "francesco nuzzi"
+      },
+      "countryCode": "IT",
+      "currentWeightClass": "Bantamweight",
+      "record": { "wins": 11, "losses": 2, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/francesco-nuzzi",
+      "heightCm": 170.18
+    },
+    {
+      "id": "ftr_lawrence_lui",
+      "slug": "lawrence-lui",
+      "slugHistory": [],
+      "name": {
+        "full": "Lawrence Lui",
+        "first": "Lawrence",
+        "last": "Lui",
+        "normalized": "lawrence lui"
+      },
+      "countryCode": "NZ",
+      "currentWeightClass": "Bantamweight",
+      "record": { "wins": 8, "losses": 1, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/lawrence-lui",
+      "heightCm": 170.18,
+      "reachCm": 184.15,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.72,
+        "significantStrikeAccuracy": 0.4,
+        "significantStrikeDefense": 0.6,
+        "takedownsPer15": 5.3,
+        "takedownAccuracy": 0.22,
+        "takedownDefense": 1,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_hector_santiago",
+      "slug": "hector-santiago",
+      "slugHistory": [],
+      "name": {
+        "full": "Hector Santiago",
+        "first": "Hector",
+        "last": "Santiago",
+        "normalized": "hector santiago"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Bantamweight",
+      "record": { "wins": 6, "losses": 1, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/hector-de-sousa-santiago",
+      "heightCm": 167.64
+    },
+    {
+      "id": "ftr_xiong_jingnan",
+      "slug": "xiong-jingnan",
+      "slugHistory": [],
+      "name": {
+        "full": "Xiong Jingnan",
+        "first": "Xiong",
+        "last": "Jingnan",
+        "normalized": "xiong jingnan"
+      },
+      "countryCode": "CN",
+      "currentWeightClass": "Women's Strawweight",
+      "record": { "wins": 19, "losses": 3, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/jingnan-xiong",
+      "heightCm": 165.1,
+      "reachCm": 160.02,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.53,
+        "significantStrikeAccuracy": 0.34,
+        "significantStrikeDefense": 0.38,
+        "takedownsPer15": 0,
+        "takedownDefense": 0.75,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_julia_polastri",
+      "slug": "julia-polastri",
+      "slugHistory": [],
+      "name": {
+        "full": "Julia Polastri",
+        "first": "Julia",
+        "last": "Polastri",
+        "normalized": "julia polastri"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Women's Strawweight",
+      "record": { "wins": 14, "losses": 6, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/julia-polastri",
+      "heightCm": 157.48,
+      "reachCm": 161.29,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 6.22,
+        "significantStrikeAccuracy": 0.57,
+        "significantStrikeDefense": 0.59,
+        "takedownsPer15": 0.62,
+        "takedownAccuracy": 0.6,
+        "takedownDefense": 0.58,
+        "submissionsPer15": 0.31
+      }
+    },
+    {
+      "id": "ftr_ding_meng",
+      "slug": "ding-meng",
+      "slugHistory": [],
+      "name": {
+        "full": "Ding Meng",
+        "first": "Ding",
+        "last": "Meng",
+        "normalized": "ding meng"
+      },
+      "countryCode": "CN",
+      "currentWeightClass": "Welterweight",
+      "record": { "wins": 35, "losses": 10, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/ding-meng",
+      "heightCm": 187.96,
+      "reachCm": 185.42,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.8,
+        "significantStrikeAccuracy": 0.46,
+        "significantStrikeDefense": 0.51,
+        "takedownsPer15": 0.5,
+        "takedownAccuracy": 0,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_cam_nelson",
+      "slug": "cam-nelson",
+      "slugHistory": [],
+      "name": {
+        "full": "Cam Nelson",
+        "first": "Cam",
+        "last": "Nelson",
+        "normalized": "cam nelson"
+      },
+      "countryCode": "CA",
+      "currentWeightClass": "Welterweight",
+      "record": { "wins": 7, "losses": 1, "draws": 0, "noContests": 0 },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/cameron-nelson",
+      "heightCm": 182.88
+    }
+  ],
+  "fights": [
+    {
+      "id": "fgt_ufc_2026_08_29_01",
+      "slug": "umar-nurmagomedov-vs-song-yadong-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_umar_nurmagomedov",
+      "fighterBId": "ftr_song_yadong",
+      "cardSegment": "main_card",
+      "boutOrder": 1,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Bantamweight",
+      "isTitleFight": false,
+      "scheduledRounds": 5,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "reviewed" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_02",
+      "slug": "yan-xiaonan-vs-denise-gomes-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_yan_xiaonan",
+      "fighterBId": "ftr_denise_gomes",
+      "cardSegment": "main_card",
+      "boutOrder": 2,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Women's Strawweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_03",
+      "slug": "aoriqileng-vs-kai-asakura-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_aoriqileng",
+      "fighterBId": "ftr_kai_asakura",
+      "cardSegment": "main_card",
+      "boutOrder": 3,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Bantamweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_04",
+      "slug": "alex-perez-vs-sumudaerji-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_alex_perez",
+      "fighterBId": "ftr_sumudaerji",
+      "cardSegment": "main_card",
+      "boutOrder": 4,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Flyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_05",
+      "slug": "liu-ce-vs-junior-tafa-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_liu_ce",
+      "fighterBId": "ftr_junior_tafa",
+      "cardSegment": "main_card",
+      "boutOrder": 5,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Light Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_06",
+      "slug": "bilal-hasan-vs-nilson-rojas-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_bilal_hasan",
+      "fighterBId": "ftr_nilson_rojas",
+      "cardSegment": "main_card",
+      "boutOrder": 6,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Flyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_07",
+      "slug": "namsrai-batbayar-vs-andre-lima-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_namsrai_batbayar",
+      "fighterBId": "ftr_andre_lima",
+      "cardSegment": "prelims",
+      "boutOrder": 7,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Flyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_08",
+      "slug": "rei-tsuruya-vs-kevin-borjas-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_rei_tsuruya",
+      "fighterBId": "ftr_kevin_borjas",
+      "cardSegment": "prelims",
+      "boutOrder": 8,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Flyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_09",
+      "slug": "jack-jenkins-vs-sean-woodson-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_jack_jenkins",
+      "fighterBId": "ftr_sean_woodson",
+      "cardSegment": "prelims",
+      "boutOrder": 9,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Featherweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_10",
+      "slug": "xiao-long-vs-francesco-nuzzi-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_xiao_long",
+      "fighterBId": "ftr_francesco_nuzzi",
+      "cardSegment": "prelims",
+      "boutOrder": 10,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Bantamweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_11",
+      "slug": "lawrence-lui-vs-hector-santiago-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_lawrence_lui",
+      "fighterBId": "ftr_hector_santiago",
+      "cardSegment": "prelims",
+      "boutOrder": 11,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Bantamweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_12",
+      "slug": "xiong-jingnan-vs-julia-polastri-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_xiong_jingnan",
+      "fighterBId": "ftr_julia_polastri",
+      "cardSegment": "prelims",
+      "boutOrder": 12,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Women's Strawweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_29_13",
+      "slug": "ding-meng-vs-cam-nelson-2026-08-29",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_29",
+      "fighterAId": "ftr_ding_meng",
+      "fighterBId": "ftr_cam_nelson",
+      "cardSegment": "prelims",
+      "boutOrder": 13,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Welterweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" },
+      "dataQuality": "verified"
+    }
+  ]
+}

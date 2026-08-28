@@ -1,58 +1,57 @@
-# MMA Codex
+# FightLobby
 
-MMA Codex is an MMA analytics workspace for event research, fighter profiles, and future risk/confidence analysis for Prize Picks-style slip building.
+FightLobby is an independent community for UFC predictions, live matchup chat, and fight-night discussion.
 
-## Local Setup
+## Workspace
 
-Create a local env file at:
+- `apps/web` — Next.js App Router web application
+- `apps/functions` — Firebase Cloud Functions v2
+- `packages/domain` — shared domain types, schemas, and scoring logic
+- `fixtures` — versioned normalized development data
+- `firebase` — Firestore, Realtime Database, and Storage rules
+- `docs` — architecture and operations documentation
 
-```text
-C:\Users\Ralph\Documents\Codex\2026-06-26\pleas\mma-predictions\.env.local
-```
+## Local setup
 
-Use `.env.example` as the key list. Keep real values out of git.
-
-```bash
-npm install
-npm run dev
-```
-
-## Data
-
-- `src/data/events.json` contains event documents with embedded fights.
-- `src/data/fighters.json` contains fighter documents keyed by `fighterId`.
-- `src/data/logs.json` is reserved for future private slip analytics.
-
-The app tries Firestore first and falls back to bundled JSON if Firebase config, rules, or seeded data are unavailable.
-
-## Firestore
-
-Rules are defined in `firestore.rules`:
-
-- `events` and `fighters` are public read.
-- Client writes are disabled.
-- `logs` are locked down for now.
-
-Dry-run the seed:
+Requirements: Node.js 22+ and Corepack.
 
 ```bash
-npm run seed:firestore -- --dry-run
+corepack enable
+pnpm install
+cp .env.example .env.local
+pnpm dev
 ```
 
-Run the real seed only with admin credentials available through one of:
+The web app runs at `http://localhost:3000`. Keep all real credentials in `.env.local`; it is ignored by Git.
 
-- `FIREBASE_SERVICE_ACCOUNT_JSON`
-- `GOOGLE_APPLICATION_CREDENTIALS`
-- application-default credentials
+## Quality checks
 
 ```bash
-npm run seed:firestore
+pnpm typecheck
+pnpm lint
+pnpm test
+pnpm build
 ```
 
-## Verification
+Before a production release, run `pnpm launch:preflight` against the production
+environment export and `pnpm launch:verify -- https://your-canonical-domain` after
+deployment. See [Production launch](docs/production-launch.md).
 
-```bash
-npm run lint
-npm run build
-npm run seed:firestore -- --dry-run
-```
+## Firebase emulators
+
+Install Java 11+ and run `pnpm emulators`. The suite uses the demo project ID `fightlobby-local` and never connects to production by default.
+
+## Data policy
+
+Development uses normalized, versioned fixtures through a mock provider. Production sports data must come through a licensed provider adapter. Provider payloads and secrets never belong in browser bundles or Git.
+
+## Documentation
+
+- [Architecture](docs/architecture.md)
+- [Authentication](docs/authentication.md)
+- [Predictions](docs/predictions.md)
+- [Grading and leaderboards](docs/grading-and-leaderboards.md)
+- [Live chat and moderation](docs/live-chat.md)
+- [Production launch](docs/production-launch.md)
+- [Backup, restore, and regrade](docs/backup-restore-and-regrade.md)
+- [UFC event-day runbook](docs/event-day-runbook.md)

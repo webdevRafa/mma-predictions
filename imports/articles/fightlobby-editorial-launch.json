@@ -1,0 +1,1088 @@
+[
+  {
+    "id": "art_ufc_shanghai_start_time_watch_guide",
+    "slug": "ufc-shanghai-start-time-how-to-watch-nurmagomedov-vs-song",
+    "slugHistory": [],
+    "title": "UFC Shanghai start time and how to watch Nurmagomedov vs Song",
+    "dek": "The UFC returns to Shanghai at local prime time, which means an early Saturday morning card for American fans. Here is the schedule, the stream, and the best way to plan it.",
+    "excerpt": "A practical viewing guide for UFC Shanghai, including prelim and main-card start times in the United States.",
+    "category": "event_guide",
+    "tags": [
+      "UFC Shanghai",
+      "Umar Nurmagomedov",
+      "Song Yadong",
+      "UFC Fight Night",
+      "how to watch"
+    ],
+    "status": "published",
+    "publishedAt": "2026-08-25T14:00:00.000Z",
+    "updatedAt": "2026-08-25T14:00:00.000Z",
+    "readingMinutes": 5,
+    "author": {
+      "id": "fightlobby_editorial",
+      "handle": "fight_lobby",
+      "displayName": "FightLobby Editorial",
+      "role": "editorial"
+    },
+    "body": [
+      {
+        "id": "the-short-version",
+        "type": "paragraph",
+        "text": "UFC Fight Night: Nurmagomedov vs Song takes place Saturday, August 29, at the Oriental Sports Center in Shanghai. In the United States, the card streams on Paramount+. The prelims begin at 3 a.m. Eastern, 2 a.m. Central, and midnight Pacific. The main card follows at 6 a.m. Eastern, 5 a.m. Central, and 3 a.m. Pacific. In Shanghai, that works out to a much friendlier 3 p.m. opening bell and 6 p.m. main card. This is not the card to approach like a normal Saturday night pay-per-view; it is a coffee, breakfast, and notifications-muted kind of fight morning."
+      },
+      {
+        "id": "start-times",
+        "type": "heading",
+        "text": "UFC Shanghai start times"
+      },
+      {
+        "id": "time-zone-list",
+        "type": "bullet_list",
+        "items": [
+          "Shanghai: prelims at 3 p.m.; main card at 6 p.m. China Standard Time",
+          "Eastern: prelims at 3 a.m.; main card at 6 a.m. EDT",
+          "Central: prelims at 2 a.m.; main card at 5 a.m. CDT",
+          "Mountain: prelims at 1 a.m.; main card at 4 a.m. MDT",
+          "Pacific: prelims at midnight; main card at 3 a.m. PDT"
+        ]
+      },
+      {
+        "id": "why-the-hour",
+        "type": "paragraph",
+        "text": "The unusual U.S. timing is intentional. UFC is staging the event in local prime time rather than asking the Shanghai crowd to attend at an hour built around North American television. That is a good trade for the atmosphere inside the building, and the card has enough regional investment to justify it. Song Yadong and Yan Xiaonan are in the top two bouts, several Chinese prospects are spread throughout the lineup, and the weekend also includes the Road to UFC Season 5 semifinals on Friday. This is a genuine Asia-focused fight week rather than a North American broadcast wearing a different venue name."
+      },
+      {
+        "id": "how-to-watch",
+        "type": "heading",
+        "text": "How to watch in the United States"
+      },
+      {
+        "id": "streaming-plan",
+        "type": "paragraph",
+        "text": "Paramount+ carries both the prelims and main card in the United States. Because fight cards can change and individual walkout times move with the pace of earlier bouts, the safest plan is to use the published block times rather than setting an alarm for one specific matchup. If the main event is all you care about, remember that a 6 a.m. Eastern main-card start does not mean Nurmagomedov and Song will walk immediately. Six main-card fights are currently listed, so the headliner should arrive considerably later if the card runs normally."
+      },
+      { "id": "fan-plan", "type": "heading", "text": "The fight-fan plan" },
+      {
+        "id": "watching-advice",
+        "type": "paragraph",
+        "text": "For Central time, where FightLobby is based, the cleanest choice is either to commit to the 2 a.m. prelim start or sleep through the opening block and wake for the 5 a.m. main card. Avoid social media if you choose a replay; results from a China card travel fast once American fans wake up. The strongest reason to watch live is the crowd. A home audience reacting to Song, Yan, Aoriqileng, Xiong Jingnan, and the rest of the regional talent adds a layer that a result clip cannot reproduce. This is an early alarm, but it is also the kind of card that can make the odd hour feel worthwhile."
+      },
+      {
+        "id": "card-context",
+        "type": "paragraph",
+        "text": "The main event carries real bantamweight consequences: former title challenger Umar Nurmagomedov faces Song Yadong, who submitted Deiveson Figueiredo in Macau in May. Yan Xiaonan meets four-fight winner Denise Gomes in the co-main event, while Kai Asakura faces Aoriqileng and Xiong Jingnan returns against Julia Polastri. Start with the viewing plan, then dig into the matchups. FightLobby will keep the event page, prediction windows, and individual fight rooms tied to the official card data as fight week develops."
+      }
+    ],
+    "sources": [
+      {
+        "label": "UFC Fight Night: Nurmagomedov vs Song event page",
+        "url": "https://www.ufc.com/event/ufc-fight-night-august-29-2026",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC returns to Shanghai with Nurmagomedov vs Song",
+        "url": "https://www.ufc.com/news/ufc-returns-shanghai-pivotal-bantamweight-clash-between-3-umar-nurmagomedov-and-5-song-yadong",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC returns to Shanghai on August 28-29",
+        "url": "https://www.ufc.com/news/ufc-returns-shanghai-august-28-29",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      }
+    ],
+    "relatedEventIds": ["evt_ufc_fn_2026_08_29"],
+    "relatedFightIds": ["fgt_ufc_2026_08_29_01"],
+    "featured": false,
+    "monetizationEligible": true,
+    "seo": {
+      "title": "UFC Shanghai start time and how to watch",
+      "description": "UFC Shanghai prelim and main-card start times, Paramount+ streaming details, and a U.S. viewing guide for Nurmagomedov vs Song.",
+      "canonicalPath": "/articles/ufc-shanghai-start-time-how-to-watch-nurmagomedov-vs-song",
+      "keywords": [
+        "UFC Shanghai start time",
+        "how to watch UFC Shanghai",
+        "Nurmagomedov vs Song",
+        "UFC Fight Night August 29 2026"
+      ]
+    }
+  },
+  {
+    "id": "art_umar_nurmagomedov_song_yadong_breakdown",
+    "slug": "umar-nurmagomedov-vs-song-yadong-technical-breakdown",
+    "slugHistory": [],
+    "title": "Umar Nurmagomedov vs Song Yadong: the real tactical battle",
+    "dek": "It looks like an elite wrestler against a dangerous boxer. The details are harder: layered kicks, cage position, hand fighting, and the moments after Song stops the first shot.",
+    "excerpt": "A technical breakdown of the ranges, reactions, and small battles that can decide the UFC Shanghai main event.",
+    "category": "fight_analysis",
+    "tags": [
+      "Umar Nurmagomedov",
+      "Song Yadong",
+      "UFC Shanghai",
+      "bantamweight",
+      "fight breakdown"
+    ],
+    "status": "published",
+    "publishedAt": "2026-08-25T13:30:00.000Z",
+    "updatedAt": "2026-08-25T13:30:00.000Z",
+    "readingMinutes": 7,
+    "author": {
+      "id": "fightlobby_editorial",
+      "handle": "fight_lobby",
+      "displayName": "FightLobby Editorial",
+      "role": "editorial"
+    },
+    "body": [
+      {
+        "id": "not-a-simple-style-fight",
+        "type": "paragraph",
+        "text": "The easy description is wrestler versus striker. Umar Nurmagomedov owns the deeper wrestling game; Song Yadong is the sharper pocket boxer with proven power. That description is not wrong, but it misses why this matchup is so interesting. Umar does not need to sprint into naked takedowns because his kicking game keeps opponents occupied at long range. Song does not need to stuff every shot cleanly because he is physically strong, difficult to hold down, and dangerous in the scramble. The main event will probably be decided by the transitions between ranges, not by one fighter getting to live permanently in his favorite phase."
+      },
+      {
+        "id": "umar-entry-system",
+        "type": "heading",
+        "text": "Umar's entries begin before the takedown"
+      },
+      {
+        "id": "umar-kicks",
+        "type": "paragraph",
+        "text": "Nurmagomedov's kicks are the first layer. He can touch the body, threaten the head, and change stance without giving an opponent a clean rhythm to read. Once a fighter starts planting his feet to counter the kick, Umar can level-change beneath the response or use the reaction to enter a body lock. His official UFC numbers list more than four takedowns landed per 15 minutes, but the more revealing part of his game is how often the threat changes an opponent's posture. Song cannot become so worried about the shot that he gives Umar free kicks, yet overcommitting to a boxing counter can expose his hips."
+      },
+      {
+        "id": "songs-pocket",
+        "type": "heading",
+        "text": "Song needs the fence behind Umar, not behind himself"
+      },
+      {
+        "id": "song-pressure",
+        "type": "paragraph",
+        "text": "Song's best work comes when his feet are set and the target has fewer exits. He throws compact combinations, carries real speed in both hands, and is comfortable attacking the body before coming back upstairs. The geography matters. If Song is backing toward the black line with his shoulders square, Umar can connect his striking feints to clinch entries. If Song can make Umar retreat in straight lines, the Dagestani's kicking variety shrinks and Song can finish combinations without immediately defending his legs. Winning open space is useful; forcing Umar toward the fence would be much more valuable."
+      },
+      {
+        "id": "first-defense",
+        "type": "heading",
+        "text": "Stopping the first shot is only half the job"
+      },
+      {
+        "id": "scramble-layer",
+        "type": "paragraph",
+        "text": "Song's listed 74 percent takedown defense is encouraging, but a percentage cannot describe chained wrestling. Umar is comfortable moving from the legs to the waist, from a failed entry to a mat return, and from top control to the back as an opponent stands. Song's real test begins after the first defense: clear the hands, turn off the fence, and leave without surrendering a second connection. A dramatic sprawl that ends with Umar still locked around the hips is not a completed defensive sequence. Song needs clean breaks that return the fight to boxing range."
+      },
+      {
+        "id": "song-surprise",
+        "type": "heading",
+        "text": "Song's grappling can create the surprise"
+      },
+      {
+        "id": "guillotine-warning",
+        "type": "paragraph",
+        "text": "The guillotine that finished Deiveson Figueiredo is a useful reminder that Song is not helpless when heads and arms collide. Chasing that submission recklessly against Umar would be a bad bargain, because losing position to an elite top player can cost a round. Used as a threat, however, front-headlock offense can make Umar more cautious about finishing on his knees. Song does not need to become the better grappler for five rounds. He needs enough credible offense to prevent Umar from treating every clinch as a one-way exchange."
+      },
+      {
+        "id": "fightlobby-read",
+        "type": "heading",
+        "text": "The FightLobby read"
+      },
+      {
+        "id": "final-read",
+        "type": "paragraph",
+        "text": "Umar has more routes to control minutes, which is the safest advantage in a five-round fight. Song has the more punishing route if he can consistently force exchanges on his terms. Watch Song's feet in the opening round: is he circling away from the fence after every combination, or is Umar quietly walking him into wrestling space? Then watch Umar's exits. If he can kick without being made to pay, the layers will accumulate. If Song can make every kick and entry feel expensive, the main event becomes far less comfortable than the surface-level style matchup suggests."
+      }
+    ],
+    "sources": [
+      {
+        "label": "Umar Nurmagomedov athlete profile and UFC statistics",
+        "url": "https://www.ufc.com/athlete/umar-nurmagomedov",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Song Yadong athlete profile and UFC statistics",
+        "url": "https://www.ufc.com/athlete/song-yadong",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC Shanghai main-event announcement",
+        "url": "https://www.ufc.com/news/ufc-returns-shanghai-pivotal-bantamweight-clash-between-3-umar-nurmagomedov-and-5-song-yadong",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      }
+    ],
+    "relatedEventIds": ["evt_ufc_fn_2026_08_29"],
+    "relatedFightIds": ["fgt_ufc_2026_08_29_01"],
+    "featured": false,
+    "monetizationEligible": true,
+    "seo": {
+      "title": "Umar Nurmagomedov vs Song Yadong technical breakdown",
+      "description": "A technical UFC Shanghai breakdown of Umar Nurmagomedov vs Song Yadong: kicks, cage position, wrestling chains, and Song's defensive keys.",
+      "canonicalPath": "/articles/umar-nurmagomedov-vs-song-yadong-technical-breakdown",
+      "keywords": [
+        "Umar Nurmagomedov vs Song Yadong",
+        "UFC Shanghai breakdown",
+        "Nurmagomedov Song analysis",
+        "bantamweight analysis"
+      ]
+    }
+  },
+  {
+    "id": "art_umar_song_deiveson_figueiredo_common_opponent",
+    "slug": "what-deiveson-figueiredo-fights-tell-us-about-umar-vs-song",
+    "slugHistory": [],
+    "title": "What the Deiveson Figueiredo fights really tell us about Umar vs Song",
+    "dek": "Umar Nurmagomedov and Song Yadong both beat the same former champion in 2026. The temptation is to compare the performances directly. The useful lesson is more specific.",
+    "excerpt": "The shared-opponent angle matters, but not as a shortcut. Here is what each Figueiredo fight actually reveals.",
+    "category": "fight_analysis",
+    "tags": [
+      "Umar Nurmagomedov",
+      "Song Yadong",
+      "Deiveson Figueiredo",
+      "UFC Shanghai",
+      "common opponent"
+    ],
+    "status": "published",
+    "publishedAt": "2026-08-25T13:00:00.000Z",
+    "updatedAt": "2026-08-25T13:00:00.000Z",
+    "readingMinutes": 6,
+    "author": {
+      "id": "fightlobby_editorial",
+      "handle": "fight_lobby",
+      "displayName": "FightLobby Editorial",
+      "role": "editorial"
+    },
+    "body": [
+      {
+        "id": "shared-opponent",
+        "type": "paragraph",
+        "text": "Common-opponent math is one of MMA's favorite traps. Umar Nurmagomedov beat Deiveson Figueiredo by a wide unanimous decision at UFC 324 in January. Song Yadong submitted Figueiredo with a guillotine late in the second round in Macau four months later. It is easy to turn those results into a debate about who handled the former flyweight champion more impressively. The honest answer is that each performance showcased a different winning mechanism, and neither one tells us automatically who wins when Umar and Song share the cage in Shanghai."
+      },
+      {
+        "id": "umar-performance",
+        "type": "heading",
+        "text": "Umar won the repeatable parts"
+      },
+      {
+        "id": "umar-control",
+        "type": "paragraph",
+        "text": "Nurmagomedov swept the official scorecards 30-27. That type of result matters because it shows a process that survived three rounds: manage distance, choose the grappling moments, and deny Figueiredo the kind of chaotic exchange where his power and submissions are most dangerous. Umar did not need one dramatic swing. He banked minutes and kept the fight inside a structure he understood. Against Song, that repeatability is the attraction. If Umar can consistently decide where exchanges begin, he can build a lead without asking for a perfect moment."
+      },
+      {
+        "id": "song-performance",
+        "type": "heading",
+        "text": "Song found the decisive moment"
+      },
+      {
+        "id": "song-finish",
+        "type": "paragraph",
+        "text": "Song's win carried a different message. Figueiredo is an experienced submission fighter with nine career submission victories listed by UFC, yet Song caught him in a guillotine at 4:42 of the second round. The finish showed awareness and opportunism under pressure, not just the boxing power most fans associate with Song. That matters against Umar because defensive grappling alone can become a losing mindset. Song needs moments that make Umar question an entry. A front headlock, a hard body shot on the break, or a fast combination after a failed shot can change the cost of every future attempt."
+      },
+      {
+        "id": "context",
+        "type": "heading",
+        "text": "The context was not identical"
+      },
+      {
+        "id": "different-fights",
+        "type": "paragraph",
+        "text": "Figueiredo entered the Umar fight above the bantamweight limit and faced a style designed to mute his bursts. By May, he was headlining against Song in Macau, where the exchanges developed differently. Fighters also change between camps. A shared opponent gives us comparable reactions, but not a laboratory experiment. Umar was not trying to fight Song's fight, and Song was not trying to reproduce Umar's. Treating the outcomes as a ranking formula would erase the tactical choices that produced them."
+      },
+      { "id": "useful-clues", "type": "heading", "text": "The useful clues" },
+      {
+        "id": "clue-list",
+        "type": "bullet_list",
+        "items": [
+          "Umar can sustain a disciplined game plan against an explosive former champion without needing a finish.",
+          "Song can turn a grappling exchange into offense rather than merely surviving it.",
+          "Both men carried their effectiveness through more than one phase, which makes the Shanghai matchup more layered than wrestler versus boxer.",
+          "Figueiredo could not force either man into the kind of fight he wanted, but each opponent denied him in a different way."
+        ]
+      },
+      {
+        "id": "conclusion",
+        "type": "paragraph",
+        "text": "The common-opponent story is valuable when it directs our eyes, not when it supplies a fake answer. Umar's performance tells us to watch control, position, and accumulated minutes. Song's tells us to watch the danger inside transitions. If Shanghai becomes orderly, Umar has already shown how comfortable he can be. If the fight develops sharp edges and imperfect entries, Song has already shown he can turn one opening into the end. Figueiredo does not pick the winner for us. He helps explain the two very different ways this main event can be won."
+      }
+    ],
+    "sources": [
+      {
+        "label": "UFC 324 official event results",
+        "url": "https://www.ufc.com/event/ufc-324",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC 324 official judges scorecards",
+        "url": "https://www.ufc.com/news/ufc-324-scorecards-judges-gaethje-vs-pimblett",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC Macau official scorecards and results",
+        "url": "https://www.ufc.com/news/ufc-fight-night-song-vs-figueiredo-official-judges-scorecards-macau",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      }
+    ],
+    "relatedEventIds": ["evt_ufc_fn_2026_08_29"],
+    "relatedFightIds": ["fgt_ufc_2026_08_29_01"],
+    "featured": false,
+    "monetizationEligible": true,
+    "seo": {
+      "title": "What Figueiredo tells us about Umar vs Song",
+      "description": "Umar Nurmagomedov and Song Yadong both beat Deiveson Figueiredo. Here is what those fights reveal before their UFC Shanghai main event.",
+      "canonicalPath": "/articles/what-deiveson-figueiredo-fights-tell-us-about-umar-vs-song",
+      "keywords": [
+        "Umar Song common opponent",
+        "Deiveson Figueiredo",
+        "Umar Nurmagomedov",
+        "Song Yadong",
+        "UFC Shanghai analysis"
+      ]
+    }
+  },
+  {
+    "id": "art_ufc_shanghai_bantamweight_title_stakes",
+    "slug": "ufc-shanghai-bantamweight-title-stakes-umar-nurmagomedov-song-yadong",
+    "slugHistory": [],
+    "title": "The bantamweight title stakes behind Nurmagomedov vs Song",
+    "dek": "Petr Yan owns the belt, several former champions and contenders remain nearby, and Shanghai gives Umar Nurmagomedov or Song Yadong a chance to make the next title argument impossible to ignore.",
+    "excerpt": "Why the UFC Shanghai main event matters in a crowded bantamweight race, and what each man can actually claim with a win.",
+    "category": "division_analysis",
+    "tags": [
+      "bantamweight",
+      "Petr Yan",
+      "Umar Nurmagomedov",
+      "Song Yadong",
+      "UFC Shanghai",
+      "title picture"
+    ],
+    "status": "published",
+    "publishedAt": "2026-08-25T12:30:00.000Z",
+    "updatedAt": "2026-08-25T12:30:00.000Z",
+    "readingMinutes": 6,
+    "author": {
+      "id": "fightlobby_editorial",
+      "handle": "fight_lobby",
+      "displayName": "FightLobby Editorial",
+      "role": "editorial"
+    },
+    "body": [
+      {
+        "id": "crowded-division",
+        "type": "paragraph",
+        "text": "Bantamweight never stays orderly for long. Petr Yan completed his road back to the championship by beating Merab Dvalishvili at UFC 323, but that result created possibilities rather than clearing a line. Merab has a natural case for a trilogy. Sean O'Malley still owns history with Yan. Cory Sandhagen remains part of every serious conversation near the top. Umar Nurmagomedov has already challenged for gold, while Song Yadong has accumulated the experience of a veteran despite being only 28. Shanghai is important because it gives one of those last two names a current, high-level win that can travel beyond rankings."
+      },
+      {
+        "id": "umars-case",
+        "type": "heading",
+        "text": "Umar's case is about removing the asterisk"
+      },
+      {
+        "id": "umar-path",
+        "type": "paragraph",
+        "text": "Nurmagomedov's lone professional loss came in his first championship attempt against Dvalishvili. Since then, he has answered with decision wins over Mario Bautista and Deiveson Figueiredo. The résumé is already contender quality: Cory Sandhagen, Bautista, Figueiredo, and long stretches of high-level control. What Umar needs now is a win that feels like the start of a fresh run rather than an extension of his first title campaign. Beating a top-ranked opponent in a five-round main event, in the opponent's home country, would do exactly that."
+      },
+      {
+        "id": "songs-case",
+        "type": "heading",
+        "text": "Song can turn longevity into urgency"
+      },
+      {
+        "id": "song-path",
+        "type": "paragraph",
+        "text": "Song has been on the UFC roster since 2017 and has already headlined five Fight Nights. His résumé includes wins over Henry Cejudo, Marlon Moraes, Ricky Simon, and now Figueiredo. It also contains losses to Yan, Sandhagen, and O'Malley, the names that have separated him from the final step. A victory over Umar would be different from adding another respected veteran. It would be a win over a former title challenger in his athletic prime and over the style many fans view as the division's most difficult test. That is the kind of result that changes the language from longtime contender to viable challenger."
+      },
+      {
+        "id": "what-win-means",
+        "type": "heading",
+        "text": "Does the winner automatically get a title shot?"
+      },
+      {
+        "id": "no-guarantee",
+        "type": "paragraph",
+        "text": "Not automatically. Matchmaking depends on timing, health, the champion's schedule, and what happens in the other major bantamweight fights. Merab's claim does not disappear, and a division this deep always produces another candidate. Still, the UFC itself described Nurmagomedov versus Song as a potential title-challenger elimination bout when the matchup was announced. The winner should leave Shanghai with a defensible claim to either the belt or a final eliminator. A dominant performance would make waiting harder to justify."
+      },
+      {
+        "id": "performance-matters",
+        "type": "heading",
+        "text": "At this level, the performance matters"
+      },
+      {
+        "id": "statement",
+        "type": "paragraph",
+        "text": "A narrow decision can still be a great win, but the politics of a crowded division reward clarity. If Umar controls Song across five rounds, he reinforces the idea that his style remains a championship-level problem. If Song hurts Umar, denies the wrestling, or finds a finish, he answers the most persistent question about his ceiling in one night. That is why the stakes feel larger than a ranking number. Both men have already done enough to belong near the top. Shanghai is their chance to show which one should be treated as next."
+      },
+      {
+        "id": "bottom-line",
+        "type": "paragraph",
+        "text": "For Yan, Merab, O'Malley, and every other bantamweight watching, the main event is a scouting assignment. For Nurmagomedov and Song, it is a chance to seize a moving target. There may not be a formal title-shot guarantee waiting in the cage, but there is something nearly as valuable: the opportunity to leave the division with no comfortable way to route around the winner."
+      }
+    ],
+    "sources": [
+      {
+        "label": "The Bantamweight Division 2026 Preview",
+        "url": "https://www.ufc.com/news/bantamweight-division-2026-preview",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC Shanghai main-event announcement",
+        "url": "https://www.ufc.com/news/ufc-returns-shanghai-pivotal-bantamweight-clash-between-3-umar-nurmagomedov-and-5-song-yadong",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Ten action-packed fights ahead in August",
+        "url": "https://www.ufc.com/news/10-action-packed-august-ahead",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      }
+    ],
+    "relatedEventIds": ["evt_ufc_fn_2026_08_29"],
+    "relatedFightIds": ["fgt_ufc_2026_08_29_01"],
+    "featured": false,
+    "monetizationEligible": true,
+    "seo": {
+      "title": "UFC Shanghai bantamweight title stakes",
+      "description": "How Umar Nurmagomedov vs Song Yadong affects Petr Yan's crowded UFC bantamweight title picture and what the Shanghai winner can claim.",
+      "canonicalPath": "/articles/ufc-shanghai-bantamweight-title-stakes-umar-nurmagomedov-song-yadong",
+      "keywords": [
+        "UFC bantamweight title picture",
+        "Umar Nurmagomedov",
+        "Song Yadong",
+        "Petr Yan",
+        "UFC Shanghai stakes"
+      ]
+    }
+  },
+  {
+    "id": "art_yan_xiaonan_denise_gomes_title_implications",
+    "slug": "yan-xiaonan-vs-denise-gomes-title-implications-ufc-shanghai",
+    "slugHistory": [],
+    "title": "Yan Xiaonan vs Denise Gomes has real strawweight title implications",
+    "dek": "Yan is protecting a top-five position in her first China appearance since 2018. Gomes arrives with four straight wins and the kind of pressure that can turn one opportunity into a title-eliminator conversation.",
+    "excerpt": "The UFC Shanghai co-main event is a veteran contender against a surging finisher, with Mackenzie Dern's title reign framing the stakes.",
+    "category": "division_analysis",
+    "tags": [
+      "Yan Xiaonan",
+      "Denise Gomes",
+      "UFC Shanghai",
+      "women's strawweight",
+      "Mackenzie Dern",
+      "title picture"
+    ],
+    "status": "published",
+    "publishedAt": "2026-08-25T12:00:00.000Z",
+    "updatedAt": "2026-08-25T12:00:00.000Z",
+    "readingMinutes": 6,
+    "author": {
+      "id": "fightlobby_editorial",
+      "handle": "fight_lobby",
+      "displayName": "FightLobby Editorial",
+      "role": "editorial"
+    },
+    "body": [
+      {
+        "id": "co-main-context",
+        "type": "paragraph",
+        "text": "Yan Xiaonan versus Denise Gomes is the kind of co-main event that can be undersold by a ranking gap. Yan is a former title challenger who has lived near the top of the division for years. Gomes is a top-15 climber on a four-fight winning streak. Mackenzie Dern defended the strawweight title against Gillian Robertson at UFC 330, so the division now needs challengers who can separate themselves from a familiar group. Shanghai offers one. The winner may not receive an immediate championship booking, but she will own a relevant argument in a division looking for direction."
+      },
+      {
+        "id": "yan-stakes",
+        "type": "heading",
+        "text": "Yan is defending more than a ranking"
+      },
+      {
+        "id": "yan-resume",
+        "type": "paragraph",
+        "text": "Yan's résumé explains why she remains important. She challenged Zhang Weili at UFC 300 and owns wins over Jessica Andrade, Tabatha Ricci, and current champion Mackenzie Dern. That last result is especially useful now. A victory over Gomes would let Yan pair historical leverage with a fresh win, and doing it in her first fight in China since 2018 would add momentum. The danger is that contender status can become fragile when a veteran is matched with a rising opponent. Yan is expected to win by the people who look only at names; she still has to solve a fighter entering with confidence and power."
+      },
+      {
+        "id": "gomes-stakes",
+        "type": "heading",
+        "text": "Gomes has earned the step up"
+      },
+      {
+        "id": "gomes-run",
+        "type": "paragraph",
+        "text": "Gomes has beaten Eduarda Moura, Karolina Kowalkiewicz, Elise Reed, and Tecia Pennington in succession. Those wins show more than one route. She can crack—seven of her 12 professional wins have come by knockout—but she has also won decisions against experienced opponents who know how to extend a fight. Her official statistics list 4.43 significant strikes landed per minute and 3.16 absorbed. The numbers support the eye test: she creates offense without treating every exchange like a desperate finish. Beating Yan would move her from promising newcomer to serious contender in one jump."
+      },
+      {
+        "id": "matchup-question",
+        "type": "heading",
+        "text": "The matchup question is pace versus poise"
+      },
+      {
+        "id": "style-read",
+        "type": "paragraph",
+        "text": "Yan is comfortable at long range, reads opponents well, and has spent championship rounds with elite competition. Gomes wants to create a more physical fight, where combinations, clinch exchanges, and damage can interrupt that measured rhythm. If Yan keeps the center and makes Gomes reset after missing, experience can become control. If Gomes crowds the exits and forces Yan to exchange longer than she wants, the younger fighter can make every minute feel urgent. Yan's composure is an asset, but it cannot become passivity in front of a challenger who knows this is the biggest opening of her career."
+      },
+      {
+        "id": "title-path",
+        "type": "heading",
+        "text": "What the winner can ask for"
+      },
+      {
+        "id": "next-step",
+        "type": "paragraph",
+        "text": "A Yan win should put her in a title eliminator, particularly because she already holds a victory over Dern. The division may still require one more current result before revisiting a championship matchup, but the storyline is clean. A Gomes win would be even more disruptive. Five straight victories capped by a top-five former challenger would justify a matchup with another elite contender and could create a title shot quickly if the performance is emphatic. Either way, the co-main event should produce something the division needs: a contender with a live, current case."
+      },
+      {
+        "id": "home-stage",
+        "type": "paragraph",
+        "text": "The setting adds pressure without changing the technical problem. Yan will have the Shanghai crowd, the history, and the ranking. Gomes gets the freedom of being the disruptor. That contrast is why this fight belongs in the co-main slot. It is not simply a homecoming showcase. It is a test of whether an established contender can protect her place against the division's most dangerous kind of opponent: a confident finisher who has already learned how to win when the knockout does not arrive."
+      }
+    ],
+    "sources": [
+      {
+        "label": "UFC Shanghai co-main event announcement",
+        "url": "https://www.ufc.com/news/ufc-returns-shanghai-pivotal-bantamweight-clash-between-3-umar-nurmagomedov-and-5-song-yadong",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Denise Gomes athlete profile and UFC statistics",
+        "url": "https://www.ufc.com/athlete/denise-gomes",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC 330 results: Dern vs Robertson",
+        "url": "https://www.ufc.com/news/ufc-330-islam-makhachev-vs-ian-machado-garry-results",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Women's Strawweight Division 2026 Preview",
+        "url": "https://www.ufc.com/news/womens-strawweight-division-2026-preview",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      }
+    ],
+    "relatedEventIds": ["evt_ufc_fn_2026_08_29"],
+    "relatedFightIds": ["fgt_ufc_2026_08_29_02"],
+    "featured": false,
+    "monetizationEligible": true,
+    "seo": {
+      "title": "Yan Xiaonan vs Denise Gomes title implications",
+      "description": "Why the UFC Shanghai co-main event between Yan Xiaonan and Denise Gomes matters to Mackenzie Dern's strawweight title picture.",
+      "canonicalPath": "/articles/yan-xiaonan-vs-denise-gomes-title-implications-ufc-shanghai",
+      "keywords": [
+        "Yan Xiaonan vs Denise Gomes",
+        "UFC strawweight title picture",
+        "UFC Shanghai co-main",
+        "Mackenzie Dern challenger"
+      ]
+    }
+  },
+  {
+    "id": "art_xiong_jingnan_ufc_shanghai_rebound",
+    "slug": "xiong-jingnan-ufc-shanghai-rebound-julia-polastri",
+    "slugHistory": [],
+    "title": "Xiong Jingnan's UFC story starts again in Shanghai",
+    "dek": "The former ONE champion entered the UFC with a decorated résumé and lost every round to Angela Hill. Her second appearance is not about erasing that history—it is about adapting quickly enough to build a new one.",
+    "excerpt": "After a difficult UFC debut, Xiong Jingnan returns at home against Julia Polastri with less novelty and more urgency.",
+    "category": "feature",
+    "tags": [
+      "Xiong Jingnan",
+      "Julia Polastri",
+      "UFC Shanghai",
+      "women's strawweight",
+      "Chinese MMA"
+    ],
+    "status": "published",
+    "publishedAt": "2026-08-25T11:30:00.000Z",
+    "updatedAt": "2026-08-25T11:30:00.000Z",
+    "readingMinutes": 6,
+    "author": {
+      "id": "fightlobby_editorial",
+      "handle": "fight_lobby",
+      "displayName": "FightLobby Editorial",
+      "role": "editorial"
+    },
+    "body": [
+      {
+        "id": "debut-reality",
+        "type": "paragraph",
+        "text": "Xiong Jingnan arrived in the UFC with the résumé of a proven champion: 19 professional wins, 11 knockouts, and a long run at the top of ONE Championship. Angela Hill still beat her 30-27 on all three scorecards in Macau. That is the blunt part of the story. The more interesting part comes now. Xiong did not sign at 38 to be treated like a developmental prospect, but changing promotions can demand development anyway—different opponents, different rules, a new weight environment, and a cage where the familiar advantages do not always appear in familiar places."
+      },
+      {
+        "id": "what-hill-exposed",
+        "type": "heading",
+        "text": "The Hill fight exposed the adaptation gap"
+      },
+      {
+        "id": "volume-problem",
+        "type": "paragraph",
+        "text": "Hill's experience was visible in the pace and range management. UFC's statistics recorded Xiong landing 4.53 significant strikes per minute while absorbing 8.13, an unsustainable exchange rate over three rounds. One fight is a tiny sample, but it matched what the scorecards said: Xiong was participating in the striking exchanges without controlling enough of them. Her power and championship confidence remain real. The question is whether she can shorten the combinations coming back at her, exit on better angles, and make her own offense define the rhythm instead of chasing it."
+      },
+      {
+        "id": "polastri-test",
+        "type": "heading",
+        "text": "Julia Polastri will not give her a quiet reset"
+      },
+      {
+        "id": "polastri-volume",
+        "type": "paragraph",
+        "text": "Polastri is 14-6 with five knockout wins and three submissions. UFC lists her at 6.22 significant strikes landed per minute, and 82 percent of her recorded significant offense has come at distance. She has also shown that she can carry pressure late, stopping Karolina Kowalkiewicz in the third round in 2025. This is not a soft matchup arranged only to produce a home-country moment. Polastri can make the same volume question reappear immediately if Xiong allows the fight to become a long, open striking exchange."
+      },
+      {
+        "id": "xiong-path",
+        "type": "heading",
+        "text": "Xiong needs to make experience visible"
+      },
+      {
+        "id": "adjustments",
+        "type": "paragraph",
+        "text": "Experience should show up as adjustment, not reputation. Xiong can attack the body, make the clinch more physical, and force Polastri to work in shorter phases rather than at a comfortable distance. She does not need to reinvent herself as a wrestler, but mixing positions would stop the Brazilian from settling into a pure kickboxing rhythm. Most importantly, Xiong must accept that the UFC version of her career cannot be a museum exhibit for everything she accomplished elsewhere. The résumé earns respect. The next fifteen minutes must earn the win."
+      },
+      {
+        "id": "home-pressure",
+        "type": "heading",
+        "text": "Home support cuts both ways"
+      },
+      {
+        "id": "shanghai-crowd",
+        "type": "paragraph",
+        "text": "Shanghai should give Xiong a real emotional lift. It can also create a temptation to force the spectacular moment when a measured one is available. At 38, every appearance carries urgency, but urgency is not the same thing as rushing. If she starts fast, invests in the body, and makes Polastri reset, the crowd can become momentum. If she loads up while eating combinations, the noise will not solve the tactical problem Hill revealed. This is a rebound fight that rewards composure more than drama."
+      },
+      {
+        "id": "legacy",
+        "type": "paragraph",
+        "text": "A loss in a UFC debut does not erase a championship career, and a win over Polastri would not instantly place Xiong in the title picture. What it would do is establish that her UFC chapter has somewhere to go. That matters. The debut was an introduction to the differences. Shanghai is the first chance to show the response. For a fighter who has already built one legacy, the most compelling reason to watch is whether she can resist living inside it."
+      }
+    ],
+    "sources": [
+      {
+        "label": "UFC Macau official scorecards",
+        "url": "https://www.ufc.com/news/ufc-fight-night-song-vs-figueiredo-official-judges-scorecards-macau",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Xiong Jingnan athlete profile and UFC statistics",
+        "url": "https://www.ufc.com/athlete/jingnan-xiong",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Julia Polastri athlete profile and UFC statistics",
+        "url": "https://www.ufc.com/athlete/julia-polastri",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Xiong signs with UFC after ONE title run",
+        "url": "https://www.mmafighting.com/ufc/481439/one-champion-xiong-jingnan-signs-with-ufc-debuts-vs-angela-hill-in-macau",
+        "publisher": "MMA Fighting",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      }
+    ],
+    "relatedEventIds": ["evt_ufc_fn_2026_08_29"],
+    "relatedFightIds": ["fgt_ufc_2026_08_29_12"],
+    "featured": false,
+    "monetizationEligible": true,
+    "seo": {
+      "title": "Xiong Jingnan's UFC Shanghai rebound test",
+      "description": "Xiong Jingnan lost every round of her UFC debut. Against Julia Polastri in Shanghai, the former ONE champion must show how she has adapted.",
+      "canonicalPath": "/articles/xiong-jingnan-ufc-shanghai-rebound-julia-polastri",
+      "keywords": [
+        "Xiong Jingnan UFC",
+        "Xiong Jingnan vs Julia Polastri",
+        "UFC Shanghai",
+        "Xiong Jingnan rebound"
+      ]
+    }
+  },
+  {
+    "id": "art_five_ufc_shanghai_fights_not_to_skip",
+    "slug": "five-ufc-shanghai-fights-not-to-skip",
+    "slugHistory": [],
+    "title": "Five UFC Shanghai fights you should not skip",
+    "dek": "The bantamweight main event deserves the attention. The rest of the card has a title-picture co-main, a rematch born from a no contest, and two fresh UFC arrivals moving at remarkable speed.",
+    "excerpt": "Five matchups beyond the UFC Shanghai headliner that give the early-morning card real depth.",
+    "category": "event_guide",
+    "tags": [
+      "UFC Shanghai",
+      "Yan Xiaonan",
+      "Denise Gomes",
+      "Kai Asakura",
+      "Bilal Hasan",
+      "Xiong Jingnan"
+    ],
+    "status": "published",
+    "publishedAt": "2026-08-25T11:00:00.000Z",
+    "updatedAt": "2026-08-25T11:00:00.000Z",
+    "readingMinutes": 7,
+    "author": {
+      "id": "fightlobby_editorial",
+      "handle": "fight_lobby",
+      "displayName": "FightLobby Editorial",
+      "role": "editorial"
+    },
+    "body": [
+      {
+        "id": "card-depth",
+        "type": "paragraph",
+        "text": "Umar Nurmagomedov versus Song Yadong is the reason UFC Shanghai has a clear identity, but it is not the only reason to set the alarm. This card mixes ranked stakes with regional prospects, veteran resets, and a couple of fighters whose career timelines have accelerated almost overnight. The prelims begin at 3 a.m. Eastern and the main card at 6 a.m., so nobody needs a lecture about watching all thirteen fights live. If you are building a shorter viewing plan, these are the five matchups beyond the headliner that FightLobby would protect."
+      },
+      {
+        "id": "yan-gomes",
+        "type": "heading",
+        "text": "1. Yan Xiaonan vs Denise Gomes"
+      },
+      {
+        "id": "yan-gomes-copy",
+        "type": "paragraph",
+        "text": "The co-main event is an established top-five contender against the division's hottest new arrival. Yan has challenged for the title and owns a victory over current champion Mackenzie Dern. Gomes has won four straight and brings seven career knockouts into the biggest fight of her career. The appeal is not just résumé versus momentum. Yan wants a measured, intelligent kickboxing match; Gomes is at her best when pressure turns clean reads into physical exchanges. One woman is protecting her place. The other can take it in a single night."
+      },
+      {
+        "id": "aoriqileng-asakura",
+        "type": "heading",
+        "text": "2. Aoriqileng vs Kai Asakura"
+      },
+      {
+        "id": "aoriqileng-asakura-copy",
+        "type": "paragraph",
+        "text": "Both bantamweights arrive with something to repair. Aoriqileng was stopped by Cody Haddon in Macau in May. On the same card, Asakura produced a first-round knockout of Cameron Smotherman, the kind of result he needed after a difficult beginning to his UFC run. Asakura's speed and finishing instincts make him dangerous whenever the fight stays orderly at striking range. Aoriqileng's willingness to make exchanges messy is exactly what can test that order. With a home crowd and two fighters who rarely benefit from caution, this has action-fight energy without needing a ranking beside either name."
+      },
+      {
+        "id": "perez-sumudaerji",
+        "type": "heading",
+        "text": "3. Alex Perez vs Sumudaerji II"
+      },
+      {
+        "id": "perez-sumudaerji-copy",
+        "type": "paragraph",
+        "text": "Their first meeting in Macau ended as a no contest after an accidental low blow in the second round. The rematch gives both flyweights a clean chance to settle a matchup that had started to develop before it was cut short. Perez brings ranked experience, fast combinations, and the urgency of a fighter who cannot afford another empty result. Sumudaerji has the length and straight-line offense to make entries expensive. Immediate rematches are usually reserved for championship controversy; this one exists because neither man received an answer. That unfinished quality gives a mid-card flyweight fight unusual tension."
+      },
+      {
+        "id": "hasan-rojas",
+        "type": "heading",
+        "text": "4. Bilal Hasan vs Nilson Rojas"
+      },
+      {
+        "id": "hasan-rojas-copy",
+        "type": "paragraph",
+        "text": "Hasan earned his UFC contract on August 11 by stopping Mridul Saikia in 45 seconds, then accepted a Shanghai debut only eighteen days later. He is 9-0 with one no contest and eight finishes, and the right hand that dropped Saikia justified the hype surrounding his Contender Series appearance. Nilson Rojas gets the difficult job of meeting a prospect whose confidence is peaking before the scouting book is fully written. The quick turnaround is exciting, but it is also the question. Can Hasan reproduce that composure through a full UFC fight week, an international trip, and an opponent who has prepared for the moment?"
+      },
+      {
+        "id": "xiong-polastri",
+        "type": "heading",
+        "text": "5. Xiong Jingnan vs Julia Polastri"
+      },
+      {
+        "id": "xiong-polastri-copy",
+        "type": "paragraph",
+        "text": "Xiong's name carries championship history, but Angela Hill's unanimous-decision win in May made the present more complicated. The former ONE champion absorbed far too much volume in her UFC debut and now faces a younger striker who lands at a high pace. Polastri has five knockout wins and showed late finishing ability against Karolina Kowalkiewicz. Xiong has the home support and greater big-fight résumé. Polastri has a style that can force the exact adjustment Xiong needs to prove she made. This is not a ceremonial rebound; it is a revealing one."
+      },
+      {
+        "id": "viewing-order",
+        "type": "paragraph",
+        "text": "If you only make the main card, Yan-Gomes and Aoriqileng-Asakura are the essential additions to the headliner. If you are joining from the prelims, Xiong-Polastri gives the opening block a meaningful anchor. The full card may still change during fight week, as every UFC lineup can, but these five fights cover the reasons Shanghai is worth more than a main-event replay: consequences, unfinished business, emerging talent, and a crowd with genuine investment in the athletes on screen."
+      }
+    ],
+    "sources": [
+      {
+        "label": "UFC Fight Night: Nurmagomedov vs Song event page",
+        "url": "https://www.ufc.com/event/ufc-fight-night-august-29-2026",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC Macau official scorecards and results",
+        "url": "https://www.ufc.com/news/ufc-fight-night-song-vs-figueiredo-official-judges-scorecards-macau",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "DWCS Season 10 Week 1 results",
+        "url": "https://www.ufc.com/news/dana-whites-contender-series-season-10-week-1-results",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Bilal Hasan is here to impress",
+        "url": "https://jp.ufc.com/news/bilal-hasan-here-impress-and-enjoy-journey-along-way-dwcs",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      }
+    ],
+    "relatedEventIds": ["evt_ufc_fn_2026_08_29"],
+    "relatedFightIds": [
+      "fgt_ufc_2026_08_29_02",
+      "fgt_ufc_2026_08_29_03",
+      "fgt_ufc_2026_08_29_04",
+      "fgt_ufc_2026_08_29_06",
+      "fgt_ufc_2026_08_29_12"
+    ],
+    "featured": false,
+    "monetizationEligible": true,
+    "seo": {
+      "title": "Five UFC Shanghai fights you should not skip",
+      "description": "Five fights beyond Nurmagomedov vs Song that make UFC Shanghai worth the early alarm, from Yan vs Gomes to Bilal Hasan's fast debut.",
+      "canonicalPath": "/articles/five-ufc-shanghai-fights-not-to-skip",
+      "keywords": [
+        "UFC Shanghai fight card",
+        "best UFC Shanghai fights",
+        "Nurmagomedov vs Song undercard",
+        "UFC Fight Night August 29"
+      ]
+    }
+  },
+  {
+    "id": "art_dwcs_season_10_week_3_prospects",
+    "slug": "dwcs-season-10-week-3-top-prospects-bella-mir",
+    "slugHistory": [],
+    "title": "DWCS Week 3: the prospects who deserve your attention tonight",
+    "dek": "Bella Mir owns the headline, but the third week of Contender Series Season 10 includes an undefeated Scottish finisher, a second-generation welterweight, and two returning heavyweights with no room for a quiet performance.",
+    "excerpt": "A fan-first scouting guide to Bella Mir and the most interesting prospects competing on DWCS Season 10 Week 3 tonight.",
+    "category": "prospects",
+    "tags": [
+      "Dana White's Contender Series",
+      "DWCS",
+      "Bella Mir",
+      "Sean Clancy Jr",
+      "Ronald Humphrey",
+      "MMA prospects"
+    ],
+    "status": "published",
+    "publishedAt": "2026-08-25T14:20:00.000Z",
+    "updatedAt": "2026-08-25T14:20:00.000Z",
+    "readingMinutes": 8,
+    "author": {
+      "id": "fightlobby_editorial",
+      "handle": "fight_lobby",
+      "displayName": "FightLobby Editorial",
+      "role": "editorial"
+    },
+    "body": [
+      {
+        "id": "tonight",
+        "type": "paragraph",
+        "text": "Dana White's Contender Series returns tonight, August 25, at 7 p.m. Eastern and 4 p.m. Pacific on Paramount+. Week 3 is headlined by Bella Mir against Alex Apodaca, but this is not a one-prospect card. There are unbeaten finishers, returning heavyweights, experienced regional champions, and several fighters who already look polished enough to make the contract discussion uncomfortable. Contender Series rewards moments, yet the best scouting question is not simply who can produce a highlight. It is whose game looks most transferable when the next opponent is already on the UFC roster."
+      },
+      {
+        "id": "bella-mir",
+        "type": "heading",
+        "text": "Bella Mir: the obvious name with a real test"
+      },
+      {
+        "id": "bella-copy",
+        "type": "paragraph",
+        "text": "Mir is 4-0 in MMA with three straight first-round submissions. She has also collected a Division I national wrestling championship, a no-gi world title at purple belt, and UFC BJJ wins, all at only 23. Being Frank Mir's daughter explains the spotlight; it does not explain the skill. Her grappling credentials and competitive composure make her one of the night's clearest prospects. Apodaca has won three straight decisions since losing her professional debut and trains in Colorado's deep MMA scene. The key for Mir is showing that her entries and control work against an opponent prepared to make her build the finish rather than donate it."
+      },
+      {
+        "id": "sean-clancy",
+        "type": "heading",
+        "text": "Sean Clancy Jr.: eight fights, eight finishes"
+      },
+      {
+        "id": "clancy-copy",
+        "type": "paragraph",
+        "text": "Clancy arrives from Scotland at 8-0 with a 100 percent finishing rate and the Cage Warriors welterweight title. Higher Level Martial Arts has sent Paul Craig, Stevie Ray, and Danny Henry to the UFC, so his team understands the jump. The matchup with Gary Balletto Jr. is smart matchmaking because Balletto brings an 11-3 MMA record, championship experience in CES, and three recent bare-knuckle stoppages. Clancy's finishing record creates the hype; his ability to stay defensively responsible against a seasoned, multi-sport opponent will tell us more about how quickly he can handle UFC depth."
+      },
+      {
+        "id": "ronald-humphrey",
+        "type": "heading",
+        "text": "Ronald Humphrey: clean record, serious physical tools"
+      },
+      {
+        "id": "humphrey-copy",
+        "type": "paragraph",
+        "text": "Humphrey is 4-0 with four stoppages, three in the opening round. He is also the son of former Strikeforce heavyweight Ron “Abongo” Humphrey and trains with American Top Team in Georgia. At 25, he looks like the kind of welterweight prospect the show was built to accelerate. Alexis Miranda is the correct test: 9-2, six-foot-two, and developed at Entram Gym, a team that has already produced successful Contender Series graduates. Humphrey should have explosive moments. What matters is how he manages Miranda's length and whether his offense remains connected when the first finish is not immediately available."
+      },
+      {
+        "id": "middleweight-opener",
+        "type": "heading",
+        "text": "Carlos Petruzzella vs Nick Galanti may be the night's best evaluation"
+      },
+      {
+        "id": "middleweight-copy",
+        "type": "paragraph",
+        "text": "Petruzzella is 15-1 with eight knockouts and seven submissions—every professional win has been a finish. Galanti is 7-1, has won five straight, and owns the CFFC middleweight championship. The records suggest a finisher against a grinder, but both men have deeper grappling foundations than that label implies. Petruzzella's experience and finishing variety are difficult to ignore. Galanti's pressure, regional-title rounds, and recent decision over an unbeaten opponent give him a sturdier résumé than a typical opening-bout underdog. Whoever controls the first clinch may tell us which game is ready for the larger stage."
+      },
+      {
+        "id": "heavyweights",
+        "type": "heading",
+        "text": "Mario Piazzon and Guilherme Uriel get their second answer"
+      },
+      {
+        "id": "heavyweight-copy",
+        "type": "paragraph",
+        "text": "Both Brazilian heavyweights have been here before. Piazzon won by disqualification on Season 7 after controlling much of the fight with grappling, then went 3-1 with two finishes. Uriel's first opportunity ended against Josh Hokit, whose subsequent rise has made that loss look less damaging, and he returned with a first-round stoppage in March. Heavyweight prospects often receive patience because the division needs depth. Tonight, patience is not the same as a free pass. The winner needs to show a repeatable skill—positional control, durable pace, or clean finishing mechanics—that can survive beyond one chaotic heavyweight exchange."
+      },
+      { "id": "fan-read", "type": "heading", "text": "The fan's read" },
+      {
+        "id": "final-prospect-read",
+        "type": "paragraph",
+        "text": "Mir is the prospect with the highest ceiling and the most public pressure. Clancy may be the cleanest plug-and-play addition if his unbeaten finishing game holds up against Balletto. Humphrey is the upside swing, while Petruzzella-Galanti should reveal which middleweight has the more UFC-ready process. That is the fun of Contender Series when the card is good: a contract is the immediate prize, but the real exercise is imagining how the skills look six months later against somebody who has already survived the same interview."
+      }
+    ],
+    "sources": [
+      {
+        "label": "DWCS Season 10 Week 3 official preview",
+        "url": "https://jp.ufc.com/news/week-3-preview-dana-whites-contender-series-season-10",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "DWCS Season 10 Episode 3 athletes and streaming guide",
+        "url": "https://jp.ufc.com/news/dwcs-season-10-episode-3-preview-athletes-bouts-start-times-streaming",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Dana White discusses Bella Mir before Week 3",
+        "url": "https://www.ufc.com/news/dana-white-contender-series-season-10-week-1-anthony-wint-bilal-hasan-tapping-submissions-more",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "DWCS Week 3 viewing guide and confirmed card",
+        "url": "https://www.sherdog.com/news/articles/How-to-watch-DWCS-2026-Week-3-Bella-Mir-headlines-Tuesday-card-202512",
+        "publisher": "Sherdog",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      }
+    ],
+    "relatedEventIds": [],
+    "relatedFightIds": [],
+    "featured": true,
+    "monetizationEligible": true,
+    "seo": {
+      "title": "DWCS Week 3 top prospects to watch tonight",
+      "description": "A scouting guide to Bella Mir, Sean Clancy Jr., Ronald Humphrey, and the top prospects on Dana White's Contender Series Week 3 tonight.",
+      "canonicalPath": "/articles/dwcs-season-10-week-3-top-prospects-bella-mir",
+      "keywords": [
+        "DWCS Week 3 prospects",
+        "Bella Mir Contender Series",
+        "Dana White's Contender Series tonight",
+        "Sean Clancy Jr",
+        "Ronald Humphrey"
+      ]
+    }
+  },
+  {
+    "id": "art_anthony_wint_ufc_debut_arrival",
+    "slug": "anthony-wint-outstanding-ufc-debut-dwcs-contract",
+    "slugHistory": [],
+    "title": "Anthony Wint did more than win his UFC debut—he looked like he belonged",
+    "dek": "Eleven days after earning a contract in 34 seconds, the former NFL linebacker escaped real submission danger and finished Terrance Chatman with an arm-triangle. The composure mattered more than the speed.",
+    "excerpt": "Anthony Wint's rapid jump from Contender Series to UFC Sacramento ended with a first-round submission and a much more important sign of growth.",
+    "category": "feature",
+    "tags": [
+      "Anthony Wint",
+      "UFC Sacramento",
+      "Dana White's Contender Series",
+      "heavyweight",
+      "UFC debut"
+    ],
+    "status": "published",
+    "publishedAt": "2026-08-25T14:10:00.000Z",
+    "updatedAt": "2026-08-25T14:10:00.000Z",
+    "readingMinutes": 6,
+    "author": {
+      "id": "fightlobby_editorial",
+      "handle": "fight_lobby",
+      "displayName": "FightLobby Editorial",
+      "role": "editorial"
+    },
+    "body": [
+      {
+        "id": "eleven-days",
+        "type": "paragraph",
+        "text": "Anthony Wint earned a UFC contract on August 11 by overwhelming Matt Adams in 34 seconds. Eleven days later, he made his promotional debut in Sacramento and put Terrance Chatman to sleep with an arm-triangle at 4:29 of the first round. That timeline is absurd even by Contender Series standards. It would be easy to frame the story around two fast finishes and the former New York Jets linebacker discovering that heavyweight power translates. The better reason to be impressed is what happened between the opening bell and the finish, when Wint briefly found himself in the kind of trouble that exposes a rushed prospect."
+      },
+      {
+        "id": "not-perfect",
+        "type": "heading",
+        "text": "The debut was impressive because it was not perfect"
+      },
+      {
+        "id": "kimura-danger",
+        "type": "paragraph",
+        "text": "When the fight hit the floor, Chatman threatened a kimura. Wint had to recognize the danger, free the trapped arm, and rebuild his position instead of assuming strength would solve everything. He did. From top, he stayed patient enough to land, improve, and eventually lock the arm-triangle while working from knee-on-belly. UFC's official recap described Chatman going unconscious. The sequence gave Wint something his 34-second Contender Series destruction could not: evidence that he can process a bad moment without losing the plot."
+      },
+      {
+        "id": "football-story",
+        "type": "heading",
+        "text": "The football background is context, not the whole scouting report"
+      },
+      {
+        "id": "athlete-to-fighter",
+        "type": "paragraph",
+        "text": "Wint's NFL history will follow him because it is an easy explanation for his explosion, balance, and physical confidence. Heavyweight is full of athletes who can create a terrifying first exchange. The division is much less forgiving to athletes who cannot make decisions once the first plan breaks. Wint began professional MMA only a few years ago and openly calls himself green. That honesty matches what we saw: an unfinished fighter with serious tools, but also one who made a correct adjustment under pressure. The arm-triangle says more about his future than another uncontested burst of ground strikes would have."
+      },
+      {
+        "id": "confidence",
+        "type": "heading",
+        "text": "He asked for the turnaround, then justified it"
+      },
+      {
+        "id": "stayed-ready",
+        "type": "paragraph",
+        "text": "After beating Adams, Wint told the UFC he wanted to fight immediately. Sacramento gave him the chance. Short turnarounds can be romanticized, but they remove the comfort of a normal camp and expose whether confidence is connected to preparation. Wint did not arrive merely to collect a debut check. He walked into a full arena, faced another hungry newcomer, and fought with enough patience to survive the only dangerous phase. The result moved him to 8-0 and gave him finishes by two different methods in less than two weeks."
+      },
+      { "id": "what-next", "type": "heading", "text": "What should come next" },
+      {
+        "id": "development",
+        "type": "paragraph",
+        "text": "The correct reaction is excitement without pretending the heavyweight rankings should move immediately. Wint needs rounds, defensive reps, and opponents who can force him to build offense after the initial explosion. A developmental matchup with a durable lower-roster heavyweight would tell us more than rushing him toward a number. His physical ceiling will generate temptation, especially in a division always searching for fresh names. The UFC can be encouraged by the debut and still give the fighter time to become as complete as the athlete."
+      },
+      {
+        "id": "why-it-mattered",
+        "type": "paragraph",
+        "text": "As an MMA fan, the satisfying part was watching the story deepen in real time. The Contender Series win introduced the power and personality. The UFC debut introduced resistance, problem-solving, and a submission finish that few expected to arrive first. Wint did not prove he is a future champion in Sacramento; nobody can prove that in one debut. He proved something more immediate and more honest: when the first UFC fight became uncomfortable, he looked like a fighter rather than a visiting athlete. That is an outstanding beginning."
+      }
+    ],
+    "sources": [
+      {
+        "label": "DWCS Season 10 Week 1 results",
+        "url": "https://www.ufc.com/news/dana-whites-contender-series-season-10-week-1-results",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "Anthony Wint has arrived",
+        "url": "https://jp.ufc.com/news/anthony-wint-has-arrived-ufc-sacramento",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC Sacramento main-card results",
+        "url": "https://jp.ufc.com/news/ufc-sacramento-hernandez-vs-rodrigues-results",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "UFC Sacramento official scorecards and results",
+        "url": "https://jp.ufc.com/news/ufc-sacramento-hernandez-vs-rodrigues-official-scorecards",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      },
+      {
+        "label": "The Scorecard: UFC Sacramento",
+        "url": "https://jp.ufc.com/news/scorecard-ufc-sacramento-hernandez-vs-rodrigues",
+        "publisher": "UFC",
+        "accessedAt": "2026-08-25T18:00:00.000Z"
+      }
+    ],
+    "relatedEventIds": ["evt_ufc_fn_2026_08_22"],
+    "relatedFightIds": ["fgt_ufc_2026_08_22_06"],
+    "featured": false,
+    "monetizationEligible": true,
+    "seo": {
+      "title": "Anthony Wint's outstanding UFC debut",
+      "description": "Anthony Wint went from a 34-second DWCS contract win to a first-round UFC submission in 11 days. The composure behind the finish mattered most.",
+      "canonicalPath": "/articles/anthony-wint-outstanding-ufc-debut-dwcs-contract",
+      "keywords": [
+        "Anthony Wint UFC debut",
+        "Anthony Wint Terrance Chatman",
+        "DWCS Anthony Wint",
+        "UFC Sacramento heavyweight"
+      ]
+    }
+  }
+]

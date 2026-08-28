@@ -1,0 +1,425 @@
+export type Promotion = "ufc";
+export type EventStatus =
+  "draft" | "scheduled" | "live" | "completed" | "canceled" | "postponed";
+export type FightStatus =
+  | "scheduled"
+  | "prefight"
+  | "walkouts"
+  | "intros"
+  | "in_progress"
+  | "end_of_round"
+  | "completed"
+  | "canceled"
+  | "postponed";
+export type PredictionStatus =
+  "open" | "locked" | "grading" | "graded" | "void";
+export type CardSegment = "early_prelims" | "prelims" | "main_card";
+export type ResultMethod =
+  | "ko_tko"
+  | "submission"
+  | "decision_unanimous"
+  | "decision_split"
+  | "decision_majority"
+  | "dq"
+  | "draw"
+  | "no_contest"
+  | "overturned"
+  | "other";
+export type PredictionMethod = "ko_tko" | "submission" | "decision";
+export type DataQuality = "verified" | "complete" | "partial" | "blocked";
+export type UserRole = "member" | "trusted" | "moderator" | "admin";
+export type AccountStatus =
+  "active" | "muted" | "suspended" | "banned" | "deleted";
+export type ProfileVisibility = "public" | "limited";
+
+export interface FighterName {
+  full: string;
+  first?: string | undefined;
+  last?: string | undefined;
+  nickname?: string | undefined;
+  normalized: string;
+}
+
+export interface FighterRecord {
+  wins: number;
+  losses: number;
+  draws: number;
+  noContests: number;
+}
+
+export interface CareerStats {
+  significantStrikesLandedPerMinute?: number | undefined;
+  significantStrikeAccuracy?: number | undefined;
+  significantStrikeDefense?: number | undefined;
+  takedownsPer15?: number | undefined;
+  takedownAccuracy?: number | undefined;
+  takedownDefense?: number | undefined;
+  submissionsPer15?: number | undefined;
+}
+
+export interface Fighter {
+  id: string;
+  slug: string;
+  slugHistory: string[];
+  name: FighterName;
+  status: "active" | "inactive" | "unknown";
+  countryCode?: string | undefined;
+  birthDate?: string | undefined;
+  stance?: "orthodox" | "southpaw" | "switch" | "open" | "unknown" | undefined;
+  heightCm?: number | undefined;
+  reachCm?: number | undefined;
+  currentWeightClass?: string | undefined;
+  sourceUrl?: string | undefined;
+  record: FighterRecord;
+  careerStats?: CareerStats | undefined;
+  dataQuality: DataQuality;
+  updatedAt: string;
+}
+
+export interface FighterSnapshot {
+  id: string;
+  slug: string;
+  name: FighterName;
+  record: FighterRecord;
+  countryCode?: string | undefined;
+}
+
+export interface Venue {
+  name?: string | undefined;
+  city?: string | undefined;
+  region?: string | undefined;
+  countryCode?: string | undefined;
+}
+
+export interface Event {
+  id: string;
+  slug: string;
+  slugHistory: string[];
+  promotion: Promotion;
+  name: string;
+  shortName: string;
+  eventNumber?: number | undefined;
+  status: EventStatus;
+  /** Legacy main-card start retained for backwards-compatible readers. */
+  startsAt: string;
+  /** Absolute UTC instant when the first preliminary bout broadcast begins. */
+  prelimsStartsAt?: string | undefined;
+  /** Absolute UTC instant when the main-card broadcast begins. */
+  mainCardStartsAt?: string | undefined;
+  /** Manual completion instant recorded by live event operations. */
+  completedAt?: string | undefined;
+  /** Absolute instant when post-event live chat becomes read-only. */
+  chatClosesAt?: string | undefined;
+  venueTimezone: string;
+  venue?: Venue | undefined;
+  mainEventFightId?: string | undefined;
+  fightCount: number;
+  cardSegments: { earlyPrelims: number; prelims: number; mainCard: number };
+  predictionSummary: { totalPredictions: number; uniquePredictors: number };
+  chatRoomId: string;
+  editorial?:
+    | {
+        summary?: string | undefined;
+        status: "missing" | "draft" | "reviewed" | "published";
+      }
+    | undefined;
+  monetizationEligible: boolean;
+  dataQuality: DataQuality;
+  updatedAt: string;
+}
+
+export interface FightEditorial {
+  biggestQuestion?: string | undefined;
+  styleContrast?: string | undefined;
+  keysForFighterA?: string[] | undefined;
+  keysForFighterB?: string[] | undefined;
+  fightLobbyTake?: string | undefined;
+  status: "missing" | "draft" | "reviewed" | "published";
+}
+
+export interface FightResult {
+  winnerFighterId?: string | undefined;
+  method: ResultMethod;
+  methodDetail?: string | undefined;
+  round?: number | undefined;
+  timeInRoundSeconds?: number | undefined;
+  resultVersion: number;
+  official: boolean;
+  updatedAt: string;
+}
+
+export interface FightGradingSummary {
+  gradedPredictions: number;
+  voidPredictions: number;
+  correctWinners: number;
+  exactPicks: number;
+  awardedPoints: number;
+}
+
+export interface PredictionSummary {
+  total: number;
+  fighterA: number;
+  fighterB: number;
+  methods: Record<string, number>;
+  rounds: Record<string, number>;
+  methodsByFighter?:
+    | {
+        fighterA: Record<string, number>;
+        fighterB: Record<string, number>;
+      }
+    | undefined;
+  roundsByFighter?:
+    | {
+        fighterA: Record<string, number>;
+        fighterB: Record<string, number>;
+      }
+    | undefined;
+  lastAggregatedAt?: string | undefined;
+}
+
+export interface Fight {
+  id: string;
+  slug: string;
+  slugHistory: string[];
+  eventId: string;
+  cardSegment: CardSegment;
+  boutOrder: number;
+  status: FightStatus;
+  predictionStatus: PredictionStatus;
+  fighterAId: string;
+  fighterBId: string;
+  fighterA: FighterSnapshot;
+  fighterB: FighterSnapshot;
+  weightClass: string;
+  isTitleFight: boolean;
+  titleType?: "undisputed" | "interim" | "bmf" | "other" | undefined;
+  scheduledRounds: 3 | 5;
+  estimatedStartsAt?: string | undefined;
+  predictionsLockedAt?: string | undefined;
+  result?: FightResult | undefined;
+  gradingSummary?: FightGradingSummary | undefined;
+  replacedByFightId?: string | undefined;
+  predictionSummary: PredictionSummary;
+  chatRoomId: string;
+  editorial: FightEditorial;
+  monetizationEligible: boolean;
+  dataQuality: DataQuality;
+  updatedAt: string;
+}
+
+export interface PredictionPick {
+  winnerFighterId: string;
+  method: PredictionMethod;
+  detail?: number | "unanimous" | "split" | "majority" | undefined;
+}
+
+export interface PublicPredictionBadge {
+  winnerFighterId: string;
+  winnerLastName: string;
+  method: PredictionMethod;
+}
+
+export type PredictionRecordStatus = "active" | "locked" | "graded" | "void";
+
+export interface PredictionGrade {
+  resultVersion: number;
+  winnerCorrect: boolean;
+  methodCorrect: boolean;
+  detailCorrect: boolean;
+  points: number;
+  gradedAt: string;
+  gradeVersion: number;
+}
+
+export interface Prediction {
+  id: string;
+  fightId: string;
+  eventId: string;
+  uid: string;
+  pick: PredictionPick;
+  status: PredictionRecordStatus;
+  submittedAt: string;
+  updatedAt: string;
+  lockedAt?: string | undefined;
+  providerStatusAtSubmission?: FightStatus | undefined;
+  lateReviewFlag: boolean;
+  predictionVersion: number;
+  grade?: PredictionGrade | undefined;
+}
+
+export interface EventCard {
+  event: Event;
+  fights: Fight[];
+  fighters: Fighter[];
+}
+
+export interface PublicProfileStats {
+  gradedPicks: number;
+  correctWinners: number;
+  winnerAccuracy: number;
+  totalPoints: number;
+  exactPicks: number;
+  currentStreak: number;
+  longestStreak: number;
+  eventChampionships: number;
+}
+
+export interface PublicProfile {
+  uid: string;
+  handle: string;
+  handleNormalized: string;
+  handleHistory: string[];
+  displayName?: string | undefined;
+  avatar?: { storagePath?: string | undefined; version: number } | undefined;
+  joinedAt: string;
+  stats: PublicProfileStats;
+  rankSummary?:
+    | {
+        seasonId: string;
+        pointsRank?: number | undefined;
+        accuracyRank?: number | undefined;
+      }
+    | undefined;
+  badges: string[];
+  profileVisibility: ProfileVisibility;
+  updatedAt: string;
+}
+
+export interface PrivateUserPreferences {
+  timezone?: string | undefined;
+}
+
+export interface PrivateUser {
+  uid: string;
+  accountStatus: AccountStatus;
+  roles: UserRole[];
+  termsVersion: string;
+  termsAcceptedAt?: string | undefined;
+  onboardingComplete: boolean;
+  preferences: PrivateUserPreferences;
+  moderation: {
+    trustLevel: number;
+    muteUntil?: string | undefined;
+    suspensionUntil?: string | undefined;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type LeaderboardType =
+  "event" | "season_points" | "season_accuracy" | "streak";
+
+export interface LeaderboardEntry {
+  uid: string;
+  handle: string;
+  avatarVersion: number;
+  rank: number;
+  gradedPicks: number;
+  correctWinners: number;
+  rawAccuracy: number;
+  wilsonScore?: number | undefined;
+  totalPoints: number;
+  exactPicks: number;
+  currentStreak: number;
+  badges: string[];
+  updatedAt: string;
+}
+
+export interface Leaderboard {
+  id: string;
+  type: LeaderboardType;
+  label: string;
+  eventId?: string | undefined;
+  seasonId?: string | undefined;
+  championUid?: string | null | undefined;
+  startsAt?: string | undefined;
+  endsAt?: string | undefined;
+  minimumPicks: number;
+  calculationVersion: number;
+  lastBuiltAt?: string | undefined;
+  entries: LeaderboardEntry[];
+}
+
+export type ChatRoomStatus =
+  "scheduled" | "open" | "slow_mode" | "read_only" | "closed";
+
+export type ChatRoleBadge = "trusted" | "moderator" | "admin";
+
+export interface ChatRoom {
+  id: string;
+  type: "event_lobby" | "fight_lobby";
+  eventId: string;
+  fightId?: string | undefined;
+  status: ChatRoomStatus;
+  opensAt: string;
+  writableUntil?: string | undefined;
+  retentionExpiresAt?: string | undefined;
+  messagesPurgedAt?: string | undefined;
+  slowModeSeconds: number;
+  messageCount: number;
+  lastMessageAt?: string | undefined;
+  moderationHealth: "normal" | "degraded" | "locked";
+  monetizationEligible: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface ChatReply {
+  messageId: string;
+  uid: string;
+  handle: string;
+  excerpt: string;
+}
+
+export interface ChatMessage {
+  id: string;
+  roomId: string;
+  uid: string;
+  author: {
+    handle: string;
+    avatarVersion: number;
+    roleBadge?: ChatRoleBadge | undefined;
+    predictionBadge?: PublicPredictionBadge | undefined;
+  };
+  body: string;
+  bodyNormalizedHash: string;
+  replyTo?: ChatReply | undefined;
+  createdAt: number;
+  clientNonce: string;
+  status: "published" | "removed";
+  moderationVersion: number;
+}
+
+export interface DiscussionReplySnapshot {
+  postId: string;
+  uid: string;
+  handle: string;
+  excerpt: string;
+}
+
+export interface DiscussionPost {
+  id: string;
+  fightId: string;
+  uid: string;
+  author: {
+    handle: string;
+    roleBadge?: ChatRoleBadge | undefined;
+    predictionBadge?: PublicPredictionBadge | undefined;
+  };
+  body: string;
+  bodyNormalizedHash: string;
+  rootPostId: string;
+  parentPostId?: string | undefined;
+  replyTo?: DiscussionReplySnapshot | undefined;
+  replyCount: number;
+  createdAt: number;
+  updatedAt: number;
+  clientNonce: string;
+  status: "published" | "removed";
+  moderationVersion: number;
+}
+
+export interface DiscussionThread {
+  post: DiscussionPost;
+  replies: DiscussionPost[];
+}

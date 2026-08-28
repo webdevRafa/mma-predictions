@@ -1,0 +1,19 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /public/{allPaths=**} { allow read: if true; allow write: if false; }
+    match /avatars/{uid}/avatar.webp {
+      allow read: if true;
+      allow create, update: if request.auth != null
+        && request.auth.uid == uid
+        && request.resource.size > 0
+        && request.resource.size <= 1024 * 1024
+        && request.resource.contentType == 'image/webp';
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+    match /avatars/{uid}/{allPaths=**} { allow read, write: if false; }
+    match /raw/{allPaths=**} { allow read, write: if false; }
+    match /{allPaths=**} { allow read, write: if false; }
+  }
+}

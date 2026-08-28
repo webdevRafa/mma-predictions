@@ -1,0 +1,1165 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-17T15:00:00.000Z",
+  "source": {
+    "provider": "manual",
+    "externalEventId": "ufc-fight-night-august-22-2026",
+    "sourceUrl": "https://www.ufc.com/event/ufc-fight-night-august-22-2026#12928",
+    "retrievedAt": "2026-08-17T15:00:00.000Z"
+  },
+  "event": {
+    "id": "evt_ufc_fn_2026_08_22",
+    "promotion": "ufc",
+    "name": "UFC Fight Night: Hernandez vs Rodrigues",
+    "shortName": "Hernandez vs Rodrigues",
+    "slug": "ufc-fight-night-hernandez-vs-rodrigues-2026",
+    "slugHistory": [],
+    "status": "scheduled",
+    "startsAt": "2026-08-23T00:00:00.000Z",
+    "venueTimezone": "America/Los_Angeles",
+    "venue": {
+      "name": "Golden 1 Center",
+      "city": "Sacramento",
+      "region": "CA",
+      "countryCode": "US"
+    },
+    "editorial": {
+      "summary": "Anthony Hernandez meets Gregory Rodrigues in the middleweight main event at Golden 1 Center in Sacramento, California.",
+      "status": "reviewed"
+    },
+    "prelimsStartsAt": "2026-08-22T21:00:00.000Z",
+    "mainCardStartsAt": "2026-08-23T00:00:00.000Z"
+  },
+  "fighters": [
+    {
+      "id": "ftr_anthony_hernandez",
+      "slug": "anthony-hernandez",
+      "slugHistory": [],
+      "name": {
+        "full": "Anthony Hernandez",
+        "first": "Anthony",
+        "last": "Hernandez",
+        "nickname": "Fluffy",
+        "normalized": "anthony hernandez"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Middleweight",
+      "record": {
+        "wins": 15,
+        "losses": 3,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/anthony-hernandez",
+      "heightCm": 182.88,
+      "reachCm": 190.5,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.57,
+        "significantStrikeAccuracy": 0.61,
+        "significantStrikeDefense": 0.51,
+        "takedownsPer15": 5.88,
+        "takedownDefense": 0.68,
+        "submissionsPer15": 1.63
+      }
+    },
+    {
+      "id": "ftr_gregory_rodrigues",
+      "slug": "gregory-rodrigues",
+      "slugHistory": [],
+      "name": {
+        "full": "Gregory Rodrigues",
+        "first": "Gregory",
+        "last": "Rodrigues",
+        "nickname": "Robocop",
+        "normalized": "gregory rodrigues"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Middleweight",
+      "record": {
+        "wins": 19,
+        "losses": 6,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/gregory-rodrigues",
+      "heightCm": 190.5,
+      "reachCm": 190.5,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 5.53,
+        "significantStrikeAccuracy": 0.52,
+        "significantStrikeDefense": 0.51,
+        "takedownsPer15": 1.9,
+        "takedownDefense": 0.75,
+        "submissionsPer15": 0.38
+      }
+    },
+    {
+      "id": "ftr_serghei_spivac",
+      "slug": "serghei-spivac",
+      "slugHistory": [],
+      "name": {
+        "full": "Serghei Spivac",
+        "first": "Serghei",
+        "last": "Spivac",
+        "nickname": "Polar Bear",
+        "normalized": "serghei spivac"
+      },
+      "countryCode": "MD",
+      "currentWeightClass": "Heavyweight",
+      "record": {
+        "wins": 18,
+        "losses": 6,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/serghei-spivac",
+      "heightCm": 190.5,
+      "reachCm": 198.12,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.57,
+        "significantStrikeAccuracy": 0.48,
+        "significantStrikeDefense": 0.52,
+        "takedownsPer15": 3.82,
+        "takedownDefense": 0.64,
+        "submissionsPer15": 0.48
+      }
+    },
+    {
+      "id": "ftr_vitor_petrino",
+      "slug": "vitor-petrino",
+      "slugHistory": [],
+      "name": {
+        "full": "Vitor Petrino",
+        "first": "Vitor",
+        "last": "Petrino",
+        "normalized": "vitor petrino"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Heavyweight",
+      "record": {
+        "wins": 14,
+        "losses": 2,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/vitor-petrino",
+      "heightCm": 187.96,
+      "reachCm": 196.85,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.24,
+        "significantStrikeAccuracy": 0.49,
+        "significantStrikeDefense": 0.51,
+        "takedownsPer15": 2.6,
+        "takedownDefense": 0.79,
+        "submissionsPer15": 0.72
+      }
+    },
+    {
+      "id": "ftr_reinier_de_ridder",
+      "slug": "reinier-de-ridder",
+      "slugHistory": [],
+      "name": {
+        "full": "Reinier de Ridder",
+        "first": "Reinier",
+        "last": "de Ridder",
+        "nickname": "RdR",
+        "normalized": "reinier de ridder"
+      },
+      "countryCode": "NL",
+      "currentWeightClass": "Light Heavyweight",
+      "record": {
+        "wins": 21,
+        "losses": 4,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/reinier-de-ridder",
+      "heightCm": 193.04,
+      "reachCm": 198.12,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 2.47,
+        "significantStrikeAccuracy": 0.49,
+        "significantStrikeDefense": 0.47,
+        "takedownsPer15": 2.56,
+        "takedownDefense": 0.4,
+        "submissionsPer15": 0.55
+      }
+    },
+    {
+      "id": "ftr_roman_dolidze",
+      "slug": "roman-dolidze",
+      "slugHistory": [],
+      "name": {
+        "full": "Roman Dolidze",
+        "first": "Roman",
+        "last": "Dolidze",
+        "normalized": "roman dolidze"
+      },
+      "countryCode": "GE",
+      "currentWeightClass": "Light Heavyweight",
+      "record": {
+        "wins": 15,
+        "losses": 5,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/roman-dolidze",
+      "heightCm": 187.96,
+      "reachCm": 193.04,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.19,
+        "significantStrikeAccuracy": 0.42,
+        "significantStrikeDefense": 0.48,
+        "takedownsPer15": 1.16,
+        "takedownDefense": 0.32,
+        "submissionsPer15": 0.74
+      }
+    },
+    {
+      "id": "ftr_marquel_mederos",
+      "slug": "marquel-mederos",
+      "slugHistory": [],
+      "name": {
+        "full": "MarQuel Mederos",
+        "first": "MarQuel",
+        "last": "Mederos",
+        "normalized": "marquel mederos"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Lightweight",
+      "record": {
+        "wins": 11,
+        "losses": 1,
+        "draws": 1,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/marquel-mederos",
+      "heightCm": 177.8,
+      "reachCm": 176.53,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 5.46,
+        "significantStrikeAccuracy": 0.58,
+        "significantStrikeDefense": 0.53,
+        "takedownsPer15": 0.23,
+        "takedownDefense": 0.83,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_mason_jones",
+      "slug": "mason-jones",
+      "slugHistory": [],
+      "name": {
+        "full": "Mason Jones",
+        "first": "Mason",
+        "last": "Jones",
+        "nickname": "The Dragon",
+        "normalized": "mason jones"
+      },
+      "countryCode": "GB",
+      "currentWeightClass": "Lightweight",
+      "record": {
+        "wins": 18,
+        "losses": 2,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/mason-jones",
+      "heightCm": 177.8,
+      "reachCm": 187.96,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 5.98,
+        "significantStrikeAccuracy": 0.43,
+        "significantStrikeDefense": 0.51,
+        "takedownsPer15": 3.48,
+        "takedownDefense": 0.74,
+        "submissionsPer15": 0.17
+      }
+    },
+    {
+      "id": "ftr_carli_judice",
+      "slug": "carli-judice",
+      "slugHistory": [],
+      "name": {
+        "full": "Carli Judice",
+        "first": "Carli",
+        "last": "Judice",
+        "nickname": "Crispy",
+        "normalized": "carli judice"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Women's Flyweight",
+      "record": {
+        "wins": 6,
+        "losses": 2,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/carli-judice",
+      "heightCm": 170.18,
+      "reachCm": 172.72,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 9.32,
+        "significantStrikeAccuracy": 0.51,
+        "significantStrikeDefense": 0.57,
+        "takedownsPer15": 0.52,
+        "takedownDefense": 0.81,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_jeisla_chaves",
+      "slug": "jeisla-chaves",
+      "slugHistory": [],
+      "name": {
+        "full": "Jeisla Chaves",
+        "first": "Jeisla",
+        "last": "Chaves",
+        "nickname": "A Braba",
+        "normalized": "jeisla chaves"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Women's Flyweight",
+      "record": {
+        "wins": 8,
+        "losses": 0,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/jeisla-chaves",
+      "heightCm": 167.64,
+      "reachCm": 172.72,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.97,
+        "significantStrikeAccuracy": 0.56,
+        "significantStrikeDefense": 0.54,
+        "takedownsPer15": 1.5,
+        "takedownDefense": 0.63,
+        "submissionsPer15": 0.5
+      }
+    },
+    {
+      "id": "ftr_terrance_chatman",
+      "slug": "terrance-chatman",
+      "slugHistory": [],
+      "name": {
+        "full": "Terrance Chatman",
+        "first": "Terrance",
+        "last": "Chatman",
+        "normalized": "terrance chatman"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Heavyweight",
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/terrance-chatman"
+    },
+    {
+      "id": "ftr_anthony_wint",
+      "slug": "anthony-wint",
+      "slugHistory": [],
+      "name": {
+        "full": "Anthony Wint",
+        "first": "Anthony",
+        "last": "Wint",
+        "nickname": "Bow Down",
+        "normalized": "anthony wint"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Heavyweight",
+      "record": {
+        "wins": 1,
+        "losses": 0,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/anthony-wint",
+      "heightCm": 180.34,
+      "reachCm": 198.12,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 22.94,
+        "significantStrikeAccuracy": 0.72,
+        "significantStrikeDefense": 1,
+        "takedownsPer15": 0,
+        "takedownDefense": 1,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_jamall_emmers",
+      "slug": "jamall-emmers",
+      "slugHistory": [],
+      "name": {
+        "full": "Jamall Emmers",
+        "first": "Jamall",
+        "last": "Emmers",
+        "nickname": "Pretty Boy",
+        "normalized": "jamall emmers"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Featherweight",
+      "record": {
+        "wins": 22,
+        "losses": 8,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/jamall-emmers",
+      "heightCm": 177.8,
+      "reachCm": 187.96,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 5.1,
+        "significantStrikeAccuracy": 0.49,
+        "significantStrikeDefense": 0.58,
+        "takedownsPer15": 2.59,
+        "takedownDefense": 0.81,
+        "submissionsPer15": 0.32
+      }
+    },
+    {
+      "id": "ftr_lerryan_douglas",
+      "slug": "lerryan-douglas",
+      "slugHistory": [],
+      "name": {
+        "full": "Lerryan Douglas",
+        "first": "Lerryan",
+        "last": "Douglas",
+        "nickname": "Gunslinger",
+        "normalized": "lerryan douglas"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Featherweight",
+      "record": {
+        "wins": 14,
+        "losses": 5,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/lerryan-douglas",
+      "heightCm": 175.26,
+      "reachCm": 182.88,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 8.67,
+        "significantStrikeAccuracy": 0.64,
+        "significantStrikeDefense": 0.64,
+        "takedownsPer15": 0,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_kennedy_nzechukwu",
+      "slug": "kennedy-nzechukwu",
+      "slugHistory": [],
+      "name": {
+        "full": "Kennedy Nzechukwu",
+        "first": "Kennedy",
+        "last": "Nzechukwu",
+        "nickname": "Chosen",
+        "normalized": "kennedy nzechukwu"
+      },
+      "countryCode": "NG",
+      "currentWeightClass": "Heavyweight",
+      "record": {
+        "wins": 14,
+        "losses": 6,
+        "draws": 1,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/kennedy-nzechukwu",
+      "heightCm": 195.58,
+      "reachCm": 210.82,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 4.96,
+        "significantStrikeAccuracy": 0.47,
+        "significantStrikeDefense": 0.51,
+        "takedownsPer15": 0.5,
+        "takedownDefense": 0.8,
+        "submissionsPer15": 0.2
+      }
+    },
+    {
+      "id": "ftr_shamil_gaziev",
+      "slug": "shamil-gaziev",
+      "slugHistory": [],
+      "name": {
+        "full": "Shamil Gaziev",
+        "first": "Shamil",
+        "last": "Gaziev",
+        "normalized": "shamil gaziev"
+      },
+      "countryCode": "BH",
+      "currentWeightClass": "Heavyweight",
+      "record": {
+        "wins": 14,
+        "losses": 3,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/shamil-gaziev",
+      "heightCm": 193.04,
+      "reachCm": 199.39,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 2.94,
+        "significantStrikeAccuracy": 0.46,
+        "significantStrikeDefense": 0.45,
+        "takedownsPer15": 1.06,
+        "takedownDefense": 0.83,
+        "submissionsPer15": 0.26
+      }
+    },
+    {
+      "id": "ftr_chris_padilla",
+      "slug": "chris-padilla",
+      "slugHistory": [],
+      "name": {
+        "full": "Chris Padilla",
+        "first": "Chris",
+        "last": "Padilla",
+        "nickname": "Taco",
+        "normalized": "chris padilla"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Lightweight",
+      "record": {
+        "wins": 17,
+        "losses": 6,
+        "draws": 1,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/chris-padilla",
+      "heightCm": 175.26,
+      "reachCm": 187.96,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 6.19,
+        "significantStrikeAccuracy": 0.54,
+        "significantStrikeDefense": 0.49,
+        "takedownsPer15": 1.13,
+        "takedownDefense": 0.8,
+        "submissionsPer15": 0.28
+      }
+    },
+    {
+      "id": "ftr_nasrat_haqparast",
+      "slug": "nasrat-haqparast",
+      "slugHistory": [],
+      "name": {
+        "full": "Nasrat Haqparast",
+        "first": "Nasrat",
+        "last": "Haqparast",
+        "normalized": "nasrat haqparast"
+      },
+      "countryCode": "MA",
+      "currentWeightClass": "Lightweight",
+      "record": {
+        "wins": 18,
+        "losses": 6,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/nasrat-haqparast",
+      "heightCm": 177.8,
+      "reachCm": 182.88,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 6.36,
+        "significantStrikeAccuracy": 0.46,
+        "significantStrikeDefense": 0.63,
+        "takedownsPer15": 0.34,
+        "takedownDefense": 0.86,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_marcio_barbosa",
+      "slug": "marcio-barbosa",
+      "slugHistory": [],
+      "name": {
+        "full": "Marcio Barbosa",
+        "first": "Marcio",
+        "last": "Barbosa",
+        "nickname": "Ticoto",
+        "normalized": "marcio barbosa"
+      },
+      "countryCode": "BR",
+      "currentWeightClass": "Featherweight",
+      "record": {
+        "wins": 17,
+        "losses": 2,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/marcio-barbosa",
+      "heightCm": 167.64,
+      "reachCm": 179.07,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 7.01,
+        "significantStrikeAccuracy": 0.48,
+        "significantStrikeDefense": 0.53,
+        "takedownsPer15": 0,
+        "takedownDefense": 1,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_ryan_kuse",
+      "slug": "ryan-kuse",
+      "slugHistory": [],
+      "name": {
+        "full": "Ryan Kuse",
+        "first": "Ryan",
+        "last": "Kuse",
+        "normalized": "ryan kuse"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Featherweight",
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/ryan-kuse"
+    },
+    {
+      "id": "ftr_gauge_young",
+      "slug": "gauge-young",
+      "slugHistory": [],
+      "name": {
+        "full": "Gauge Young",
+        "first": "Gauge",
+        "last": "Young",
+        "nickname": "Gee Money",
+        "normalized": "gauge young"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Lightweight",
+      "record": {
+        "wins": 11,
+        "losses": 3,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/gauge-young",
+      "heightCm": 175.26,
+      "reachCm": 177.8,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 6.32,
+        "significantStrikeAccuracy": 0.52,
+        "significantStrikeDefense": 0.49,
+        "takedownsPer15": 0.75,
+        "takedownDefense": 0.77,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_stan_dorsainvil",
+      "slug": "stan-dorsainvil",
+      "slugHistory": [],
+      "name": {
+        "full": "Stan Dorsainvil",
+        "first": "Stan",
+        "last": "Dorsainvil",
+        "normalized": "stan dorsainvil"
+      },
+      "countryCode": "HT",
+      "currentWeightClass": "Lightweight",
+      "record": {
+        "wins": 0,
+        "losses": 0,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/stan-dorsainvil"
+    },
+    {
+      "id": "ftr_wes_schultz",
+      "slug": "wes-schultz",
+      "slugHistory": [],
+      "name": {
+        "full": "Wes Schultz",
+        "first": "Wes",
+        "last": "Schultz",
+        "nickname": "Party Time",
+        "normalized": "wes schultz"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Middleweight",
+      "record": {
+        "wins": 9,
+        "losses": 3,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/wes-schultz",
+      "heightCm": 187.96,
+      "reachCm": 195.58,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 2.91,
+        "significantStrikeAccuracy": 0.47,
+        "significantStrikeDefense": 0.43,
+        "takedownsPer15": 2.39,
+        "submissionsPer15": 3.59
+      }
+    },
+    {
+      "id": "ftr_jackson_mcvey",
+      "slug": "jackson-mcvey",
+      "slugHistory": [],
+      "name": {
+        "full": "Jackson McVey",
+        "first": "Jackson",
+        "last": "McVey",
+        "nickname": "The Moose",
+        "normalized": "jackson mcvey"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Middleweight",
+      "record": {
+        "wins": 7,
+        "losses": 2,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/jackson-mcvey",
+      "heightCm": 193.04,
+      "reachCm": 195.58,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 6.51,
+        "significantStrikeAccuracy": 0.69,
+        "significantStrikeDefense": 0.24,
+        "takedownsPer15": 0,
+        "submissionsPer15": 1.2
+      }
+    },
+    {
+      "id": "ftr_shanelle_dyer",
+      "slug": "shanelle-dyer",
+      "slugHistory": [],
+      "name": {
+        "full": "Shanelle Dyer",
+        "first": "Shanelle",
+        "last": "Dyer",
+        "nickname": "The Nightmare",
+        "normalized": "shanelle dyer"
+      },
+      "countryCode": "GB",
+      "currentWeightClass": "Women's Strawweight",
+      "record": {
+        "wins": 7,
+        "losses": 1,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/shanelle-dyer",
+      "heightCm": 167.64,
+      "reachCm": 165.1,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 7.71,
+        "significantStrikeAccuracy": 0.47,
+        "significantStrikeDefense": 0.51,
+        "takedownsPer15": 0.7,
+        "takedownDefense": 1,
+        "submissionsPer15": 0
+      }
+    },
+    {
+      "id": "ftr_elise_reed",
+      "slug": "elise-reed",
+      "slugHistory": [],
+      "name": {
+        "full": "Elise Reed",
+        "first": "Elise",
+        "last": "Reed",
+        "normalized": "elise reed"
+      },
+      "countryCode": "US",
+      "currentWeightClass": "Women's Strawweight",
+      "record": {
+        "wins": 8,
+        "losses": 5,
+        "draws": 0,
+        "noContests": 0
+      },
+      "dataQuality": "verified",
+      "sourceUrl": "https://www.ufc.com/athlete/elise-reed",
+      "heightCm": 160.02,
+      "reachCm": 160.02,
+      "careerStats": {
+        "significantStrikesLandedPerMinute": 3.41,
+        "significantStrikeAccuracy": 0.53,
+        "significantStrikeDefense": 0.52,
+        "takedownsPer15": 0.46,
+        "takedownDefense": 0.53,
+        "submissionsPer15": 0
+      }
+    }
+  ],
+  "fights": [
+    {
+      "id": "fgt_ufc_2026_08_22_01",
+      "slug": "anthony-hernandez-vs-gregory-rodrigues-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_anthony_hernandez",
+      "fighterBId": "ftr_gregory_rodrigues",
+      "cardSegment": "main_card",
+      "boutOrder": 1,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Middleweight",
+      "isTitleFight": false,
+      "scheduledRounds": 5,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "reviewed"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_02",
+      "slug": "serghei-spivac-vs-vitor-petrino-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_serghei_spivac",
+      "fighterBId": "ftr_vitor_petrino",
+      "cardSegment": "main_card",
+      "boutOrder": 2,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_03",
+      "slug": "reinier-de-ridder-vs-roman-dolidze-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_reinier_de_ridder",
+      "fighterBId": "ftr_roman_dolidze",
+      "cardSegment": "main_card",
+      "boutOrder": 3,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Light Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_04",
+      "slug": "marquel-mederos-vs-mason-jones-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_marquel_mederos",
+      "fighterBId": "ftr_mason_jones",
+      "cardSegment": "main_card",
+      "boutOrder": 4,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Lightweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_05",
+      "slug": "carli-judice-vs-jeisla-chaves-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_carli_judice",
+      "fighterBId": "ftr_jeisla_chaves",
+      "cardSegment": "main_card",
+      "boutOrder": 5,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Women's Flyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_06",
+      "slug": "terrance-chatman-vs-anthony-wint-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_terrance_chatman",
+      "fighterBId": "ftr_anthony_wint",
+      "cardSegment": "main_card",
+      "boutOrder": 6,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_07",
+      "slug": "jamall-emmers-vs-lerryan-douglas-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_jamall_emmers",
+      "fighterBId": "ftr_lerryan_douglas",
+      "cardSegment": "prelims",
+      "boutOrder": 7,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Featherweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_08",
+      "slug": "kennedy-nzechukwu-vs-shamil-gaziev-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_kennedy_nzechukwu",
+      "fighterBId": "ftr_shamil_gaziev",
+      "cardSegment": "prelims",
+      "boutOrder": 8,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Heavyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_09",
+      "slug": "chris-padilla-vs-nasrat-haqparast-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_chris_padilla",
+      "fighterBId": "ftr_nasrat_haqparast",
+      "cardSegment": "prelims",
+      "boutOrder": 9,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Lightweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_10",
+      "slug": "marcio-barbosa-vs-ryan-kuse-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_marcio_barbosa",
+      "fighterBId": "ftr_ryan_kuse",
+      "cardSegment": "prelims",
+      "boutOrder": 10,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Featherweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_11",
+      "slug": "gauge-young-vs-stan-dorsainvil-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_gauge_young",
+      "fighterBId": "ftr_stan_dorsainvil",
+      "cardSegment": "prelims",
+      "boutOrder": 11,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Lightweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_12",
+      "slug": "wes-schultz-vs-jackson-mcvey-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_wes_schultz",
+      "fighterBId": "ftr_jackson_mcvey",
+      "cardSegment": "prelims",
+      "boutOrder": 12,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Middleweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    },
+    {
+      "id": "fgt_ufc_2026_08_22_13",
+      "slug": "shanelle-dyer-vs-elise-reed-2026-08-22",
+      "slugHistory": [],
+      "eventId": "evt_ufc_fn_2026_08_22",
+      "fighterAId": "ftr_shanelle_dyer",
+      "fighterBId": "ftr_elise_reed",
+      "cardSegment": "prelims",
+      "boutOrder": 13,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Women's Strawweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": {
+        "status": "missing"
+      },
+      "dataQuality": "verified"
+    }
+  ]
+}

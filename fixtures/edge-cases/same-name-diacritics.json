@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-16T18:00:00.000Z",
+  "source": { "provider": "mock", "externalEventId": "edge-identity" },
+  "event": {
+    "id": "evt_edge_identity",
+    "promotion": "ufc",
+    "name": "UFC Fixture: Identity Collision",
+    "shortName": "Identity Fixture",
+    "slug": "ufc-fixture-identity-collision-dentty",
+    "status": "scheduled",
+    "startsAt": "2026-12-01T23:00:00.000Z",
+    "venueTimezone": "Europe/Madrid"
+  },
+  "fighters": [
+    {
+      "id": "ftr_edge_jose_es",
+      "slug": "jose-silva-josees",
+      "name": { "full": "José Silva", "normalized": "jose silva" },
+      "birthDate": "1994-02-18",
+      "countryCode": "ES",
+      "record": { "wins": 6, "losses": 1, "draws": 0, "noContests": 0 }
+    },
+    {
+      "id": "ftr_edge_jose_br",
+      "slug": "jose-silva-josebr",
+      "name": { "full": "José Silva", "normalized": "jose silva" },
+      "birthDate": "1991-09-07",
+      "countryCode": "BR",
+      "record": { "wins": 9, "losses": 3, "draws": 0, "noContests": 0 }
+    }
+  ],
+  "fights": [
+    {
+      "id": "fgt_edge_identity",
+      "slug": "jose-silva-vs-jose-silva-dentty",
+      "eventId": "evt_edge_identity",
+      "fighterAId": "ftr_edge_jose_es",
+      "fighterBId": "ftr_edge_jose_br",
+      "cardSegment": "early_prelims",
+      "boutOrder": 1,
+      "status": "scheduled",
+      "predictionStatus": "open",
+      "weightClass": "Flyweight",
+      "isTitleFight": false,
+      "scheduledRounds": 3,
+      "predictionSummary": {
+        "total": 0,
+        "fighterA": 0,
+        "fighterB": 0,
+        "methods": {},
+        "rounds": {}
+      },
+      "editorial": { "status": "missing" }
+    }
+  ]
+}

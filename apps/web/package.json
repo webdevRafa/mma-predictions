@@ -1,0 +1,35 @@
+{
+  "name": "@fightlobby/web",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run --passWithNoTests"
+  },
+  "dependencies": {
+    "@fightlobby/domain": "workspace:*",
+    "@fightlobby/firebase-ops": "workspace:*",
+    "@next/env": "latest",
+    "firebase": "latest",
+    "firebase-admin": "latest",
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-easy-crop": "^6.2.3",
+    "server-only": "latest",
+    "lucide-react": "latest",
+    "zod": "latest"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "latest",
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "tailwindcss": "latest",
+    "typescript": "^6.0.2",
+    "vitest": "latest"
+  }
+}
