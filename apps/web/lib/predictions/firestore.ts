@@ -16,6 +16,7 @@ import {
 } from "firebase-admin/firestore";
 
 import { ApiError } from "../auth/http";
+import { shouldRevealConsensus } from "./consensus-visibility";
 
 const PREDICTION_SHARD_COUNT = 20;
 const SUBMISSION_OPEN_FIGHT_STATUSES: FightStatus[] = ["scheduled", "prefight"];
@@ -609,7 +610,10 @@ export async function getPredictionExperience(
       : null,
     summary,
     canSubmit,
-    reveal: shouldRevealConsensus(predictionSnapshot.exists),
+    reveal: shouldRevealConsensus({
+      fight: { status: fight.status, result: fight.result },
+      hasOwnPrediction: predictionSnapshot.exists,
+    }),
   };
 }
 
@@ -630,8 +634,4 @@ export async function getEventPredictionsForUser(
       ? [{ fightId, ...safePrediction(document) }]
       : [];
   });
-}
-
-export function shouldRevealConsensus(hasOwnPrediction: boolean) {
-  return hasOwnPrediction;
 }

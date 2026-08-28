@@ -3,8 +3,8 @@ import { describe, expect, it } from "vitest";
 import {
   assertPredictionSubmissionOpen,
   predictionShardId,
-  shouldRevealConsensus,
 } from "../lib/predictions/firestore.ts";
+import { shouldRevealConsensus } from "../lib/predictions/consensus-visibility.ts";
 
 describe("server prediction lock policy", () => {
   const openFight = {
@@ -52,8 +52,54 @@ describe("prediction counter shard selection", () => {
 });
 
 describe("community consensus privacy", () => {
-  it("reveals consensus only after the viewer has made a prediction", () => {
-    expect(shouldRevealConsensus(false)).toBe(false);
-    expect(shouldRevealConsensus(true)).toBe(true);
+  const scheduledFight = { status: "scheduled" as const, result: undefined };
+  const completedFight = {
+    status: "completed" as const,
+    result: {
+      winnerFighterId: "fighter_a",
+      method: "decision_unanimous" as const,
+      resultVersion: 1,
+      official: true,
+      updatedAt: "2026-08-23T03:00:00.000Z",
+    },
+  };
+
+  it("keeps an open matchup private before the viewer predicts", () => {
+    expect(
+      shouldRevealConsensus({
+        fight: scheduledFight,
+        hasOwnPrediction: false,
+      }),
+    ).toBe(false);
+  });
+
+  it("reveals consensus after the viewer predicts", () => {
+    expect(
+      shouldRevealConsensus({
+        fight: scheduledFight,
+        hasOwnPrediction: true,
+      }),
+    ).toBe(true);
+  });
+
+  it("reveals consensus to non-voters after an official result is posted", () => {
+    expect(
+      shouldRevealConsensus({
+        fight: completedFight,
+        hasOwnPrediction: false,
+      }),
+    ).toBe(true);
+  });
+
+  it("does not reveal consensus for a provisional result", () => {
+    expect(
+      shouldRevealConsensus({
+        fight: {
+          ...completedFight,
+          result: { ...completedFight.result, official: false },
+        },
+        hasOwnPrediction: false,
+      }),
+    ).toBe(false);
   });
 });

@@ -33,6 +33,7 @@ import {
   getPredictionPanelMode,
   isPredictionSubmissionDisabled,
 } from "@/lib/predictions/experience-state";
+import { shouldRevealConsensus } from "@/lib/predictions/consensus-visibility";
 
 interface DraftEnvelope {
   fightId: string;
@@ -286,6 +287,10 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   const initiallyOpen =
     fight.predictionStatus === "open" &&
     ["scheduled", "prefight"].includes(fight.status);
+  const resultRevealsConsensus = shouldRevealConsensus({
+    fight,
+    hasOwnPrediction: false,
+  });
   const [pick, setPick] = useState<PredictionDraft>({
     winnerFighterId: "",
     method: "",
@@ -298,7 +303,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
   const [canSubmit, setCanSubmit] = useState(initiallyOpen);
   const [saved, setSaved] = useState<SavedPrediction | null>(null);
   const [summary, setSummary] = useState(fight.predictionSummary);
-  const [reveal, setReveal] = useState(false);
+  const [reveal, setReveal] = useState(resultRevealsConsensus);
   const [busy, setBusy] = useState(false);
   const [status, setStatus] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -350,7 +355,8 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
           return;
         }
         if (typeof data.canSubmit === "boolean") setCanSubmit(data.canSubmit);
-        if (typeof data.reveal === "boolean") setReveal(data.reveal);
+        if (typeof data.reveal === "boolean")
+          setReveal(resultRevealsConsensus || data.reveal);
         const nextSummary = parseSummary(data.summary);
         if (nextSummary) setSummary(nextSummary);
         const prediction = parseSavedPrediction(data.prediction, fight);
@@ -383,7 +389,7 @@ export function PredictionExperience({ fight }: { fight: Fight }) {
       active = false;
       controller.abort();
     };
-  }, [fight, initiallyOpen, lookupAttempt]);
+  }, [fight, initiallyOpen, lookupAttempt, resultRevealsConsensus]);
 
   useEffect(() => {
     const dialog = confirmationDialog.current;
